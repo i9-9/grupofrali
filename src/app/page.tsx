@@ -1,103 +1,129 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main>
+      {/* Video Hero */}
+      <section className="relative h-screen">
+        <video 
+          className="md:hidden absolute inset-0 w-full h-full object-cover"
+          autoPlay 
+          muted 
+          loop
+          playsInline
+        >
+          <source src="/videos/video_mobile1.mp4" type="video/mp4" />
+        </video>
+        <video 
+          className="hidden md:block absolute inset-0 w-full h-full object-cover"
+          autoPlay 
+          muted 
+          loop
+          playsInline
+        >
+          <source src="/videos/video_desktop3.mp4" type="video/mp4" />
+        </video>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        {/* Content over video */}
+        <div className="relative z-10 h-full flex items-center justify-center">
+          <div className="text-center text-white">
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+      </section>
+
+      {/* Desarrollo */}
+      <section className="py-16 bg-white h-screen">
+        <div className="content-wrapper">
+          <div className="grid">
+            {/* TÍTULO - 6 columnas */}
+            <div className="col-6 md:col-6">
+              {/* Mobile */}
+              <h2 className="md:hidden font-baskerville text-5xl text-black mb-8">
+                IMPULSAMOS EL<br />
+                DESARROLLO<br />
+                CON VISIÓN<br />
+                ESTRATÉGICA<br />
+              </h2>
+              
+              {/* Desktop */}
+              <h2 className="hidden md:block font-baskerville text-5xl text-black mb-8">
+                <span className="whitespace-nowrap mb-1">IMPULSAMOS EL DESARROLLO</span><br />
+                <span className="whitespace-nowrap">CON VISIÓN ESTRATÉGICA</span>
+              </h2>
+            </div>
+
+            {/* CONCEPTOS - arriba de stats izquierdas (columnas 1-5) */}
+            <div className="col-6 md:col-1-to-5 flex flex-col order-2 md:order-1">
+              <div className="flex justify-between pb-8 items-center mt-auto">
+                <h3 className="font-baskerville text-xs text-black uppercase tracking-wider">
+                  VISIÓN DE FUTURO
+                </h3>
+                <h3 className="font-baskerville text-xs text-black uppercase tracking-wider">
+                  INNOVACIÓN
+                </h3>
+                <h3 className="font-baskerville text-xs text-black uppercase tracking-wider">
+                  SOLIDEZ
+                </h3>
+              </div>
+            </div>
+
+            {/* PÁRRAFO - arriba de stats derechas (columnas 8-12) */}
+            <div className="col-6 md:col-8-to-12 order-1 md:order-2 flex flex-col">
+              <p className="font-archivo font-normal text-base text-black leading-none tracking-normal mb-12 mt-auto">
+                Con casi 30 años de trayectoria, en Grupo Frali desarrollamos inversiones estratégicas en real estate, agroindustria, hotelería y energías renovables. Apostamos a proyectos que combinan crecimiento económico, compromiso con el entorno y generación de valor en Argentina, EE. UU. y Uruguay.
+              </p>
+            </div>
+
+            {/* ESTADÍSTICAS - Layout 5+2+5 en Desktop */}
+            {/* Columna 1: Estadísticas izquierda (columnas 1-5) */}
+            <div className="col-6 md:col-1-to-5 order-3 md:order-3">
+              <div className="border-t border-black pt-1 mb-1 flex justify-between items-start">
+                <div className="font-archivo text-black text-stat-number leading-none font-archivo-light">14</div>
+                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 w-34">
+                  PROYECTOS<br />DESARROLLADOS
+                </div>
+              </div>
+
+              <div className="border-t border-black pt-1 mb-1 flex justify-between items-start">
+                <div className="font-archivo text-black text-stat-number leading-none font-archivo-light">300 MM<span className="text-stat-unit">USD</span></div>
+                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 w-34">
+                  VALOR TOTAL<br />DE ACTIVOS
+                </div>
+              </div>
+
+              <div className="border-t border-black pt-1 mb-1 flex justify-between items-start">
+                <div className="font-archivo text-black text-stat-number leading-none font-archivo-light">5</div>
+                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 w-34">
+                  PROYECTOS EN<br />PLANIFICACIÓN
+                </div>
+              </div>
+            </div>
+
+            {/* Columna 2: Estadísticas derecha (columnas 8-12) */}
+            <div className="col-6 md:col-8-to-12 order-4 md:order-4">
+              <div className="border-t border-black pt-1 mb-1 flex justify-between items-start">
+                <div className="font-archivo text-black text-stat-number leading-none font-archivo-light">7800<span className="text-stat-unit">ha</span></div>
+                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 w-34">
+                  HECTÁREAS<br />AGRÍCOLAS
+                </div>
+              </div>
+
+              <div className="border-t border-black pt-1 mb-1 flex justify-between items-start">
+                <div className="font-archivo text-black text-stat-number leading-none font-archivo-light">+300</div>
+                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 w-34">
+                  Nº EMPLEADOS &<br />COLABORADORES
+                </div>
+              </div>
+
+              <div className="border-t border-black pt-1 mb-1 flex justify-between items-start">
+                <div className="font-archivo text-black text-stat-number leading-none font-archivo-light">+100.000<span className="text-stat-unit">m²</span></div>
+                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 w-34">
+                  SUPERFICIE<br />CONSTRUIDA
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  )
 }

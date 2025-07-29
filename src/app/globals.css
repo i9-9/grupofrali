@@ -1,26 +1,207 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: 'Baskerville';
+  src: url('/fonts/baskerville.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@font-face {
+  font-family: 'Archivo';
+  src: url('/fonts/Archivo-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  font-family: 'Archivo';
+  src: url('/fonts/Archivo-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('/fonts/Archivo-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: #151714;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 400;
+}
+
+/* Typography */
+.font-baskerville {
+  font-family: 'Baskerville', serif;
+}
+
+.font-archivo {
+  font-family: 'Archivo', sans-serif;
+}
+
+.font-archivo-light {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 300;
+}
+
+.font-archivo-regular {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 400;
+}
+
+.font-archivo-bold {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+}
+
+/* Título que ocupa todo el ancho sin overflow */
+.responsive-title {
+  font-size: clamp(3rem, 6vw, 8rem);
+  white-space: nowrap;
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  margin: 0;
+  letter-spacing: clamp(0.3em, 5.5vw, 2em);
+  display: block;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Fix para pantallas problemáticas justo antes de mobile */
+@media (min-width: 600px) and (max-width: 900px) {
+  .responsive-title {
+    letter-spacing: clamp(0.5em, 5.2vw, 0.9em);
+  }
+}
+
+/* Header superpuesto */
+.header-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: transparent;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@media (min-width: 768px) {
+  .content-wrapper {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+/* Grid System */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+  }
+}
+
+/* Mobile: 6 columnas */
+.col-1 { grid-column: span 1; }
+.col-2 { grid-column: span 2; }
+.col-3 { grid-column: span 3; }
+.col-4 { grid-column: span 4; }
+.col-5 { grid-column: span 5; }
+.col-6 { grid-column: span 6; }
+
+/* Desktop: 12 columnas */
+@media (min-width: 768px) {
+  .md\:col-1 { grid-column: span 1; }
+  .md\:col-2 { grid-column: span 2; }
+  .md\:col-3 { grid-column: span 3; }
+  .md\:col-4 { grid-column: span 4; }
+  .md\:col-5 { grid-column: span 5; }
+  .md\:col-6 { grid-column: span 6; }
+  .md\:col-7 { grid-column: span 7; }
+  .md\:col-8 { grid-column: span 8; }
+  .md\:col-9 { grid-column: span 9; }
+  .md\:col-10 { grid-column: span 10; }
+  .md\:col-11 { grid-column: span 11; }
+  .md\:col-12 { grid-column: span 12; }
+  
+  /* Grid start positions */
+  .md\:col-start-1 { grid-column-start: 1; }
+  .md\:col-start-2 { grid-column-start: 2; }
+  .md\:col-start-3 { grid-column-start: 3; }
+  .md\:col-start-4 { grid-column-start: 4; }
+  .md\:col-start-5 { grid-column-start: 5; }
+  .md\:col-start-6 { grid-column-start: 6; }
+  .md\:col-start-7 { grid-column-start: 7; }
+  .md\:col-start-8 { grid-column-start: 8; }
+  .md\:col-start-9 { grid-column-start: 9; }
+  .md\:col-start-10 { grid-column-start: 10; }
+  .md\:col-start-11 { grid-column-start: 11; }
+  .md\:col-start-12 { grid-column-start: 12; }
+  
+  /* Grid span positions */
+  .md\:col-span-1 { grid-column: span 1; }
+  .md\:col-span-2 { grid-column: span 2; }
+  .md\:col-span-3 { grid-column: span 3; }
+  .md\:col-span-4 { grid-column: span 4; }
+  .md\:col-span-5 { grid-column: span 5; }
+  .md\:col-span-6 { grid-column: span 6; }
+  .md\:col-span-7 { grid-column: span 7; }
+  .md\:col-span-8 { grid-column: span 8; }
+  .md\:col-span-9 { grid-column: span 9; }
+  .md\:col-span-10 { grid-column: span 10; }
+  .md\:col-span-11 { grid-column: span 11; }
+  .md\:col-span-12 { grid-column: span 12; }
+  
+  /* Posiciones específicas para estadísticas 5+2+5 */
+  .md\:col-1-to-5 { grid-column: 1 / 6; }
+  .md\:col-8-to-12 { grid-column: 8 / 13; }
+  
+  /* Posiciones para conceptos y párrafo */
+  .md\:col-1-to-3 { grid-column: 1 / 4; }
+  .md\:col-8-to-10 { grid-column: 8 / 11; }
+}
+
+/* Tamaños personalizados para estadísticas */
+.text-stat-number { 
+  font-size: 52px; /* Mobile */
+}
+
+.text-stat-description { 
+  font-size: 10px; /* Mobile */
+}
+
+.text-stat-unit { 
+  font-size: 16px; 
+}
+
+/* Desktop sizes para estadísticas */
+@media (min-width: 768px) {
+  .text-stat-number { 
+    font-size: 86px; /* Desktop */
+  }
+  
+  .text-stat-description { 
+    font-size: 14px; /* Desktop */
+  }
 }
