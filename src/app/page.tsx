@@ -1,10 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import Image from "next/image"
 import RandomVideo from "@/components/RandomVideo"
 
 export default function Home() {
-  const [isHome, setIsHome] = useState(true)
 
   return (
     <main>
@@ -121,30 +120,38 @@ export default function Home() {
             {/* Primera iteración de logos */}
             <div className="flex items-center gap-32">
               <div className="shrink-0 flex items-center justify-center">
-                <img 
+                <Image 
                   src="/images/logos/sofitel.svg" 
                   alt="Sofitel" 
+                  width={120}
+                  height={80}
                   className="h-20 w-auto"
                 />
               </div>
               <div className="shrink-0 flex items-center justify-center">
-                <img 
+                <Image 
                   src="/images/logos/cardales.svg" 
                   alt="Cardales" 
+                  width={120}
+                  height={144}
                   className="h-36 w-auto"
                 />
               </div>
               <div className="shrink-0 flex items-center justify-center">
-                <img 
+                <Image 
                   src="/images/logos/regina.svg" 
                   alt="Regina" 
+                  width={120}
+                  height={96}
                   className="h-24 w-auto"
                 />
               </div>
               <div className="shrink-0 flex items-center justify-center">
-                <img 
+                <Image 
                   src="/images/logos/septiembre.svg" 
                   alt="Septiembre" 
+                  width={120}
+                  height={80}
                   className="h-20 w-auto"
                 />
               </div>
@@ -152,30 +159,38 @@ export default function Home() {
             {/* Segunda iteración (duplicada para efecto infinito) */}
             <div className="flex items-center gap-32">
               <div className="shrink-0 flex items-center justify-center">
-                <img 
+                <Image 
                   src="/images/logos/sofitel.svg" 
                   alt="Sofitel" 
+                  width={120}
+                  height={80}
                   className="h-20 w-auto"
                 />
               </div>
               <div className="shrink-0 flex items-center justify-center">
-                <img 
+                <Image 
                   src="/images/logos/cardales.svg" 
                   alt="Cardales" 
+                  width={120}
+                  height={144}
                   className="h-36 w-auto"
                 />
               </div>
               <div className="shrink-0 flex items-center justify-center">
-                <img 
+                <Image 
                   src="/images/logos/regina.svg" 
                   alt="Regina" 
+                  width={120}
+                  height={96}
                   className="h-24 w-auto"
                 />
               </div>
               <div className="shrink-0 flex items-center justify-center">
-                <img 
+                <Image 
                   src="/images/logos/septiembre.svg" 
                   alt="Septiembre" 
+                  width={120}
+                  height={80}
                   className="h-20 w-auto"
                 />
               </div>

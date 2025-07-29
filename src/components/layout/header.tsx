@@ -1,7 +1,6 @@
 "use client"
 
 import { motion, AnimatePresence } from "motion/react"
-import Link from "next/link"
 import { useState } from "react"
 import HamburgerIcon from "../icons/HamburgerIcon"
 import DownArrowIcon from "../icons/DownArrowIcon"

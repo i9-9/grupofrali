@@ -3,7 +3,7 @@ export default function Footer() {
         <footer className="bg-[#151714]">
             <div className="content-wrapper">
                 <div className="grid pt-7">
-                    <div className="md:col-6 flex flex-col">
+                    <div className="col-6 md:col-6 flex flex-col">
                         <h4 className="text-white text-xs mb-2">
                             INFO@GRUPOFRALI.COM
                         </h4>
@@ -22,25 +22,30 @@ export default function Footer() {
                         </h4>
                     </div>
                 </div>
-                <div className="flex flex-col md:flex-row justify-between text-white text-xs py-10">
-                    <h4>
+                                 <div className="flex flex-col md:flex-row justify-between text-white text-xs py-10 gap-y-1 md:text-[14px]">
+                    <h4 className="hidden md:block">
                         VOLVER ARRIBA
                     </h4>
-                    <h4>
+                    <h4 className="tracking-[0.17em]">
                         HOME
                     </h4>
-                    <h4>
+                    <h4 className="tracking-[0.17em]">
                         QUIÉNES SOMOS
                     </h4>
-                    <h4>
+                    <h4 className="tracking-[0.17em]">
                         DESARROLLOS E INVERSIONES
                     </h4>
-                    <h4>
+                    <h4 className="tracking-[0.17em]">
                         RECURSOS HUMANOS
                     </h4>
-                    <h4>
-                        CONTACTO
-                    </h4>
+                    <div className="flex justify-between">
+                        <h4 className="tracking-[0.17em]">
+                            CONTACTO
+                        </h4>
+                        <h4 className="md:hidden">
+                        VOLVER ARRIBA
+                        </h4>
+                    </div>
                 </div>
             </div>
         </footer>
