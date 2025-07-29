@@ -1,0 +1,160 @@
+{
+  "projects": [
+    {
+      "id": "sofitel-buenos-aires",
+      "name": {
+        "es": "Sofitel Buenos Aires",
+        "en": "Sofitel Buenos Aires"
+      },
+      "category": {
+        "es": "Hotelería",
+        "en": "Hospitality"
+      },
+      "location": {
+        "es": "Puerto Madero, Buenos Aires",
+        "en": "Puerto Madero, Buenos Aires"
+      },
+      "description": {
+        "es": "Desarrollo hotelero de lujo con 144 habitaciones y suites, spa, centro de convenciones y múltiples opciones gastronómicas en el corazón de Puerto Madero.",
+        "en": "Luxury hotel development with 144 rooms and suites, spa, convention center and multiple dining options in the heart of Puerto Madero."
+      },
+      "statistics": {
+        "superficie": 35000,
+        "superficieUnit": "M²",
+        "habitaciones": 144,
+        "pisos": 20,
+        "inversionTotal": 85000000,
+        "inversionCurrency": "USD",
+        "estado": {
+          "es": "Completado",
+          "en": "Completed"
+        }
+      },
+      "images": {
+        "hero": "/images/projects/sofitel/hero.jpg",
+        "gallery": [
+          "/images/projects/sofitel/exterior.jpg",
+          "/images/projects/sofitel/lobby.jpg",
+          "/images/projects/sofitel/room.jpg"
+        ]
+      }
+    },
+    {
+      "id": "la-reserva-cardales",
+      "name": {
+        "es": "La Reserva Cardales",
+        "en": "La Reserva Cardales"
+      },
+      "category": {
+        "es": "Uso Mixto",
+        "en": "Mixed Use"
+      },
+      "location": {
+        "es": "Cardales, Buenos Aires",
+        "en": "Cardales, Buenos Aires"
+      },
+      "description": {
+        "es": "Desarrollo integral de country club con hotel boutique, campo de golf de 18 hoyos, spa y residencias de lujo en un entorno natural privilegiado.",
+        "en": "Comprehensive country club development with boutique hotel, 18-hole golf course, spa and luxury residences in a privileged natural environment."
+      },
+      "statistics": {
+        "superficie": 250000,
+        "superficieUnit": "M²",
+        "hoyosGolf": 18,
+        "habitacionesHotel": 48,
+        "lotesResidenciales": 85,
+        "inversionTotal": 120000000,
+        "inversionCurrency": "USD",
+        "estado": {
+          "es": "En Desarrollo",
+          "en": "In Development"
+        }
+      },
+      "images": {
+        "hero": "/images/projects/cardales/hero.jpg",
+        "gallery": [
+          "/images/projects/cardales/golf.jpg",
+          "/images/projects/cardales/hotel.jpg",
+          "/images/projects/cardales/spa.jpg"
+        ]
+      }
+    },
+    {
+      "id": "chacras-de-mar",
+      "name": {
+        "es": "Chacras de Mar",
+        "en": "Chacras de Mar"
+      },
+      "category": {
+        "es": "Real Estate",
+        "en": "Real Estate"
+      },
+      "location": {
+        "es": "Rocha, Uruguay",
+        "en": "Rocha, Uruguay"
+      },
+      "description": {
+        "es": "Chacras de Mar es el nuevo desarrollo de Grupo Frali en Rocha, una de las regiones de mayor proyección inmobiliaria de Uruguay. El proyecto propone un conjunto de chacras de gran superficie, diseñadas para integrarse armónicamente al paisaje natural y brindar un estilo de vida único en contacto con la naturaleza y el mar. Ubicado a pocos minutos de las playas más reconocidas de José Ignacio, Chacras de Mar ofrece una propuesta exclusiva, en un entorno de alta valorización turística y residencial. Actualmente en etapa de planificación, el proyecto refleja la apuesta de Grupo Frali por crear propuestas innovadoras que combinan inversión inmobiliaria presentación del entorno natural.",
+        "en": "Chacras de Mar is Grupo Frali's new development in Rocha, one of Uruguay's most promising real estate regions. The project proposes a set of large-surface estates, designed to integrate harmoniously with the natural landscape and provide a unique lifestyle in contact with nature and the sea. Located just minutes from the most recognized beaches of José Ignacio, Chacras de Mar offers an exclusive proposal, in an environment of high tourist and residential appreciation. Currently in the planning stage, the project reflects Grupo Frali's commitment to creating innovative proposals that combine real estate investment with preservation of the natural environment."
+      },
+      "statistics": {
+        "cantidadLotes": 30,
+        "superficie": 168,
+        "superficieUnit": "M²",
+        "inversionTotal": 75000000,
+        "inversionCurrency": "USD",
+        "estado": {
+          "es": "En Planificación",
+          "en": "In Planning"
+        }
+      },
+      "images": {
+        "hero": "/images/projects/chacras-de-mar/hero.jpg",
+        "gallery": [
+          "/images/projects/chacras-de-mar/aerial.jpg",
+          "/images/projects/chacras-de-mar/beach.jpg",
+          "/images/projects/chacras-de-mar/landscape.jpg"
+        ]
+      }
+    },
+    {
+      "id": "septiembre-agroindustrial",
+      "name": {
+        "es": "Complejo Agroindustrial Septiembre",
+        "en": "Septiembre Agroindustrial Complex"
+      },
+      "category": {
+        "es": "Agroindustrial",
+        "en": "Agroindustrial"
+      },
+      "location": {
+        "es": "Buenos Aires, Argentina",
+        "en": "Buenos Aires, Argentina"
+      },
+      "description": {
+        "es": "Desarrollo agroindustrial integral con silos, planta de procesamiento, centro logístico y tecnología de punta para optimizar la cadena productiva.",
+        "en": "Comprehensive agroindustrial development with silos, processing plant, logistics center and cutting-edge technology to optimize the production chain."
+      },
+      "statistics": {
+        "superficie": 150000,
+        "superficieUnit": "M²",
+        "capacidadAlmacenamiento": 50000,
+        "capacidadProcesamiento": 200,
+        "inversionTotal": 95000000,
+        "inversionCurrency": "USD",
+        "estado": {
+          "es": "En Planificación",
+          "en": "In Planning"
+        }
+      },
+      "images": {
+        "hero": "/images/projects/septiembre/hero.jpg",
+        "gallery": [
+          "/images/projects/septiembre/silos.jpg",
+          "/images/projects/septiembre/plant.jpg",
+          "/images/projects/septiembre/logistics.jpg"
+        ]
+      }
+    }
+  ]
+}

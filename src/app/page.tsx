@@ -1,27 +1,17 @@
+"use client"
+
+import { useEffect, useState } from "react"
+import RandomVideo from "@/components/RandomVideo"
+
 export default function Home() {
+  const [isHome, setIsHome] = useState(true)
+
   return (
     <main>
       {/* Video Hero */}
       <section className="relative h-screen">
-        <video 
-          className="md:hidden absolute inset-0 w-full h-full object-cover"
-          autoPlay 
-          muted 
-          loop
-          playsInline
-        >
-          <source src="/videos/video_mobile1.mp4" type="video/mp4" />
-        </video>
-        <video 
-          className="hidden md:block absolute inset-0 w-full h-full object-cover"
-          autoPlay 
-          muted 
-          loop
-          playsInline
-        >
-          <source src="/videos/video_desktop3.mp4" type="video/mp4" />
-        </video>
-
+        <RandomVideo type="mobile" />
+        <RandomVideo type="desktop" />
         {/* Content over video */}
         <div className="relative z-10 h-full flex items-center justify-center">
           <div className="text-center text-white">
@@ -123,6 +113,81 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Marquee Logos */}
+      <section className="py-24 overflow-hidden">
+        <div className="w-full overflow-hidden">
+          <div className="flex gap-32 w-max animate-marquee">
+            {/* Primera iteración de logos */}
+            <div className="flex items-center gap-32">
+              <div className="shrink-0 flex items-center justify-center">
+                <img 
+                  src="/images/logos/sofitel.svg" 
+                  alt="Sofitel" 
+                  className="h-20 w-auto"
+                />
+              </div>
+              <div className="shrink-0 flex items-center justify-center">
+                <img 
+                  src="/images/logos/cardales.svg" 
+                  alt="Cardales" 
+                  className="h-36 w-auto"
+                />
+              </div>
+              <div className="shrink-0 flex items-center justify-center">
+                <img 
+                  src="/images/logos/regina.svg" 
+                  alt="Regina" 
+                  className="h-24 w-auto"
+                />
+              </div>
+              <div className="shrink-0 flex items-center justify-center">
+                <img 
+                  src="/images/logos/septiembre.svg" 
+                  alt="Septiembre" 
+                  className="h-20 w-auto"
+                />
+              </div>
+            </div>
+            {/* Segunda iteración (duplicada para efecto infinito) */}
+            <div className="flex items-center gap-32">
+              <div className="shrink-0 flex items-center justify-center">
+                <img 
+                  src="/images/logos/sofitel.svg" 
+                  alt="Sofitel" 
+                  className="h-20 w-auto"
+                />
+              </div>
+              <div className="shrink-0 flex items-center justify-center">
+                <img 
+                  src="/images/logos/cardales.svg" 
+                  alt="Cardales" 
+                  className="h-36 w-auto"
+                />
+              </div>
+              <div className="shrink-0 flex items-center justify-center">
+                <img 
+                  src="/images/logos/regina.svg" 
+                  alt="Regina" 
+                  className="h-24 w-auto"
+                />
+              </div>
+              <div className="shrink-0 flex items-center justify-center">
+                <img 
+                  src="/images/logos/septiembre.svg" 
+                  alt="Septiembre" 
+                  className="h-20 w-auto"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Ejemplo de cómo usar los proyectos */}
+      {/* 
+      <ProjectsGrid language="es" />
+      */}
 
     </main>
   )
