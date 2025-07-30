@@ -161,9 +161,9 @@
       "locacion": "Campana, Buenos Aires",
       "descripcion": "La Reserva Cardales es uno de los desarrollos más relevantes de Grupo Frali, pionero en la Argentina en reunir residencias, golf, hotelería de lujo y espacios comerciales dentro de un mismo masterplan de gran escala. Ubicado en el Km 61 de la Ruta Panamericana Ramal Campana, el barrio se extiende sobre 185 hectáreas y ofrece 550 lotes residenciales inmersos en un entorno natural cuidadosamente diseñado. El proyecto cuenta con un reconocido campo de golf diseñado por Caprinle & Capdepont que fue sede del PGA Tour Latinoamérica en 2013, un Club House con servicios exclusivos y el hotel cinco estrellas Sofitel La Reserva Cardales, integrando deporte, hospitalidad y vida residencial en una propuesta única. La Reserva Cardales también incluye desarrollos complementarios como La Villette Golf Residences, GreenHouse y 3 macro lotes reservados para futuros desarrollos residenciales y comerciales.",
       "imagenes": {
-        "home_gallery": "/images/projects/la-reserva-cardales/home-gallery.jpg",
-        "desarrollos_mobile": "/images/projects/la-reserva-cardales/desarrollos-mobile.jpg",
-        "desarrollos_desktop": "/images/projects/la-reserva-cardales/desarrollos-desktop.jpg",
+        "home_gallery": "/images/projects/la-reserva-cardales/home-gallery/reserva-home.jpg",
+        "desarrollos_mobile": "/images/projects/la-reserva-cardales/desarrollos/mobile/la-reserva.jpg",
+        "desarrollos_desktop": "/images/projects/la-reserva-cardales/desarrollos/desktop/la-reserva.jpg",
         "individual_mobile": "/images/projects/la-reserva-cardales/individual-mobile.jpg",
         "individual_desktop": [
           "/images/projects/la-reserva-cardales/individual-desktop-1.jpg",
@@ -191,12 +191,16 @@
       "categoria": "REAL ESTATE",
       "locacion": "Campana, Buenos Aires",
       "descripcion": "La Villette Golf Residences es un desarrollo residencial de 6 edificios de apartamentos aterrazados concebido por Grupo Frali dentro del masterplan de La Reserva Cardales. Con 102 unidades distribuidas en 16.650 m² construidos, el proyecto ofrece departamentos de 2, 3 y 4 ambientes, todos con jardín o terraza propia, integrando privacidad, diseño contemporáneo y vistas al campo de golf. Ubicado junto al trazado del golf y con acceso inmediato a los servicios, espacios verdes y al Club House del barrio, La Villette combina la comodidad de un entorno residencial con la conexión directa a la infraestructura premium que ofrece el barrio.",
-      "imagenes": [
-        {
-          "src": "/images/projects/la-villette/la_villette_1.jpg",
-          "alt": "Edificios residenciales modernos con terrazas escalonadas"
-        }
-      ],
+      "imagenes": {
+        "home_gallery": "/images/projects/la-villette-golf-residences/home-gallery/villette-home.jpg",
+        "desarrollos_mobile": "/images/projects/la-villette-golf-residences/desarrollos/mobile/la-villete.jpg",
+        "desarrollos_desktop": "/images/projects/la-villette-golf-residences/desarrollos/desktop/la-villete.jpg",
+        "individual_mobile": "/images/projects/la-villette-golf-residences/individual/mobile/villette.jpg",
+        "individual_desktop": [
+          "/images/projects/la-villette-golf-residences/individual/desktop/villette-1.jpg"
+        ],
+        "alt": "Edificios residenciales modernos con terrazas escalonadas"
+      },
       "estadisticas": {
         "superficie_construida": "16650 m²",
         "estado": "EN COMERCIALIZACIÓN ETAPA FINAL",
@@ -209,12 +213,16 @@
       "categoria": "REAL ESTATE",
       "locacion": "Campana, Buenos Aires",
       "descripcion": "GreenHouse es el nuevo emprendimiento residencial de media densidad que Grupo Frali proyecta dentro de La Reserva Cardales. Concebido para integrarse al entorno natural ya existente, Green House propondrá unidades que combinarán diseño contemporáneo, eficiencia en el uso de espacios y conexión con áreas verdes comunes. Ubicado en una de las zonas de mayor consolidación del desarrollo, a menos de 20 metros del Hotel Sofitel La Reserva Cardales, y con acceso ágil a infraestructura deportiva, social y comercial, el proyecto representa una nueva etapa de crecimiento dentro del masterplan original. Actualmente en etapa de planificación, Green House refleja la continuidad de la visión de Grupo Frali de generar propuestas habitacionales innovadoras y adaptadas a las nuevas demandas de vivienda.",
-      "imagenes": [
-        {
-          "src": "/images/projects/green-house/green_house_1.jpg",
-          "alt": "Vista aérea del desarrollo Green House con lagos y áreas verdes"
-        }
-      ],
+      "imagenes": {
+        "home_gallery": "/images/projects/green-house/home-gallery/greenhouse-home.jpg",
+        "desarrollos_mobile": "/images/projects/green-house/desarrollos/mobile/green-house.jpg",
+        "desarrollos_desktop": "/images/projects/green-house/desarrollos/desktop/green-house.jpg",
+        "individual_mobile": "/images/projects/green-house/individual/mobile/greenhouse.jpg",
+        "individual_desktop": [
+          "/images/projects/green-house/individual/desktop/greenhouse-1.jpg"
+        ],
+        "alt": "Vista aérea del desarrollo Green House con lagos y áreas verdes"
+      },
       "estadisticas": {
         "departamentos": "80",
         "tipo": "MULTIFAMILIAR",
@@ -228,12 +236,16 @@
       "categoria": "REAL ESTATE",
       "locacion": "Miami, Estados Unidos",
       "descripcion": "Edgewater River es un proyecto mixto que Grupo Frali proyecta en uno de los barrios de mayor crecimiento de Miami: Edgewater. Ubicado sobre Biscayne Boulevard, a metros de la bahía, el desarrollo contempla usos residenciales, comerciales y de oficinas, integrando más de 750.000 m² construibles en una zona reconocida por su dinamismo urbano, su proximidad a áreas de arte, cultura y recreación, y su alta valorización inmobiliaria. La zonificación T6-360 permite una densificación vertical que acompaña el perfil en desarrollo del distrito. Actualmente en etapa de planificación, Edgewater River representa un paso firme en la expansión internacional del Grupo, con foco en mercados estratégicos y proyectos de escala global.",
-      "imagenes": [
-        {
-          "src": "/images/projects/edgewater-river/edgewater_1.jpg",
-          "alt": "Renderización de torres residenciales modernas en Miami"
-        }
-      ],
+      "imagenes": {
+        "home_gallery": "/images/projects/edgewater-river/home-gallery/edgewater-home.jpg",
+        "desarrollos_mobile": "/images/projects/edgewater-river/desarrollos/mobile/edgewater.png",
+        "desarrollos_desktop": "/images/projects/edgewater-river/desarrollos/desktop/edgewater.png",
+        "individual_mobile": "/images/projects/edgewater-river/individual/mobile/edgewater.jpg",
+        "individual_desktop": [
+          "/images/projects/edgewater-river/individual/desktop/edgewater-1.jpg"
+        ],
+        "alt": "Renderización de torres residenciales modernas en Miami"
+      },
       "estadisticas": {
         "superficie": "60.000 m²",
         "tipologia": "MIX USE: COMERCIAL, RESIDENCIAL Y OFICINAS",
@@ -248,12 +260,16 @@
       "categoria": "REAL ESTATE",
       "locacion": "Escobar, Buenos Aires",
       "descripcion": "Barrio Septiembre marcó el inicio de la actividad inmobiliaria de Grupo Frali, convirtiéndose en uno de los primeros barrios privados de gran escala desarrollados en el Ramal Escobar. Refleja nuestra capacidad para generar desarrollos urbanos integrales, anticipándonos a las tendencias de crecimiento de una región. Con una superficie total de 60 hectáreas y 428 lotes, Septiembre integra urbanismo e infraestructura en una propuesta consolidada, hoy 100% comercializada y habitada. Ubicado en el Km 47,5 de Panamericana, el barrio cuenta con accesos ágiles y una variedad de servicios que potencia su calidad de vida. Dentro de su masterplan, desarrollamos dos emprendimientos integrados que complementan la propuesta residencial: Terrazas de Septiembre y Casas de Septiembre.",
-      "imagenes": [
-        {
-          "src": "/images/projects/septiembre/septiembre_1.jpg",
-          "alt": "Vista aérea del barrio Septiembre con club house, piscinas y canchas"
-        }
-      ],
+      "imagenes": {
+        "home_gallery": "/images/projects/septiembre/home-gallery/septiembre-home.jpg",
+        "desarrollos_mobile": "/images/projects/septiembre/desarrollos/mobile/septiembre.jpg",
+        "desarrollos_desktop": "/images/projects/septiembre/desarrollos/desktop/septiembre.jpg",
+        "individual_mobile": "/images/projects/septiembre/individual/mobile/septiembre.jpg",
+        "individual_desktop": [
+          "/images/projects/septiembre/individual/desktop/septiembre-1.jpg"
+        ],
+        "alt": "Vista aérea del barrio Septiembre con club house, piscinas y canchas"
+      },
       "estadisticas": {
         "club_house": "1",
         "canchas_futbol_hockey": "XXX",
@@ -269,12 +285,16 @@
       "categoria": "REAL ESTATE",
       "locacion": "Escobar, Buenos Aires",
       "descripcion": "Terrazas de Septiembre es un emprendimiento residencial desarrollado por Grupo Frali dentro del masterplan de Barrio Septiembre, en Escobar. Con 61 unidades distribuidas en 3.950 m² construidos, el proyecto fue diseñado como una propuesta de departamentos de renting, respondiendo a la demanda generada por el crecimiento de los parques industriales de la zona. Terrazas de Septiembre integra funcionalidad, calidad constructiva y cercanía a centros de actividad económica, en un entorno consolidado y de fácil acceso.",
-      "imagenes": [
-        {
-          "src": "/images/projects/terrazas-de-septiembre/terrazas_septiembre_1.jpg",
-          "alt": "Complejo residencial de departamentos con arquitectura moderna"
-        }
-      ],
+      "imagenes": {
+        "home_gallery": "/images/projects/terrazas-de-septiembre/home-gallery/terrazas-home.jpg",
+        "desarrollos_mobile": "/images/projects/terrazas-de-septiembre/desarrollos/mobile/terrazas.jpg",
+        "desarrollos_desktop": "/images/projects/terrazas-de-septiembre/desarrollos/desktop/terrazas.jpg",
+        "individual_mobile": "/images/projects/terrazas-de-septiembre/individual/mobile/terrazas.jpg",
+        "individual_desktop": [
+          "/images/projects/terrazas-de-septiembre/individual/desktop/terrazas-1.jpg"
+        ],
+        "alt": "Complejo residencial de departamentos con arquitectura moderna"
+      },
       "estadisticas": {
         "superficie_construida": "3950 m²",
         "tipologia": "DEPARTAMENTOS DE RENTING",
