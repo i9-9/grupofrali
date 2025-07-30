@@ -2,16 +2,15 @@
 
 import {useEffect, useState} from "react"
 import Link from "next/link"
+import projectsData from "@/data/projects.json"
 
 // Componente para imagen responsive
 function ResponsiveImage({ 
-  projectName, 
   desktopImage, 
   mobileImage, 
   alt, 
   className = ""
 }: {
-  projectName: string
   desktopImage: string
   mobileImage: string
   alt: string
@@ -41,9 +40,32 @@ function ResponsiveImage({
   )
 }
 
+// Función para obtener imagen de desarrollo desde el JSON
+const getDesarrollosImage = (project: { imagenes?: { desarrollos_mobile?: string, desarrollos_desktop?: string } }, isMobile: boolean = false) => {
+  const baseKey = isMobile ? 'desarrollos_mobile' : 'desarrollos_desktop'
+  
+  // Retornar la imagen desde el JSON si existe
+  if (project.imagenes && project.imagenes[baseKey]) {
+    return project.imagenes[baseKey]
+  }
+  
+  // Si no existe, retornar string vacío
+  return ''
+}
+
+// Categorías disponibles
+const categories = [
+  "VER TODOS",
+  "ENERGIA RENOVABLE", 
+  "REAL ESTATE",
+  "AGROPECUARIA",
+  "HOTELERIA"
+]
+
 export default function DesarrollosProyectos() {
 const [currentPhoto, setCurrentPhoto] = useState(0)
 const [isFading, setIsFading] = useState(false)
+const [selectedCategory, setSelectedCategory] = useState("VER TODOS")
 
 const photos = [
   "/images/desarrollos/1.jpg",
@@ -65,6 +87,15 @@ useEffect(() => {
   return () => clearInterval(interval)
 }, [])
 
+// Filtrar proyectos según la categoría seleccionada
+const filteredProjects = selectedCategory === "VER TODOS" 
+  ? projectsData.proyectos 
+  : projectsData.proyectos.filter(project => project.categoria === selectedCategory)
+
+// Función para manejar el cambio de filtro
+const handleCategoryChange = (category: string) => {
+  setSelectedCategory(category)
+}
 
   return (
     <main className="bg-[#EFEFEF]">
@@ -93,119 +124,46 @@ useEffect(() => {
               </div>
               <div className="md:col-start-3 md:col-span-3">
                 <div className="flex flex-col font-baskerville text-[26px] gap-y-1 leading-7">
-                  <h4>VER TODOS</h4>
-                  <h4>ENERGÍA RENOVABLE</h4>
-                  <h4>REAL ESTATE</h4>
-                  <h4>AGROPECUARIA</h4>
-                  <h4>HOTELERÍA</h4>
+                  {categories.map((category) => (
+                    <h4 
+                      key={category}
+                      onClick={() => handleCategoryChange(category)}
+                      className={`filter-item cursor-pointer ${selectedCategory === category ? 'active' : 'inactive'}`}
+                    >
+                      {category}
+                    </h4>
+                  ))}
                 </div>
               </div>
           </div>
       </div>
 
       <section className="content-wrapper py-16">
-        <div className="grid">
-          {/* Fila 1 */}
-          <Link href="/desarrollos-proyectos/la-banderita-parque-eolico" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
-            <img 
-              src="/images/projects/la-banderita-parque-eolico/desarrollos/desktop/labanderita.jpg" 
-              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
-              alt="PARQUE EOLICO LA BANDERITA" 
-            />
-            <h3 className="font-baskerville text-lg mt-4">PARQUE EOLICO LA BANDERITA</h3>
-          </Link>
-          <Link href="/desarrollos-proyectos/septiembre" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
-            <img 
-              src="/images/projects/septiembre/desarrollos/desktop/septiembre.jpg" 
-              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
-              alt="SEPTIEMBRE" 
-            />
-            <h3 className="font-baskerville text-lg mt-4">SEPTIEMBRE</h3>
-          </Link>
-          <Link href="/desarrollos-proyectos/la-reserva-cardales" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
-            <img 
-              src="/images/projects/la-reserva-cardales/desarrollos/desktop/la-reserva.jpg" 
-              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
-              alt="LA RESERVA CARDALES" 
-            />
-            <h3 className="font-baskerville text-lg mt-4">LA RESERVA CARDALES</h3>
-          </Link>
-          <Link href="/desarrollos-proyectos/sofitel" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
-            <img 
-              src="/images/projects/sofitel/desarrollos/desktop/sofitel.jpg" 
-              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
-              alt="SOFITEL LA RESERVA CARDALES" 
-            />
-            <h3 className="font-baskerville text-lg mt-4">SOFITEL LA RESERVA CARDALES</h3>
-          </Link>
-          
-          {/* Fila 2 */}
-          <Link href="/desarrollos-proyectos/terrazas-de-septiembre" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
-            <img 
-              src="/images/projects/terrazas-de-septiembre/desarrollos/desktop/terrazas.jpg" 
-              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
-              alt="TERRAZAS DE SEPTIEMBRE" 
-            />
-            <h3 className="font-baskerville text-lg mt-4">TERRAZAS DE SEPTIEMBRE</h3>
-          </Link>
-          <Link href="/desarrollos-proyectos/casas-de-septiembre" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
-            <img 
-              src="/images/projects/casas-de-septiembre/desarrollos/desktop/casas.png" 
-              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
-              alt="CASAS DE SEPTIEMBRE" 
-            />
-            <h3 className="font-baskerville text-lg mt-4">CASAS DE SEPTIEMBRE</h3>
-          </Link>
-          <Link href="/desarrollos-proyectos/green-house" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
-            <img 
-              src="/images/projects/green-house/desarrollos/desktop/green-house.jpg" 
-              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
-              alt="GREEN HOUSE" 
-            />
-            <h3 className="font-baskerville text-lg mt-4">GREEN HOUSE</h3>
-          </Link>
-          <Link href="/desarrollos-proyectos/chacras-de-mar" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
-            <img 
-              src="/images/projects/chacras-de-mar/desarrollos/desktop/chacras.jpg" 
-              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
-              alt="CHACRAS DE MAR" 
-            />
-            <h3 className="font-baskerville text-lg mt-4">CHACRAS DE MAR</h3>
-          </Link>
-          
-          {/* Fila 3 */}
-          <Link href="/desarrollos-proyectos/edgewater-river" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
-            <img 
-              src="/images/projects/edgewater-river/desarrollos/desktop/edgewater.png" 
-              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
-              alt="EDGEWATER RIVER" 
-            />
-            <h3 className="font-baskerville text-lg mt-4">EDGEWATER RIVER</h3>
-          </Link>
-          <Link href="/desarrollos-proyectos/santa-regina" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
-            <img 
-              src="/images/projects/santa-regina/desarrollos/desktop/santa-regina.jpg" 
-              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
-              alt="SANTA REGINA" 
-            />
-            <h3 className="font-baskerville text-lg mt-4">SANTA REGINA</h3>
-          </Link>
-          <Link href="/desarrollos-proyectos/elvis-river-sunflower-river" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
-            <img 
-              src="/images/projects/elvis-river-sunflower-river/desarrollos/desktop/elvis.jpg" 
-              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
-              alt="ELVIS RIVER & SUNFLOWER RIVER" 
-            />
-            <h3 className="font-baskerville text-lg mt-4">ELVIS RIVER & SUNFLOWER RIVER</h3>
-          </Link>
-          <Link href="/desarrollos-proyectos/la-villette-golf-residences" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
-            <img 
-              src="/images/projects/la-villette-golf-residences/desarrollos/desktop/la-villete.jpg" 
-              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
-              alt="LA VILLETTE GOLF RESIDENCES" 
-            />
-            <h3 className="font-baskerville text-lg mt-4">LA VILLETTE GOLF RESIDENCES</h3>
-          </Link>
+        <div className="grid gap-4 md:gap-[21px]">
+          {filteredProjects.map((project) => {
+            const desktopImage = getDesarrollosImage(project, false)
+            const mobileImage = getDesarrollosImage(project, true)
+            
+            if (!desktopImage || !mobileImage) return null
+            
+            return (
+            <Link 
+              key={project.id}
+              href={`/desarrollos-proyectos/${project.id}`} 
+              className="col-6 md:col-4 lg:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out"
+            >
+              <ResponsiveImage 
+                desktopImage={desktopImage}
+                mobileImage={mobileImage}
+                className="w-full h-[250px] md:h-[356px] object-cover pb-[22px] border-b border-black" 
+                alt={project.imagenes?.alt || project.titulo} 
+              />
+              <h3 className="font-baskerville text-base md:text-[24.5px] mt-4 leading-none">
+                {project.titulo}
+              </h3>
+            </Link>
+            )
+          })}
         </div>
       </section>
 
