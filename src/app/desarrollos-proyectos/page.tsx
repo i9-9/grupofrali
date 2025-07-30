@@ -1,6 +1,45 @@
 "use client"
 
 import {useEffect, useState} from "react"
+import Link from "next/link"
+
+// Componente para imagen responsive
+function ResponsiveImage({ 
+  projectName, 
+  desktopImage, 
+  mobileImage, 
+  alt, 
+  className = ""
+}: {
+  projectName: string
+  desktopImage: string
+  mobileImage: string
+  alt: string
+  className?: string
+}) {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  const imageSrc = isMobile ? mobileImage : desktopImage
+
+  return (
+    <img 
+      src={imageSrc} 
+      className={className}
+      alt={alt} 
+    />
+  )
+}
 
 export default function DesarrollosProyectos() {
 const [currentPhoto, setCurrentPhoto] = useState(0)
@@ -67,58 +106,106 @@ useEffect(() => {
       <section className="content-wrapper py-16">
         <div className="grid">
           {/* Fila 1 */}
-          <div className="col-6 md:col-3">
-            <img src="/images/projects/la-banderita-parque-eolico/desarrollos/desktop/labanderita.jpg" className="w-full h-[356px] object-cover" alt="PARQUE EOLICO LA BANDERITA" />
+          <Link href="/desarrollos-proyectos/la-banderita-parque-eolico" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
+            <img 
+              src="/images/projects/la-banderita-parque-eolico/desarrollos/desktop/labanderita.jpg" 
+              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
+              alt="PARQUE EOLICO LA BANDERITA" 
+            />
             <h3 className="font-baskerville text-lg mt-4">PARQUE EOLICO LA BANDERITA</h3>
-          </div>
-          <div className="col-6 md:col-3">
-            <img src="/images/projects/septiembre/desarrollos/desktop/septiembre.jpg" className="w-full h-[356px] object-cover" alt="SEPTIEMBRE" />
+          </Link>
+          <Link href="/desarrollos-proyectos/septiembre" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
+            <img 
+              src="/images/projects/septiembre/desarrollos/desktop/septiembre.jpg" 
+              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
+              alt="SEPTIEMBRE" 
+            />
             <h3 className="font-baskerville text-lg mt-4">SEPTIEMBRE</h3>
-          </div>
-          <div className="col-6 md:col-3">
-            <img src="/images/projects/la-reserva-cardales/desarrollos/desktop/la-reserva.jpg" className="w-full h-[356px] object-cover" alt="LA RESERVA CARDALES" />
+          </Link>
+          <Link href="/desarrollos-proyectos/la-reserva-cardales" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
+            <img 
+              src="/images/projects/la-reserva-cardales/desarrollos/desktop/la-reserva.jpg" 
+              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
+              alt="LA RESERVA CARDALES" 
+            />
             <h3 className="font-baskerville text-lg mt-4">LA RESERVA CARDALES</h3>
-          </div>
-          <div className="col-6 md:col-3">
-            <img src="/images/projects/sofitel/desarrollos/desktop/sofitel.jpg" className="w-full h-[356px] object-cover" alt="SOFITEL LA RESERVA CARDALES" />
+          </Link>
+          <Link href="/desarrollos-proyectos/sofitel" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
+            <img 
+              src="/images/projects/sofitel/desarrollos/desktop/sofitel.jpg" 
+              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
+              alt="SOFITEL LA RESERVA CARDALES" 
+            />
             <h3 className="font-baskerville text-lg mt-4">SOFITEL LA RESERVA CARDALES</h3>
-          </div>
+          </Link>
           
           {/* Fila 2 */}
-          <div className="col-6 md:col-3">
-            <img src="/images/projects/terrazas-de-septiembre/desarrollos/desktop/terrazas.jpg" className="w-full h-[356px] object-cover" alt="TERRAZAS DE SEPTIEMBRE" />
+          <Link href="/desarrollos-proyectos/terrazas-de-septiembre" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
+            <img 
+              src="/images/projects/terrazas-de-septiembre/desarrollos/desktop/terrazas.jpg" 
+              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
+              alt="TERRAZAS DE SEPTIEMBRE" 
+            />
             <h3 className="font-baskerville text-lg mt-4">TERRAZAS DE SEPTIEMBRE</h3>
-          </div>
-          <div className="col-6 md:col-3">
-            <img src="/images/projects/casas-de-septiembre/desarrollos/desktop/casas.png" className="w-full h-[356px] object-cover" alt="CASAS DE SEPTIEMBRE" />
+          </Link>
+          <Link href="/desarrollos-proyectos/casas-de-septiembre" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
+            <img 
+              src="/images/projects/casas-de-septiembre/desarrollos/desktop/casas.png" 
+              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
+              alt="CASAS DE SEPTIEMBRE" 
+            />
             <h3 className="font-baskerville text-lg mt-4">CASAS DE SEPTIEMBRE</h3>
-          </div>
-          <div className="col-6 md:col-3">
-            <img src="/images/projects/green-house/desarrollos/desktop/green-house.jpg" className="w-full h-[356px] object-cover" alt="GREEN HOUSE" />
+          </Link>
+          <Link href="/desarrollos-proyectos/green-house" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
+            <img 
+              src="/images/projects/green-house/desarrollos/desktop/green-house.jpg" 
+              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
+              alt="GREEN HOUSE" 
+            />
             <h3 className="font-baskerville text-lg mt-4">GREEN HOUSE</h3>
-          </div>
-          <div className="col-6 md:col-3">
-            <img src="/images/projects/chacras-de-mar/desarrollos/desktop/chacras.jpg" className="w-full h-[356px] object-cover" alt="CHACRAS DE MAR" />
+          </Link>
+          <Link href="/desarrollos-proyectos/chacras-de-mar" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
+            <img 
+              src="/images/projects/chacras-de-mar/desarrollos/desktop/chacras.jpg" 
+              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
+              alt="CHACRAS DE MAR" 
+            />
             <h3 className="font-baskerville text-lg mt-4">CHACRAS DE MAR</h3>
-          </div>
+          </Link>
           
           {/* Fila 3 */}
-          <div className="col-6 md:col-3">
-            <img src="/images/projects/edgewater-river/desarrollos/desktop/edgewater.png" className="w-full h-[356px] object-cover" alt="EDGEWATER RIVER" />
+          <Link href="/desarrollos-proyectos/edgewater-river" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
+            <img 
+              src="/images/projects/edgewater-river/desarrollos/desktop/edgewater.png" 
+              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
+              alt="EDGEWATER RIVER" 
+            />
             <h3 className="font-baskerville text-lg mt-4">EDGEWATER RIVER</h3>
-          </div>
-          <div className="col-6 md:col-3">
-            <img src="/images/projects/santa-regina/desarrollos/desktop/santa-regina.jpg" className="w-full h-[356px] object-cover" alt="SANTA REGINA" />
+          </Link>
+          <Link href="/desarrollos-proyectos/santa-regina" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
+            <img 
+              src="/images/projects/santa-regina/desarrollos/desktop/santa-regina.jpg" 
+              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
+              alt="SANTA REGINA" 
+            />
             <h3 className="font-baskerville text-lg mt-4">SANTA REGINA</h3>
-          </div>
-          <div className="col-6 md:col-3">
-            <img src="/images/projects/elvis-river-sunflower-river/desarrollos/desktop/elvis.jpg" className="w-full h-[356px] object-cover" alt="ELVIS RIVER & SUNFLOWER RIVER" />
+          </Link>
+          <Link href="/desarrollos-proyectos/elvis-river-sunflower-river" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
+            <img 
+              src="/images/projects/elvis-river-sunflower-river/desarrollos/desktop/elvis.jpg" 
+              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
+              alt="ELVIS RIVER & SUNFLOWER RIVER" 
+            />
             <h3 className="font-baskerville text-lg mt-4">ELVIS RIVER & SUNFLOWER RIVER</h3>
-          </div>
-          <div className="col-6 md:col-3">
-            <img src="/images/projects/la-villette-golf-residences/desarrollos/desktop/la-villete.jpg" className="w-full h-[356px] object-cover" alt="LA VILLETTE GOLF RESIDENCES" />
+          </Link>
+          <Link href="/desarrollos-proyectos/la-villette-golf-residences" className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out">
+            <img 
+              src="/images/projects/la-villette-golf-residences/desarrollos/desktop/la-villete.jpg" 
+              className="w-[362px] h-[197px] md:w-full md:h-[356px] object-cover pb-[22px] border-b border-black" 
+              alt="LA VILLETTE GOLF RESIDENCES" 
+            />
             <h3 className="font-baskerville text-lg mt-4">LA VILLETTE GOLF RESIDENCES</h3>
-          </div>
+          </Link>
         </div>
       </section>
 
