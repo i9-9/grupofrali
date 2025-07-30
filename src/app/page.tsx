@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import RandomVideo from "@/components/RandomVideo"
+import ProjectGallery from "@/components/ProjectGallery"
 
 export default function Home() {
 
@@ -114,95 +115,140 @@ export default function Home() {
       </section>
 
       {/* Marquee Logos */}
-      <section className="py-24 overflow-hidden">
+      <section className="pb-40 overflow-hidden pt-40 md:pt-0">
         <div className="w-full overflow-hidden">
           <div className="flex gap-32 w-max animate-marquee">
             {/* Primera iteración de logos */}
             <div className="flex items-center gap-32">
               <div className="shrink-0 flex items-center justify-center">
-                <Image 
-                  src="/images/logos/sofitel.svg" 
-                  alt="Sofitel" 
-                  width={120}
-                  height={80}
-                  className="h-20 w-auto"
-                />
+                <picture>
+                  <source srcSet="/images/logos/sofitel.png" type="image/webp" />
+                  <img
+                    src="/images/logos/sofitel.png" 
+                    alt="Sofitel" 
+                    width={120}
+                    height={80}
+                    className="h-20 w-auto object-contain"
+                  />
+                </picture>
               </div>
               <div className="shrink-0 flex items-center justify-center">
-                <Image 
-                  src="/images/logos/cardales.svg" 
-                  alt="Cardales" 
-                  width={120}
-                  height={144}
-                  className="h-36 w-auto"
-                />
+                <picture>
+                  <source srcSet="/images/logos/cardales.png" type="image/webp" />
+                  <img 
+                    src="/images/logos/cardales.png" 
+                    alt="Cardales" 
+                    width={120}
+                    height={144}
+                    className="h-48 w-auto object-contain"
+                  />
+                </picture>
               </div>
               <div className="shrink-0 flex items-center justify-center">
-                <Image 
-                  src="/images/logos/regina.svg" 
-                  alt="Regina" 
-                  width={120}
-                  height={96}
-                  className="h-24 w-auto"
-                />
+                <picture>
+                  <source srcSet="/images/logos/regina.png" type="image/webp" />
+                  <img 
+                    src="/images/logos/regina.png" 
+                    alt="Regina" 
+                    width={120}
+                    height={96}
+                    className="h-32 w-auto object-contain"
+                  />
+                </picture>
               </div>
               <div className="shrink-0 flex items-center justify-center">
-                <Image 
-                  src="/images/logos/septiembre.svg" 
-                  alt="Septiembre" 
-                  width={120}
-                  height={80}
-                  className="h-20 w-auto"
-                />
+                <picture>
+                  <source srcSet="/images/logos/septiembre.png" type="image/webp" />
+                  <img 
+                    src="/images/logos/septiembre.png" 
+                    alt="Septiembre" 
+                    width={120}
+                    height={80}
+                    className="h-20 w-auto object-contain"
+                  />
+                </picture>
               </div>
             </div>
             {/* Segunda iteración (duplicada para efecto infinito) */}
             <div className="flex items-center gap-32">
               <div className="shrink-0 flex items-center justify-center">
-                <Image 
-                  src="/images/logos/sofitel.svg" 
-                  alt="Sofitel" 
-                  width={120}
-                  height={80}
-                  className="h-20 w-auto"
-                />
+                <picture>
+                  <source srcSet="/images/logos/sofitel.png" type="image/webp" />
+                  <img 
+                    src="/images/logos/sofitel.png" 
+                    alt="Sofitel" 
+                    width={120}
+                    height={80}
+                    className="h-20 w-auto object-contain"
+                  />
+                </picture>
               </div>
               <div className="shrink-0 flex items-center justify-center">
-                <Image 
-                  src="/images/logos/cardales.svg" 
-                  alt="Cardales" 
-                  width={120}
-                  height={144}
-                  className="h-36 w-auto"
-                />
+                <picture>
+                  <source srcSet="/images/logos/cardales.png" type="image/webp" />
+                  <img 
+                    src="/images/logos/cardales.png" 
+                    alt="Cardales" 
+                    width={120}
+                    height={144}
+                    className="h-48 w-auto object-contain"
+                  />
+                </picture>
               </div>
               <div className="shrink-0 flex items-center justify-center">
-                <Image 
-                  src="/images/logos/regina.svg" 
-                  alt="Regina" 
-                  width={120}
-                  height={96}
-                  className="h-24 w-auto"
-                />
+                <picture>
+                  <source srcSet="/images/logos/regina.png" type="image/webp" />
+                  <img 
+                    src="/images/logos/regina.png" 
+                    alt="Regina" 
+                    width={120}
+                    height={96}
+                    className="h-32 w-auto object-contain"
+                  />
+                </picture>
               </div>
               <div className="shrink-0 flex items-center justify-center">
-                <Image 
-                  src="/images/logos/septiembre.svg" 
-                  alt="Septiembre" 
-                  width={120}
-                  height={80}
-                  className="h-20 w-auto"
-                />
+                <picture>
+                  <source srcSet="/images/logos/septiembre.png" type="image/webp" />
+                  <img 
+                    src="/images/logos/septiembre.png" 
+                    alt="Septiembre" 
+                    width={120}
+                    height={80}
+                    className="h-20 w-auto object-contain"
+                  />
+                </picture>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Ejemplo de cómo usar los proyectos */}
-      {/* 
-      <ProjectsGrid language="es" />
-      */}
+      {/* Proyectos Section */}
+      <section className="py-16 bg-white">
+        <div className="content-wrapper">
+          {/* Header */}
+          <div className="flex justify-between items-end font-baskerville text-base mb-8">
+            <h3 className="text-sm md:text-base">PROYECTOS</h3>
+            <h3 className="text-sm md:text-base underline">VER TODOS</h3>
+          </div>
+
+          <div className="mb-12">
+            <h2 className="md:hidden font-baskerville text-[32px] leading-[1.1em] mb-8">
+              DIVERSIFICACIÓN <br/>
+              PARA CRECER DE<br/>
+              MANERA SOSTENIBLE
+            </h2>
+            <h2 className="hidden md:block font-baskerville text-[48px] leading-[1.1em] mb-8">
+              DIVERSIFICACIÓN PARA <br/> 
+              CRECER DE MANERA <br/> 
+              SOSTENIBLE
+            </h2>
+          </div>
+
+          <ProjectGallery />
+        </div>
+      </section>
 
     </main>
   )

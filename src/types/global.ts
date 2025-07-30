@@ -1,46 +1,36 @@
 // Existing types...
 
 // Projects Data Types
-export interface LocalizedString {
-  es: string;
-  en: string;
+export interface ProjectImages {
+  // Para galería del home
+  home_gallery: string;
+  
+  // Para página de desarrollos
+  desarrollos_mobile: string;   // Imagen vertical/cuadrada para mobile
+  desarrollos_desktop: string;  // Imagen horizontal para desktop
+  
+  // Para páginas individuales
+  individual_mobile: string;        // Una imagen principal para mobile
+  individual_desktop: string[];     // Una o más imágenes para desktop (galería)
+  
+  // Alt texts
+  alt: string;
 }
 
 export interface ProjectStatistics {
-  superficie: number;
-  superficieUnit: string;
-  inversionTotal: number;
-  inversionCurrency: string;
-  estado: LocalizedString;
-  // Campos específicos por tipo de proyecto
-  cantidadLotes?: number;
-  habitaciones?: number;
-  pisos?: number;
-  hoyosGolf?: number;
-  habitacionesHotel?: number;
-  lotesResidenciales?: number;
-  capacidadAlmacenamiento?: number;
-  capacidadProcesamiento?: number;
-}
-
-export interface ProjectImages {
-  hero: string;
-  gallery: string[];
+  [key: string]: string; // Estadísticas dinámicas como strings
 }
 
 export interface Project {
   id: string;
-  name: LocalizedString;
-  category: LocalizedString;
-  location: LocalizedString;
-  description: LocalizedString;
-  statistics: ProjectStatistics;
-  images: ProjectImages;
+  titulo: string;
+  categoria: string;
+  locacion: string;
+  descripcion: string;
+  imagenes: ProjectImages;
+  estadisticas: ProjectStatistics;
 }
 
 export interface ProjectsData {
-  projects: Project[];
+  proyectos: Project[];
 }
-
-// Language type
-export type Language = 'es' | 'en';

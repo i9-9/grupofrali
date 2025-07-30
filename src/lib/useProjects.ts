@@ -2,73 +2,104 @@
 
 import { useMemo } from 'react'
 import projectsData from '@/data/projects.json'
-import type { ProjectsData, Project, Language } from '@/types/global'
+import type { ProjectsData, Project } from '@/types/global'
 
-const data = projectsData as ProjectsData
+const data = projectsData as unknown as ProjectsData
 
 export function useProjects() {
   return useMemo(() => ({
     // Get all projects
-    getAllProjects: (): Project[] => data.projects,
+    getAllProjects: (): Project[] => data.proyectos,
     
     // Get project by ID
     getProjectById: (id: string): Project | undefined =>
-      data.projects.find(project => project.id === id),
+      data.proyectos.find(project => project.id === id),
     
     // Search projects
-    searchProjects: (query: string, language: Language = 'es'): Project[] =>
-      data.projects.filter(project => 
-        project.name[language].toLowerCase().includes(query.toLowerCase()) ||
-        project.description[language].toLowerCase().includes(query.toLowerCase()) ||
-        project.category[language].toLowerCase().includes(query.toLowerCase()) ||
-        project.location[language].toLowerCase().includes(query.toLowerCase())
+    searchProjects: (query: string): Project[] =>
+      data.proyectos.filter(project => 
+        project.titulo.toLowerCase().includes(query.toLowerCase()) ||
+        project.descripcion.toLowerCase().includes(query.toLowerCase()) ||
+        project.categoria.toLowerCase().includes(query.toLowerCase()) ||
+        project.locacion.toLowerCase().includes(query.toLowerCase())
       ),
-    
-    // Get localized text
-    getLocalizedText: (text: { es: string; en: string }, language: Language = 'es'): string =>
-      text[language],
-    
-    // Format investment
-    formatInvestment: (statistics: { inversionTotal: number; inversionCurrency: string }): string => {
-      const formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: statistics.inversionCurrency,
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0,
-      })
-      return formatter.format(statistics.inversionTotal)
-    },
-    
-    // Format surface area
-    formatSuperficie: (statistics: { superficie: number; superficieUnit: string }): string =>
-      `${statistics.superficie.toLocaleString()} ${statistics.superficieUnit}`,
     
     // Get project stats
     getProjectStats: () => ({
-      total: data.projects.length,
-      totalInvestment: data.projects.reduce((sum, p) => sum + p.statistics.inversionTotal, 0),
-      averageSuperficie: Math.round(data.projects.reduce((sum, p) => sum + p.statistics.superficie, 0) / data.projects.length)
+      total: data.proyectos.length,
+      byCategory: data.proyectos.reduce((acc, project) => {
+        acc[project.categoria] = (acc[project.categoria] || 0) + 1
+        return acc
+      }, {} as Record<string, number>),
+      byStatus: data.proyectos.reduce((acc, project) => {
+        const estado = project.estadisticas.estado || 'SIN ESTADO'
+        acc[estado] = (acc[estado] || 0) + 1
+        return acc
+      }, {} as Record<string, number>)
     }),
 
     // Get unique categories
-    getCategories: (language: Language = 'es'): string[] => {
-      const categories = data.projects.map(p => p.category[language])
+    getCategories: (): string[] => {
+      const categories = data.proyectos.map(p => p.categoria)
       return [...new Set(categories)]
     },
 
     // Get projects by category
-    getProjectsByCategory: (categoryName: string, language: Language = 'es'): Project[] =>
-      data.projects.filter(project => project.category[language] === categoryName),
+    getProjectsByCategory: (categoryName: string): Project[] =>
+      data.proyectos.filter(project => project.categoria === categoryName),
 
     // Get unique status
-    getStatusOptions: (language: Language = 'es'): string[] => {
-      const statuses = data.projects.map(p => p.statistics.estado[language])
+    getStatusOptions: (): string[] => {
+      const statuses = data.proyectos.map(p => p.estadisticas.estado).filter(Boolean)
       return [...new Set(statuses)]
     },
 
     // Get projects by status
-    getProjectsByStatus: (statusName: string, language: Language = 'es'): Project[] =>
-      data.projects.filter(project => project.statistics.estado[language] === statusName)
+    getProjectsByStatus: (statusName: string): Project[] =>
+      data.proyectos.filter(project => project.estadisticas.estado === statusName),
+
+    // Get different image types for project
+    getHomeGalleryImage: (project: Project): string => 
+      project.imagenes.home_gallery || '/images/placeholder.jpg',
+
+    getDesarrollosMobileImage: (project: Project): string => 
+      project.imagenes.desarrollos_mobile || '/images/placeholder.jpg',
+
+    getDesarrollosDesktopImage: (project: Project): string => 
+      project.imagenes.desarrollos_desktop || '/images/placeholder.jpg',
+
+    getIndividualMobileImage: (project: Project): string => 
+      project.imagenes.individual_mobile || '/images/placeholder.jpg',
+
+    getIndividualDesktopImages: (project: Project): string[] => 
+      project.imagenes.individual_desktop || ['/images/placeholder.jpg'],
+
+    // Get project image alt text
+    getImageAlt: (project: Project): string => 
+      project.imagenes.alt || project.titulo,
+
+    // Format statistic for display
+    formatStatistic: (key: string, value: string): { label: string; value: string } => {
+      const labels: Record<string, string> = {
+        superficie: 'Superficie',
+        hectareas_superficie: 'Superficie',
+        superficie_construida: 'Superficie Construida',
+        habitaciones: 'Habitaciones',
+        lotes_residenciales: 'Lotes Residenciales',
+        cantidad_lotes: 'Cantidad de Lotes',
+        casas: 'Casas',
+        departamentos: 'Departamentos',
+        unidades_residenciales: 'Unidades Residenciales',
+        capacidad_instalada: 'Capacidad Instalada',
+        estado: 'Estado',
+        // Agregar más según necesidad
+      }
+      
+      return {
+        label: labels[key] || key.replace(/_/g, ' ').toUpperCase(),
+        value: value
+      }
+    }
   }), [])
 }
 

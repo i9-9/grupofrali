@@ -1,15 +1,15 @@
-# 📋 Estructura de Datos de Proyectos
+# 📋 Estructura de Datos de Proyectos - Grupo Frali
 
 ## 🚀 Resumen
 
-La estructura de datos de proyectos está diseñada para ser **escalable**, **multiidioma** y **type-safe**. Incluye tipos TypeScript, un hook personalizado y componentes de ejemplo.
+La estructura de datos de proyectos está diseñada para ser **simple**, **escalable** y **type-safe**. Incluye tipos TypeScript, un hook personalizado y componentes de ejemplo. **12 proyectos reales** de Grupo Frali incluidos.
 
 ## 📁 Archivos Principales
 
 ```
 src/
 ├── data/
-│   └── projects.json          # Datos de proyectos
+│   └── projects.json          # Datos de proyectos reales
 ├── types/
 │   └── global.ts             # Tipos TypeScript
 ├── lib/
@@ -19,68 +19,67 @@ src/
         └── ProjectCard.tsx   # Componente de ejemplo
 ```
 
-## 🏗️ Estructura JSON
-
-### Categorías
-```json
-{
-  "categories": [
-    {
-      "id": "residential",
-      "name": { "es": "Residencial", "en": "Residential" }
-    }
-  ]
-}
-```
-
-### Estados
-```json
-{
-  "status": [
-    {
-      "id": "completed",
-      "name": { "es": "Completado", "en": "Completed" }
-    }
-  ]
-}
-```
+## 🏗️ Estructura JSON Con Sistema de Imágenes Optimizado
 
 ### Proyectos
 ```json
 {
-  "projects": [
+  "proyectos": [
     {
-      "id": "proyecto-unico",
-      "title": { "es": "Título", "en": "Title" },
-      "subtitle": { "es": "Subtítulo", "en": "Subtitle" },
-      "description": { "es": "Descripción", "en": "Description" },
-      "category": "residential",
-      "status": "completed",
-      "location": {
-        "city": "Buenos Aires",
-        "country": "Argentina",
-        "coordinates": { "lat": -34.6118, "lng": -58.3960 }
+      "id": "chacras-de-mar",
+      "titulo": "CHACRAS DE MAR",
+      "categoria": "REAL ESTATE",
+      "locacion": "Rochas, Uruguay",
+      "descripcion": "Descripción completa del proyecto...",
+      "imagenes": {
+        "home_gallery": "/images/projects/chacras-de-mar/home-gallery.jpg",
+        "desarrollos_mobile": "/images/projects/chacras-de-mar/desarrollos-mobile.jpg",
+        "desarrollos_desktop": "/images/projects/chacras-de-mar/desarrollos-desktop.jpg",
+        "individual_mobile": "/images/projects/chacras-de-mar/individual-mobile.jpg",
+        "individual_desktop": [
+          "/images/projects/chacras-de-mar/individual-desktop-1.jpg",
+          "/images/projects/chacras-de-mar/individual-desktop-2.jpg",
+          "/images/projects/chacras-de-mar/individual-desktop-3.jpg"
+        ],
+        "alt": "Vista aérea del desarrollo costero con casas modernas junto al mar"
       },
-      "specs": {
-        "area": { "total": 5000, "unit": "m²" },
-        "floors": 10,
-        "units": 50
-      },
-      "features": {
-        "es": ["Spa", "Gimnasio"],
-        "en": ["Spa", "Gym"]
-      },
-      "images": {
-        "hero": "/images/projects/ejemplo/hero.jpg",
-        "gallery": ["/images/projects/ejemplo/1.jpg"]
-      },
-      "investment": { "total": 50000000, "currency": "USD" },
-      "featured": true,
-      "order": 1
+      "estadisticas": {
+        "cantidad_lotes": "30",
+        "superficie": "168 m²",
+        "estado": "EN PLANIFICACIÓN"
+      }
     }
   ]
 }
 ```
+
+### 📸 Sistema de Imágenes por Contexto
+
+#### **1. Home Gallery (`home_gallery`)**
+- **Uso**: Galería de proyectos en la página principal
+- **Formato**: Imagen optimizada para cards/grid
+- **Dimensiones sugeridas**: 400x300px (4:3)
+
+#### **2. Desarrollos Mobile (`desarrollos_mobile`)**
+- **Uso**: Lista de proyectos en mobile (página desarrollos)
+- **Formato**: Imagen vertical/cuadrada
+- **Dimensiones sugeridas**: 350x350px (1:1)
+
+#### **3. Desarrollos Desktop (`desarrollos_desktop`)**
+- **Uso**: Vista de proyecto en desktop (página desarrollos)
+- **Formato**: Imagen horizontal que acompaña el texto
+- **Dimensiones sugeridas**: 800x500px (16:10)
+
+#### **4. Individual Mobile (`individual_mobile`)**
+- **Uso**: Imagen principal en página individual mobile
+- **Formato**: Imagen hero para mobile
+- **Dimensiones sugeridas**: 400x250px (16:10)
+
+#### **5. Individual Desktop (`individual_desktop[]`)**
+- **Uso**: Galería de imágenes en página individual desktop
+- **Formato**: Array de imágenes para galería/carrusel
+- **Dimensiones sugeridas**: 1200x800px (3:2)
+- **Cantidad**: 1-5 imágenes por proyecto
 
 ## 🎣 Uso del Hook
 
@@ -90,24 +89,44 @@ import { useProjects } from '@/lib/useProjects'
 function MiComponente() {
   const {
     getAllProjects,
-    getFeaturedProjects,
     getProjectsByCategory,
     getProjectById,
-    formatInvestment,
-    formatArea,
-    getLocalizedText
+    // Nuevas funciones de imágenes por contexto
+    getHomeGalleryImage,
+    getDesarrollosMobileImage,
+    getDesarrollosDesktopImage,
+    getIndividualMobileImage,
+    getIndividualDesktopImages,
+    getImageAlt,
+    formatStatistic
   } = useProjects()
 
-  const proyectos = getFeaturedProjects()
+  const proyectos = getAllProjects()
   const stats = getProjectStats()
 
   return (
     <div>
       {proyectos.map(proyecto => (
         <div key={proyecto.id}>
-          <h3>{getLocalizedText(proyecto.title, 'es')}</h3>
-          <p>{formatInvestment(proyecto.investment)}</p>
-          <p>{formatArea(proyecto.specs.area)}</p>
+          <h3>{proyecto.titulo}</h3>
+          <p>{proyecto.categoria}</p>
+          
+          {/* Imagen para home gallery */}
+          <img 
+            src={getHomeGalleryImage(proyecto)} 
+            alt={getImageAlt(proyecto)} 
+          />
+          
+          {/* Imagen para página desarrollos desktop */}
+          <img 
+            src={getDesarrollosDesktopImage(proyecto)} 
+            alt={getImageAlt(proyecto)} 
+          />
+          
+          {/* Galería de imágenes individuales */}
+          {getIndividualDesktopImages(proyecto).map((img, index) => (
+            <img key={index} src={img} alt={getImageAlt(proyecto)} />
+          ))}
         </div>
       ))}
     </div>
@@ -121,63 +140,74 @@ function MiComponente() {
 import { ProjectCard, ProjectsGrid } from '@/components/examples/ProjectCard'
 
 // Usar un proyecto específico
-<ProjectCard project={proyecto} language="es" />
+<ProjectCard project={proyecto} />
 
-// Mostrar todos los proyectos destacados
-<ProjectsGrid language="es" />
+// Mostrar todos los proyectos
+<ProjectsGrid />
 ```
 
-## 🌍 Multiidioma
+## 📸 Estructura de Imágenes Organizada
 
-Todos los textos están en formato:
-```json
-{
-  "es": "Texto en español",
-  "en": "Text in English"
-}
-```
-
-Usar con:
-```tsx
-const texto = getLocalizedText(proyecto.title, 'es') // o 'en'
-```
-
-## 📸 Imágenes
-
-Estructura de carpetas recomendada:
+### Carpetas Automáticas Generadas
 ```
 public/images/projects/
+├── chacras-de-mar/
+│   ├── home-gallery.jpg           # Para galería del home
+│   ├── desarrollos-mobile.jpg     # Para página desarrollos mobile
+│   ├── desarrollos-desktop.jpg    # Para página desarrollos desktop
+│   ├── individual-mobile.jpg      # Para página individual mobile
+│   └── individual-desktop-1.jpg   # Para galería individual desktop
+│       individual-desktop-2.jpg
+│       individual-desktop-3.jpg
 ├── sofitel/
-│   ├── hero.jpg
-│   ├── exterior.jpg
-│   └── ...
-├── cardales/
-│   ├── hero.jpg
-│   └── ...
-└── septiembre/
-    └── ...
+│   ├── home-gallery.jpg
+│   ├── desarrollos-mobile.jpg
+│   ├── desarrollos-desktop.jpg
+│   ├── individual-mobile.jpg
+│   └── individual-desktop-1.jpg
+│       individual-desktop-2.jpg
+│       individual-desktop-3.jpg
+│       individual-desktop-4.jpg
+└── ... (12 proyectos total)
 ```
+
+### Script de Generación
+```bash
+# Ejecutar para crear todas las carpetas automáticamente
+node scripts/create-image-folders.js
+```
+
+### Convenciones de Nomenclatura
+- **`home-gallery.jpg`**: Imagen para galería principal
+- **`desarrollos-mobile.jpg`**: Imagen vertical/cuadrada para mobile
+- **`desarrollos-desktop.jpg`**: Imagen horizontal para desktop
+- **`individual-mobile.jpg`**: Hero image para página individual mobile
+- **`individual-desktop-X.jpg`**: Galería numerada para desktop (1-5 imágenes)
 
 ## 🔍 Funciones Disponibles
 
 ### Obtener Datos
 - `getAllProjects()` - Todos los proyectos
-- `getFeaturedProjects()` - Solo destacados
-- `getProjectsByCategory(id)` - Por categoría
-- `getProjectsByStatus(id)` - Por estado
+- `getProjectsByCategory(categoria)` - Por categoría
+- `getProjectsByStatus(estado)` - Por estado
 - `getProjectById(id)` - Proyecto específico
-- `searchProjects(query, language)` - Búsqueda
+- `searchProjects(query)` - Búsqueda en título, descripción, etc.
 
-### Formato y Utilidades
-- `formatInvestment(investment)` - Formato moneda
-- `formatArea(area)` - Formato área
-- `getLocalizedText(text, language)` - Texto localizado
+### Utilidades de Imágenes
+- `getHomeGalleryImage(project)` - Imagen para galería del home
+- `getDesarrollosMobileImage(project)` - Imagen para desarrollos mobile
+- `getDesarrollosDesktopImage(project)` - Imagen para desarrollos desktop
+- `getIndividualMobileImage(project)` - Imagen para página individual mobile
+- `getIndividualDesktopImages(project)` - Array de imágenes para galería desktop
+- `getImageAlt(project)` - Alt text de las imágenes
+
+### Utilidades Generales
+- `formatStatistic(key, value)` - Formateo de estadísticas
 - `getProjectStats()` - Estadísticas generales
 
-### Filtros y Ordenamiento
-- `getProjectsSorted()` - Ordenados por `order`
-- `getCategories()` - Lista de categorías
-- `getStatusOptions()` - Lista de estados
+### Filtros
+- `getCategories()` - Lista de categorías únicas
+- `getStatusOptions()` - Lista de estados únicos
 
 ## 📊 Estadísticas
 
@@ -185,14 +215,37 @@ public/images/projects/
 const stats = getProjectStats()
 // Retorna:
 {
-  total: 3,
-  completed: 1,
-  inProgress: 1,
-  planning: 1,
-  totalInvestment: 300000000,
-  averageArea: 145000
+  total: 12,
+  byCategory: {
+    "REAL ESTATE": 8,
+    "AGROPECUARIA": 2,
+    "HOTELERIA": 1,
+    "ENERGIA RENOVABLE": 1
+  },
+  byStatus: {
+    "EN OPERACIÓN": 5,
+    "EN PLANIFICACIÓN": 3,
+    "EN COMERCIALIZACIÓN ETAPA FINAL": 2,
+    "100% COMERCIALIZADO Y HABITADO": 2
+  }
 }
 ```
+
+## 🏢 Proyectos Incluidos
+
+### **REAL ESTATE (8)**
+- Chacras de Mar, La Reserva Cardales, La Villette Golf Residences
+- Green House, Edgewater River, Septiembre, Terrazas de Septiembre
+- Casas de Septiembre
+
+### **AGROPECUARIA (2)**
+- Elvis River y Sunflower River, Santa Regina
+
+### **HOTELERÍA (1)**
+- Sofitel La Reserva Cardales
+
+### **ENERGÍA RENOVABLE (1)**
+- La Banderita Parque Eólico
 
 ## ➕ Agregar Nuevos Proyectos
 
@@ -200,8 +253,20 @@ const stats = getProjectStats()
 ```json
 {
   "id": "nuevo-proyecto",
-  "title": { "es": "Nuevo", "en": "New" },
-  // ... resto de campos
+  "titulo": "NUEVO PROYECTO",
+  "categoria": "REAL ESTATE",
+  "locacion": "Buenos Aires, Argentina",
+  "descripcion": "Descripción del proyecto...",
+  "imagenes": [
+    {
+      "src": "/images/projects/nuevo-proyecto/imagen_1.jpg",
+      "alt": "Descripción de la imagen"
+    }
+  ],
+  "estadisticas": {
+    "superficie": "1000 m²",
+    "estado": "EN DESARROLLO"
+  }
 }
 ```
 
@@ -218,9 +283,18 @@ const proyecto = getProjectById('nuevo-proyecto')
 ## ✅ Type Safety
 
 Todos los tipos están definidos en `src/types/global.ts`:
-- `Project` - Proyecto completo
+- `Project` - Proyecto individual
 - `ProjectsData` - Estructura completa
-- `Language` - 'es' | 'en'
-- `LocalizedString` - Texto multiidioma
+- `ProjectImage` - Imagen con src y alt
+- `ProjectStatistics` - Estadísticas dinámicas
 
-¡La estructura está lista para usar! 🚀 
+## 🎯 Características Clave
+
+- ✅ **12 proyectos reales** de Grupo Frali
+- ✅ **Estructura simple** sin multiidioma
+- ✅ **Estadísticas dinámicas** adaptables por proyecto
+- ✅ **Type Safety** completo con TypeScript
+- ✅ **Hook personalizado** con utilidades
+- ✅ **Componentes listos** para usar
+
+¡Todo listo para implementar! 🚀 
