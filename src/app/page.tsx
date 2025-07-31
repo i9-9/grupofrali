@@ -1,6 +1,6 @@
 "use client"
 
-import Image from "next/image"
+
 import RandomVideo from "@/components/RandomVideo"
 import ProjectGallery from "@/components/ProjectGallery"
 

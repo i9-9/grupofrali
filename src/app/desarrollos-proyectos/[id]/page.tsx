@@ -5,55 +5,7 @@ import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import projectsData from "@/data/projects.json"
 
-interface ProjectImage {
-  individual_mobile?: string | string[]
-  individual_desktop?: string | string[]
-  alt?: string
-}
 
-interface ProjectStats {
-  [key: string]: string | number
-}
-
-
-
-function ResponsiveImage({ 
-  desktopImages, 
-  mobileImages, 
-  alt, 
-  className = ""
-}: {
-  desktopImages: string[]
-  mobileImages: string[]
-  alt: string
-  className?: string
-}) {
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    checkScreenSize()
-    window.addEventListener('resize', checkScreenSize)
-    return () => window.removeEventListener('resize', checkScreenSize)
-  }, [])
-
-  const images = isMobile ? mobileImages : desktopImages
-  
-  return (
-    <div className="w-full h-full overflow-hidden">
-      {images.map((imageSrc, index) => (
-        <img 
-          key={index}
-          src={imageSrc} 
-          className={`w-full h-auto object-cover block ${className}`}
-          alt={`${alt} - Imagen ${index + 1}`} 
-        />
-      ))}
-    </div>
-  )
-}
 
 export default function DesarrolloProyecto() {
   const params = useParams()

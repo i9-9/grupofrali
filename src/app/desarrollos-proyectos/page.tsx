@@ -2,6 +2,7 @@
 
 import {useEffect, useState} from "react"
 import Link from "next/link"
+import Image from "next/image"
 import projectsData from "@/data/projects.json"
 
 function ResponsiveImage({ 
@@ -31,10 +32,12 @@ function ResponsiveImage({
   const imageSrc = isMobile ? mobileImage : desktopImage
 
   return (
-    <img 
+    <Image 
       src={imageSrc} 
+      alt={alt}
+      width={300}
+      height={200}
       className={className}
-      alt={alt} 
     />
   )
 }
@@ -92,7 +95,7 @@ useEffect(() => {
   }, 4000)
 
   return () => clearInterval(interval)
-}, [])
+}, [photos.length])
 
 const filteredProjects = selectedCategory === "VER TODOS" 
   ? projectsData.proyectos 
@@ -114,9 +117,11 @@ const handleCategoryChange = (category: string) => {
               </p>
           </div>
           <div className="hidden md:block absolute top-0 right-0 md:w-[50%] w-full h-full z-0 md:pt-24"> {/* Slightly smaller width with gap */}
-            <img
+            <Image
               src={photos[currentPhoto]}
               alt={`Slide ${currentPhoto}`}
+              width={800}
+              height={600}
               className={`w-full h-auto object-cover transition-opacity duration-300 ease-in-out ${
                 isFading ? 'opacity-0' : 'opacity-100'
               }`}

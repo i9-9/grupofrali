@@ -55,8 +55,8 @@ export default function SmoothScroll() {
 
     // Interceptar scroll programático (como window.scrollTo)
     const originalScrollTo = window.scrollTo
-    // @ts-ignore - Interceptando window.scrollTo temporalmente
-    window.scrollTo = function(x: any, y?: any) {
+    // @ts-expect-error - Interceptando window.scrollTo temporalmente
+    window.scrollTo = function(x: number | ScrollToOptions, y?: number) {
       if (typeof x === 'object' && x !== null) {
         const options = x as ScrollToOptions
         if (options.behavior === 'smooth' || !options.behavior) {
@@ -67,7 +67,11 @@ export default function SmoothScroll() {
         smoothScrollTo(y)
         return
       }
-      originalScrollTo.call(window, x, y)
+      if (typeof x === 'number' && typeof y === 'number') {
+        originalScrollTo.call(window, x, y)
+      } else if (typeof x === 'object') {
+        originalScrollTo.call(window, x)
+      }
     }
 
     document.addEventListener('click', handleLinkClick)

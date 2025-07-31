@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 export default function QuienesSomos() {
   const valores = [
@@ -234,13 +235,15 @@ export default function QuienesSomos() {
         </div>
 
         <div className="grid">
-          {management.map((person, index) => (
+          {management.map((person) => (
             <React.Fragment key={person.numero}>
               {/* Imagen - 5 columnas mobile, 3 columnas desktop */}
               <div className="col-5 md:col-3 mb-8 md:mb-12">
-                <img
+                <Image
                   src={person.imagen}
                   alt={`${person.nombre} ${person.apellido}`}
+                  width={300}
+                  height={400}
                   className="w-full h-auto object-contain grayscale"
                 />
                 
