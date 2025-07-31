@@ -11,7 +11,7 @@ export default function Contacto() {
     mensaje: ''
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -19,7 +19,7 @@ export default function Contacto() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // Aquí iría la lógica para enviar el formulario
     console.log('Formulario enviado:', formData);
@@ -147,7 +147,7 @@ export default function Contacto() {
                   name="mensaje"
                   value={formData.mensaje}
                   onChange={handleInputChange}
-                  rows="4"
+                  rows={4}
                   className="w-full bg-transparent border-b border-black pb-2 text-black font-archivo text-sm tracking-wider resize-none focus:outline-none focus:border-black"
                   style={{ fontSize: 'clamp(12px, 1vw, 14px)' }}
                 />

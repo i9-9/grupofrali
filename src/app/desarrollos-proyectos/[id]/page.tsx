@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import projectsData from "@/data/projects.json"
 
 
@@ -98,10 +99,12 @@ export default function DesarrolloProyecto() {
               >
                 {mobileImages.map((imageSrc, index) => (
                   <div key={index} className="flex-shrink-0 w-full h-full snap-start">
-                    <img 
+                    <Image 
                       src={imageSrc} 
+                      alt={`${project.imagenes?.alt || project.titulo} - Imagen ${index + 1}`}
+                      width={600}
+                      height={400}
                       className="w-full h-full object-cover"
-                      alt={`${project.imagenes?.alt || project.titulo} - Imagen ${index + 1}`} 
                     />
                   </div>
                 ))}
@@ -305,10 +308,12 @@ export default function DesarrolloProyecto() {
               >
                 {desktopImages.map((imageSrc, index) => (
                   <div key={index} className="flex-shrink-0 w-full h-full snap-start">
-                    <img 
+                    <Image 
                       src={imageSrc} 
+                      alt={`${project.imagenes?.alt || project.titulo} - Imagen ${index + 1}`}
+                      width={800}
+                      height={600}
                       className="w-full h-full object-cover"
-                      alt={`${project.imagenes?.alt || project.titulo} - Imagen ${index + 1}`} 
                     />
                   </div>
                 ))}
