@@ -63,15 +63,15 @@ export default function SmoothScroll() {
           smoothScrollTo(options.top || 0)
           return
         }
+        // Fallback para scroll sin smooth
+        originalScrollTo(options)
+        return
       } else if (typeof x === 'number' && typeof y === 'number') {
         smoothScrollTo(y)
         return
       }
-      if (typeof x === 'number' && typeof y === 'number') {
-        originalScrollTo.call(window, x, y)
-      } else if (typeof x === 'object') {
-        originalScrollTo.call(window, x)
-      }
+      // Fallback para casos no manejados
+      originalScrollTo(x as number, y || 0)
     }
 
     document.addEventListener('click', handleLinkClick)
