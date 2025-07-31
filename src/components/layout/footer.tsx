@@ -4,7 +4,13 @@ import Link from "next/link"
 
 export default function Footer() {
     const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        if (typeof window !== 'undefined') {
+            // Usar smooth scroll nativo más optimizado, evitando la interceptación personalizada
+            document.documentElement.scrollTo({ 
+                top: 0, 
+                behavior: 'smooth' 
+            })
+        }
     }
     return(
         <footer className="bg-[#151714]">
@@ -29,27 +35,27 @@ export default function Footer() {
                         </h4>
                     </div>
                 </div>
-                                 <div className="flex flex-col md:flex-row justify-between text-white text-xs py-10 gap-y-1 md:text-[14px]">
-                    <button onClick={scrollToTop} className="hidden md:block text-white text-xs md:text-[14px] hover:text-white/70 transition-colors cursor-pointer text-left">
+                                 <div className="flex flex-col md:flex-row justify-between text-white py-10 gap-y-1">
+                    <button onClick={scrollToTop} className="hidden md:block text-white text-[10px] sm:text-xs md:text-sm lg:text-[14px] hover:text-white/70 transition-colors cursor-pointer text-left">
                         VOLVER ARRIBA
                     </button>
-                    <Link href="/" className="text-white text-xs md:text-[14px] tracking-[0.17em] hover:text-white/70 transition-colors">
+                    <Link href="/" className="text-white text-[10px] sm:text-xs md:text-sm lg:text-[14px] tracking-[0.17em] hover:text-white/70 transition-colors">
                         HOME
                     </Link>
-                    <Link href="/quienes-somos" className="text-white text-xs md:text-[14px] tracking-[0.17em] hover:text-white/70 transition-colors">
+                    <Link href="/quienes-somos" className="text-white text-[10px] sm:text-xs md:text-sm lg:text-[14px] tracking-[0.17em] hover:text-white/70 transition-colors">
                         QUIÉNES SOMOS
                     </Link>
-                    <Link href="/desarrollos-proyectos" className="text-white text-xs md:text-[14px] tracking-[0.17em] hover:text-white/70 transition-colors">
+                    <Link href="/desarrollos-proyectos" className="text-white text-[10px] sm:text-xs md:text-sm lg:text-[14px] tracking-[0.17em] hover:text-white/70 transition-colors">
                         DESARROLLOS E INVERSIONES
                     </Link>
-                    <Link href="/rrhh" className="text-white text-xs md:text-[14px] tracking-[0.17em] hover:text-white/70 transition-colors">
+                    <Link href="/rrhh" className="text-white text-[10px] sm:text-xs md:text-sm lg:text-[14px] tracking-[0.17em] hover:text-white/70 transition-colors">
                         RECURSOS HUMANOS
                     </Link>
                     <div className="flex justify-between">
-                        <Link href="/contacto" className="text-white text-xs md:text-[14px] tracking-[0.17em] hover:text-white/70 transition-colors">
+                        <Link href="/contacto" className="text-white text-[10px] sm:text-xs md:text-sm lg:text-[14px] tracking-[0.17em] hover:text-white/70 transition-colors">
                             CONTACTO
                         </Link>
-                        <button onClick={scrollToTop} className="md:hidden text-white text-xs hover:text-white/70 transition-colors cursor-pointer">
+                        <button onClick={scrollToTop} className="md:hidden text-white text-[10px] sm:text-xs hover:text-white/70 transition-colors cursor-pointer">
                         VOLVER ARRIBA
                         </button>
                     </div>

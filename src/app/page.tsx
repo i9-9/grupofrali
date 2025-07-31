@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <main>
       {/* Video Hero */}
-      <section className="relative h-screen">
+      <section className="relative h-screen overflow-hidden">
         <RandomVideo type="mobile" />
         <RandomVideo type="desktop" />
         {/* Content over video */}

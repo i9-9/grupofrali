@@ -5,7 +5,11 @@ import { useEffect } from 'react'
 export default function SmoothScroll() {
   useEffect(() => {
     // Función para scroll suave personalizado
-    const smoothScrollTo = (targetPosition: number, duration: number = 1200) => {
+    const smoothScrollTo = (targetPosition: number, duration?: number) => {
+      // Si no se especifica duración, usar duración más corta para scroll to top
+      if (!duration) {
+        duration = targetPosition === 0 ? 600 : 1200
+      }
       const startPosition = window.pageYOffset
       const distance = targetPosition - startPosition
       const startTime = performance.now()
@@ -51,8 +55,9 @@ export default function SmoothScroll() {
 
     // Interceptar scroll programático (como window.scrollTo)
     const originalScrollTo = window.scrollTo
-    window.scrollTo = function(x: number | ScrollToOptions, y?: number) {
-      if (typeof x === 'object') {
+    // @ts-ignore - Interceptando window.scrollTo temporalmente
+    window.scrollTo = function(x: any, y?: any) {
+      if (typeof x === 'object' && x !== null) {
         const options = x as ScrollToOptions
         if (options.behavior === 'smooth' || !options.behavior) {
           smoothScrollTo(options.top || 0)
