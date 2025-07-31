@@ -42,7 +42,7 @@ function ResponsiveImage({
   const images = isMobile ? mobileImages : desktopImages
   
   return (
-    <div className="h-[504px] md:h-full overflow-hidden">
+    <div className="w-full h-full overflow-hidden">
       {images.map((imageSrc, index) => (
         <img 
           key={index}
@@ -89,7 +89,7 @@ export default function DesarrolloProyecto() {
       {/* Mobile Layout */}
       <div className="md:hidden h-full flex flex-col">
         {/* Galería de imágenes mobile */}
-        <div className="flex-1 overflow-hidden">
+        <div className="h-[504px] md:h-full overflow-hidden">
           {hasImages ? (
             <ResponsiveImage 
               desktopImages={desktopImages}
