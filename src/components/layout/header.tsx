@@ -18,7 +18,7 @@ const menuItems = [
 const mobileItems = [
   { name: "HOME", href: "/" },
   { name: "QUIENES SOMOS", href: "/quienes-somos" },
-  { name: "DESARROLLOS & PROYECTOS", href: "/desarrollos" },
+  { name: "DESARROLLOS & PROYECTOS", href: "/desarrollos-proyectos" },
   { name: "RRHH", href: "/rrhh" },
   { name: "CONTACTO", href: "/contacto" }
 ]
@@ -26,6 +26,7 @@ const mobileItems = [
 export default function Header() {
   const pathname = usePathname()
   const isHome = pathname === "/"
+  const isProjectPage = pathname.startsWith("/desarrollos-proyectos/") && pathname !== "/desarrollos-proyectos"
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleMenu = () => setIsOpen(!isOpen)
@@ -36,7 +37,7 @@ export default function Header() {
         <div className="content-wrapper">
           {/* Mobile */}
           <div className={`flex md:hidden items-center h-30 ${isHome ? 'justify-between' : 'justify-between'}`}>
-                <h1 className={`font-baskerville text-[28px] tracking-[0.68em] ${isHome ? 'text-white' : 'text-black'}`}>
+                <h1 className={`font-baskerville header-logo-mobile ${isHome ? 'text-white' : 'text-black'}`}>
                 GRUPO FRALI
                 </h1>
 
@@ -49,7 +50,7 @@ export default function Header() {
           <div className="hidden md:block">
             {isHome ? (
               <div className="flex justify-end items-center h-14">
-                <ul className="flex gap-5 text-sm text-white">
+                <ul className="flex gap-5 header-menu-items text-white">
                   {menuItems.map((item, index) => (
                     <li key={index}>
                       <Link href={item.href}>
@@ -62,16 +63,19 @@ export default function Header() {
             ) : (
               <div className="flex justify-between items-center h-14">
                 <Link href="/">
-                    <h1 className="font-baskerville text-base tracking-[0.68em] text-black pl-3">
+                    <h1 className="font-baskerville header-logo text-black pl-3">
                     GRUPO FRALI
                     </h1>
                 </Link>
-                <ul className="flex gap-5 text-sm">
+                <ul className="flex gap-5 header-menu-items">
                   {menuItems.map((item, index) => {
                     const isCurrent = pathname === item.href
+                    const textColor = isProjectPage ? 'text-white' : 'text-black'
+                    const hoverColor = isProjectPage ? 'hover:text-white/30' : 'hover:text-black/30'
+                    const currentColor = isProjectPage ? 'text-white/30' : 'text-black/30'
                     return (
                       <li key={index}>
-                        <Link href={item.href} className= {`${isCurrent ? 'text-black/30' : 'text-black'} hover:text-black/30 transition-colors duration-400`}>
+                        <Link href={item.href} className={`${isCurrent ? currentColor : textColor} ${hoverColor} transition-colors duration-400`}>
                           {item.name}
                         </Link>
                       </li>
