@@ -67,21 +67,21 @@ export default function Home() {
             <div className="col-6 md:col-1-to-5 order-3 md:order-3">
               <div className="border-t border-black pt-1 mb-1 flex justify-between items-start">
                 <div className="font-archivo text-black text-stat-number leading-none font-archivo-light">14</div>
-                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 w-34">
+                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 flex-1 max-w-[140px] md:max-w-[120px] lg:max-w-[140px]">
                   PROYECTOS<br />DESARROLLADOS
                 </div>
               </div>
 
               <div className="border-t border-black pt-1 mb-1 flex justify-between items-start">
                 <div className="font-archivo text-black text-stat-number leading-none font-archivo-light">300 MM<span className="text-stat-unit">USD</span></div>
-                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 w-34">
+                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 flex-1 max-w-[140px] md:max-w-[120px] lg:max-w-[140px]">
                   VALOR TOTAL<br />DE ACTIVOS
                 </div>
               </div>
 
               <div className="border-t border-black pt-1 mb-1 flex justify-between items-start">
                 <div className="font-archivo text-black text-stat-number leading-none font-archivo-light">5</div>
-                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 w-34">
+                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 flex-1 max-w-[140px] md:max-w-[120px] lg:max-w-[140px]">
                   PROYECTOS EN<br />PLANIFICACIÓN
                 </div>
               </div>
@@ -91,21 +91,21 @@ export default function Home() {
             <div className="col-6 md:col-8-to-12 order-4 md:order-4">
               <div className="border-t border-black pt-1 mb-1 flex justify-between items-start">
                 <div className="font-archivo text-black text-stat-number leading-none font-archivo-light">7800<span className="text-stat-unit">ha</span></div>
-                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 w-34">
+                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 flex-1 max-w-[140px] md:max-w-[120px] lg:max-w-[140px]">
                   HECTÁREAS<br />AGRÍCOLAS
                 </div>
               </div>
 
               <div className="border-t border-black pt-1 mb-1 flex justify-between items-start">
                 <div className="font-archivo text-black text-stat-number leading-none font-archivo-light">+300</div>
-                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 w-34">
+                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 flex-1 max-w-[140px] md:max-w-[120px] lg:max-w-[140px]">
                   Nº EMPLEADOS &<br />COLABORADORES
                 </div>
               </div>
 
               <div className="border-t border-black pt-1 mb-1 flex justify-between items-start">
                 <div className="font-archivo text-black text-stat-number leading-none font-archivo-light">+100.000<span className="text-stat-unit">m²</span></div>
-                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 w-34">
+                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 flex-1 max-w-[140px] md:max-w-[120px] lg:max-w-[140px]">
                   SUPERFICIE<br />CONSTRUIDA
                 </div>
               </div>
@@ -115,7 +115,7 @@ export default function Home() {
       </section>
 
       {/* Marquee Logos */}
-      <section className="pb-40 overflow-hidden pt-20 lg:pt-0">
+      <section className="pb-40 overflow-hidden pt-20">
         <div className="w-full overflow-hidden">
           <div className="flex gap-32 w-max animate-marquee">
             {/* Primera iteración de logos */}

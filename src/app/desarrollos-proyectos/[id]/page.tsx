@@ -106,7 +106,7 @@ export default function DesarrolloProyecto() {
         {/* Panel de información mobile - fijo en la parte inferior */}
         <div className="bg-white border-t border-gray-200 p-4 max-h-[50vh] overflow-y-auto">
           <div className="flex items-center gap-2 mb-2">
-            <Link href="/desarrollos-proyectos" className="text-gray-600">
+            <Link href="/desarrollos-proyectos" className="text-[#151714]">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
               </svg>
@@ -123,7 +123,7 @@ export default function DesarrolloProyecto() {
             {project.locacion}
           </p>
           
-          <p className="text-[#151714] text-sm leading-relaxed mb-4">
+          <p className="text-[#151714] text-base leading-5 mb-4">
             {project.descripcion}
           </p>
           

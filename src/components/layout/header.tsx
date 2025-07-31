@@ -1,6 +1,5 @@
 "use client"
 
-import { motion, AnimatePresence } from "motion/react"
 import { useState } from "react"
 import HamburgerIcon from "../icons/HamburgerIcon"
 import DownArrowIcon from "../icons/DownArrowIcon"
@@ -28,8 +27,30 @@ export default function Header() {
   const isHome = pathname === "/"
   const isProjectPage = pathname.startsWith("/desarrollos-proyectos/") && pathname !== "/desarrollos-proyectos"
   const [isOpen, setIsOpen] = useState(false)
+  const [isAnimating, setIsAnimating] = useState(false)
+  const [animationClass, setAnimationClass] = useState("")
 
-  const toggleMenu = () => setIsOpen(!isOpen)
+  const toggleMenu = () => {
+    if (isOpen) {
+      // Cerrar menu
+      setIsAnimating(true)
+      setAnimationClass("mobile-menu-exit-active")
+      setTimeout(() => {
+        setIsOpen(false)
+        setIsAnimating(false)
+        setAnimationClass("")
+      }, 1000)
+    } else {
+      // Abrir menu
+      setIsOpen(true)
+      setAnimationClass("mobile-menu-enter")
+      
+      // Usar setTimeout con un delay mínimo para asegurar que la clase se aplique
+      setTimeout(() => {
+        setAnimationClass("mobile-menu-enter-active")
+      }, 10) // 10ms es suficiente para que React procese el primer cambio de estado
+    }
+  }
 
   return (
     <>
@@ -99,51 +120,45 @@ export default function Header() {
         )}
       </header>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="fixed inset-0 bg-white z-50 md:hidden"
-            initial={{ y: "-100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "-100%" }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="content-wrapper">
-              <h1 className="font-baskerville text-[28px] md:text-base text-[#151714] tracking-[0.68em] pt-14 pb-20">
-                GRUPO FRALI
-              </h1>
-              <ul className="flex flex-col text-[#151714] text-lg divide-y divide-[#151714] border-y border-[#151714]">
-                {mobileItems.map((item, index) => {
-                  const isCurrent = pathname === item.href
-                  return (
-                    <li
-                      key={index}
-                      className="font-archivo-light py-4 flex justify-between items-center"
-                      onClick={toggleMenu}
+      {(isOpen || isAnimating) && (
+        <div
+          className={`fixed inset-0 bg-white z-50 md:hidden ${animationClass}`}
+        >
+          <div className="content-wrapper">
+            <h1 className="font-baskerville text-[28px] md:text-base text-[#151714] tracking-[0.68em] pt-14 pb-20">
+              GRUPO FRALI
+            </h1>
+            <ul className="flex flex-col text-[#151714] text-lg divide-y divide-[#151714] border-y border-[#151714]">
+              {mobileItems.map((item, index) => {
+                const isCurrent = pathname === item.href
+                return (
+                  <li
+                    key={index}
+                    className="font-archivo-light py-4 flex justify-between items-center"
+                    onClick={toggleMenu}
+                  >
+                    <Link
+                      href={item.href}
+                      className={`flex justify-between w-full ${isCurrent ? 'font-bold' : ''}`}
                     >
-                      <Link
-                        href={item.href}
-                        className={`flex justify-between w-full ${isCurrent ? 'font-bold' : ''}`}
-                      >
-                        <span>{item.name}</span>
-                        <span>(0{index + 1})</span>
-                      </Link>
-                    </li>
-                  )
-                })}
-              </ul>
-              <div className="flex justify-between items-center">
-                <Link href="/en">
-                  <h4 className="py-14" onClick={toggleMenu}>EN</h4>
-                </Link>
-                <div onClick={toggleMenu}>
-                  <DownArrowIcon className="rotate-180" />
-                </div>
+                      <span>{item.name}</span>
+                      <span>(0{index + 1})</span>
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+            <div className="flex justify-between items-center">
+              <Link href="/en">
+                <h4 className="py-14" onClick={toggleMenu}>EN</h4>
+              </Link>
+              <div onClick={toggleMenu}>
+                <DownArrowIcon className="rotate-180" />
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      )}
     </>
   )
 }
