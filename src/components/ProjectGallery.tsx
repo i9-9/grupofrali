@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 interface Project {
@@ -64,9 +64,38 @@ const projects: Project[] = [
 ];
 
 export default function ProjectGallery() {
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0)
+
+  // Detectar proyecto activo en el scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!scrollRef.current) return
+      
+      const container = scrollRef.current
+      const scrollLeft = container.scrollLeft
+      const containerWidth = container.clientWidth
+      const scrollWidth = container.scrollWidth
+      
+      // Calcular el progreso del scroll (0 a 1)
+      const scrollProgress = scrollLeft / (scrollWidth - containerWidth)
+      
+      // Convertir el progreso a índice de proyecto
+      const activeIndex = Math.round(scrollProgress * (projects.length - 1))
+      setActiveProjectIndex(Math.max(0, Math.min(activeIndex, projects.length - 1)))
+    }
+
+    const container = scrollRef.current
+    if (container) {
+      container.addEventListener('scroll', handleScroll)
+      return () => container.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   return (
-    <div className="w-full overflow-x-auto scrollbar-hidden">
-      <div className="flex space-x-6 pb-4 md:pb-8">
+    <div className="relative w-full">
+      <div ref={scrollRef} className="w-full overflow-x-auto scrollbar-hidden">
+        <div className="flex space-x-6 pb-4 md:pb-8">
         {projects.map((project, index) => (
           <Link
             key={project.id}
@@ -91,7 +120,25 @@ export default function ProjectGallery() {
             </div>
           </Link>
         ))}
+        </div>
       </div>
+      
+      {/* Barra de paginación - solo mobile */}
+      {projects.length > 1 && (
+        <div className="md:hidden absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-2">
+          <div className="rounded-full px-3 py-2">
+            <div className="relative w-24 h-1 bg-white/30 rounded-full overflow-hidden">
+              <div 
+                className="absolute top-0 h-full bg-white rounded-full transition-all duration-300 ease-out"
+                style={{ 
+                  width: `${100 / projects.length}%`,
+                  left: `${(activeProjectIndex * 100) / projects.length}%`
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

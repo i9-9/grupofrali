@@ -28,11 +28,16 @@ export default function RandomVideo({ type }: Props) {
 
   if (!videoSrc) return null;
 
+  // Aplicar zoom específico al video_desktop2.mp4 para ocultar información lumínica detrás del navbar
+  const isVideo2Desktop = videoSrc === '/videos/video_desktop2.mp4';
+  const videoStyle = isVideo2Desktop ? { transform: 'scale(1.20)', transformOrigin: 'center center' } : {};
+
   return (
     <video
       className={`absolute inset-0 w-full h-full object-cover ${
         type === 'mobile' ? 'md:hidden' : 'hidden md:block'
       }`}
+      style={videoStyle}
       autoPlay
       muted
       loop
