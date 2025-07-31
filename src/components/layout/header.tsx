@@ -37,11 +37,11 @@ export default function Header() {
         <div className="content-wrapper">
           {/* Mobile */}
           <div className={`flex md:hidden items-center h-30 ${isHome ? 'justify-between' : 'justify-between'}`}>
-                <h1 className={`font-baskerville header-logo-mobile ${isHome ? 'text-white' : 'text-black'}`}>
+                <h1 className={`font-baskerville header-logo-mobile ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}>
                 GRUPO FRALI
                 </h1>
 
-            <button onClick={toggleMenu} className={isHome ? 'text-white' : 'text-black'}>
+            <button onClick={toggleMenu} className={isHome || isProjectPage ? 'text-white' : 'text-black'}>
               {isOpen ? <></> : <HamburgerIcon />}
             </button>
           </div>

@@ -111,19 +111,19 @@ export default function DesarrolloProyecto() {
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
               </svg>
             </Link>
-            <span className="text-gray-500 text-sm font-medium">{project.categoria}</span>
+            <span className="text-black font-baskerville text-base">{project.categoria}</span>
           </div>
           
-          <h1 className="font-baskerville text-2xl text-black mb-1">{project.titulo}</h1>
-          <p className="text-gray-600 text-sm mb-4 flex items-center">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="mr-1">
+          <h1 className="font-archivo text-4xl text-black mb-15">{project.titulo}</h1>
+          <p className="text-[#151714] text-sm mb-4 flex items-center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="mr-1 text-black">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
               <circle cx="12" cy="10" r="3"/>
             </svg>
             {project.locacion}
           </p>
           
-          <p className="text-black text-sm leading-relaxed mb-4">
+          <p className="text-[#151714] text-sm leading-relaxed mb-4">
             {project.descripcion}
           </p>
           

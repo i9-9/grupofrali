@@ -20,7 +20,7 @@ export default function Home() {
       </section>
 
       {/* Desarrollo */}
-      <section className="py-16 bg-white h-screen">
+      <section className="py-16 bg-white min-h-screen lg:h-screen">
         <div className="content-wrapper">
           <div className="grid">
             {/* TÍTULO - 6 columnas */}
@@ -115,7 +115,7 @@ export default function Home() {
       </section>
 
       {/* Marquee Logos */}
-      <section className="pb-40 overflow-hidden pt-40 md:pt-0">
+      <section className="pb-40 overflow-hidden pt-20 lg:pt-0">
         <div className="w-full overflow-hidden">
           <div className="flex gap-32 w-max animate-marquee">
             {/* Primera iteración de logos */}

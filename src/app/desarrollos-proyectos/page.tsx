@@ -104,7 +104,7 @@ const handleCategoryChange = (category: string) => {
 
   return (
     <main className="bg-[#EFEFEF]">
-      <div className="content-wrapper h-screen">
+      <div className="content-wrapper md:h-screen">
         <div className="grid">
           <div className="col-6 md:col-6 pt-36 md:pt-24">
             <h1 className="font-baskerville text-black lg:pr-12" style={{ fontSize: 'clamp(36px, 3.2vw, 54px)', lineHeight: 'clamp(40px, 3.6vw, 68px)' }}>
@@ -186,8 +186,8 @@ const handleCategoryChange = (category: string) => {
         </div>
       </div>
 
-      <section className="content-wrapper pb-16 pt-5">
-        <div className="grid gap-4 md:gap-[21px]">
+      <section className="content-wrapper pb-16">
+        <div className="grid gap-2 md:gap-[10px]">
           {filteredProjects.map((project) => {
             const desktopImage = getDesarrollosImage(project, false)
             const mobileImage = getDesarrollosImage(project, true)
@@ -198,7 +198,7 @@ const handleCategoryChange = (category: string) => {
             <Link 
               key={project.id}
               href={`/desarrollos-proyectos/${project.id}`} 
-              className="col-6 md:col-4 lg:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out"
+              className="col-6  md:col-4 lg:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out pt-4 "
             >
               <ResponsiveImage 
                 desktopImage={desktopImage}
