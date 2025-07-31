@@ -18,11 +18,11 @@
         "alt": "Vista aérea de campos agrícolas con sistemas de riego"
       },
       "estadisticas": {
-        "superficie": "3500 hectáreas",
+        "superficie": "3500 H",
         "riego": "90%",
         "cultivos": "SOJA, MAÍZ, ARROZ Y ALGODÓN",
-        "tipo_produccion": "100% AGRICULTURA",
-        "estado": "EN OPERACIÓN"
+        "estado": "EN OPERACIÓN",
+        "tipo_de_produccion": "100% AGRICULTURA"
       }
     },
     {
@@ -44,7 +44,7 @@
       },
       "estadisticas": {
         "produccion_ganadera": "25%",
-        "superficie": "4300 hectáreas",
+        "superficie": "4300 H",
         "produccion_agricola": "75%",
         "estado": "EN OPERACIÓN"
       }
@@ -97,8 +97,8 @@
         "alt": "Vista aérea de desarrollo inmobiliario costero con casas modernas junto al mar"
       },
       "estadisticas": {
-        "cantidad_lotes": "30",
-        "inversion": "000000",
+        "cantidad_de_lotes": "30",
+        "inversion_total": "000000",
         "superficie": "168 m²",
         "estado": "EN PLANIFICACIÓN"
       }
@@ -151,7 +151,7 @@
       },
       "estadisticas": {
         "habitaciones": "160",
-        "capacidad_centro_convenciones": "1200",
+        "capacidad_de_centro_de_convenciones": "1200",
         "calidad": "5 ESTRELLAS",
         "salones_evento": "14",
         "restaurantes_gourmet": "3",
@@ -181,9 +181,9 @@
       "estadisticas": {
         "lotes_residenciales": "566",
         "areas_verdes": "60%",
-        "hectareas_superficie": "185",
-        "hectareas_laguna": "20",
-        "campo_golf": "18 hoyos",
+        "hectareas_de_superficie": "185",
+        "hectareas_de_laguna": "20",
+        "campo_de_golf": "18 hoyos",
         "estado": "CONSOLIDADO Y EN COMERCIALIZACIÓN ETAPA FINAL",
         "canchas_tenis": "6",
         "espacios_comunes": "GIMNASIO, SALÓN DE USOS MÚLTIPLES Y CLUB HOUSE"
@@ -266,10 +266,10 @@
       },
       "estadisticas": {
         "club_house": "1",
-        "canchas_futbol_hockey": "XXX",
+        "canchas_de_futbol_&_hockey": "XXX",
         "lotes_residenciales": "428",
         "estado": "100% COMERCIALIZADO Y HABITADO",
-        "hectareas_superficie_total": "60",
+        "hectareas_de_superficie_total": "60",
         "canchas_tenis": "XXX"
       }
     },

@@ -5,7 +5,6 @@ import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import projectsData from "@/data/projects.json"
 
-// Tipos para el proyecto
 interface ProjectImage {
   individual_mobile?: string | string[]
   individual_desktop?: string | string[]
@@ -18,7 +17,6 @@ interface ProjectStats {
 
 
 
-// Componente para imagen responsive
 function ResponsiveImage({ 
   desktopImages, 
   mobileImages, 
@@ -44,7 +42,7 @@ function ResponsiveImage({
   const images = isMobile ? mobileImages : desktopImages
   
   return (
-    <div className="h-full overflow-y-auto">
+    <div className="h-[504px] md:h-full overflow-hidden">
       {images.map((imageSrc, index) => (
         <img 
           key={index}
@@ -72,7 +70,6 @@ export default function DesarrolloProyecto() {
     )
   }
 
-  // Preparar las imágenes
   const mobileImages: string[] = (() => {
     const mobile = project.imagenes?.individual_mobile
     if (!mobile) return []
@@ -85,19 +82,13 @@ export default function DesarrolloProyecto() {
     return Array.isArray(desktop) ? desktop : [desktop]
   })()
 
-  // Debug: verificar que las imágenes se cargan correctamente
-  console.log('Project ID:', projectId)
-  console.log('Mobile Images:', mobileImages)
-  console.log('Desktop Images:', desktopImages)
-
-  // Verificar si hay imágenes disponibles
   const hasImages = mobileImages.length > 0 || desktopImages.length > 0
 
   return (
     <main className="h-screen bg-[#EFEFEF] relative">
       {/* Mobile Layout */}
       <div className="md:hidden h-full flex flex-col">
-        {/* Galería de imágenes mobile - scrolleable */}
+        {/* Galería de imágenes mobile */}
         <div className="flex-1 overflow-hidden">
           {hasImages ? (
             <ResponsiveImage 
@@ -177,21 +168,58 @@ export default function DesarrolloProyecto() {
               {project.descripcion}
             </p>
             
-            {/* Estadísticas desktop */}
+                        {/* Estadísticas desktop */}
             {project.estadisticas && (
-  <div className="grid !grid-cols-2 gap-4">
-    {Object.entries(project.estadisticas).map(([key, value]) => (
-      <div key={key} className="border-t border-black pt-3 pb-3 flex justify-between items-start">
-        <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-3">
-          {key.replace(/_/g, ' ')}
-        </div>
-        <div className="font-archivo text-black text-2xl leading-none font-archivo-light">
-          {value}
-        </div>
-      </div>
-    ))}
-  </div>
-)}
+              <div className="grid !grid-cols-2 gap-2">
+                {Object.entries(project.estadisticas).map(([key, value]) => {
+                  // Función para separar número y texto
+                  const parseValue = (val: string) => {
+                    const str = val.toString()
+                    // Detectar si es solo texto (no empieza con número)
+                    if (isNaN(Number(str.charAt(0))) && !str.match(/^\d/)) {
+                      return { isTextOnly: true, number: '', text: str }
+                    }
+                    
+                    // Separar número principal y texto descriptivo
+                    const match = str.match(/^([\d,.]+ ?[A-Z%]*)\s*(.*)$/)
+                    if (match && match[2]) {
+                      return { isTextOnly: false, number: match[1], text: match[2] }
+                    }
+                    
+                    // Si no hay texto adicional, es solo número
+                    return { isTextOnly: false, number: str, text: '' }
+                  }
+                  
+                  const parsed = parseValue(value.toString())
+                  
+                  return (
+                    <div key={key} className="border-t border-black pt-2 pb-1 flex justify-between items-start">
+                      <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-3">
+                        {key.replace(/_/g, ' ')}
+                      </div>
+                      <div className="text-right">
+                        {parsed.isTextOnly ? (
+                          <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-3">
+                            {parsed.text}
+                          </div>
+                        ) : (
+                          <>
+                            <div className="font-archivo text-black text-3xl font-archivo-light leading-none">
+                              {parsed.number}
+                            </div>
+                            {parsed.text && (
+                              <div className="font-archivo text-black uppercase tracking-wider text-xs leading-3 mt-1">
+                                {parsed.text}
+                              </div>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            )}
           </div>
         </div>
         
