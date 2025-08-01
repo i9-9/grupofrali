@@ -229,24 +229,26 @@ export default function Home() {
       <section className="py-16 bg-white">
         <div className="content-wrapper">
           {/* Header */}
-          <div className="flex justify-between items-end font-baskerville text-base mb-8">
+          <div className="flex justify-between items-baseline font-baskerville text-base mb-8">
             <h3 className="text-sm md:text-base">PROYECTOS</h3>
-            <Link href="/desarrollos-proyectos">
-              <h3 className="text-sm md:text-base underline">VER TODOS</h3>
-            </Link>
           </div>
 
-          <div className="mb-12">
-            <h2 className="md:hidden font-baskerville text-[32px] leading-[1.1em] mb-8">
-              DIVERSIFICACIÓN <br/>
-              PARA CRECER DE<br/>
-              MANERA SOSTENIBLE
-            </h2>
-            <h2 className="hidden md:block font-baskerville text-[48px] leading-[1.1em] mb-8">
-              DIVERSIFICACIÓN PARA <br/> 
-              CRECER DE MANERA <br/> 
-              SOSTENIBLE
-            </h2>
+          <div className="mb-12 flex justify-between items-end">
+            <div>
+              <h2 className="md:hidden font-baskerville text-[32px] leading-[1.1em]">
+                DIVERSIFICACIÓN <br/>
+                PARA CRECER DE<br/>
+                MANERA SOSTENIBLE
+              </h2>
+              <h2 className="hidden md:block font-baskerville text-[48px] leading-[1.1em]">
+                DIVERSIFICACIÓN PARA <br/> 
+                CRECER DE MANERA <br/> 
+                SOSTENIBLE
+              </h2>
+            </div>
+            <Link href="/desarrollos-proyectos">
+              <h3 className="text-sm md:text-base underline font-archivo">VER MÁS</h3>
+            </Link>
           </div>
 
           <ProjectGallery />

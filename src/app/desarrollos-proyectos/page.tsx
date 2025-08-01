@@ -120,8 +120,8 @@ const handleCategoryChange = (category: string) => {
             <Image
               src={photos[currentPhoto]}
               alt={`Slide ${currentPhoto}`}
-              width={800}
-              height={600}
+              width={350}
+              height={355}
               className={`w-full h-auto object-cover transition-opacity duration-300 ease-in-out ${
                 isFading ? 'opacity-0' : 'opacity-100'
               }`}
