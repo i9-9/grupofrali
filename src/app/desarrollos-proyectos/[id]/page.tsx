@@ -217,9 +217,9 @@ export default function DesarrolloProyecto() {
                   if (estrellas) {
                     return { 
                       isTextOnly: false, 
-                      number: estrellas[1] + estrellas[2], 
+                      number: estrellas[1], 
                       unit: '', 
-                      text: '' 
+                      text: estrellas[2] 
                     }
                   }
                   
@@ -228,9 +228,9 @@ export default function DesarrolloProyecto() {
                   if (hoyos) {
                     return { 
                       isTextOnly: false, 
-                      number: hoyos[1] + hoyos[2], 
+                      number: hoyos[1], 
                       unit: '', 
-                      text: '' 
+                      text: hoyos[2] 
                     }
                   }
                   
@@ -252,7 +252,7 @@ export default function DesarrolloProyecto() {
                 const parsed = parseValue(value.toString())
                 
                                   return (
-                    <div key={key} className="border-t border-black pt-3 pb-2 flex justify-between items-start">
+                    <div key={key} className="border-t border-black pt-1 pb-0 md:pt-0.5 md:pb-0 flex justify-between items-start">
                       <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3 max-w-[50%]" style={{ wordBreak: 'break-word', hyphens: 'auto' }}>
                         {key.replace(/_/g, ' ').split(' ').map((word, index) => (
                           <span key={index}>
@@ -270,25 +270,40 @@ export default function DesarrolloProyecto() {
                           </div>
                         ) : (
                           <div className="flex flex-col items-end">
-                            <div className="flex items-baseline gap-1">
-                              <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: 'clamp(18px, 5vw, 30px)' }}>
-                                {parsed.number}
-                              </span>
-                              {parsed.unit && (
-                                <span className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3">
-                                  {parsed.unit}
+                            {parsed.text && (parsed.text.toUpperCase() === 'HOYOS' || parsed.text.toUpperCase() === 'ESTRELLAS') ? (
+                              // Caso especial para HOYOS y ESTRELLAS - número arriba, texto abajo
+                              <>
+                                <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: 'clamp(18px, 5vw, 30px)' }}>
+                                  {parsed.number}
                                 </span>
-                              )}
-                              {!parsed.unit && parsed.text && (
-                                <span className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3">
+                                <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3">
                                   {parsed.text}
-                                </span>
-                              )}
-                            </div>
-                            {parsed.unit && parsed.text && (
-                              <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3">
-                                {parsed.text}
-                              </div>
+                                </div>
+                              </>
+                            ) : (
+                              // Caso normal - número y unidad/texto en línea
+                              <>
+                                <div className="flex items-baseline gap-1">
+                                  <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: 'clamp(18px, 5vw, 30px)' }}>
+                                    {parsed.number}
+                                  </span>
+                                  {parsed.unit && (
+                                    <span className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3">
+                                      {parsed.unit}
+                                    </span>
+                                  )}
+                                  {!parsed.unit && parsed.text && (
+                                    <span className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3">
+                                      {parsed.text}
+                                    </span>
+                                  )}
+                                </div>
+                                {parsed.unit && parsed.text && (
+                                  <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3">
+                                    {parsed.text}
+                                  </div>
+                                )}
+                              </>
                             )}
                           </div>
                         )}
@@ -329,7 +344,7 @@ export default function DesarrolloProyecto() {
       {/* Desktop Layout */}
       <div className="hidden md:block h-full relative">
         {/* Panel de información desktop */}
-        <div className="absolute left-0 top-0 w-1/2 h-full bg-white z-10 p-4 md:p-6 lg:p-8 pt-16 md:pt-20 lg:pt-24 flex flex-col">
+        <div className="absolute left-0 top-0 w-1/2 h-full bg-[#EFEFEF] z-10 p-4 md:p-6 lg:p-8 pt-16 md:pt-20 lg:pt-24 flex flex-col">
           <div className="max-w-xl md:max-w-2xl">
             {/* Header fijo */}
             <div className="flex items-center gap-2 mb-4">
@@ -402,9 +417,9 @@ export default function DesarrolloProyecto() {
                     if (estrellas) {
                       return { 
                         isTextOnly: false, 
-                        number: estrellas[1] + estrellas[2], 
+                        number: estrellas[1], 
                         unit: '', 
-                        text: '' 
+                        text: estrellas[2] 
                       }
                     }
                     
@@ -413,9 +428,9 @@ export default function DesarrolloProyecto() {
                     if (hoyos) {
                       return { 
                         isTextOnly: false, 
-                        number: hoyos[1] + hoyos[2], 
+                        number: hoyos[1], 
                         unit: '', 
-                        text: '' 
+                        text: hoyos[2] 
                       }
                     }
                     
@@ -437,7 +452,7 @@ export default function DesarrolloProyecto() {
                   const parsed = parseValue(value.toString())
                   
                   return (
-                    <div key={key} className="border-t border-black py-1 flex justify-between items-start">
+                    <div key={key} className="border-t border-black pt-0.5 pb-0 flex justify-between items-start">
                       <div className="font-archivo text-black uppercase tracking-wider leading-[1]" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)', wordBreak: 'break-word', hyphens: 'auto' }}>
                         {key.replace(/_/g, ' ').split(' ').map((word, index) => (
                           <span key={index}>
@@ -455,25 +470,40 @@ export default function DesarrolloProyecto() {
                           </div>
                         ) : (
                           <div className="flex flex-col items-end">
-                            <div className="flex items-baseline gap-1">
-                              <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: 'clamp(18px, 2.2vw, 30px)' }}>
-                                {parsed.number}
-                              </span>
-                              {parsed.unit && (
-                                <span className="font-archivo text-black uppercase tracking-wider leading-[1.1]" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
-                                  {parsed.unit}
+                            {parsed.text && (parsed.text.toUpperCase() === 'HOYOS' || parsed.text.toUpperCase() === 'ESTRELLAS') ? (
+                              // Caso especial para HOYOS y ESTRELLAS - número arriba, texto abajo
+                              <>
+                                <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: 'clamp(18px, 2.2vw, 30px)' }}>
+                                  {parsed.number}
                                 </span>
-                              )}
-                              {!parsed.unit && parsed.text && (
-                                <span className="font-archivo text-black uppercase tracking-wider leading-[1.1]" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
+                                <div className="font-archivo text-black uppercase tracking-wider leading-[1.1]" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
                                   {parsed.text}
-                                </span>
-                              )}
-                            </div>
-                            {parsed.unit && parsed.text && (
-                              <div className="font-archivo text-black uppercase tracking-wider leading-[1.1]" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
-                                {parsed.text}
-                              </div>
+                                </div>
+                              </>
+                            ) : (
+                              // Caso normal - número y unidad/texto en línea
+                              <>
+                                <div className="flex items-baseline gap-1">
+                                  <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: 'clamp(18px, 2.2vw, 30px)' }}>
+                                    {parsed.number}
+                                  </span>
+                                  {parsed.unit && (
+                                    <span className="font-archivo text-black uppercase tracking-wider leading-[1.1]" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
+                                      {parsed.unit}
+                                    </span>
+                                  )}
+                                  {!parsed.unit && parsed.text && (
+                                    <span className="font-archivo text-black uppercase tracking-wider leading-[1.1]" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
+                                      {parsed.text}
+                                    </span>
+                                  )}
+                                </div>
+                                {parsed.unit && parsed.text && (
+                                  <div className="font-archivo text-black uppercase tracking-wider leading-[1.1]" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
+                                    {parsed.text}
+                                  </div>
+                                )}
+                              </>
                             )}
                           </div>
                         )}
@@ -536,7 +566,7 @@ export default function DesarrolloProyecto() {
         </div>
         
         {/* Flechas de navegación desktop */}
-        <div className="flex absolute bottom-2 left-0 right-0 justify-between pointer-events-none z-20 px-6">
+        <div className="flex absolute bottom-2 left-0 right-0 justify-between pointer-events-none z-20 px-4 md:px-6">
           {/* Flecha anterior */}
           <button
             onClick={() => navigateToProject(previousProject)}

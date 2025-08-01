@@ -148,7 +148,9 @@
         "desarrollos_mobile": "/images/projects/sofitel/desarrollos/mobile/sofitel.jpg",
         "desarrollos_desktop": "/images/projects/sofitel/desarrollos/desktop/sofitel.jpg",
         "individual_mobile": [
-          "/images/projects/sofitel/individual/mobile/individual-mobile-1.jpg"
+          "/images/projects/sofitel/individual/mobile/individual-mobile-1.jpg",
+          "/images/projects/sofitel/individual/mobile/individual-mobile-2.jpg",
+          "/images/projects/sofitel/individual/mobile/individual-mobile-3.jpg"
         ],
         "individual_desktop": [
           "/images/projects/sofitel/individual/desktop/individual-desktop-1.jpg",

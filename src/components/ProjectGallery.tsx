@@ -128,9 +128,9 @@ export default function ProjectGallery() {
       
       {/* Barra de paginación - mobile y desktop */}
       {projects.length > 1 && (
-        <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
-          <div className="rounded-full px-3 py-2">
-            <div className="relative w-24 h-1 bg-black/30 rounded-full overflow-hidden">
+        <div className="absolute -bottom-6 left-0 right-0">
+          <div className="px-3 py-2">
+            <div className="relative w-full h-1 bg-black/10 rounded-full overflow-hidden">
               <div 
                 className="absolute top-0 h-full bg-black rounded-full transition-all duration-300 ease-out"
                 style={{ 
