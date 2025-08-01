@@ -28,9 +28,22 @@ export default function RandomVideo({ type }: Props) {
 
   if (!videoSrc) return null;
 
-  // Aplicar zoom específico al video_desktop2.mp4 para ocultar información lumínica detrás del navbar
+
+  // Aplicar zoom específico a videos para ocultar información lumínica detrás del navbar
   const isVideo2Desktop = videoSrc === '/videos/video_desktop2.mp4';
-  const videoStyle = isVideo2Desktop ? { transform: 'scale(1.20)', transformOrigin: 'center center' } : {};
+  
+  // Zoom para mobile para mejor contraste con el navbar
+  const getVideoStyle = () => {
+    if (isVideo2Desktop) {
+      return { transform: 'scale(1.20)', transformOrigin: 'center center' };
+    }
+    if (type === 'mobile') {
+      return { transform: 'scale(1.35)', transformOrigin: 'center center' };
+    }
+    return {};
+  };
+  
+  const videoStyle = getVideoStyle();
 
   return (
     <video
