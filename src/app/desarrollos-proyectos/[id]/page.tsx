@@ -16,6 +16,7 @@ export default function DesarrolloProyecto() {
   const desktopScrollRef = useRef<HTMLDivElement>(null)
   const [activeImageIndex, setActiveImageIndex] = useState(0)
   const [activeDesktopImageIndex, setActiveDesktopImageIndex] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
   
   // Buscar el proyecto por ID
   const project = projectsData.proyectos.find(p => p.id === projectId)
@@ -29,12 +30,7 @@ export default function DesarrolloProyecto() {
     ? projectsData.proyectos[currentProjectIndex + 1] 
     : projectsData.proyectos[0] // Primer proyecto
   
-  // Función para navegar a otro proyecto
-  const navigateToProject = (project: typeof projectsData.proyectos[0]) => {
-    if (project) {
-      router.push(`/desarrollos-proyectos/${project.id}`)
-    }
-  }
+
 
   const mobileImages: string[] = (() => {
     if (!project?.imagenes?.individual_mobile) return []
@@ -92,6 +88,21 @@ export default function DesarrolloProyecto() {
     }
   }, [desktopImages.length])
   
+  // Función para navegar entre proyectos con transición de opacidad
+  const navigateToProject = (targetProject: typeof projectsData.proyectos[0]) => {
+    if (!targetProject) return
+    
+    setIsTransitioning(true)
+    
+    setTimeout(() => {
+      router.push(`/desarrollos-proyectos/${targetProject.id}`)
+    }, 150) // Mitad de la transición para cambiar el contenido
+    
+    setTimeout(() => {
+      setIsTransitioning(false)
+    }, 300) // Duración total de la transición
+  }
+  
   if (!project) {
     return (
       <div className="content-wrapper h-screen flex items-center justify-center">
@@ -121,7 +132,9 @@ export default function DesarrolloProyecto() {
                       alt={`${project.imagenes?.alt || project.titulo} - Imagen ${index + 1}`}
                       width={600}
                       height={400}
-                      className="w-full h-full object-cover"
+                      className={`w-full h-full object-cover transition-opacity duration-300 ${
+                        isTransitioning ? 'opacity-0' : 'opacity-100'
+                      }`}
                     />
                   </div>
                 ))}
@@ -152,7 +165,9 @@ export default function DesarrolloProyecto() {
         </div>
         
         {/* Panel de información mobile */}
-        <div className="bg-[#EFEFEF] border-t border-gray-200 p-4">
+        <div className={`bg-[#EFEFEF] border-t border-gray-200 p-4 transition-opacity duration-300 ${
+          isTransitioning ? 'opacity-0' : 'opacity-100'
+        }`}>
           <div className="flex items-center gap-2 mb-2">
             <Link href="/desarrollos-proyectos" className="text-[#151714]">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -177,7 +192,8 @@ export default function DesarrolloProyecto() {
             
             {/* Estadísticas mobile */}
             {project.estadisticas && (
-              <div className="flex flex-col gap-4 py-12 ">
+              <div className="py-12">
+                <div className="stats-custom-layout">
               {Object.entries(project.estadisticas).map(([key, value]) => {
                 // Función para separar número y texto (misma lógica que desktop)
                 const parseValue = (val: string) => {
@@ -234,6 +250,17 @@ export default function DesarrolloProyecto() {
                     }
                   }
                   
+                  // Caso especial para "TONELADAS" - mantener palabra completa
+                  const toneladas = str.match(/^([\d,.]+)\s+(TONELADAS.*)$/i)
+                  if (toneladas) {
+                    return { 
+                      isTextOnly: false, 
+                      number: toneladas[1], 
+                      unit: '', 
+                      text: toneladas[2] 
+                    }
+                  }
+                  
                   // Separar número con porcentaje o unidad simple
                   const simpleMatch = str.match(/^([\d,.]+)\s*([%A-Z]*)\s*(.*)$/)
                   if (simpleMatch && simpleMatch[2]) {
@@ -252,8 +279,8 @@ export default function DesarrolloProyecto() {
                 const parsed = parseValue(value.toString())
                 
                                   return (
-                    <div key={key} className="border-t border-black pt-1 pb-0 md:pt-0.5 md:pb-0 flex justify-between items-start">
-                      <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3 max-w-[50%]" style={{ wordBreak: 'break-word', hyphens: 'auto' }}>
+                    <div key={key} className="border-t border-black pt-1 pb-0 md:pt-0 md:pb-0 flex justify-between items-start min-h-[60px] md:min-h-[20px]">
+                      <div className="font-archivo text-black uppercase tracking-wider leading-none max-w-[50%] text-[14px] md:text-[13px] self-start" style={{ wordBreak: 'break-word', hyphens: 'auto' }}>
                         {key.replace(/_/g, ' ').split(' ').map((word, index) => (
                           <span key={index}>
                             {word}
@@ -265,7 +292,7 @@ export default function DesarrolloProyecto() {
                       </div>
                       <div className="text-right self-center max-w-[45%]">
                                               {parsed.isTextOnly ? (
-                          <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3 break-words">
+                          <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none break-words">
                             {parsed.text}
                           </div>
                         ) : (
@@ -276,7 +303,7 @@ export default function DesarrolloProyecto() {
                                 <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: 'clamp(18px, 5vw, 30px)' }}>
                                   {parsed.number}
                                 </span>
-                                <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3">
+                                <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none">
                                   {parsed.text}
                                 </div>
                               </>
@@ -288,18 +315,18 @@ export default function DesarrolloProyecto() {
                                     {parsed.number}
                                   </span>
                                   {parsed.unit && (
-                                    <span className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3">
+                                    <span className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none">
                                       {parsed.unit}
                                     </span>
                                   )}
                                   {!parsed.unit && parsed.text && (
-                                    <span className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3">
+                                    <span className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none">
                                       {parsed.text}
                                     </span>
                                   )}
                                 </div>
                                 {parsed.unit && parsed.text && (
-                                  <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3">
+                                  <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none">
                                     {parsed.text}
                                   </div>
                                 )}
@@ -311,6 +338,7 @@ export default function DesarrolloProyecto() {
                   </div>
                 )
               })}
+                </div>
             </div>
           )}
         </div>
@@ -344,7 +372,9 @@ export default function DesarrolloProyecto() {
       {/* Desktop Layout */}
       <div className="hidden md:block h-full relative">
         {/* Panel de información desktop */}
-        <div className="absolute left-0 top-0 w-1/2 h-full bg-[#EFEFEF] z-10 p-4 md:p-6 lg:p-8 pt-16 md:pt-20 lg:pt-24 flex flex-col">
+        <div className={`absolute left-0 top-0 w-1/2 h-full bg-[#EFEFEF] z-10 p-4 md:p-6 lg:p-8 pt-16 md:pt-20 lg:pt-24 flex flex-col transition-opacity duration-300 ${
+          isTransitioning ? 'opacity-0' : 'opacity-100'
+        }`}>
           <div className="max-w-xl md:max-w-2xl">
             {/* Header fijo */}
             <div className="flex items-center gap-2 mb-4">
@@ -370,7 +400,7 @@ export default function DesarrolloProyecto() {
                 {project.locacion}
               </p>
               
-              <p className="text-[#151714] leading-[1.1]" style={{ fontSize: 'clamp(14px, 1.25vw, 16px)' }}>
+              <p className="text-[#151714] leading-none" style={{ fontSize: 'clamp(14px, 1.25vw, 16px)' }}>
                 {project.descripcion}
               </p>
             </div>
@@ -452,8 +482,8 @@ export default function DesarrolloProyecto() {
                   const parsed = parseValue(value.toString())
                   
                   return (
-                    <div key={key} className="border-t border-black pt-0.5 pb-0 flex justify-between items-start">
-                      <div className="font-archivo text-black uppercase tracking-wider leading-[1]" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)', wordBreak: 'break-word', hyphens: 'auto' }}>
+                    <div key={key} className="border-t border-black pt-0.5 pb-0 md:pt-0 md:pb-0 flex justify-between items-start min-h-[60px] md:min-h-[20px]">
+                      <div className="font-archivo text-black uppercase tracking-wider leading-none text-[14px] md:text-[13px] self-start" style={{ wordBreak: 'break-word', hyphens: 'auto' }}>
                         {key.replace(/_/g, ' ').split(' ').map((word, index) => (
                           <span key={index}>
                             {word}
@@ -465,7 +495,7 @@ export default function DesarrolloProyecto() {
                       </div>
                       <div className="text-right self-center max-w-[45%]">
                         {parsed.isTextOnly ? (
-                          <div className="font-archivo text-black uppercase tracking-wider leading-[1.1] break-words" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
+                          <div className="font-archivo text-black uppercase tracking-wider leading-none break-words" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
                             {parsed.text}
                           </div>
                         ) : (
@@ -476,7 +506,7 @@ export default function DesarrolloProyecto() {
                                 <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: 'clamp(18px, 2.2vw, 30px)' }}>
                                   {parsed.number}
                                 </span>
-                                <div className="font-archivo text-black uppercase tracking-wider leading-[1.1]" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
+                                <div className="font-archivo text-black uppercase tracking-wider leading-none" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
                                   {parsed.text}
                                 </div>
                               </>
@@ -488,18 +518,18 @@ export default function DesarrolloProyecto() {
                                     {parsed.number}
                                   </span>
                                   {parsed.unit && (
-                                    <span className="font-archivo text-black uppercase tracking-wider leading-[1.1]" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
+                                    <span className="font-archivo text-black uppercase tracking-wider leading-none" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
                                       {parsed.unit}
                                     </span>
                                   )}
                                   {!parsed.unit && parsed.text && (
-                                    <span className="font-archivo text-black uppercase tracking-wider leading-[1.1]" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
+                                    <span className="font-archivo text-black uppercase tracking-wider leading-none" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
                                       {parsed.text}
                                     </span>
                                   )}
                                 </div>
                                 {parsed.unit && parsed.text && (
-                                  <div className="font-archivo text-black uppercase tracking-wider leading-[1.1]" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
+                                  <div className="font-archivo text-black uppercase tracking-wider leading-none" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
                                     {parsed.text}
                                   </div>
                                 )}
@@ -534,7 +564,9 @@ export default function DesarrolloProyecto() {
                       alt={`${project.imagenes?.alt || project.titulo} - Imagen ${index + 1}`}
                       width={800}
                       height={600}
-                      className="w-full h-full object-cover"
+                      className={`w-full h-full object-cover transition-opacity duration-300 ${
+                        isTransitioning ? 'opacity-0' : 'opacity-100'
+                      }`}
                     />
                   </div>
                 ))}

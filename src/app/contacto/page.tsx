@@ -129,8 +129,8 @@ export default function Contacto() {
           </div>
 
           {/* Información de contacto - Columnas 1-6 en desktop, después del formulario en mobile */}
-          <div className="col-6 md:col-span-6 order-3 md:order-3">
-            <div className="space-y-0 mb-20">
+          <div className="col-6 md:col-span-6 order-3">
+            <div className="space-y-0 mb-20 mt-0 md:-mt-64">
               <div>
                 <a 
                   href="mailto:INFO@GRUPOFRALI.COM" 

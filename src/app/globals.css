@@ -371,3 +371,27 @@ body {
   -ms-overflow-style: none;  /* IE y Edge */
   scrollbar-width: none;     /* Firefox */
 }
+
+/* Layout personalizado para estadísticas con control total del gap */
+.stats-custom-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* 16px para mobile */
+}
+
+.stats-custom-layout > * {
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+}
+
+@media (min-width: 768px) {
+  .stats-custom-layout {
+    gap: 0px !important; /* Sin gap en desktop */
+  }
+  
+  .stats-custom-layout > * {
+    margin-bottom: 0px !important;
+    margin-top: 0px !important;
+  }
+}
+

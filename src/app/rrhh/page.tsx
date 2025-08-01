@@ -3,7 +3,7 @@ export default function RRHH() {
     <main className="bg-[#EFEFEF]">
       {/* Hero */}
       <div className="content-wrapper">
-        <div className="grid pt-36 md:pt-24 pb-20">
+        <div className="grid pt-36 md:pt-24 pb-32">
           <div className="col-6 md:col-8">
             <h1 className="font-baskerville text-black" style={{ fontSize: 'clamp(40px, 56px, 72px)', lineHeight: 'clamp(40px, 1.1em, 80px)' }}>
               UN EQUIPO QUE<br />
