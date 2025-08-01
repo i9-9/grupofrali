@@ -82,12 +82,8 @@ export default function QuienesSomos() {
 
         <div className="grid pb-16">
           <div className="col-6 md:col-6">
-            <p className="text-[#151714] tracking-[0.01em] leading-[1]" style={{ fontSize: 'clamp(16px, 22px, 17px)' }}>
-              Con casi 30 años de trayectoria, consolidamos nuestro liderazgo a 
-              través de proyectos que combinan innovación, compromiso y una 
-              gestión profesional orientada al valor de largo plazo, en Argentina, 
-              Estados Unidos y Uruguay. Nuestra fortaleza está en la capacidad 
-              de evolucionar, diversificar e invertir en el futuro.
+            <p className="text-[#151714] tracking-[0.01em] leading-[1]" style={{ fontSize: 'clamp(16px, 1.8vw, 22px)' }}>
+              Con casi 30 años de trayectoria, consolidamos nuestro liderazgo a través de proyectos que combinan innovación, compromiso y una gestión profesional orientada al valor de largo plazo, en Argentina, Estados Unidos y Uruguay. Nuestra fortaleza está en la capacidad de evolucionar, diversificar e invertir en el futuro.
             </p>
           </div>
         </div>
@@ -96,88 +92,105 @@ export default function QuienesSomos() {
       {/* Valores y Nuestro ADN Section */}
       <section className="content-wrapper pb-20">
         <div className="grid">
-          {/* Título Valores - Columnas 1-6 */}
-          <div className="col-6 md:col-span-6">
-            <h2 className="font-baskerville pb-4 border-b border-black pr-4 md:pr-6" style={{ fontSize: 'clamp(24px, 28px, 32px)', lineHeight: '1.2' }}>
-              VALORES
-            </h2>
+          {/* Columna Izquierda: VALORES */}
+          <div className="col-6 md:col-6">
+            {/* Título VALORES */}
+            <div className="border-b border-black pb-4 mb-8">
+              <h2 className="font-baskerville" style={{ fontSize: 'clamp(20px, 2.4vw, 28px)', lineHeight: '1.2' }}>
+                VALORES
+              </h2>
+            </div>
+            
+            {/* Layout 2x2 con Flexbox */}
+            <div className="space-y-8">
+              {/* Fila 1 */}
+              <div className="flex gap-6">
+                <div className="flex-1">
+                  <div className="flex items-start space-x-4">
+                    <span className="font-archivo text-black flex-shrink-0" style={{ fontSize: '17px' }}>
+                      ({valores[0].numero})
+                    </span>
+                    <p className="font-archivo text-black" style={{ fontSize: '22px', lineHeight: '1.4' }}>
+                      {valores[0].titulo}
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex-1">
+                  <div className="flex items-start space-x-4">
+                    <span className="font-archivo text-black flex-shrink-0" style={{ fontSize: '17px' }}>
+                      ({valores[2].numero})
+                    </span>
+                    <p className="font-archivo text-black" style={{ fontSize: '22px', lineHeight: '1.4' }}>
+                      {valores[2].titulo}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Fila 2 */}
+              <div className="flex gap-6">
+                <div className="flex-1">
+                  <div className="flex items-start space-x-4">
+                    <span className="font-archivo text-black flex-shrink-0" style={{ fontSize: '17px' }}>
+                      ({valores[1].numero})
+                    </span>
+                    <p className="font-archivo text-black" style={{ fontSize: '22px', lineHeight: '1.4' }}>
+                      {valores[1].titulo}
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex-1">
+                  <div className="flex items-start space-x-4">
+                    <span className="font-archivo text-black flex-shrink-0" style={{ fontSize: '17px' }}>
+                      ({valores[3].numero})
+                    </span>
+                    <p className="font-archivo text-black" style={{ fontSize: '22px', lineHeight: '1.4' }}>
+                      {valores[3].titulo}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Título Nuestro ADN - Columnas 7-12 */}
-          <div className="col-6 md:col-span-6 md:col-start-7">
-            <h2 className="font-baskerville pb-4 border-b border-black pl-4 md:pl-6" style={{ fontSize: 'clamp(24px, 2.2vw, 32px)', lineHeight: '1.2' }}>
-              NUESTRO ADN
-            </h2>
-          </div>
-
-          {/* Valores distribuidos en columnas 1-6 (2x2) */}
-          
-          {/* Fila 2: Valores 01 y 02 */}
-          {/* Valor 01 - Columnas 1-3, Fila 2 */}
-          <div className="col-3 md:col-span-3 md:col-start-1 py-6 border-b border-black pr-2 md:pr-3" style={{ gridRow: '2' }}>
-            <span className="font-baskerville block mb-2" style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}>
-              ({valores[0].numero})
-            </span>
-            <p className="font-baskerville" style={{ fontSize: 'clamp(14px, 1.2vw, 16px)', lineHeight: '1.3' }}>
-              {valores[0].titulo}
-            </p>
-          </div>
-
-          {/* Valor 02 - Columnas 4-6, Fila 2 */}
-          <div className="col-3 md:col-span-3 md:col-start-4 py-6 border-b border-black pl-2 md:pl-3" style={{ gridRow: '2' }}>
-            <span className="font-baskerville block mb-2" style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}>
-              ({valores[1].numero})
-            </span>
-            <p className="font-baskerville" style={{ fontSize: 'clamp(14px, 1.2vw, 16px)', lineHeight: '1.3' }}>
-              {valores[1].titulo}
-            </p>
-          </div>
-
-          {/* Fila 2: Misión - Columnas 7-8, Fila 2 */}
-          <div className="col-3 md:col-span-2 md:col-start-7 py-6 border-b border-black pl-4 md:pl-6" style={{ gridRow: '2' }}>
-            <h3 className="font-archivo-bold text-xs mb-3 tracking-wider">MISIÓN</h3>
-          </div>
-
-          {/* Fila 2: Párrafo Misión - Columnas 9-12, Fila 2 */}
-          <div className="col-3 md:col-span-4 md:col-start-9 py-6 border-b border-black" style={{ gridRow: '2' }}>
-            <p style={{ fontSize: 'clamp(14px, 1.2vw, 16px)', lineHeight: '1.4' }}>
-              Impulsar proyectos de inversión que generen valor económico, social y humano, fortaleciendo 
-              el crecimiento de las comunidades donde operamos.
-            </p>
-          </div>
-
-          {/* Fila 3: Valores 03 y 04 */}
-          {/* Valor 03 - Columnas 1-3, Fila 3 */}
-          <div className="col-3 md:col-span-3 md:col-start-1 py-6 pr-2 md:pr-3" style={{ gridRow: '3' }}>
-            <span className="font-baskerville block mb-2" style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}>
-              ({valores[2].numero})
-            </span>
-            <p className="font-baskerville" style={{ fontSize: 'clamp(14px, 1.2vw, 16px)', lineHeight: '1.3' }}>
-              {valores[2].titulo}
-            </p>
-          </div>
-
-          {/* Valor 04 - Columnas 4-6, Fila 3 */}
-          <div className="col-3 md:col-span-3 md:col-start-4 py-6 pl-2 md:pl-3" style={{ gridRow: '3' }}>
-            <span className="font-baskerville block mb-2" style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}>
-              ({valores[3].numero})
-            </span>
-            <p className="font-baskerville" style={{ fontSize: 'clamp(14px, 1.2vw, 16px)', lineHeight: '1.3' }}>
-              {valores[3].titulo}
-            </p>
-          </div>
-
-          {/* Fila 3: Visión - Columnas 7-8, Fila 3 */}
-          <div className="col-3 md:col-span-2 md:col-start-7 py-6 pl-4 md:pl-6" style={{ gridRow: '3' }}>
-            <h3 className="font-archivo-bold text-xs mb-3 tracking-wider">VISIÓN</h3>
-          </div>
-
-          {/* Fila 3: Párrafo Visión - Columnas 9-12, Fila 3 */}
-          <div className="col-3 md:col-span-4 md:col-start-9 py-6" style={{ gridRow: '3' }}>
-            <p style={{ fontSize: 'clamp(14px, 1.2vw, 16px)', lineHeight: '1.4' }}>
-              Consolidarnos como un actor estratégico en la generación de desarrollos de alto impacto, 
-              combinando responsabilidad, innovación y visión de futuro.
-            </p>
+          {/* Columna Derecha: NUESTRO ADN */}
+          <div className="col-6 md:col-6">
+            {/* Título NUESTRO ADN */}
+            <div className="border-b border-black pb-4 mb-8">
+              <h2 className="font-baskerville" style={{ fontSize: 'clamp(20px, 2.4vw, 28px)', lineHeight: '1.2' }}>
+                NUESTRO ADN
+              </h2>
+            </div>
+            
+            {/* MISIÓN con flexbox */}
+            <div className="flex items-start border-b border-black pb-8 mb-8">
+              <div className="w-32 flex-shrink-0">
+                <h3 className="font-archivo text-black tracking-wider" style={{ fontSize: 'clamp(14px, 1.4vw, 17px)' }}>
+                  MISIÓN
+                </h3>
+              </div>
+              <div className="flex-1 pl-12">
+                <p className="font-archivo text-black" style={{ fontSize: 'clamp(16px, 1.8vw, 22px)', lineHeight: '1.4' }}>
+                  Impulsar proyectos de inversión que generen valor económico, social y humano, fortaleciendo el crecimiento de las comunidades donde operamos.
+                </p>
+              </div>
+            </div>
+            
+            {/* VISIÓN con flexbox */}
+            <div className="flex items-start">
+              <div className="w-32 flex-shrink-0">
+                <h3 className="font-archivo text-black tracking-wider" style={{ fontSize: 'clamp(14px, 1.4vw, 17px)' }}>
+                  VISIÓN
+                </h3>
+              </div>
+              <div className="flex-1 pl-12">
+                <p className="font-archivo text-black" style={{ fontSize: 'clamp(16px, 1.8vw, 22px)', lineHeight: '1.4' }}>
+                  Consolidarnos como un actor estratégico en la generación de desarrollos de alto impacto, combinando responsabilidad, innovación y visión de futuro.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -197,7 +210,7 @@ export default function QuienesSomos() {
             <p className="text-black" style={{ fontSize: 'clamp(14px, 1.2vw, 16px)', lineHeight: '1.5' }}>
               Desde nuestros inicios, canalizamos inversiones en sectores 
               estratégicos, trabajando con un enfoque profesional y una mirada a 
-              largo plazo. Nuestros desarrollos en real estate, agroindustria, energía 
+              largo plazo. Nuestros proyectos en real estate, agroindustria, energía 
               y hotelería reflejan un modelo de gestión basado en la diversificación 
               y el compromiso con el proyecto institucional. Hoy operamos en 
               Argentina, Estados Unidos y Uruguay, ampliando nuestra presencia 
@@ -212,10 +225,8 @@ export default function QuienesSomos() {
               con experiencia local e internacional, comprometidos con la excelencia 
               y el crecimiento estratégico del grupo.
             </p>
-          </div>
 
-          <div className="col-6 md:col-4 md:col-start-9">
-            <div className="px-6 py-8">
+            <div className="pt-8">
               <h3 className="font-baskerville text-black" style={{ fontSize: 'clamp(18px, 1.8vw, 24px)', lineHeight: '1.3' }}>
                 SEGUIMOS CREANDO OPORTUNIDADES QUE IMPULSAN EL FUTURO
               </h3>

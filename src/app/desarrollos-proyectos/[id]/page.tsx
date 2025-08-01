@@ -182,6 +182,20 @@ export default function DesarrolloProyecto() {
                 // Función para separar número y texto (misma lógica que desktop)
                 const parseValue = (val: string) => {
                   const str = val.toString()
+                  console.log('Parsing value:', str)
+                  // Caso especial para códigos como "T6-360" - tratar como número
+                  const codigo = str.match(/^([A-Z]\d+-\d+)$/i)
+                  console.log('Codigo match:', codigo)
+                  if (codigo) {
+                    console.log('Found codigo, returning as number')
+                    return { 
+                      isTextOnly: false, 
+                      number: codigo[1], 
+                      unit: '', 
+                      text: '' 
+                    }
+                  }
+                  
                   // Detectar si es solo texto (no empieza con número)
                   if (isNaN(Number(str.charAt(0))) && !str.match(/^\d/)) {
                     return { isTextOnly: true, number: '', text: str, unit: '' }
@@ -353,6 +367,20 @@ export default function DesarrolloProyecto() {
                   // Función para separar número y texto
                   const parseValue = (val: string) => {
                     const str = val.toString()
+                    console.log('Desktop parsing value:', str)
+                    // Caso especial para códigos como "T6-360" - tratar como número
+                    const codigo = str.match(/^([A-Z]\d+-\d+)$/i)
+                    console.log('Desktop codigo match:', codigo)
+                    if (codigo) {
+                      console.log('Desktop found codigo, returning as number')
+                      return { 
+                        isTextOnly: false, 
+                        number: codigo[1], 
+                        unit: '', 
+                        text: '' 
+                      }
+                    }
+                    
                     // Detectar si es solo texto (no empieza con número)
                     if (isNaN(Number(str.charAt(0))) && !str.match(/^\d/)) {
                       return { isTextOnly: true, number: '', text: str, unit: '' }
