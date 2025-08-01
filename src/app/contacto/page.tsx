@@ -27,62 +27,21 @@ export default function Contacto() {
 
   return (
     <main className="bg-[#EFEFEF]">
-      <div className="content-wrapper">
+      <div className="content-wrapper pb-20">
         <div className="grid pt-36 md:pt-24 pb-20">
-          {/* Título y información de contacto - Columnas 1-6 */}
-          <div className="col-6 md:col-span-6">
+          {/* Título primero siempre - Columnas 1-6 */}
+          <div className="col-6 md:col-span-6 order-1">
             <h1 className="font-baskerville text-black pb-24" style={{ fontSize: 'clamp(36px, 4.5vw, 72px)', lineHeight: 'clamp(40px, 5vw, 80px)' }}>
               ENVIANOS<br />
               TU CONSULTA
             </h1>
-
-            <div className="space-y-0 mb-20">
-              <div>
-                <a 
-                  href="mailto:INFO@GRUPOFRALI.COM" 
-                  className="font-archivo text-black hover:opacity-70 transition-opacity leading-tight"
-                  style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}
-                >
-                  INFO@GRUPOFRALI.COM
-                </a>
-              </div>
-              
-              <div>
-                <a 
-                  href="mailto:PRENSA@GRUPOFRALI.COM" 
-                  className="font-archivo text-black hover:opacity-70 transition-opacity leading-tight"
-                  style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}
-                >
-                  PRENSA@GRUPOFRALI.COM
-                </a>
-              </div>
-              
-              <div>
-                <a 
-                  href="tel:+543489466110" 
-                  className="font-archivo text-black hover:opacity-70 transition-opacity leading-tight"
-                  style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}
-                >
-                  +54 3489 466110
-                </a>
-              </div>
-            </div>
-
-            <div className="space-y-0">
-              <p className="font-archivo text-black leading-tight" style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}>
-                RUTA PANAMERICANA N°9, KM 61
-              </p>
-              <p className="font-archivo text-black leading-tight" style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}>
-                (2804) CAMPANA, BS AS, ARGENTINA
-              </p>
-            </div>
           </div>
 
-          {/* Formulario completo - Columnas 7-12 */}
-          <div className="col-6 md:col-span-6 md:col-start-7">
-            <div className="space-y-8 mt-36">
-              {/* Nombre y Apellido en una fila */}
-              <div className="flex space-x-6">
+          {/* Formulario - Columnas 1-6 en mobile, 7-12 en desktop */}
+          <div className="col-6 md:col-span-6 md:col-start-7 order-2">
+            <div className="space-y-8 mt-0 md:mt-36">
+              {/* Nombre y Apellido - separados en mobile, juntos en desktop */}
+              <div className="flex flex-col md:flex-row md:space-x-6 space-y-8 md:space-y-0">
                 <div className="flex-1">
                   <input
                     type="text"
@@ -166,6 +125,50 @@ export default function Contacto() {
                   </button>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Información de contacto - Columnas 1-6 en desktop, después del formulario en mobile */}
+          <div className="col-6 md:col-span-6 order-3 md:order-3">
+            <div className="space-y-0 mb-20">
+              <div>
+                <a 
+                  href="mailto:INFO@GRUPOFRALI.COM" 
+                  className="font-archivo text-black hover:opacity-70 transition-opacity leading-tight"
+                  style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}
+                >
+                  INFO@GRUPOFRALI.COM
+                </a>
+              </div>
+              
+              <div>
+                <a 
+                  href="mailto:PRENSA@GRUPOFRALI.COM" 
+                  className="font-archivo text-black hover:opacity-70 transition-opacity leading-tight"
+                  style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}
+                >
+                  PRENSA@GRUPOFRALI.COM
+                </a>
+              </div>
+              
+              <div>
+                <a 
+                  href="tel:+543489466110" 
+                  className="font-archivo text-black hover:opacity-70 transition-opacity leading-tight"
+                  style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}
+                >
+                  +54 3489 466110
+                </a>
+              </div>
+            </div>
+
+            <div className="space-y-0">
+              <p className="font-archivo text-black leading-tight" style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}>
+                RUTA PANAMERICANA N°9, KM 61
+              </p>
+              <p className="font-archivo text-black leading-tight" style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}>
+                (2804) CAMPANA, BS AS, ARGENTINA
+              </p>
             </div>
           </div>
         </div>
