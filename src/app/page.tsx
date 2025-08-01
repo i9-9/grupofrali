@@ -3,6 +3,7 @@
 
 import RandomVideo from "@/components/RandomVideo"
 import ProjectGallery from "@/components/ProjectGallery"
+import Link from "next/link"
 
 export default function Home() {
 
@@ -230,7 +231,9 @@ export default function Home() {
           {/* Header */}
           <div className="flex justify-between items-end font-baskerville text-base mb-8">
             <h3 className="text-sm md:text-base">PROYECTOS</h3>
-            <h3 className="text-sm md:text-base underline">VER TODOS</h3>
+            <Link href="/desarrollos-proyectos">
+              <h3 className="text-sm md:text-base underline">VER TODOS</h3>
+            </Link>
           </div>
 
           <div className="mb-12">

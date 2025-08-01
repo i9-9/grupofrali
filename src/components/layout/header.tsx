@@ -10,8 +10,8 @@ const menuItems = [
   { name: "QUIENES SOMOS", href: "/quienes-somos" },
   { name: "DESARROLLOS & PROYECTOS", href: "/desarrollos-proyectos" },
   { name: "RRHH", href: "/rrhh" },
-  { name: "CONTACTO", href: "/contacto" },
-  { name: "EN", href: "/en" }
+  { name: "CONTACTO", href: "/contacto" }
+  // { name: "EN", href: "/en" }
 ]
 
 const mobileItems = [
@@ -149,9 +149,9 @@ export default function Header() {
               })}
             </ul>
             <div className="flex justify-between items-center">
-              <Link href="/en">
+              {/* <Link href="/en">
                 <h4 className="py-14" onClick={toggleMenu}>EN</h4>
-              </Link>
+              </Link> */}
               <div onClick={toggleMenu}>
                 <DownArrowIcon className="rotate-180" />
               </div>

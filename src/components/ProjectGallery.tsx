@@ -101,7 +101,7 @@ export default function ProjectGallery() {
           <Link
             key={project.id}
             href={`/desarrollos-proyectos/${project.id}`}
-            className="group min-w-[250px] md:min-w-[280px] lg:min-w-[300px] flex-shrink-0 cursor-pointer"
+            className="group w-[250px] md:w-[280px] lg:w-[300px] flex-shrink-0 cursor-pointer"
           >
         <div className="relative overflow-hidden mb-3 h-[369px] pb-5 border-b border-black" >
               <Image
@@ -113,11 +113,11 @@ export default function ProjectGallery() {
               />
               <div className="absolute inset-0 bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300" />
             </div>
-            <div className="flex justify-between items-center md:items-start">
-                <h3 className="font-light col-start-1 col-span-1">
+            <div className="flex items-start gap-4">
+                <h3 className="font-light flex-shrink-0 pt-1">
                     (0{index + 1})
                 </h3>
-                <h3 className="font-baskerville text-sm md:text-[22px] text-black leading-tight text-left col-start-6 col-span-11">
+                <h3 className="font-baskerville text-sm md:text-[22px] text-black leading-tight text-left flex-1 whitespace-normal break-words">
                 {project.titulo}
                 </h3>
             </div>

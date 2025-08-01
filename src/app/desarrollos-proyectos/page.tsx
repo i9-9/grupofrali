@@ -116,7 +116,7 @@ const handleCategoryChange = (category: string) => {
               En Grupo Frali desarrollamos y gestionamos proyectos en sectores estratégicos, combinando experiencia, innovación y compromiso. Con una estrategia basada en la diversificación de inversiones en distintos mercados y segmentos de negocio, y con presencia en Argentina, Estados Unidos y Uruguay, apostamos a una evolución constante, abiertos a nuevas oportunidades que integren infraestructura, naturaleza, calidad de vida y eficiencia productiva.
               </p>
           </div>
-          <div className="hidden md:block absolute top-0 right-0 md:w-[50%] w-full h-full z-0 md:pt-24"> {/* Slightly smaller width with gap */}
+          <div className="hidden md:block absolute top-0 right-0 md:w-[50%] xl:w-[45%] 2xl:w-[40%] max-w-[800px] w-full h-full z-0 md:pt-24"> {/* Slightly smaller width with gap */}
             <Image
               src={photos[currentPhoto]}
               alt={`Slide ${currentPhoto}`}
@@ -128,7 +128,7 @@ const handleCategoryChange = (category: string) => {
             />
           </div>
         </div>
-        <div className="grid pt-8 md:pt-16 grid-cols-12 mt-16 md:mt-0">
+        <div className="grid pt-8 md:pt-16 grid-cols-12 mt-16 md:mt-0 xl:mt-32 2xl:mt-40">
           {/* Mobile layout - título ocupa toda la columna y filtros debajo */}
           <div className="md:hidden col-6">
             <h2 className="font-baskerville leading-7" style={{ fontSize: 'clamp(26px, 2.2vw, 32px)' }}>PROYECTOS</h2>
