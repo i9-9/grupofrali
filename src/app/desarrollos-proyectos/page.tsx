@@ -128,13 +128,13 @@ const handleCategoryChange = (category: string) => {
             />
           </div>
         </div>
-        <div className="grid pt-16 grid-cols-12">
+        <div className="grid pt-8 md:pt-16 grid-cols-12 mt-16 md:mt-0">
           {/* Mobile layout - título ocupa toda la columna y filtros debajo */}
           <div className="md:hidden col-6">
             <h2 className="font-baskerville leading-7" style={{ fontSize: 'clamp(26px, 2.2vw, 32px)' }}>PROYECTOS</h2>
             
             {/* Filtros mobile en dos filas debajo del título */}
-            <div className="flex flex-col font-baskerville gap-y-3 mt-6" style={{ fontSize: 'clamp(18px, 4vw, 22px)' }}>
+            <div className="flex flex-col font-baskerville gap-y-3 mt-4 md:mt-6" style={{ fontSize: 'clamp(18px, 4vw, 22px)' }}>
               {/* Primera fila: 2 botones */}
               <div className="flex gap-x-3">
                 {categories.slice(0, 2).map((category) => (
@@ -192,7 +192,7 @@ const handleCategoryChange = (category: string) => {
       </div>
 
       <section className="content-wrapper pb-16">
-        <div className="grid gap-2 md:gap-[10px] mt-40">
+        <div className="grid gap-2 md:gap-[10px] mt-16 md:mt-40">
           {filteredProjects.map((project) => {
             const desktopImage = getDesarrollosImage(project, false)
             const mobileImage = getDesarrollosImage(project, true)

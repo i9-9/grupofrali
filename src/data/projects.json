@@ -64,7 +64,8 @@
         "desarrollos_mobile": "/images/projects/casas-de-septiembre/desarrollos/mobile/casas.jpg",
         "desarrollos_desktop": "/images/projects/casas-de-septiembre/desarrollos/desktop/casas.png",
         "individual_mobile": [
-          "/images/projects/casas-de-septiembre/individual/mobile/individual-mobile-1.jpg"
+          "/images/projects/casas-de-septiembre/individual/mobile/individual-mobile-1.jpg",
+          "/images/projects/casas-de-septiembre/individual/mobile/individual-mobile-2.jpg"
         ],
         "individual_desktop": [
           "/images/projects/casas-de-septiembre/individual/desktop/individual-desktop-1.jpg",
@@ -176,7 +177,9 @@
         "desarrollos_mobile": "/images/projects/la-reserva-cardales/desarrollos/mobile/la-reserva.jpg",
         "desarrollos_desktop": "/images/projects/la-reserva-cardales/desarrollos/desktop/la-reserva.jpg",
         "individual_mobile": [
-          "/images/projects/la-reserva-cardales/individual/mobile/individual-mobile-1.jpg"
+          "/images/projects/la-reserva-cardales/individual/mobile/individual-mobile-1.jpg",
+          "/images/projects/la-reserva-cardales/individual/mobile/individual-mobile-2.jpg",
+          "/images/projects/la-reserva-cardales/individual/mobile/individual-mobile-3.jpg"
         ],
         "individual_desktop": [
           "/images/projects/la-reserva-cardales/individual/desktop/individual-desktop-1.jpg",
@@ -207,7 +210,8 @@
         "desarrollos_desktop": "/images/projects/la-villette-golf-residences/desarrollos/desktop/la-villete.jpg",
         "individual_mobile": [
           "/images/projects/la-villette-golf-residences/individual/mobile/individual-mobile-1.jpg",
-          "/images/projects/la-villette-golf-residences/individual/mobile/individual-mobile-2.jpg"
+          "/images/projects/la-villette-golf-residences/individual/mobile/individual-mobile-2.jpg",
+          "/images/projects/la-villette-golf-residences/individual/mobile/individual-mobile-3.jpg"
         ],
         "individual_desktop": [
           "/images/projects/la-villette-golf-residences/individual/desktop/individual-desktop-1.jpg",

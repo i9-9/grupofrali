@@ -36,26 +36,26 @@ export default function Footer() {
                     </div>
                 </div>
                                  <div className="flex flex-col md:flex-row justify-between text-white py-10 gap-y-1">
-                    <button onClick={scrollToTop} className="hidden md:block text-white text-[10px] sm:text-xs md:text-sm lg:text-[14px] hover:text-white/70 transition-colors cursor-pointer text-left">
+                    <button onClick={scrollToTop} className="hidden md:block text-white hover:text-white/70 transition-colors cursor-pointer text-left" style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}>
                         VOLVER ARRIBA
                     </button>
-                    <Link href="/" className="text-white text-[10px] sm:text-xs md:text-sm lg:text-[14px] tracking-[0.17em] hover:text-white/70 transition-colors">
+                    <Link href="/" className="text-white tracking-[0.17em] hover:text-white/70 transition-colors" style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}>
                         HOME
                     </Link>
-                    <Link href="/quienes-somos" className="text-white text-[10px] sm:text-xs md:text-sm lg:text-[14px] tracking-[0.17em] hover:text-white/70 transition-colors">
+                    <Link href="/quienes-somos" className="text-white tracking-[0.17em] hover:text-white/70 transition-colors" style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}>
                         QUIÉNES SOMOS
                     </Link>
-                    <Link href="/desarrollos-proyectos" className="text-white text-[10px] sm:text-xs md:text-sm lg:text-[14px] tracking-[0.17em] hover:text-white/70 transition-colors">
+                    <Link href="/desarrollos-proyectos" className="text-white tracking-[0.17em] hover:text-white/70 transition-colors" style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}>
                         DESARROLLOS E INVERSIONES
                     </Link>
-                    <Link href="/rrhh" className="text-white text-[10px] sm:text-xs md:text-sm lg:text-[14px] tracking-[0.17em] hover:text-white/70 transition-colors">
+                    <Link href="/rrhh" className="text-white tracking-[0.17em] hover:text-white/70 transition-colors" style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}>
                         RECURSOS HUMANOS
                     </Link>
                     <div className="flex justify-between">
-                        <Link href="/contacto" className="text-white text-[10px] sm:text-xs md:text-sm lg:text-[14px] tracking-[0.17em] hover:text-white/70 transition-colors">
+                        <Link href="/contacto" className="text-white tracking-[0.17em] hover:text-white/70 transition-colors" style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}>
                             CONTACTO
                         </Link>
-                        <button onClick={scrollToTop} className="md:hidden text-white text-[10px] sm:text-xs hover:text-white/70 transition-colors cursor-pointer">
+                        <button onClick={scrollToTop} className="md:hidden text-white hover:text-white/70 transition-colors cursor-pointer" style={{ fontSize: 'clamp(10px, 1.2vw, 12px)' }}>
                         VOLVER ARRIBA
                         </button>
                     </div>
