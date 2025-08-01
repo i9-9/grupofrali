@@ -10,8 +10,8 @@ const menuItems = [
   { name: "QUIENES SOMOS", href: "/quienes-somos" },
   { name: "DESARROLLOS & PROYECTOS", href: "/desarrollos-proyectos" },
   { name: "RRHH", href: "/rrhh" },
-  { name: "CONTACTO", href: "/contacto" }
-  // { name: "EN", href: "/en" }
+  { name: "CONTACTO", href: "/contacto" },
+  { name: "EN", href: "#", static: true }
 ]
 
 const mobileItems = [
@@ -74,9 +74,15 @@ export default function Header() {
                 <ul className="flex gap-5 header-menu-items text-white">
                   {menuItems.map((item, index) => (
                     <li key={index}>
-                      <Link href={item.href}>
-                        {item.name}
-                      </Link>
+                      {item.static ? (
+                        <span className="cursor-default">
+                          {item.name}
+                        </span>
+                      ) : (
+                        <Link href={item.href}>
+                          {item.name}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -96,9 +102,15 @@ export default function Header() {
                     const currentColor = isProjectPage ? 'text-white/30' : 'text-black/30'
                     return (
                       <li key={index}>
-                        <Link href={item.href} className={`${isCurrent ? currentColor : textColor} ${hoverColor} transition-colors duration-400`}>
-                          {item.name}
-                        </Link>
+                        {item.static ? (
+                          <span className={`cursor-default ${textColor}`}>
+                            {item.name}
+                          </span>
+                        ) : (
+                          <Link href={item.href} className={`${isCurrent ? currentColor : textColor} ${hoverColor} transition-colors duration-400`}>
+                            {item.name}
+                          </Link>
+                        )}
                       </li>
                     )
                   })}
@@ -149,9 +161,9 @@ export default function Header() {
               })}
             </ul>
             <div className="flex justify-between items-center">
-              {/* <Link href="/en">
-                <h4 className="py-14" onClick={toggleMenu}>EN</h4>
-              </Link> */}
+              <span className="cursor-default">
+                <h4 className="py-14">EN</h4>
+              </span>
               <div onClick={toggleMenu}>
                 <DownArrowIcon className="rotate-180" />
               </div>
