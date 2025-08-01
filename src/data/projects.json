@@ -10,10 +10,12 @@
         "home_gallery": "/images/projects/elvis-river/home-gallery.jpg",
         "desarrollos_mobile": "/images/projects/elvis-river-sunflower-river/desarrollos/mobile/elvis.jpg",
         "desarrollos_desktop": "/images/projects/elvis-river-sunflower-river/desarrollos/desktop/elvis.jpg",
-        "individual_mobile": "/images/projects/elvis-river/individual-mobile.jpg",
+        "individual_mobile": [
+          "/images/projects/elvis-river-sunflower-river/individual/mobile/individual-mobile-1.jpg"
+        ],
         "individual_desktop": [
-          "/images/projects/elvis-river/individual-desktop-1.jpg",
-          "/images/projects/elvis-river/individual-desktop-2.jpg"
+          "/images/projects/elvis-river-sunflower-river/individual/desktop/individual-desktop-1.jpg",
+          "/images/projects/elvis-river-sunflower-river/individual/desktop/individual-desktop-2.jpg"
         ],
         "alt": "Vista aérea de campos agrícolas con sistemas de riego"
       },
@@ -35,10 +37,12 @@
         "home_gallery": "/images/projects/santa-regina/home-gallery.jpg",
         "desarrollos_mobile": "/images/projects/santa-regina/desarrollos/mobile/santa-regina.jpg",
         "desarrollos_desktop": "/images/projects/santa-regina/desarrollos/desktop/santa-regina.jpg",
-        "individual_mobile": "/images/projects/santa-regina/individual-mobile.jpg",
+        "individual_mobile": [
+          "/images/projects/santa-regina/individual/mobile/individual-mobile-1.jpg"
+        ],
         "individual_desktop": [
-          "/images/projects/santa-regina/individual-desktop-1.jpg",
-          "/images/projects/santa-regina/individual-desktop-2.jpg"
+          "/images/projects/santa-regina/individual/desktop/individual-desktop-1.jpg",
+          "/images/projects/santa-regina/individual/desktop/individual-desktop-2.jpg"
         ],
         "alt": "Cosechadora trabajando en campo de trigo dorado"
       },
@@ -59,11 +63,13 @@
         "home_gallery": "/images/projects/casas-de-septiembre/home-gallery.jpg",
         "desarrollos_mobile": "/images/projects/casas-de-septiembre/desarrollos/mobile/casas.jpg",
         "desarrollos_desktop": "/images/projects/casas-de-septiembre/desarrollos/desktop/casas.png",
-        "individual_mobile": "/images/projects/casas-de-septiembre/individual-mobile.jpg",
+        "individual_mobile": [
+          "/images/projects/casas-de-septiembre/individual/mobile/individual-mobile-1.jpg"
+        ],
         "individual_desktop": [
-          "/images/projects/casas-de-septiembre/individual-desktop-1.jpg",
-          "/images/projects/casas-de-septiembre/individual-desktop-2.jpg",
-          "/images/projects/casas-de-septiembre/individual-desktop-3.jpg"
+          "/images/projects/casas-de-septiembre/individual/desktop/individual-desktop-1.jpg",
+          "/images/projects/casas-de-septiembre/individual/desktop/individual-desktop-2.jpg",
+          "/images/projects/casas-de-septiembre/individual/desktop/individual-desktop-3.jpg"
         ],
         "alt": "Casa moderna con arquitectura colonial y jardín paisajístico"
       },
@@ -85,9 +91,9 @@
         "desarrollos_mobile": "/images/projects/chacras-de-mar/desarrollos/mobile/chacras.jpg",
         "desarrollos_desktop": "/images/projects/chacras-de-mar/desarrollos/desktop/chacras.jpg",
         "individual_mobile": [
-          "/images/projects/chacras-de-mar/individual/mobile/chacras-1.jpg",
-          "/images/projects/chacras-de-mar/individual/mobile/chacras-2.jpg",
-          "/images/projects/chacras-de-mar/individual/mobile/chacras-3.jpg"
+          "/images/projects/chacras-de-mar/individual/mobile/individual-mobile-1.jpg",
+          "/images/projects/chacras-de-mar/individual/mobile/individual-mobile-2.jpg",
+          "/images/projects/chacras-de-mar/individual/mobile/individual-mobile-3.jpg"
         ],
         "individual_desktop": [
           "/images/projects/chacras-de-mar/individual/desktop/individual-desktop-1.jpg",
@@ -113,11 +119,11 @@
         "home_gallery": "/images/projects/la-banderita-parque-eolico/home-gallery/labanderita-home.jpg",
         "desarrollos_mobile": "/images/projects/la-banderita-parque-eolico/desarrollos/mobile/labanderita.jpg",
         "desarrollos_desktop": "/images/projects/la-banderita-parque-eolico/desarrollos/desktop/labanderita.jpg",
-        "individual_mobile": "/images/projects/la-banderita-parque-eolico/individual-mobile.jpg",
+        "individual_mobile": [
+          "/images/projects/la-banderita-parque-eolico/individual/mobile/individual-mobile-1.jpg"
+        ],
         "individual_desktop": [
-          "/images/projects/la-banderita-parque-eolico/individual-desktop-1.jpg",
-          "/images/projects/la-banderita-parque-eolico/individual-desktop-2.jpg",
-          "/images/projects/la-banderita-parque-eolico/individual-desktop-3.jpg"
+          "/images/projects/la-banderita-parque-eolico/individual/desktop/individual-desktop-1.jpg"
         ],
         "alt": "Parque eólico con múltiples aerogeneradores bajo cielo azul"
       },
@@ -140,12 +146,13 @@
         "home_gallery": "/images/projects/sofitel/home-gallery/sofitel-home.jpg",
         "desarrollos_mobile": "/images/projects/sofitel/desarrollos/mobile/sofitel.jpg",
         "desarrollos_desktop": "/images/projects/sofitel/desarrollos/desktop/sofitel.jpg",
-        "individual_mobile": "/images/projects/sofitel/individual-mobile.jpg",
+        "individual_mobile": [
+          "/images/projects/sofitel/individual/mobile/individual-mobile-1.jpg"
+        ],
         "individual_desktop": [
-          "/images/projects/sofitel/individual-desktop-1.jpg",
-          "/images/projects/sofitel/individual-desktop-2.jpg",
-          "/images/projects/sofitel/individual-desktop-3.jpg",
-          "/images/projects/sofitel/individual-desktop-4.jpg"
+          "/images/projects/sofitel/individual/desktop/individual-desktop-1.jpg",
+          "/images/projects/sofitel/individual/desktop/individual-desktop-2.jpg",
+          "/images/projects/sofitel/individual/desktop/individual-desktop-3.jpg"
         ],
         "alt": "Hotel Sofitel con arquitectura moderna, piscina y paisajismo"
       },
@@ -168,13 +175,13 @@
         "home_gallery": "/images/projects/la-reserva-cardales/home-gallery/reserva-home.jpg",
         "desarrollos_mobile": "/images/projects/la-reserva-cardales/desarrollos/mobile/la-reserva.jpg",
         "desarrollos_desktop": "/images/projects/la-reserva-cardales/desarrollos/desktop/la-reserva.jpg",
-        "individual_mobile": "/images/projects/la-reserva-cardales/individual-mobile.jpg",
+        "individual_mobile": [
+          "/images/projects/la-reserva-cardales/individual/mobile/individual-mobile-1.jpg"
+        ],
         "individual_desktop": [
-          "/images/projects/la-reserva-cardales/individual-desktop-1.jpg",
-          "/images/projects/la-reserva-cardales/individual-desktop-2.jpg",
-          "/images/projects/la-reserva-cardales/individual-desktop-3.jpg",
-          "/images/projects/la-reserva-cardales/individual-desktop-4.jpg",
-          "/images/projects/la-reserva-cardales/individual-desktop-5.jpg"
+          "/images/projects/la-reserva-cardales/individual/desktop/individual-desktop-1.jpg",
+          "/images/projects/la-reserva-cardales/individual/desktop/individual-desktop-2.jpg",
+          "/images/projects/la-reserva-cardales/individual/desktop/individual-desktop-3.jpg"
         ],
         "alt": "Club house con arquitectura clásica junto al campo de golf"
       },
@@ -198,6 +205,15 @@
       "imagenes": {
         "desarrollos_mobile": "/images/projects/la-villette-golf-residences/desarrollos/mobile/la-villete.jpg",
         "desarrollos_desktop": "/images/projects/la-villette-golf-residences/desarrollos/desktop/la-villete.jpg",
+        "individual_mobile": [
+          "/images/projects/la-villette-golf-residences/individual/mobile/individual-mobile-1.jpg",
+          "/images/projects/la-villette-golf-residences/individual/mobile/individual-mobile-2.jpg"
+        ],
+        "individual_desktop": [
+          "/images/projects/la-villette-golf-residences/individual/desktop/individual-desktop-1.jpg",
+          "/images/projects/la-villette-golf-residences/individual/desktop/individual-desktop-2.jpg",
+          "/images/projects/la-villette-golf-residences/individual/desktop/individual-desktop-3.jpg"
+        ],
         "alt": "Edificios residenciales modernos con terrazas escalonadas"
       },
       "estadisticas": {
@@ -215,6 +231,12 @@
       "imagenes": {
         "desarrollos_mobile": "/images/projects/green-house/desarrollos/mobile/green-house.jpg",
         "desarrollos_desktop": "/images/projects/green-house/desarrollos/desktop/green-house.jpg",
+        "individual_mobile": [
+          "/images/projects/green-house/individual/mobile/individual-mobile-1.jpg"
+        ],
+        "individual_desktop": [
+          "/images/projects/green-house/individual/desktop/individual-desktop-1.jpg"
+        ],
         "alt": "Vista aérea del desarrollo Green House con lagos y áreas verdes"
       },
       "estadisticas": {
@@ -233,6 +255,14 @@
       "imagenes": {
         "desarrollos_mobile": "/images/projects/edgewater-river/desarrollos/mobile/edgewater.jpg",
         "desarrollos_desktop": "/images/projects/edgewater-river/desarrollos/desktop/edgewater.png",
+        "individual_mobile": [
+          "/images/projects/edgewater-river/individual/mobile/individual-mobile-1.jpg",
+          "/images/projects/edgewater-river/individual/mobile/individual-mobile-2.jpg"
+        ],
+        "individual_desktop": [
+          "/images/projects/edgewater-river/individual/desktop/individual-desktop-1.jpg",
+          "/images/projects/edgewater-river/individual/desktop/individual-desktop-2.jpg"
+        ],
         "alt": "Renderización de torres residenciales modernas en Miami"
       },
       "estadisticas": {
@@ -242,7 +272,7 @@
         "estado": "EN PLANIFICACIÓN",
         "superficie_construir": "750.000 m²"
       }
-    },
+    },  
     {
       "id": "septiembre",
       "titulo": "SEPTIEMBRE",
@@ -254,13 +284,12 @@
         "desarrollos_mobile": "/images/projects/septiembre/desarrollos/mobile/septiembre.jpg",
         "desarrollos_desktop": "/images/projects/septiembre/desarrollos/desktop/septiembre.jpg",
         "individual_mobile": [
-          "/images/projects/septiembre/individual/mobile/septiembre-1.jpg",
-          "/images/projects/septiembre/individual/mobile/septiembre-2.jpg"
+          "/images/projects/septiembre/individual/mobile/individual-mobile-1.jpg",
+          "/images/projects/septiembre/individual/mobile/individual-mobile-2.jpg"
         ],
         "individual_desktop": [
-          "/images/projects/septiembre/individual/desktop/Component 32.jpg",
-          "/images/projects/septiembre/individual/desktop/DSC_0086.jpg",
-          "/images/projects/septiembre/individual/desktop/IMG_7546.jpg"
+          "/images/projects/septiembre/individual/desktop/individual-desktop-1.jpg",
+          "/images/projects/septiembre/individual/desktop/individual-desktop-2.jpg" 
         ],
         "alt": "Vista aérea del barrio Septiembre con club house, piscinas y canchas"
       },
@@ -282,6 +311,12 @@
       "imagenes": {
         "desarrollos_mobile": "/images/projects/terrazas-de-septiembre/desarrollos/mobile/terrazas.jpg",
         "desarrollos_desktop": "/images/projects/terrazas-de-septiembre/desarrollos/desktop/terrazas.jpg",
+        "individual_mobile": [
+          "/images/projects/terrazas-de-septiembre/individual/mobile/individual-mobile-1.jpg"
+        ],
+        "individual_desktop": [
+          "/images/projects/terrazas-de-septiembre/individual/desktop/individual-desktop-1.jpg"
+        ],
         "alt": "Complejo residencial de departamentos con arquitectura moderna"
       },
       "estadisticas": {

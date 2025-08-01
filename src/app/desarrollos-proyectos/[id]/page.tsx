@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import projectsData from "@/data/projects.json"
@@ -10,6 +10,7 @@ import projectsData from "@/data/projects.json"
 
 export default function DesarrolloProyecto() {
   const params = useParams()
+  const router = useRouter()
   const projectId = params.id as string
   const scrollRef = useRef<HTMLDivElement>(null)
   const desktopScrollRef = useRef<HTMLDivElement>(null)
@@ -18,6 +19,22 @@ export default function DesarrolloProyecto() {
   
   // Buscar el proyecto por ID
   const project = projectsData.proyectos.find(p => p.id === projectId)
+  
+  // Encontrar el índice del proyecto actual y calcular anterior/siguiente con navegación circular
+  const currentProjectIndex = projectsData.proyectos.findIndex(p => p.id === projectId)
+  const previousProject = currentProjectIndex > 0 
+    ? projectsData.proyectos[currentProjectIndex - 1] 
+    : projectsData.proyectos[projectsData.proyectos.length - 1] // Último proyecto
+  const nextProject = currentProjectIndex < projectsData.proyectos.length - 1 
+    ? projectsData.proyectos[currentProjectIndex + 1] 
+    : projectsData.proyectos[0] // Primer proyecto
+  
+  // Función para navegar a otro proyecto
+  const navigateToProject = (project: typeof projectsData.proyectos[0]) => {
+    if (project) {
+      router.push(`/desarrollos-proyectos/${project.id}`)
+    }
+  }
 
   const mobileImages: string[] = (() => {
     if (!project?.imagenes?.individual_mobile) return []
@@ -84,7 +101,7 @@ export default function DesarrolloProyecto() {
   }
 
   return (
-    <main className="min-h-screen md:h-screen bg-[#EFEFEF] relative">
+    <main className="min-h-screen md:h-screen md:overflow-hidden bg-[#EFEFEF] relative">
       {/* Mobile Layout */}
       <div className="md:hidden flex flex-col">
         {/* Galería de imágenes mobile - carrusel con paginación */}
@@ -135,7 +152,7 @@ export default function DesarrolloProyecto() {
         </div>
         
         {/* Panel de información mobile */}
-        <div className="bg-white border-t border-gray-200 p-4">
+        <div className="bg-[#EFEFEF] border-t border-gray-200 p-4">
           <div className="flex items-center gap-2 mb-2">
             <Link href="/desarrollos-proyectos" className="text-[#151714]">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -145,7 +162,7 @@ export default function DesarrolloProyecto() {
             <span className="text-black font-baskerville text-base">{project.categoria}</span>
           </div>
           
-          <h1 className="font-archivo text-4xl text-black mb-15">{project.titulo}</h1>
+          <h1 className="font-archivo text-3xl md:text-4xl text-black leading-tight mb-12 md:mb-15">{project.titulo}</h1>
           <p className="text-[#151714] text-sm mb-4 flex items-center">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="mr-1 text-black">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
@@ -154,56 +171,113 @@ export default function DesarrolloProyecto() {
             {project.locacion}
           </p>
           
-          <p className="text-[#151714] text-base leading-5 mb-4">
-            {project.descripcion}
-          </p>
-          
-          {/* Estadísticas mobile */}
-          {project.estadisticas && (
-            <div className="flex flex-col gap-4 py-12">
+                      <p className="text-[#151714] text-base leading-6 md:leading-5 mb-12">
+              {project.descripcion}
+            </p>
+            
+            {/* Estadísticas mobile */}
+            {project.estadisticas && (
+              <div className="flex flex-col gap-4 py-12 ">
               {Object.entries(project.estadisticas).map(([key, value]) => {
                 // Función para separar número y texto (misma lógica que desktop)
                 const parseValue = (val: string) => {
                   const str = val.toString()
                   // Detectar si es solo texto (no empieza con número)
                   if (isNaN(Number(str.charAt(0))) && !str.match(/^\d/)) {
-                    return { isTextOnly: true, number: '', text: str }
+                    return { isTextOnly: true, number: '', text: str, unit: '' }
                   }
                   
-                  // Separar número principal y texto descriptivo
-                  const match = str.match(/^([\d,.]+ ?[A-Z%]*)\s*(.*)$/)
-                  if (match && match[2]) {
-                    return { isTextOnly: false, number: match[1], text: match[2] }
+                  // Separar número, unidad técnica y texto descriptivo
+                  const techUnitMatch = str.match(/^([\d,.]+)\s+(MW|GWH|KWH|MW|M²|H|KG|TON)\s*(.*)$/i)
+                  if (techUnitMatch) {
+                    return { 
+                      isTextOnly: false, 
+                      number: techUnitMatch[1], 
+                      unit: techUnitMatch[2], 
+                      text: techUnitMatch[3] 
+                    }
+                  }
+                  
+                  // Caso especial para "5 ESTRELLAS" - mantener junto
+                  const estrellas = str.match(/^(\d+)\s+(ESTRELLAS?)$/i)
+                  if (estrellas) {
+                    return { 
+                      isTextOnly: false, 
+                      number: estrellas[1] + estrellas[2], 
+                      unit: '', 
+                      text: '' 
+                    }
+                  }
+                  
+                  // Caso especial para "18 HOYOS" - mantener junto
+                  const hoyos = str.match(/^(\d+)\s+(HOYOS?)$/i)
+                  if (hoyos) {
+                    return { 
+                      isTextOnly: false, 
+                      number: hoyos[1] + hoyos[2], 
+                      unit: '', 
+                      text: '' 
+                    }
+                  }
+                  
+                  // Separar número con porcentaje o unidad simple
+                  const simpleMatch = str.match(/^([\d,.]+)\s*([%A-Z]*)\s*(.*)$/)
+                  if (simpleMatch && simpleMatch[2]) {
+                    return { 
+                      isTextOnly: false, 
+                      number: simpleMatch[1] + simpleMatch[2], 
+                      unit: '', 
+                      text: simpleMatch[3] 
+                    }
                   }
                   
                   // Si no hay texto adicional, es solo número
-                  return { isTextOnly: false, number: str, text: '' }
+                  return { isTextOnly: false, number: str, text: '', unit: '' }
                 }
                 
                 const parsed = parseValue(value.toString())
                 
-                return (
-                  <div key={key} className="border-t border-black pt-3 pb-2 flex justify-between items-start">
-                    <div className="font-archivo text-black uppercase tracking-wider text-xs leading-3 max-w-[50%]">
-                      {key.replace(/_/g, ' ')}
-                    </div>
-                    <div className="text-right">
-                      {parsed.isTextOnly ? (
-                        <div className="font-archivo text-black uppercase tracking-wider text-xs leading-3">
-                          {parsed.text}
-                        </div>
-                      ) : (
-                        <>
-                          <div className="font-archivo text-black text-2xl font-archivo-light leading-none">
-                            {parsed.number}
+                                  return (
+                    <div key={key} className="border-t border-black pt-3 pb-2 flex justify-between items-start">
+                      <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3 max-w-[50%]" style={{ wordBreak: 'break-word', hyphens: 'auto' }}>
+                        {key.replace(/_/g, ' ').split(' ').map((word, index) => (
+                          <span key={index}>
+                            {word}
+                            {index === 1 && <br />}
+                            {index > 1 && index < key.replace(/_/g, ' ').split(' ').length - 1 && ' '}
+                            {index === 0 && index < key.replace(/_/g, ' ').split(' ').length - 1 && ' '}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="text-right self-center max-w-[45%]">
+                                              {parsed.isTextOnly ? (
+                          <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3 break-words">
+                            {parsed.text}
                           </div>
-                          {parsed.text && (
-                            <div className="font-archivo text-black uppercase tracking-wider text-xs leading-3 mt-1">
-                              {parsed.text}
+                        ) : (
+                          <div className="flex flex-col items-end">
+                            <div className="flex items-baseline gap-1">
+                              <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: 'clamp(18px, 5vw, 30px)' }}>
+                                {parsed.number}
+                              </span>
+                              {parsed.unit && (
+                                <span className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3">
+                                  {parsed.unit}
+                                </span>
+                              )}
+                              {!parsed.unit && parsed.text && (
+                                <span className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3">
+                                  {parsed.text}
+                                </span>
+                              )}
                             </div>
-                          )}
-                        </>
-                      )}
+                            {parsed.unit && parsed.text && (
+                              <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-4 md:leading-5 lg:leading-3">
+                                {parsed.text}
+                              </div>
+                            )}
+                          </div>
+                        )}
                     </div>
                   </div>
                 )
@@ -211,80 +285,169 @@ export default function DesarrolloProyecto() {
             </div>
           )}
         </div>
+        
+        {/* Flechas de navegación desktop */}
+        <div className="hidden md:flex fixed bottom-2 left-0 right-0 justify-between pointer-events-none z-50 px-4">
+          {/* Flecha anterior */}
+          <button
+            onClick={() => navigateToProject(previousProject)}
+            className="pointer-events-auto w-12 h-12 flex items-center hover:opacity-70 transition-opacity"
+            aria-label={`Ir a proyecto anterior: ${previousProject.titulo}`}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          
+          {/* Flecha siguiente */}
+          <button
+            onClick={() => navigateToProject(nextProject)}
+            className="pointer-events-auto w-12 h-12 flex items-center justify-center hover:opacity-70 transition-opacity"
+            aria-label={`Ir a proyecto siguiente: ${nextProject.titulo}`}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Desktop Layout */}
       <div className="hidden md:block h-full relative">
         {/* Panel de información desktop */}
-        <div className="absolute left-0 top-0 w-1/2 h-full bg-white overflow-y-auto z-10 p-8 pt-24">
-          <div className="max-w-2xl">
+        <div className="absolute left-0 top-0 w-1/2 h-full bg-white z-10 p-4 md:p-6 lg:p-8 pt-16 md:pt-20 lg:pt-24 flex flex-col">
+          <div className="max-w-xl md:max-w-2xl">
+            {/* Header fijo */}
             <div className="flex items-center gap-2 mb-4">
               <Link href="/desarrollos-proyectos" className="text-black hover:text-black/80 transition-colors">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
               </Link>
-              <span className="text-[#151714] text-[19px] font-baskerville font-medium">{project.categoria}</span>
+              <span className="text-[#151714] font-baskerville font-medium" style={{ fontSize: 'clamp(16px, 1.5vw, 19px)' }}>{project.categoria}</span>
             </div>
             
-            <h1 className="font-archivo text-4xl text-black mb-2 pb-20">{project.titulo}</h1>
-            <p className="text-black mb-6 flex items-center">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="mr-2">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                <circle cx="12" cy="10" r="3"/>
-              </svg>
-              {project.locacion}
-            </p>
+            {/* Título con altura fija */}
+            <div className="h-24 md:h-32 lg:h-36 flex items-start mb-6">
+              <h1 className="font-archivo text-black leading-tight" style={{ fontSize: 'clamp(24px, 36px, 48px)' }}>{project.titulo}</h1>
+            </div>
+            {/* Contenido con espacio flexible */}
+            <div className="flex-1 flex flex-col justify-start space-y-6">
+              <p className="text-black flex items-center" style={{ fontSize: 'clamp(12px, 1vw, 16px)' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="mr-2 md:w-[18px] md:h-[18px]">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                {project.locacion}
+              </p>
+              
+              <p className="text-[#151714] leading-[1.1]" style={{ fontSize: 'clamp(14px, 1.25vw, 16px)' }}>
+                {project.descripcion}
+              </p>
+            </div>
             
-            <p className="text-[#151714] text-[19px] leading-5 mb-8">
-              {project.descripcion}
-            </p>
-            
-                        {/* Estadísticas desktop */}
+            {/* Estadísticas desktop */}
             {project.estadisticas && (
-              <div className="grid !grid-cols-2 gap-2">
+              <div className="grid !grid-cols-2 gap-2 mt-16">
                 {Object.entries(project.estadisticas).map(([key, value]) => {
                   // Función para separar número y texto
                   const parseValue = (val: string) => {
                     const str = val.toString()
                     // Detectar si es solo texto (no empieza con número)
                     if (isNaN(Number(str.charAt(0))) && !str.match(/^\d/)) {
-                      return { isTextOnly: true, number: '', text: str }
+                      return { isTextOnly: true, number: '', text: str, unit: '' }
                     }
                     
-                    // Separar número principal y texto descriptivo
-                    const match = str.match(/^([\d,.]+ ?[A-Z%]*)\s*(.*)$/)
-                    if (match && match[2]) {
-                      return { isTextOnly: false, number: match[1], text: match[2] }
+                    // Separar número, unidad técnica y texto descriptivo
+                    const techUnitMatch = str.match(/^([\d,.]+)\s+(MW|GWH|KWH|MW|M²|H|KG|TON)\s*(.*)$/i)
+                    if (techUnitMatch) {
+                      return { 
+                        isTextOnly: false, 
+                        number: techUnitMatch[1], 
+                        unit: techUnitMatch[2], 
+                        text: techUnitMatch[3] 
+                      }
+                    }
+                    
+                    // Caso especial para "5 ESTRELLAS" - mantener junto
+                    const estrellas = str.match(/^(\d+)\s+(ESTRELLAS?)$/i)
+                    if (estrellas) {
+                      return { 
+                        isTextOnly: false, 
+                        number: estrellas[1] + estrellas[2], 
+                        unit: '', 
+                        text: '' 
+                      }
+                    }
+                    
+                    // Caso especial para "18 HOYOS" - mantener junto
+                    const hoyos = str.match(/^(\d+)\s+(HOYOS?)$/i)
+                    if (hoyos) {
+                      return { 
+                        isTextOnly: false, 
+                        number: hoyos[1] + hoyos[2], 
+                        unit: '', 
+                        text: '' 
+                      }
+                    }
+                    
+                    // Separar número con porcentaje o unidad simple
+                    const simpleMatch = str.match(/^([\d,.]+)\s*([%A-Z]*)\s*(.*)$/)
+                    if (simpleMatch && simpleMatch[2]) {
+                      return { 
+                        isTextOnly: false, 
+                        number: simpleMatch[1] + simpleMatch[2], 
+                        unit: '', 
+                        text: simpleMatch[3] 
+                      }
                     }
                     
                     // Si no hay texto adicional, es solo número
-                    return { isTextOnly: false, number: str, text: '' }
+                    return { isTextOnly: false, number: str, text: '', unit: '' }
                   }
                   
                   const parsed = parseValue(value.toString())
                   
                   return (
-                    <div key={key} className="border-t border-black pt-2 pb-1 flex justify-between items-start">
-                      <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-3">
-                        {key.replace(/_/g, ' ')}
+                    <div key={key} className="border-t border-black py-1 flex justify-between items-start">
+                      <div className="font-archivo text-black uppercase tracking-wider leading-[1]" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)', wordBreak: 'break-word', hyphens: 'auto' }}>
+                        {key.replace(/_/g, ' ').split(' ').map((word, index) => (
+                          <span key={index}>
+                            {word}
+                            {index === 1 && <br />}
+                            {index > 1 && index < key.replace(/_/g, ' ').split(' ').length - 1 && ' '}
+                            {index === 0 && index < key.replace(/_/g, ' ').split(' ').length - 1 && ' '}
+                          </span>
+                        ))}
                       </div>
-                      <div className="text-right">
+                      <div className="text-right self-center max-w-[45%]">
                         {parsed.isTextOnly ? (
-                          <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-3">
+                          <div className="font-archivo text-black uppercase tracking-wider leading-[1.1] break-words" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
                             {parsed.text}
                           </div>
                         ) : (
-                          <>
-                            <div className="font-archivo text-black text-3xl font-archivo-light leading-none">
-                              {parsed.number}
+                          <div className="flex flex-col items-end">
+                            <div className="flex items-baseline gap-1">
+                              <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: 'clamp(18px, 2.2vw, 30px)' }}>
+                                {parsed.number}
+                              </span>
+                              {parsed.unit && (
+                                <span className="font-archivo text-black uppercase tracking-wider leading-[1.1]" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
+                                  {parsed.unit}
+                                </span>
+                              )}
+                              {!parsed.unit && parsed.text && (
+                                <span className="font-archivo text-black uppercase tracking-wider leading-[1.1]" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
+                                  {parsed.text}
+                                </span>
+                              )}
                             </div>
-                            {parsed.text && (
-                              <div className="font-archivo text-black uppercase tracking-wider text-xs leading-3 mt-1">
+                            {parsed.unit && parsed.text && (
+                              <div className="font-archivo text-black uppercase tracking-wider leading-[1.1]" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
                                 {parsed.text}
                               </div>
                             )}
-                          </>
+                          </div>
                         )}
                       </div>
                     </div>
@@ -325,7 +488,7 @@ export default function DesarrolloProyecto() {
                   <div className="rounded-full px-2 py-3">
                     <div className="relative w-1 h-24 bg-white/30 rounded-full overflow-hidden">
                       <div 
-                        className="absolute left-0 w-full bg-white rounded-full transition-all duration-300 ease-out"
+                        className="absolute left-0 w-full bg-[#efefef] rounded-full transition-all duration-300 ease-out"
                         style={{ 
                           height: `${100 / desktopImages.length}%`,
                           top: `${(activeDesktopImageIndex * 100) / desktopImages.length}%`
@@ -342,6 +505,31 @@ export default function DesarrolloProyecto() {
             </div>
           )}
           </div>
+        </div>
+        
+        {/* Flechas de navegación desktop */}
+        <div className="flex absolute bottom-2 left-0 right-0 justify-between pointer-events-none z-20 px-6">
+          {/* Flecha anterior */}
+          <button
+            onClick={() => navigateToProject(previousProject)}
+            className="pointer-events-auto w-16 h-16 flex items-center justify-center hover:opacity-70 transition-opacity"
+            aria-label={`Ir a proyecto anterior: ${previousProject.titulo}`}
+          >
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          
+          {/* Flecha siguiente */}
+          <button
+            onClick={() => navigateToProject(nextProject)}
+            className="pointer-events-auto w-16 h-16 flex items-center justify-center hover:opacity-70 transition-opacity"
+            aria-label={`Ir a proyecto siguiente: ${nextProject.titulo}`}
+          >
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
         </div>
       </div>
     </main>
