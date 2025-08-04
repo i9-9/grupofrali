@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Componentes SVG individuales para cada logo
 const SofitelLogo = ({ className }: { className?: string }) => (
   <svg 
     width="120" 
