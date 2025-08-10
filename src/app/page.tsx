@@ -66,46 +66,22 @@ export default function Home() {
             {/* Columna 1: Estadísticas izquierda (columnas 1-5) */}
             <div className="col-6 md:col-1-to-5 order-3 md:order-3">
               <div className="border-t border-black pt-1 mb-1 flex items-start">
-                <div 
-                  className="font-archivo text-black leading-none font-archivo-light" 
-                  style={{ fontSize: 'clamp(1.25rem, 1.5vw, 2rem)' }}
-                >
-                  14
-                </div>
-                <div 
-                  className="font-archivo text-black uppercase tracking-wider text-left max-w-[140px] md:max-w-[120px] lg:max-w-[140px] ml-auto" 
-                  style={{ fontSize: 'clamp(0.75rem, 1vw, 1rem)', lineHeight: 1.1 }}
-                >
+                <div className="font-archivo text-black text-stat-number leading-none font-archivo-light">14</div>
+                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 max-w-[140px] md:max-w-[120px] lg:max-w-[140px] ml-auto">
                   PROYECTOS<br />DESARROLLADOS
                 </div>
               </div>
 
               <div className="border-t border-black pt-1 mb-1 flex items-start">
-                <div 
-                  className="font-archivo text-black leading-none font-archivo-light" 
-                  style={{ fontSize: 'clamp(1.25rem, 1.5vw, 2rem)' }}
-                >
-                  300 MM<span className="text-stat-unit">USD</span>
-                </div>
-                <div 
-                  className="font-archivo text-black uppercase tracking-wider text-left max-w-[140px] md:max-w-[120px] lg:max-w-[140px] ml-auto" 
-                  style={{ fontSize: 'clamp(0.75rem, 1vw, 1rem)', lineHeight: 1.1 }}
-                >
+                <div className="font-archivo text-black text-stat-number leading-none font-archivo-light">300 MM<span className="text-stat-unit">USD</span></div>
+                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 max-w-[140px] md:max-w-[120px] lg:max-w-[140px] ml-auto">
                   VALOR TOTAL<br />DE ACTIVOS
                 </div>
               </div>
 
               <div className="border-t border-black pt-1 mb-1 flex items-start">
-                <div 
-                  className="font-archivo text-black leading-none font-archivo-light" 
-                  style={{ fontSize: 'clamp(1.25rem, 1.5vw, 2rem)' }}
-                >
-                  5
-                </div>
-                <div 
-                  className="font-archivo text-black uppercase tracking-wider text-left max-w-[140px] md:max-w-[120px] lg:max-w-[140px] ml-auto" 
-                  style={{ fontSize: 'clamp(0.75rem, 1vw, 1rem)', lineHeight: 1.1 }}
-                >
+                <div className="font-archivo text-black text-stat-number leading-none font-archivo-light">5</div>
+                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 max-w-[140px] md:max-w-[120px] lg:max-w-[140px] ml-auto">
                   PROYECTOS EN<br />PLANIFICACIÓN
                 </div>
               </div>
@@ -114,46 +90,22 @@ export default function Home() {
             {/* Columna 2: Estadísticas derecha (columnas 8-12) */}
             <div className="col-6 md:col-8-to-12 order-4 md:order-4">
               <div className="border-t border-black pt-1 mb-1 flex items-start">
-                <div 
-                  className="font-archivo text-black leading-none font-archivo-light" 
-                  style={{ fontSize: 'clamp(1.25rem, 1.5vw, 2rem)' }}
-                >
-                  7800<span className="text-stat-unit">ha</span>
-                </div>
-                <div 
-                  className="font-archivo text-black uppercase tracking-wider text-left max-w-[140px] md:max-w-[120px] lg:max-w-[140px] ml-auto" 
-                  style={{ fontSize: 'clamp(0.75rem, 1vw, 1rem)', lineHeight: 1.1 }}
-                >
+                <div className="font-archivo text-black text-stat-number leading-none font-archivo-light">7800<span className="text-stat-unit">ha</span></div>
+                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 max-w-[140px] md:max-w-[120px] lg:max-w-[140px] ml-auto">
                   HECTÁREAS<br />AGRÍCOLAS
                 </div>
               </div>
 
               <div className="border-t border-black pt-1 mb-1 flex items-start">
-                <div 
-                  className="font-archivo text-black leading-none font-archivo-light" 
-                  style={{ fontSize: 'clamp(1.25rem, 1.5vw, 2rem)' }}
-                >
-                  +300
-                </div>
-                <div 
-                  className="font-archivo text-black uppercase tracking-wider text-left max-w-[140px] md:max-w-[120px] lg:max-w-[140px] ml-auto" 
-                  style={{ fontSize: 'clamp(0.75rem, 1vw, 1rem)', lineHeight: 1.1 }}
-                >
+                <div className="font-archivo text-black text-stat-number leading-none font-archivo-light">+300</div>
+                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 max-w-[140px] md:max-w-[120px] lg:max-w-[140px] ml-auto">
                   Nº EMPLEADOS &<br />COLABORADORES
                 </div>
               </div>
 
               <div className="border-t border-black pt-1 mb-1 flex items-start">
-                <div 
-                  className="font-archivo text-black leading-none font-archivo-light" 
-                  style={{ fontSize: 'clamp(1.25rem, 1.5vw, 2rem)' }}
-                >
-                  +100.000<span className="text-stat-unit">m²</span>
-                </div>
-                <div 
-                  className="font-archivo text-black uppercase tracking-wider text-left max-w-[140px] md:max-w-[120px] lg:max-w-[140px] ml-auto" 
-                  style={{ fontSize: 'clamp(0.75rem, 1vw, 1rem)', lineHeight: 1.1 }}
-                >
+                <div className="font-archivo text-black text-stat-number leading-none font-archivo-light">+100.000<span className="text-stat-unit">m²</span></div>
+                <div className="font-archivo text-black uppercase tracking-wider text-left text-stat-description leading-3 max-w-[140px] md:max-w-[120px] lg:max-w-[140px] ml-auto">
                   SUPERFICIE<br />CONSTRUIDA
                 </div>
               </div>

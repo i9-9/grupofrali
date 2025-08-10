@@ -1,6 +1,6 @@
 "use client"
 
-import {useEffect, useState} from "react"
+import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import projectsData from "@/data/projects.json"
@@ -76,12 +76,12 @@ const categories = [
 export default function DesarrollosProyectos() {
 const [selectedCategory, setSelectedCategory] = useState("VER TODOS")
 
-const photos = [
+const photos = useMemo(() => [
   "/images/desarrollos/1.jpg",
   "/images/desarrollos/2.jpg",
   "/images/desarrollos/3.jpg",
   "/images/desarrollos/4.jpg",
-] 
+], [])
 
 const filteredProjects = selectedCategory === "VER TODOS" 
   ? projectsData.proyectos 

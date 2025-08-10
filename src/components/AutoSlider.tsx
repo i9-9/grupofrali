@@ -56,7 +56,7 @@ export default function AutoSlider({ images, altText = "Slide", className = "" }
   useEffect(() => {
     setCurrentPhoto(0)
     setIsFading(false)
-  }, [images])
+  }, [images.length])
 
   if (!images || images.length === 0) {
     return null
