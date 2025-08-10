@@ -134,7 +134,7 @@ export default function Header() {
 
       {(isOpen || isAnimating) && (
         <div
-          className={`fixed inset-0 bg-[#EBEBEB] z-50 md:hidden ${animationClass}`}
+          className={`fixed top-0 left-0 right-0 h-[80vh] overflow-y-auto bg-[#EBEBEB] z-50 md:hidden ${animationClass}`}
         >
           <div className="content-wrapper">
             <h1 className="font-baskerville text-[28px] md:text-base text-[#151714] tracking-[0.68em] pt-14 pb-20">
