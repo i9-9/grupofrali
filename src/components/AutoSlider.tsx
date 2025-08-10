@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useCallback } from "react"
 import Image from "next/image"
 
 interface AutoSliderProps {
@@ -12,17 +12,16 @@ interface AutoSliderProps {
 export default function AutoSlider({ images, altText = "Slide", className = "" }: AutoSliderProps) {
   const [currentPhoto, setCurrentPhoto] = useState(0)
   const [isFading, setIsFading] = useState(false)
-  const [isPaused, setIsPaused] = useState(false)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
   // Función para avanzar al siguiente slide
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setIsFading(true)
     setTimeout(() => {
       setCurrentPhoto((prevIndex) => (prevIndex + 1) % images.length)
       setIsFading(false)
     }, 500) // Aumentado a 500ms para transición más suave
-  }
+  }, [images.length])
 
   // Función para ir a un slide específico
   const goToSlide = (index: number) => {
@@ -34,21 +33,14 @@ export default function AutoSlider({ images, altText = "Slide", className = "" }
   }
 
   // Función para iniciar el intervalo
-  const startInterval = () => {
+  const startInterval = useCallback(() => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current)
     }
     intervalRef.current = setInterval(() => {
-      if (!isPaused) {
-        nextSlide()
-      }
+      nextSlide()
     }, 5000) // Aumentado a 5 segundos para dar más tiempo
-  }
-
-  // Función para pausar/reanudar
-  const togglePause = () => {
-    setIsPaused(!isPaused)
-  }
+  }, [nextSlide])
 
   useEffect(() => {
     startInterval()
@@ -58,13 +50,12 @@ export default function AutoSlider({ images, altText = "Slide", className = "" }
         clearInterval(intervalRef.current)
       }
     }
-  }, [isPaused, images.length])
+  }, [startInterval])
 
   // Reiniciar slider cuando cambian las imágenes
   useEffect(() => {
     setCurrentPhoto(0)
     setIsFading(false)
-    setIsPaused(false)
   }, [images])
 
   if (!images || images.length === 0) {
@@ -74,8 +65,6 @@ export default function AutoSlider({ images, altText = "Slide", className = "" }
   return (
     <div 
       className={`relative ${className}`}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
     > 
       <Image
         src={images[currentPhoto]}
@@ -105,24 +94,7 @@ export default function AutoSlider({ images, altText = "Slide", className = "" }
         </div>
       )}
       
-      {/* Botón de pausa/reanudar */}
-      {images.length > 1 && (
-        <button
-          onClick={togglePause}
-          className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300"
-          aria-label={isPaused ? "Reanudar slideshow" : "Pausar slideshow"}
-        >
-          {isPaused ? (
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-            </svg>
-          ) : (
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
-            </svg>
-          )}
-        </button>
-      )}
+      
     </div>
   )
 } 

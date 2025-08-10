@@ -42,20 +42,20 @@ export default function Footer() {
                     <Link href="/" className="text-white tracking-[0.17em] hover:text-white/70 transition-colors" style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}>
                         HOME
                     </Link>
-                    <Link href="/quienes-somos" className="text-white tracking-[0.17em] hover:text-white/70 transition-colors" style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}>
+                    <Link href="/quienes-somos" className="text-white tracking-[0.17em] hover:text-white/70 transition-colors duration-300" style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}>
                         QUIÉNES SOMOS
                     </Link>
-                    <Link href="/desarrollos-proyectos" className="text-white tracking-[0.17em] hover:text-white/70 transition-colors" style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}>
+                    <Link href="/desarrollos-proyectos" className="text-white tracking-[0.17em] hover:text-white/70 transition-colors duration-300" style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}>
                         DESARROLLOS E INVERSIONES
                     </Link>
-                    <Link href="/rrhh" className="text-white tracking-[0.17em] hover:text-white/70 transition-colors" style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}>
+                    <Link href="/rrhh" className="text-white tracking-[0.17em] hover:text-white/70 transition-colors duration-300" style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}>
                         RECURSOS HUMANOS
                     </Link>
                     <div className="flex justify-between">
-                        <Link href="/contacto" className="text-white tracking-[0.17em] hover:text-white/70 transition-colors" style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}>
+                        <Link href="/contacto" className="text-white tracking-[0.17em] hover:text-white/70 transition-colors duration-300" style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}>
                             CONTACTO
                         </Link>
-                        <button onClick={scrollToTop} className="md:hidden text-white hover:text-white/70 transition-colors cursor-pointer" style={{ fontSize: 'clamp(10px, 1.2vw, 12px)' }}>
+                        <button onClick={scrollToTop} className="md:hidden text-white hover:text-white/70 transition-colors cursor-pointer duration-300" style={{ fontSize: 'clamp(10px, 1.2vw, 12px)' }}>
                         VOLVER ARRIBA
                         </button>
                     </div>
