@@ -23,14 +23,6 @@ export default function AutoSlider({ images, altText = "Slide", className = "" }
     }, 500) // Aumentado a 500ms para transición más suave
   }, [images.length])
 
-  // Función para ir a un slide específico
-  const goToSlide = (index: number) => {
-    setIsFading(true)
-    setTimeout(() => {
-      setCurrentPhoto(index)
-      setIsFading(false)
-    }, 500)
-  }
 
   // Función para iniciar el intervalo
   const startInterval = useCallback(() => {
@@ -39,7 +31,7 @@ export default function AutoSlider({ images, altText = "Slide", className = "" }
     }
     intervalRef.current = setInterval(() => {
       nextSlide()
-    }, 5000) // Aumentado a 5 segundos para dar más tiempo
+    }, 5000)
   }, [nextSlide])
 
   useEffect(() => {
@@ -76,23 +68,6 @@ export default function AutoSlider({ images, altText = "Slide", className = "" }
         }`}
       />
       
-      {/* Indicadores de slide */}
-      {images.length > 1 && (
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentPhoto 
-                  ? 'bg-white scale-125' 
-                  : 'bg-white/50 hover:bg-white/75'
-              }`}
-              aria-label={`Ir a imagen ${index + 1}`}
-            />
-          ))}
-        </div>
-      )}
       
       
     </div>
