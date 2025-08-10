@@ -4,6 +4,7 @@ import {useEffect, useState} from "react"
 import Link from "next/link"
 import Image from "next/image"
 import projectsData from "@/data/projects.json"
+import AutoSlider from "@/components/AutoSlider"
 
 function ResponsiveImage({ 
   desktopImage, 
@@ -73,8 +74,6 @@ const categories = [
 ]
 
 export default function DesarrollosProyectos() {
-const [currentPhoto, setCurrentPhoto] = useState(0)
-const [isFading, setIsFading] = useState(false)
 const [selectedCategory, setSelectedCategory] = useState("VER TODOS")
 
 const photos = [
@@ -83,19 +82,6 @@ const photos = [
   "/images/desarrollos/3.jpg",
   "/images/desarrollos/4.jpg",
 ] 
-
-useEffect(() => {
-  const interval = setInterval(() => {
-    setIsFading(true)
-
-    setTimeout(() => {
-      setCurrentPhoto((prevIndex) => (prevIndex + 1) % photos.length)
-      setIsFading(false)
-    }, 300) // Increased from 100ms to 300ms for smoother transition
-  }, 4000)
-
-  return () => clearInterval(interval)
-}, [photos.length])
 
 const filteredProjects = selectedCategory === "VER TODOS" 
   ? projectsData.proyectos 
@@ -116,15 +102,11 @@ const handleCategoryChange = (category: string) => {
               En Grupo Frali desarrollamos y gestionamos proyectos en sectores estratégicos, combinando experiencia, innovación y compromiso. Con una estrategia basada en la diversificación de inversiones en distintos mercados y segmentos de negocio, y con presencia en Argentina, Estados Unidos y Uruguay, apostamos a una evolución constante, abiertos a nuevas oportunidades que integren infraestructura, naturaleza, calidad de vida y eficiencia productiva.
               </p>
           </div>
-          <div className="hidden md:block absolute top-0 right-0 md:w-[50%] xl:w-[45%] 2xl:w-[40%] max-w-[800px] w-full h-full z-0 md:pt-24"> {/* Slightly smaller width with gap */}
-            <Image
-              src={photos[currentPhoto]}
-              alt={`Slide ${currentPhoto}`}
-              width={350}
-              height={355}
-              className={`w-full h-auto object-cover transition-opacity duration-300 ease-in-out ${
-                isFading ? 'opacity-0' : 'opacity-100'
-              }`}
+          <div className="hidden md:block absolute top-0 right-0 md:w-[50%] xl:w-[45%] 2xl:w-[40%] max-w-[800px] w-full h-full z-0 md:pt-24">
+            <AutoSlider 
+              images={photos}
+              altText="Desarrollo"
+              className="w-full h-full"
             />
           </div>
         </div>
