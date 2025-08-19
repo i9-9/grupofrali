@@ -31,7 +31,7 @@ export default function Contacto() {
         <div className="grid pt-36 md:pt-24 pb-20">
           {/* Título primero siempre - Columnas 1-6 */}
           <div className="col-6 md:col-span-6 order-1">
-            <h1 className="font-baskerville text-black pb-24" style={{ fontSize: 'clamp(36px, 4.5vw, 72px)', lineHeight: 'clamp(40px, 5vw, 80px)' }}>
+            <h1 className="text-h1-baskerville text-black pb-24">
               ENVIANOS<br />
               TU CONSULTA
             </h1>
@@ -48,10 +48,9 @@ export default function Contacto() {
                     name="nombre"
                     value={formData.nombre}
                     onChange={handleInputChange}
-                    className="w-full bg-transparent border-b border-black pb-2 text-black font-archivo text-sm tracking-wider focus:outline-none focus:border-black"
-                    style={{ fontSize: 'clamp(12px, 1vw, 14px)' }}
+                    className="w-full bg-transparent border-b border-black pb-2 text-black font-archivo text-base tracking-wider focus:outline-none focus:border-black"
                   />
-                  <label className="block mt-2 font-archivo text-black tracking-wider" style={{ fontSize: 'clamp(12px, 1vw, 14px)' }}>
+                  <label className="block mt-2 font-archivo text-black tracking-wider text-base">
                     NOMBRE
                   </label>
                 </div>
@@ -61,10 +60,9 @@ export default function Contacto() {
                     name="apellido"
                     value={formData.apellido}
                     onChange={handleInputChange}
-                    className="w-full bg-transparent border-b border-black pb-2 text-black font-archivo text-sm tracking-wider focus:outline-none focus:border-black"
-                    style={{ fontSize: 'clamp(12px, 1vw, 14px)' }}
+                    className="w-full bg-transparent border-b border-black pb-2 text-black font-archivo text-base tracking-wider focus:outline-none focus:border-black"
                   />
-                  <label className="block mt-2 font-archivo text-black tracking-wider" style={{ fontSize: 'clamp(12px, 1vw, 14px)' }}>
+                  <label className="block mt-2 font-archivo text-black tracking-wider text-base">
                     APELLIDO
                   </label>
                 </div>
@@ -77,10 +75,9 @@ export default function Contacto() {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full bg-transparent border-b border-black pb-2 text-black font-archivo text-sm tracking-wider focus:outline-none focus:border-black"
-                  style={{ fontSize: 'clamp(12px, 1vw, 14px)' }}
+                  className="w-full bg-transparent border-b border-black pb-2 text-black font-archivo text-base tracking-wider focus:outline-none focus:border-black"
                 />
-                <label className="block mt-2 font-archivo text-black tracking-wider" style={{ fontSize: 'clamp(12px, 1vw, 14px)' }}>
+                <label className="block mt-2 font-archivo text-black tracking-wider text-base">
                   E-MAIL
                 </label>
               </div>
@@ -92,10 +89,9 @@ export default function Contacto() {
                   name="asunto"
                   value={formData.asunto}
                   onChange={handleInputChange}
-                  className="w-full bg-transparent border-b border-black pb-2 text-black font-archivo text-sm tracking-wider focus:outline-none focus:border-black"
-                  style={{ fontSize: 'clamp(12px, 1vw, 14px)' }}
+                  className="w-full bg-transparent border-b border-black pb-2 text-black font-archivo text-base tracking-wider focus:outline-none focus:border-black"
                 />
-                <label className="block mt-2 font-archivo text-black tracking-wider" style={{ fontSize: 'clamp(12px, 1vw, 14px)' }}>
+                <label className="block mt-2 font-archivo text-black tracking-wider text-base">
                   ASUNTO
                 </label>
               </div>
@@ -107,10 +103,9 @@ export default function Contacto() {
                   value={formData.mensaje}
                   onChange={handleInputChange}
                   rows={4}
-                  className="w-full bg-transparent border-b border-black pb-2 text-black font-archivo text-sm tracking-wider resize-none focus:outline-none focus:border-black"
-                  style={{ fontSize: 'clamp(12px, 1vw, 14px)' }}
+                  className="w-full bg-transparent border-b border-black pb-2 text-black font-archivo text-base tracking-wider resize-none focus:outline-none focus:border-black"
                 />
-                <label className="block mt-2 font-archivo text-black tracking-wider" style={{ fontSize: 'clamp(12px, 1vw, 14px)' }}>
+                <label className="block mt-2 font-archivo text-black tracking-wider text-base">
                   MENSAJE
                 </label>
                 
@@ -118,8 +113,7 @@ export default function Contacto() {
                 <div className="flex justify-end mt-6">
                   <button
                     onClick={handleSubmit}
-                    className="font-archivo text-black/30 tracking-wider hover:opacity-70 transition-opacity"
-                    style={{ fontSize: 'clamp(12px, 1vw, 14px)' }}
+                    className="font-archivo text-black/30 tracking-wider hover:opacity-70 transition-opacity text-base cursor-pointer"
                   >
                     ENVIAR
                   </button>
@@ -134,8 +128,7 @@ export default function Contacto() {
               <div>
                 <a 
                   href="mailto:INFO@GRUPOFRALI.COM" 
-                  className="font-archivo text-black hover:opacity-70 transition-opacity leading-tight"
-                  style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}
+                  className="font-archivo text-black hover:opacity-70 transition-opacity leading-tight text-base"
                 >
                   INFO@GRUPOFRALI.COM
                 </a>
@@ -144,8 +137,7 @@ export default function Contacto() {
               <div>
                 <a 
                   href="mailto:PRENSA@GRUPOFRALI.COM" 
-                  className="font-archivo text-black hover:opacity-70 transition-opacity leading-tight"
-                  style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}
+                  className="font-archivo text-black hover:opacity-70 transition-opacity leading-tight text-base"
                 >
                   PRENSA@GRUPOFRALI.COM
                 </a>
@@ -154,8 +146,7 @@ export default function Contacto() {
               <div>
                 <a 
                   href="tel:+543489466110" 
-                  className="font-archivo text-black hover:opacity-70 transition-opacity leading-tight"
-                  style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}
+                  className="font-archivo text-black hover:opacity-70 transition-opacity leading-tight text-base"
                 >
                   +54 3489 466110
                 </a>
@@ -163,10 +154,10 @@ export default function Contacto() {
             </div>
 
             <div className="space-y-0">
-              <p className="font-archivo text-black leading-tight" style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}>
+              <p className="font-archivo text-black leading-tight text-base">
                 RUTA PANAMERICANA N°9, KM 61
               </p>
-              <p className="font-archivo text-black leading-tight" style={{ fontSize: 'clamp(14px, 1.2vw, 16px)' }}>
+              <p className="font-archivo text-black leading-tight text-base">
                 (2804) CAMPANA, BS AS, ARGENTINA
               </p>
             </div>

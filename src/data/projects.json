@@ -1,116 +1,6 @@
 {
   "proyectos": [
     {
-      "id": "elvis-river-sunflower-river",
-      "titulo": "ELVIS RIVER Y SUNFLOWER RIVER",
-      "categoria": "AGROPECUARIA",
-      "locacion": "Mississipi, Estados Unidos",
-      "descripcion": "Elvis River y SunFlower River son dos campos agrícolas que Grupo Frali gestiona en el estado de Mississippi, Estados Unidos. Juntos suman 3.500 hectáreas dedicadas íntegramente a producción agrícola, con cultivos de soja, maíz, arroz y algodón, y más del 90% de la superficie equipada con sistemas de riego. Ubicados en una de las regiones agrícolas más fértiles del país, estos campos operan con foco en el rendimiento por hectárea y la eficiencia productiva, orientados al abastecimiento de mercados locales e internacionales de commodities.",
-      "imagenes": {
-        "home_gallery": "/images/projects/elvis-river/home-gallery.jpg",
-        "desarrollos_mobile": "/images/projects/elvis-river-sunflower-river/desarrollos/mobile/elvis.jpg",
-        "desarrollos_desktop": "/images/projects/elvis-river-sunflower-river/desarrollos/desktop/elvis.jpg",
-        "individual_mobile": [
-          "/images/projects/elvis-river-sunflower-river/individual/mobile/individual-mobile-1.jpg"
-        ],
-        "individual_desktop": [
-          "/images/projects/elvis-river-sunflower-river/individual/desktop/individual-desktop-1.jpg",
-          "/images/projects/elvis-river-sunflower-river/individual/desktop/individual-desktop-2.jpg"
-        ],
-        "alt": "Vista aérea de campos agrícolas con sistemas de riego"
-      },
-      "estadisticas": {
-        "superficie": "3500 H",
-        "riego": "90%",
-        "cultivos": "SOJA, MAÍZ, ARROZ Y ALGODÓN",
-        "estado": "EN OPERACIÓN",
-        "tipo_de_produccion": "100% AGRICULTURA"
-      }
-    },
-    {
-      "id": "santa-regina",
-      "titulo": "SANTA REGINA",
-      "categoria": "AGROPECUARIA",
-      "locacion": "General Villegas, Buenos Aires",
-      "descripcion": "Santa Regina es el campo productivo de 4.300 hectáreas que Grupo Frali gestiona en General Villegas, provincia de Buenos Aires. Con un modelo de producción diversificada —75% destinado a agricultura y 25% a ganadería—, la unidad opera con foco en la eficiencia y el uso responsable de los recursos naturales, incorporando prácticas adaptadas a los desafíos actuales del sector agropecuario. La superficie dedicada a ganadería se maneja con rodeo propio sobre pasturas implantadas y pastizales naturales, complementando la rotación agrícola. Confiando en el potencial de desarrollo del país, uno de los principales objetivos del Grupo es continuar ampliando sus inversiones agropecuarias en el mediano plazo.",
-      "imagenes": {
-        "home_gallery": "/images/projects/santa-regina/home-gallery.jpg",
-        "desarrollos_mobile": "/images/projects/santa-regina/desarrollos/mobile/santa-regina.jpg",
-        "desarrollos_desktop": "/images/projects/santa-regina/desarrollos/desktop/santa-regina.jpg",
-        "individual_mobile": [
-          "/images/projects/santa-regina/individual/mobile/individual-mobile-1.jpg"
-        ],
-        "individual_desktop": [
-          "/images/projects/santa-regina/individual/desktop/individual-desktop-1.jpg",
-          "/images/projects/santa-regina/individual/desktop/individual-desktop-2.jpg"
-        ],
-        "alt": "Cosechadora trabajando en campo de trigo dorado"
-      },
-      "estadisticas": {
-        "produccion_ganadera": "25%",
-        "superficie": "4300 H",
-        "produccion_agricola": "75%",
-        "estado": "EN OPERACIÓN"
-      }
-    },
-    {
-      "id": "casas-de-septiembre",
-      "titulo": "CASAS DE SEPTIEMBRE",
-      "categoria": "REAL ESTATE",
-      "locacion": "Escobar, Buenos Aires",
-      "descripcion": "Casas de Septiembre es un conjunto de viviendas desarrollado y construido por Grupo Frali como parte del crecimiento integral de Barrio Septiembre. El emprendimiento reúne 50 casas en lote propio, totalizando 9.000 m² destinados a propuestas llave en mano que combinan diseño arquitectónico, calidad constructiva y armonía con el entorno verde del barrio. Con acceso ágil por el Km 47,5 de Panamericana Ramal Escobar, Casas de Septiembre refuerza la visión de Grupo Frali de desarrollar proyectos pensados para vivir y proyectar en comunidad.",
-      "imagenes": {
-        "home_gallery": "/images/projects/casas-de-septiembre/home-gallery.jpg",
-        "desarrollos_mobile": "/images/projects/casas-de-septiembre/desarrollos/mobile/casas.jpg",
-        "desarrollos_desktop": "/images/projects/casas-de-septiembre/desarrollos/desktop/casas.png",
-        "individual_mobile": [
-          "/images/projects/casas-de-septiembre/individual/mobile/individual-mobile-1.jpg",
-          "/images/projects/casas-de-septiembre/individual/mobile/individual-mobile-2.jpg"
-        ],
-        "individual_desktop": [
-          "/images/projects/casas-de-septiembre/individual/desktop/individual-desktop-1.jpg",
-          "/images/projects/casas-de-septiembre/individual/desktop/individual-desktop-2.jpg",
-          "/images/projects/casas-de-septiembre/individual/desktop/individual-desktop-3.jpg"
-        ],
-        "alt": "Casa moderna con arquitectura colonial y jardín paisajístico"
-      },
-      "estadisticas": {
-        "superficie_construida": "9000 m²",
-        "desarrollo": "LLAVE EN MANO",
-        "casas": "50",
-        "estado": "100% COMERCIALIZADO Y HABITADO"
-      }
-    },
-    {
-      "id": "chacras-de-mar",
-      "titulo": "CHACRAS DE MAR",
-      "categoria": "REAL ESTATE",
-      "locacion": "Rochas, Uruguay",
-      "descripcion": "Chacras de Mar es el nuevo desarrollo de Grupo Frali en Rocha, una de las regiones de mayor proyección inmobiliaria de Uruguay. El proyecto propone un conjunto de chacras de gran superficie, diseñadas para integrarse armónicamente al paisaje natural y brindar un estilo de vida único en contacto con la naturaleza y el mar. Ubicado a pocos minutos de las playas más reconocidas de José Ignacio, Chacras de Mar ofrece una propuesta exclusiva, en un entorno de alta valorización turística y residencial. Actualmente en etapa de planificación, el proyecto refleja la apuesta de Grupo Frali por crear propuestas innovadoras que combinan inversión inmobiliaria prestigiosa con la preservación del entorno natural.",
-      "imagenes": {
-        "home_gallery": "/images/projects/chacras-de-mar/home-gallery.jpg",
-        "desarrollos_mobile": "/images/projects/chacras-de-mar/desarrollos/mobile/chacras.jpg",
-        "desarrollos_desktop": "/images/projects/chacras-de-mar/desarrollos/desktop/chacras.jpg",
-        "individual_mobile": [
-          "/images/projects/chacras-de-mar/individual/mobile/individual-mobile-1.jpg",
-          "/images/projects/chacras-de-mar/individual/mobile/individual-mobile-2.jpg",
-          "/images/projects/chacras-de-mar/individual/mobile/individual-mobile-3.jpg"
-        ],
-        "individual_desktop": [
-          "/images/projects/chacras-de-mar/individual/desktop/individual-desktop-1.jpg",
-          "/images/projects/chacras-de-mar/individual/desktop/individual-desktop-2.jpg",
-          "/images/projects/chacras-de-mar/individual/desktop/individual-desktop-3.jpg"
-        ],
-        "alt": "Vista aérea de desarrollo inmobiliario costero con casas modernas junto al mar"
-      },
-      "estadisticas": {
-        "cantidad_de_lotes": "30",
-        "inversion_total": "000000",
-        "superficie": "168 m²",
-        "estado": "EN PLANIFICACIÓN"
-      }
-    },
-    {
       "id": "la-banderita-parque-eolico",
       "titulo": "LA BANDERITA PARQUE EÓLICO",
       "categoria": "ENERGIA RENOVABLE",
@@ -138,34 +28,32 @@
       }
     },
     {
-      "id": "sofitel-la-reserva-cardales",
-      "titulo": "SOFITEL LA RESERVA CARDALES",
-      "categoria": "HOTELERIA",
-      "locacion": "Campana, Buenos Aires",
-      "descripcion": "Sofitel La Reserva Cardales es el hotel cinco estrellas desarrollado por Grupo Frali y operado bajo la gestión de la cadena internacional Sofitel (Accor Hotels), dentro del masterplan de La Reserva Cardales, en Campana, Buenos Aires. Forma parte del primer proyecto en Argentina en integrar un resort country club y un hotel de lujo en un mismo entorno planificado, sobre 185 hectáreas de naturaleza y servicios de alta calidad. Con 160 habitaciones, un centro de convenciones de gran capacidad, spa, piscinas y gastronomía de primer nivel, Sofitel La Reserva Cardales se posicionó como destino turístico para huéspedes de todo el mundo, además de ser un espacio elegido por grandes empresas para eventos corporativos y congresos de gran escala. En 2010 fue sede de la Cumbre de UNASUR con la participación de todos los mandatarios y cancilleres de la región. Actualmente, es elegido continuamente por delegaciones deportivas de relevancia internacional.",
+      "id": "septiembre",
+      "titulo": "SEPTIEMBRE",
+      "categoria": "REAL ESTATE",
+      "locacion": "Escobar, Buenos Aires",
+      "descripcion": "Barrio Septiembre marcó el inicio de la actividad inmobiliaria de Grupo Frali, convirtiéndose en uno de los primeros barrios privados de gran escala desarrollados en el Ramal Escobar. Refleja nuestra capacidad para generar desarrollos urbanos integrales, anticipándonos a las tendencias de crecimiento de una región. Con una superficie total de 60 hectáreas y 428 lotes, Septiembre integra urbanismo e infraestructura en una propuesta consolidada, hoy 100% comercializada y habitada. Ubicado en el Km 47,5 de Panamericana, el barrio cuenta con accesos ágiles y una variedad de servicios que potencia su calidad de vida. Dentro de su masterplan, desarrollamos dos emprendimientos integrados que complementan la propuesta residencial: Terrazas de Septiembre y Casas de Septiembre.",
       "imagenes": {
-        "home_gallery": "/images/projects/sofitel/home-gallery/sofitel-home.jpg",
-        "desarrollos_mobile": "/images/projects/sofitel/desarrollos/mobile/sofitel.jpg",
-        "desarrollos_desktop": "/images/projects/sofitel/desarrollos/desktop/sofitel.jpg",
+        "home_gallery": "/images/projects/septiembre/home-gallery/septiembre-home.jpg",
+        "desarrollos_mobile": "/images/projects/septiembre/desarrollos/mobile/septiembre.jpg",
+        "desarrollos_desktop": "/images/projects/septiembre/desarrollos/desktop/septiembre.jpg",
         "individual_mobile": [
-          "/images/projects/sofitel/individual/mobile/individual-mobile-1.jpg",
-          "/images/projects/sofitel/individual/mobile/individual-mobile-2.jpg",
-          "/images/projects/sofitel/individual/mobile/individual-mobile-3.jpg"
+          "/images/projects/septiembre/individual/mobile/individual-mobile-1.jpg",
+          "/images/projects/septiembre/individual/mobile/individual-mobile-2.jpg"
         ],
         "individual_desktop": [
-          "/images/projects/sofitel/individual/desktop/individual-desktop-1.jpg",
-          "/images/projects/sofitel/individual/desktop/individual-desktop-2.jpg",
-          "/images/projects/sofitel/individual/desktop/individual-desktop-3.jpg"
+          "/images/projects/septiembre/individual/desktop/individual-desktop-1.jpg",
+          "/images/projects/septiembre/individual/desktop/individual-desktop-2.jpg" 
         ],
-        "alt": "Hotel Sofitel con arquitectura moderna, piscina y paisajismo"
+        "alt": "Vista aérea del barrio Septiembre con club house, piscinas y canchas"
       },
       "estadisticas": {
-        "habitaciones": "160",
-        "capacidad_de_centro_de_convenciones": "1200",
-        "calidad": "5 ESTRELLAS",
-        "salones_evento": "14",
-        "restaurantes_gourmet": "3",
-        "estado": "EN OPERACIÓN"
+        "club_house": "1",
+        "canchas_de_futbol_&_hockey": "XXX",
+        "lotes_residenciales": "428",
+        "estado": "100% COMERCIALIZADO Y HABITADO",
+        "hectareas_de_superficie_total": "60",
+        "canchas_tenis": "XXX"
       }
     },
     {
@@ -202,30 +90,86 @@
       }
     },
     {
-      "id": "la-villette-golf-residences",
-      "titulo": "LA VILLETTE GOLF RESIDENCES",
-      "categoria": "REAL ESTATE",
+      "id": "sofitel-la-reserva-cardales",
+      "titulo": "SOFITEL LA RESERVA CARDALES",
+      "categoria": "HOTELERIA",
       "locacion": "Campana, Buenos Aires",
-      "descripcion": "La Villette Golf Residences es un desarrollo residencial de 6 edificios de apartamentos aterrazados concebido por Grupo Frali dentro del masterplan de La Reserva Cardales. Con 102 unidades distribuidas en 16.650 m² construidos, el proyecto ofrece departamentos de 2, 3 y 4 ambientes, todos con jardín o terraza propia, integrando privacidad, diseño contemporáneo y vistas al campo de golf. Ubicado junto al trazado del golf y con acceso inmediato a los servicios, espacios verdes y al Club House del barrio, La Villette combina la comodidad de un entorno residencial con la conexión directa a la infraestructura premium que ofrece el barrio.",
+      "descripcion": "Sofitel La Reserva Cardales es el hotel cinco estrellas desarrollado por Grupo Frali y operado bajo la gestión de la cadena internacional Sofitel (Accor Hotels), dentro del masterplan de La Reserva Cardales, en Campana, Buenos Aires. Forma parte del primer proyecto en Argentina en integrar un resort country club y un hotel de lujo en un mismo entorno planificado, sobre 185 hectáreas de naturaleza y servicios de alta calidad. Con 160 habitaciones, un centro de convenciones de gran capacidad, spa, piscinas y gastronomía de primer nivel, Sofitel La Reserva Cardales se posicionó como destino turístico para huéspedes de todo el mundo, además de ser un espacio elegido por grandes empresas para eventos corporativos y congresos de gran escala. En 2010 fue sede de la Cumbre de UNASUR con la participación de todos los mandatarios y cancilleres de la región. Actualmente, es elegido continuamente por delegaciones deportivas de relevancia internacional.",
       "imagenes": {
-        "desarrollos_mobile": "/images/projects/la-villette-golf-residences/desarrollos/mobile/la-villete.jpg",
-        "desarrollos_desktop": "/images/projects/la-villette-golf-residences/desarrollos/desktop/la-villete.jpg",
+        "home_gallery": "/images/projects/sofitel/home-gallery/sofitel-home.jpg",
+        "desarrollos_mobile": "/images/projects/sofitel/desarrollos/mobile/sofitel.jpg",
+        "desarrollos_desktop": "/images/projects/sofitel/desarrollos/desktop/sofitel.jpg",
         "individual_mobile": [
-          "/images/projects/la-villette-golf-residences/individual/mobile/individual-mobile-1.jpg",
-          "/images/projects/la-villette-golf-residences/individual/mobile/individual-mobile-2.jpg",
-          "/images/projects/la-villette-golf-residences/individual/mobile/individual-mobile-3.jpg"
+          "/images/projects/sofitel/individual/mobile/individual-mobile-1.jpg",
+          "/images/projects/sofitel/individual/mobile/individual-mobile-2.jpg",
+          "/images/projects/sofitel/individual/mobile/individual-mobile-3.jpg"
         ],
         "individual_desktop": [
-          "/images/projects/la-villette-golf-residences/individual/desktop/individual-desktop-1.jpg",
-          "/images/projects/la-villette-golf-residences/individual/desktop/individual-desktop-2.jpg",
-          "/images/projects/la-villette-golf-residences/individual/desktop/individual-desktop-3.jpg"
+          "/images/projects/sofitel/individual/desktop/individual-desktop-1.jpg",
+          "/images/projects/sofitel/individual/desktop/individual-desktop-2.jpg",
+          "/images/projects/sofitel/individual/desktop/individual-desktop-3.jpg"
         ],
-        "alt": "Edificios residenciales modernos con terrazas escalonadas"
+        "alt": "Hotel Sofitel con arquitectura moderna, piscina y paisajismo"
       },
       "estadisticas": {
-        "superficie_construida": "16650 m²",
-        "estado": "EN COMERCIALIZACIÓN ETAPA FINAL",
-        "unidades_residenciales": "102"
+        "habitaciones": "160",
+        "capacidad_de_centro_de_convenciones": "1200",
+        "calidad": "5 ESTRELLAS",
+        "salones_evento": "14",
+        "restaurantes_gourmet": "3",
+        "estado": "EN OPERACIÓN"
+      }
+    },
+    {
+      "id": "terrazas-de-septiembre",
+      "titulo": "TERRAZAS DE SEPTIEMBRE",
+      "categoria": "REAL ESTATE",
+      "locacion": "Escobar, Buenos Aires",
+      "descripcion": "Terrazas de Septiembre es un emprendimiento residencial desarrollado por Grupo Frali dentro del masterplan de Barrio Septiembre, en Escobar. Con 61 unidades distribuidas en 3.950 m² construidos, el proyecto fue diseñado como una propuesta de departamentos de renting, respondiendo a la demanda generada por el crecimiento de los parques industriales de la zona. Terrazas de Septiembre integra funcionalidad, calidad constructiva y cercanía a centros de actividad económica, en un entorno consolidado y de fácil acceso.",
+      "imagenes": {
+        "desarrollos_mobile": "/images/projects/terrazas-de-septiembre/desarrollos/mobile/terrazas.jpg",
+        "desarrollos_desktop": "/images/projects/terrazas-de-septiembre/desarrollos/desktop/terrazas.jpg",
+        "individual_mobile": [
+          "/images/projects/terrazas-de-septiembre/individual/mobile/individual-mobile-1.jpg"
+        ],
+        "individual_desktop": [
+          "/images/projects/terrazas-de-septiembre/individual/desktop/individual-desktop-1.jpg"
+        ],
+        "alt": "Complejo residencial de departamentos con arquitectura moderna"
+      },
+      "estadisticas": {
+        "superficie_construida": "3950 m²",
+        "tipologia": "DEPARTAMENTOS DE RENTING",
+        "unidades_residenciales": "61",
+        "estado": "EN OPERACIÓN"
+      }
+    },
+    {
+      "id": "casas-de-septiembre",
+      "titulo": "CASAS DE SEPTIEMBRE",
+      "categoria": "REAL ESTATE",
+      "locacion": "Escobar, Buenos Aires",
+      "descripcion": "Casas de Septiembre es un conjunto de viviendas desarrollado y construido por Grupo Frali como parte del crecimiento integral de Barrio Septiembre. El emprendimiento reúne 50 casas en lote propio, totalizando 9.000 m² destinados a propuestas llave en mano que combinan diseño arquitectónico, calidad constructiva y armonía con el entorno verde del barrio. Con acceso ágil por el Km 47,5 de Panamericana Ramal Escobar, Casas de Septiembre refuerza la visión de Grupo Frali de desarrollar proyectos pensados para vivir y proyectar en comunidad.",
+      "imagenes": {
+        "home_gallery": "/images/projects/casas-de-septiembre/home-gallery.jpg",
+        "desarrollos_mobile": "/images/projects/casas-de-septiembre/desarrollos/mobile/casas.jpg",
+        "desarrollos_desktop": "/images/projects/casas-de-septiembre/desarrollos/desktop/casas.png",
+        "individual_mobile": [
+          "/images/projects/casas-de-septiembre/individual/mobile/individual-mobile-1.jpg",
+          "/images/projects/casas-de-septiembre/individual/mobile/individual-mobile-2.jpg"
+        ],
+        "individual_desktop": [
+          "/images/projects/casas-de-septiembre/individual/desktop/individual-desktop-1.jpg",
+          "/images/projects/casas-de-septiembre/individual/desktop/individual-desktop-2.jpg",
+          "/images/projects/casas-de-septiembre/individual/desktop/individual-desktop-3.jpg"
+        ],
+        "alt": "Casa moderna con arquitectura colonial y jardín paisajístico"
+      },
+      "estadisticas": {
+        "superficie_construida": "9000 m²",
+        "desarrollo": "LLAVE EN MANO",
+        "casas": "50",
+        "estado": "100% COMERCIALIZADO Y HABITADO"
       }
     },
     {
@@ -249,6 +193,35 @@
         "departamentos": "80",
         "tipo": "MULTIFAMILIAR",
         "espacios_comunes": "SUM, PILETA & GYM",
+        "estado": "EN PLANIFICACIÓN"
+      }
+    },
+    {
+      "id": "chacras-de-mar",
+      "titulo": "CHACRAS DE MAR",
+      "categoria": "REAL ESTATE",
+      "locacion": "Rochas, Uruguay",
+      "descripcion": "Chacras de Mar es el nuevo desarrollo de Grupo Frali en Rocha, una de las regiones de mayor proyección inmobiliaria de Uruguay. El proyecto propone un conjunto de chacras de gran superficie, diseñadas para integrarse armónicamente al paisaje natural y brindar un estilo de vida único en contacto con la naturaleza y el mar. Ubicado a pocos minutos de las playas más reconocidas de José Ignacio, Chacras de Mar ofrece una propuesta exclusiva, en un entorno de alta valorización turística y residencial. Actualmente en etapa de planificación, el proyecto refleja la apuesta de Grupo Frali por crear propuestas innovadoras que combinan inversión inmobiliaria prestigiosa con la preservación del entorno natural.",
+      "imagenes": {
+        "home_gallery": "/images/projects/chacras-de-mar/home-gallery.jpg",
+        "desarrollos_mobile": "/images/projects/chacras-de-mar/desarrollos/mobile/chacras.jpg",
+        "desarrollos_desktop": "/images/projects/chacras-de-mar/desarrollos/desktop/chacras.jpg",
+        "individual_mobile": [
+          "/images/projects/chacras-de-mar/individual/mobile/individual-mobile-1.jpg",
+          "/images/projects/chacras-de-mar/individual/mobile/individual-mobile-2.jpg",
+          "/images/projects/chacras-de-mar/individual/mobile/individual-mobile-3.jpg"
+        ],
+        "individual_desktop": [
+          "/images/projects/chacras-de-mar/individual/desktop/individual-desktop-1.jpg",
+          "/images/projects/chacras-de-mar/individual/desktop/individual-desktop-2.jpg",
+          "/images/projects/chacras-de-mar/individual/desktop/individual-desktop-3.jpg"
+        ],
+        "alt": "Vista aérea de desarrollo inmobiliario costero con casas modernas junto al mar"
+      },
+      "estadisticas": {
+        "cantidad_de_lotes": "30",
+        "inversion_total": "000000",
+        "superficie": "168 m²",
         "estado": "EN PLANIFICACIÓN"
       }
     },
@@ -278,58 +251,85 @@
         "estado": "EN PLANIFICACIÓN",
         "superficie_construir": "750.000 m²"
       }
-    },  
+    },
     {
-      "id": "septiembre",
-      "titulo": "SEPTIEMBRE",
-      "categoria": "REAL ESTATE",
-      "locacion": "Escobar, Buenos Aires",
-      "descripcion": "Barrio Septiembre marcó el inicio de la actividad inmobiliaria de Grupo Frali, convirtiéndose en uno de los primeros barrios privados de gran escala desarrollados en el Ramal Escobar. Refleja nuestra capacidad para generar desarrollos urbanos integrales, anticipándonos a las tendencias de crecimiento de una región. Con una superficie total de 60 hectáreas y 428 lotes, Septiembre integra urbanismo e infraestructura en una propuesta consolidada, hoy 100% comercializada y habitada. Ubicado en el Km 47,5 de Panamericana, el barrio cuenta con accesos ágiles y una variedad de servicios que potencia su calidad de vida. Dentro de su masterplan, desarrollamos dos emprendimientos integrados que complementan la propuesta residencial: Terrazas de Septiembre y Casas de Septiembre.",
+      "id": "santa-regina",
+      "titulo": "SANTA REGINA",
+      "categoria": "AGROPECUARIA",
+      "locacion": "General Villegas, Buenos Aires",
+      "descripcion": "Santa Regina es el campo productivo de 4.300 hectáreas que Grupo Frali gestiona en General Villegas, provincia de Buenos Aires. Con un modelo de producción diversificada —75% destinado a agricultura y 25% a ganadería—, la unidad opera con foco en la eficiencia y el uso responsable de los recursos naturales, incorporando prácticas adaptadas a los desafíos actuales del sector agropecuario. La superficie dedicada a ganadería se maneja con rodeo propio sobre pasturas implantadas y pastizales naturales, complementando la rotación agrícola. Confiando en el potencial de desarrollo del país, uno de los principales objetivos del Grupo es continuar ampliando sus inversiones agropecuarias en el mediano plazo.",
       "imagenes": {
-        "home_gallery": "/images/projects/septiembre/home-gallery/septiembre-home.jpg",
-        "desarrollos_mobile": "/images/projects/septiembre/desarrollos/mobile/septiembre.jpg",
-        "desarrollos_desktop": "/images/projects/septiembre/desarrollos/desktop/septiembre.jpg",
+        "home_gallery": "/images/projects/santa-regina/home-gallery.jpg",
+        "desarrollos_mobile": "/images/projects/santa-regina/desarrollos/mobile/santa-regina.jpg",
+        "desarrollos_desktop": "/images/projects/santa-regina/desarrollos/desktop/santa-regina.jpg",
         "individual_mobile": [
-          "/images/projects/septiembre/individual/mobile/individual-mobile-1.jpg",
-          "/images/projects/septiembre/individual/mobile/individual-mobile-2.jpg"
+          "/images/projects/santa-regina/individual/mobile/individual-mobile-1.jpg"
         ],
         "individual_desktop": [
-          "/images/projects/septiembre/individual/desktop/individual-desktop-1.jpg",
-          "/images/projects/septiembre/individual/desktop/individual-desktop-2.jpg" 
+          "/images/projects/santa-regina/individual/desktop/individual-desktop-1.jpg",
+          "/images/projects/santa-regina/individual/desktop/individual-desktop-2.jpg"
         ],
-        "alt": "Vista aérea del barrio Septiembre con club house, piscinas y canchas"
+        "alt": "Cosechadora trabajando en campo de trigo dorado"
       },
       "estadisticas": {
-        "club_house": "1",
-        "canchas_de_futbol_&_hockey": "XXX",
-        "lotes_residenciales": "428",
-        "estado": "100% COMERCIALIZADO Y HABITADO",
-        "hectareas_de_superficie_total": "60",
-        "canchas_tenis": "XXX"
+        "produccion_ganadera": "25%",
+        "superficie": "4300 H",
+        "produccion_agricola": "75%",
+        "estado": "EN OPERACIÓN"
       }
     },
     {
-      "id": "terrazas-de-septiembre",
-      "titulo": "TERRAZAS DE SEPTIEMBRE",
-      "categoria": "REAL ESTATE",
-      "locacion": "Escobar, Buenos Aires",
-      "descripcion": "Terrazas de Septiembre es un emprendimiento residencial desarrollado por Grupo Frali dentro del masterplan de Barrio Septiembre, en Escobar. Con 61 unidades distribuidas en 3.950 m² construidos, el proyecto fue diseñado como una propuesta de departamentos de renting, respondiendo a la demanda generada por el crecimiento de los parques industriales de la zona. Terrazas de Septiembre integra funcionalidad, calidad constructiva y cercanía a centros de actividad económica, en un entorno consolidado y de fácil acceso.",
+      "id": "elvis-river-sunflower-river",
+      "titulo": "ELVIS RIVER Y SUNFLOWER RIVER",
+      "categoria": "AGROPECUARIA",
+      "locacion": "Mississipi, Estados Unidos",
+      "descripcion": "Elvis River y SunFlower River son dos campos agrícolas que Grupo Frali gestiona en el estado de Mississippi, Estados Unidos. Juntos suman 3.500 hectáreas dedicadas íntegramente a producción agrícola, con cultivos de soja, maíz, arroz y algodón, y más del 90% de la superficie equipada con sistemas de riego. Ubicados en una de las regiones agrícolas más fértiles del país, estos campos operan con foco en el rendimiento por hectárea y la eficiencia productiva, orientados al abastecimiento de mercados locales e internacionales de commodities.",
       "imagenes": {
-        "desarrollos_mobile": "/images/projects/terrazas-de-septiembre/desarrollos/mobile/terrazas.jpg",
-        "desarrollos_desktop": "/images/projects/terrazas-de-septiembre/desarrollos/desktop/terrazas.jpg",
+        "home_gallery": "/images/projects/elvis-river/home-gallery.jpg",
+        "desarrollos_mobile": "/images/projects/elvis-river-sunflower-river/desarrollos/mobile/elvis.jpg",
+        "desarrollos_desktop": "/images/projects/elvis-river-sunflower-river/desarrollos/desktop/elvis.jpg",
         "individual_mobile": [
-          "/images/projects/terrazas-de-septiembre/individual/mobile/individual-mobile-1.jpg"
+          "/images/projects/elvis-river-sunflower-river/individual/mobile/individual-mobile-1.jpg"
         ],
         "individual_desktop": [
-          "/images/projects/terrazas-de-septiembre/individual/desktop/individual-desktop-1.jpg"
+          "/images/projects/elvis-river-sunflower-river/individual/desktop/individual-desktop-1.jpg",
+          "/images/projects/elvis-river-sunflower-river/individual/desktop/individual-desktop-2.jpg"
         ],
-        "alt": "Complejo residencial de departamentos con arquitectura moderna"
+        "alt": "Vista aérea de campos agrícolas con sistemas de riego"
       },
       "estadisticas": {
-        "superficie_construida": "3950 m²",
-        "tipologia": "DEPARTAMENTOS DE RENTING",
-        "unidades_residenciales": "61",
-        "estado": "EN OPERACIÓN"
+        "superficie": "3500 H",
+        "riego": "90%",
+        "cultivos": "SOJA, MAÍZ, ARROZ Y ALGODÓN",
+        "estado": "EN OPERACIÓN",
+        "tipo_de_produccion": "100% AGRICULTURA"
+      }
+    },
+    {
+      "id": "la-villette-golf-residences",
+      "titulo": "LA VILLETTE GOLF RESIDENCES",
+      "categoria": "REAL ESTATE",
+      "locacion": "Campana, Buenos Aires",
+      "descripcion": "La Villette Golf Residences es un desarrollo residencial de 6 edificios de apartamentos aterrazados concebido por Grupo Frali dentro del masterplan de La Reserva Cardales. Con 102 unidades distribuidas en 16.650 m² construidos, el proyecto ofrece departamentos de 2, 3 y 4 ambientes, todos con jardín o terraza propia, integrando privacidad, diseño contemporáneo y vistas al campo de golf. Ubicado junto al trazado del golf y con acceso inmediato a los servicios, espacios verdes y al Club House del barrio, La Villette combina la comodidad de un entorno residencial con la conexión directa a la infraestructura premium que ofrece el barrio.",
+      "imagenes": {
+        "desarrollos_mobile": "/images/projects/la-villette-golf-residences/desarrollos/mobile/la-villete.jpg",
+        "desarrollos_desktop": "/images/projects/la-villette-golf-residences/desarrollos/desktop/la-villete.jpg",
+        "individual_mobile": [
+          "/images/projects/la-villette-golf-residences/individual/mobile/individual-mobile-1.jpg",
+          "/images/projects/la-villette-golf-residences/individual/mobile/individual-mobile-2.jpg",
+          "/images/projects/la-villette-golf-residences/individual/mobile/individual-mobile-3.jpg"
+        ],
+        "individual_desktop": [
+          "/images/projects/la-villette-golf-residences/individual/desktop/individual-desktop-1.jpg",
+          "/images/projects/la-villette-golf-residences/individual/desktop/individual-desktop-2.jpg",
+          "/images/projects/la-villette-golf-residences/individual/desktop/individual-desktop-3.jpg"
+        ],
+        "alt": "Edificios residenciales modernos con terrazas escalonadas"
+      },
+      "estadisticas": {
+        "superficie_construida": "16650 m²",
+        "estado": "EN COMERCIALIZACIÓN ETAPA FINAL",
+        "unidades_residenciales": "102"
       }
     }
   ]
