@@ -70,6 +70,122 @@ body {
   font-weight: 400;
 }
 
+/* ========================================
+   SISTEMA TIPOGRÁFICO REM - DESKTOP
+   ======================================== */
+
+/* H1 BASKERVILLE - 3.5rem */
+.text-h1-baskerville {
+  font-family: 'Baskerville', serif;
+  font-size: 3.5rem;
+  line-height: 1.1;
+  font-weight: normal;
+}
+
+/* SMALL BASKERVILLE - 1.75rem */
+.text-small-baskerville {
+  font-family: 'Baskerville', serif;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  font-weight: normal;
+}
+
+/* H2 ARCHIVO - 2.2rem */
+.text-h2-archivo {
+  font-family: 'Archivo', sans-serif;
+  font-size: 2.2rem;
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+/* H3 BASKERVILLE - 1.5rem */
+.text-h3-baskerville {
+  font-family: 'Baskerville', serif;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  font-weight: normal;
+}
+
+/* BODY 1 ARCHIVO - 1.75rem */
+.text-body1-archivo {
+  font-family: 'Archivo', sans-serif;
+  font-size: 1.75rem;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+/* BODY 2 ARCHIVO - 1rem */
+.text-body2-archivo {
+  font-family: 'Archivo', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* SMALL ARCHIVO - 0.8rem */
+.text-small-archivo {
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* 24 ARCHIVO - 1.5rem */
+.text-24-archivo {
+  font-family: 'Archivo', sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+/* 12 ARCHIVO - 0.75rem */
+.text-12-archivo {
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ========================================
+   ESCALA TIPOGRÁFICA MOBILE - RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+  /* H1 BASKERVILLE - 2.5rem mobile */
+  .text-h1-baskerville {
+    font-size: 2.5rem; /* 40px */
+  }
+  
+  /* H2 ARCHIVO - 2.5rem mobile */
+  .text-h2-archivo {
+    font-size: 2.5rem; /* 40px */
+  }
+  
+  /* H3 BASKERVILLE - 1.5rem mobile (igual que desktop) */
+  .text-h3-baskerville {
+    font-size: 1.5rem; /* 24px */
+  }
+  
+  /* BODY 1 ARCHIVO - 1rem mobile */
+  .text-body1-archivo {
+    font-size: 1rem; /* 16px */
+  }
+  
+  /* 24 ARCHIVO - 1.5rem mobile (mantiene) */
+  .text-24-archivo {
+    font-size: 1.5rem; /* 24px */
+  }
+  
+  /* 12 ARCHIVO - 0.75rem mobile (mantiene) */
+  .text-12-archivo {
+    font-size: 0.75rem; /* 12px */
+  }
+}
+
 /* Typography */
 .font-baskerville {
   font-family: 'Baskerville', serif;
@@ -266,43 +382,92 @@ body {
   .lg\:col-12 { grid-column: span 12; }
 }
 
+/* ========================================
+   ESTADÍSTICAS - TAMAÑOS Y ANIMACIONES
+   ======================================== */
+
 /* Tamaños personalizados para estadísticas */
 .text-stat-number { 
-  font-size: 52px; /* Mobile */
-}
-
-.text-stat-description { 
-  font-size: 10px; /* Mobile */
+  font-family: 'Archivo', sans-serif;
+  font-size: 5.4rem; /* 86.4px en base 16px */
+  line-height: 0.85;
+  font-weight: 300;
+  letter-spacing: -0.02em;
 }
 
 .text-stat-unit { 
-  font-size: 14px; /* Mobile */
+  font-family: 'Archivo', sans-serif;
+  font-size: 1.5rem; /* 24px - proporcional al número grande */
+  line-height: 0.9;
+  font-weight: 300;
 }
 
-/* Desktop chico sizes para estadísticas */
-@media (min-width: 768px) {
+/* Responsive para números grandes - Siguiendo nueva escala mobile */
+@media (max-width: 768px) {
   .text-stat-number { 
-    font-size: 64px; /* Desktop chico */
-  }
-  
-  .text-stat-description { 
-    font-size: 14px; /* Desktop */
+    font-size: 2.5rem; /* Siguiendo H1/H2 mobile scale */
   }
   
   .text-stat-unit { 
-    font-size: 18px; /* Desktop chico */
+    font-size: 0.75rem; /* Siguiendo 12 ARCHIVO mobile scale */
   }
 }
 
-/* Desktop grande sizes para estadísticas */
-@media (min-width: 1200px) {
+@media (max-width: 480px) {
   .text-stat-number { 
-    font-size: 86px; /* Desktop grande */
+    font-size: 3.5rem; /* Mantiene escala mobile */
   }
   
   .text-stat-unit { 
-    font-size: 24px; /* Desktop grande */
+    font-size: 0.75rem; /* Mantiene escala mobile */
   }
+}
+
+/* ========================================
+   ANIMACIÓN FADE-IN PARA NÚMEROS SOLAMENTE
+   ======================================== */
+
+/* Keyframe fade-in desde izquierda */
+@keyframes fadeInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Clase base para animación de números */
+.stat-number-animated {
+  opacity: 0;
+  animation: fadeInFromLeft 0.6s ease-out forwards;
+}
+
+/* Delays secuenciales para cada número */
+.stat-number-delay-1 {
+  animation-delay: 0.3s;
+}
+
+.stat-number-delay-2 {
+  animation-delay: 0.6s;
+}
+
+.stat-number-delay-3 {
+  animation-delay: 0.9s;
+}
+
+.stat-number-delay-4 {
+  animation-delay: 1.2s;
+}
+
+.stat-number-delay-5 {
+  animation-delay: 1.5s;
+}
+
+.stat-number-delay-6 {
+  animation-delay: 1.8s;
 }
 
 /* Marquee animation - Safari optimized */
@@ -394,4 +559,3 @@ body {
     margin-top: 0px !important;
   }
 }
-

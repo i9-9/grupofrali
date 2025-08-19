@@ -58,7 +58,7 @@ export default function Header() {
         <div className="content-wrapper">
           {/* Mobile */}
           <div className={`flex md:hidden items-center h-30 ${isHome ? 'justify-between' : 'justify-between'}`}>
-                <h1 className={`font-baskerville header-logo-mobile ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}>
+                <h1 className={`font-baskerville header-logo-mobile whitespace-nowrap ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}>
                 GRUPO FRALI
                 </h1>
 
@@ -90,7 +90,7 @@ export default function Header() {
             ) : (
               <div className="flex justify-between items-center h-14">
                 <Link href="/">
-                    <h1 className="font-baskerville header-logo text-black pl-3">
+                    <h1 className="font-baskerville header-logo text-black pl-3 whitespace-nowrap">
                     GRUPO FRALI
                     </h1>
                 </Link>
@@ -124,7 +124,7 @@ export default function Header() {
         {isHome && (
           <div className="content-wrapper">
             <div className="hidden md:block">
-              <h1 className="font-baskerville text-white responsive-title leading-none">
+              <h1 className="font-baskerville text-white responsive-title leading-none whitespace-nowrap">
                 GRUPO FRALI
               </h1>
             </div>
@@ -134,12 +134,15 @@ export default function Header() {
 
       {(isOpen || isAnimating) && (
         <div
-          className={`fixed top-0 left-0 right-0 h-[80vh] overflow-y-auto bg-[#EBEBEB] z-50 md:hidden ${animationClass}`}
+          className={`fixed top-0 left-0 right-0 bg-[#EBEBEB] z-50 md:hidden ${animationClass}`}
+          style={{ height: '80dvh', overflowY: 'auto' }}
         >
           <div className="content-wrapper">
-            <h1 className="font-baskerville text-[28px] md:text-base text-[#151714] tracking-[0.68em] pt-14 pb-20">
-              GRUPO FRALI
-            </h1>
+            <Link href='/'>
+              <h1 className="font-baskerville text-2xl sm:text-2xl text-[#151714] tracking-[0.5em] xs:tracking-[0.6em] pt-14 pb-20 whitespace-nowrap">
+                GRUPO FRALI
+              </h1>
+            </Link>
             <ul className="flex flex-col text-[#151714] text-lg divide-y divide-[#151714] border-y border-[#151714]">
               {mobileItems.map((item, index) => {
                 const isCurrent = pathname === item.href

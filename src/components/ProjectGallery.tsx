@@ -65,83 +65,73 @@ const projects: Project[] = [
 ];
 
 export default function ProjectGallery() {
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const [activeProjectIndex, setActiveProjectIndex] = useState(0)
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
 
   // Detectar proyecto activo en el scroll
   useEffect(() => {
     const handleScroll = () => {
-      if (!scrollRef.current) return
-      
-      const container = scrollRef.current
-      const scrollLeft = container.scrollLeft
-      const containerWidth = container.clientWidth
-      const scrollWidth = container.scrollWidth
-      
-      // Calcular el progreso del scroll (0 a 1)
-      const scrollProgress = scrollLeft / (scrollWidth - containerWidth)
-      
-      // Convertir el progreso a índice de proyecto
-      const activeIndex = Math.round(scrollProgress * (projects.length - 1))
-      setActiveProjectIndex(Math.max(0, Math.min(activeIndex, projects.length - 1)))
-    }
+      if (!scrollRef.current) return;
 
-    const container = scrollRef.current
+      const container = scrollRef.current;
+      const scrollLeft = container.scrollLeft;
+      const containerWidth = container.clientWidth;
+      const scrollWidth = container.scrollWidth;
+
+      // Calcular el progreso del scroll (0 a 1)
+      const scrollProgress = scrollLeft / (scrollWidth - containerWidth);
+
+      // Convertir el progreso a índice de proyecto
+      const activeIndex = Math.round(scrollProgress * (projects.length - 1));
+      setActiveProjectIndex(
+        Math.max(0, Math.min(activeIndex, projects.length - 1))
+      );
+    };
+
+    const container = scrollRef.current;
     if (container) {
-      container.addEventListener('scroll', handleScroll)
-      return () => container.removeEventListener('scroll', handleScroll)
+      container.addEventListener("scroll", handleScroll);
+      return () => container.removeEventListener("scroll", handleScroll);
     }
-  }, [])
+  }, []);
 
   return (
     <div className="relative w-full">
       <div ref={scrollRef} className="w-full overflow-x-auto scrollbar-hidden">
         <div className="flex space-x-6 pb-4 md:pb-8">
-        {projects.map((project, index) => (
-          <Link
-            key={project.id}
-            href={`/desarrollos-proyectos/${project.id}`}
-            className="group w-[250px] md:w-[280px] lg:w-[300px] flex-shrink-0 cursor-pointer"
-          >
-        <div className="relative overflow-hidden mb-3 h-[369px] pb-5 border-b border-black" >
-              <Image
-                src={project.imagen}
-                alt={project.alt}
-                width={300}
-                height={369}
-                className="object-cover w-full h-full"
-              />
-              <div className="absolute inset-0 bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300" />
-            </div>
-            <div className="flex items-start gap-4">
-                <h3 className="font-light flex-shrink-0 pt-1">
-                    (0{index + 1})
-                </h3>
-                <h3 className="font-baskerville text-sm md:text-[22px] text-black leading-tight text-left flex-1 whitespace-normal break-words">
-                {project.titulo}
-                </h3>
-            </div>
-          </Link>
-        ))}
+          {projects.map((project, index) => (
+            <Link
+              key={project.id}
+              href={`/desarrollos-proyectos/${project.id}`}
+              className="group w-[343px] flex-shrink-0 cursor-pointer hover:opacity-80 transition-all duration-300 ease-in-out"
+            >
+              <div className="relative overflow-hidden aspect-[343/350] mb-4">
+                <Image
+                  src={project.imagen}
+                  alt={project.alt}
+                  width={343}
+                  height={350}
+                  className="object-cover w-full h-full"
+                />
+                <div className="absolute inset-0 bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300" />
+              </div>
+              <div className="border-t border-black pt-6 pb-4">
+                <div className="flex justify-between items-start w-full">
+                  {/* Número a la izquierda */}
+                  <h3 className="font-light">(0{index + 1})</h3>
+
+                  {/* Título alineado a la izquierda, pegado al margen derecho */}
+                  <div className="text-left w-[160px] md:w-[200px] lg:w-[220px]">
+                    <h3 className="font-baskerville text-sm md:text-[22px] text-black leading-tight">
+                      {project.titulo}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
-      
-      {/* Barra de paginación - mobile y desktop */}
-      {projects.length > 1 && (
-        <div className="absolute -bottom-6 left-0 right-0">
-          <div className="px-3 py-2">
-            <div className="relative w-full h-1 bg-black/10 rounded-full overflow-hidden">
-              <div 
-                className="absolute top-0 h-full bg-black rounded-full transition-all duration-300 ease-out"
-                style={{ 
-                  width: `${100 / projects.length}%`,
-                  left: `${(activeProjectIndex * 100) / projects.length}%`
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
