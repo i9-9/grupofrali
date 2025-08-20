@@ -253,6 +253,11 @@ export default function Home() {
           {/* Header */}
           <div className="flex justify-between items-baseline mb-8">
             <h3 className="text-small-archivo">PROYECTOS</h3>
+            <Link href="/desarrollos-proyectos" className="md:hidden">
+              <h3 className="text-small-archivo underline hover:text-black/50 transition-colors duration-300">
+                VER MÁS
+              </h3>
+            </Link>
           </div>
 
           <div className="mb-12 flex justify-between items-end">
@@ -269,7 +274,7 @@ export default function Home() {
                 SOSTENIBLE
               </h2>
             </div>
-            <Link href="/desarrollos-proyectos">
+            <Link href="/desarrollos-proyectos" className="hidden md:block">
               <h3 className="text-small-archivo underline hover:text-black/50 transition-colors duration-300">
                 VER MÁS
               </h3>

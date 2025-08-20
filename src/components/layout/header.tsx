@@ -58,9 +58,11 @@ export default function Header() {
         <div className="content-wrapper">
           {/* Mobile */}
           <div className={`flex md:hidden items-center h-30 ${isHome ? 'justify-between' : 'justify-between'}`}>
+            <Link href='/'>
                 <h1 className={`font-baskerville header-logo-mobile whitespace-nowrap ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}>
                 GRUPO FRALI
                 </h1>
+            </Link>
 
             <button onClick={toggleMenu} className={isHome || isProjectPage ? 'text-white' : 'text-black'}>
               {isOpen ? <></> : <HamburgerIcon />}

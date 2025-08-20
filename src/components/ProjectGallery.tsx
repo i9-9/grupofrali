@@ -75,7 +75,7 @@ export default function ProjectGallery() {
             <Link
               key={project.id}
               href={`/desarrollos-proyectos/${project.id}`}
-              className="group w-[343px] flex-shrink-0 cursor-pointer hover:opacity-80 transition-all duration-300 ease-in-out"
+              className="group w-full md:w-[343px] flex-shrink-0 cursor-pointer hover:opacity-80 transition-all duration-300 ease-in-out"
             >
               <div className="relative overflow-hidden aspect-[343/350] mb-4">
                 <Image

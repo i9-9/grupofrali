@@ -139,17 +139,17 @@ const handleCategoryChange = (category: string) => {
         <div className="grid pt-6 md:pt-8 mt-8 md:mt-12">
           {/* Mobile layout - título ocupa toda la columna y filtros debajo */}
           <div className="md:hidden col-6">
-            <h2 className="font-baskerville leading-7">PROYECTOS</h2>
+            <h2 className="font-baskerville leading-7 text-[1.5rem]">PROYECTOS</h2>
             
             {/* Filtros mobile en dos filas debajo del título */}
-            <div className="flex flex-col font-baskerville gap-y-3 mt-4 md:mt-6" style={{ fontSize: 'clamp(18px, 4vw, 22px)' }}>
+            <div className="flex flex-col font-baskerville gap-y-3 mt-4 md:mt-6" >
               {/* Primera fila: 2 botones */}
               <div className="flex gap-x-3">
                 {categories.slice(0, 2).map((category) => (
                   <h4 
                     key={category}
                     onClick={() => handleCategoryChange(category)}
-                    className={`flex justify-center filter-item items-center rounded-[5px] text-center px-3 py-2 flex-1 text-xs cursor-pointer ${
+                    className={`flex justify-center filter-item items-center rounded-[5px] text-center px-3 py-2 text-[0.75rem] cursor-pointer ${
                       selectedCategory === category 
                         ? 'bg-black text-white' 
                         : 'bg-gray-200 text-gray-600'
@@ -166,7 +166,7 @@ const handleCategoryChange = (category: string) => {
                   <h4 
                     key={category}
                     onClick={() => handleCategoryChange(category)}
-                    className={`flex justify-center filter-item items-center rounded-[5px] text-center px-3 py-2 flex-1 text-xs cursor-pointer ${
+                    className={`flex justify-center filter-item items-center rounded-[5px] text-center px-3 py-2 text-[0.75rem] cursor-pointer ${
                       selectedCategory === category 
                         ? 'bg-black text-white' 
                         : 'bg-gray-200 text-gray-600'
@@ -216,10 +216,10 @@ const handleCategoryChange = (category: string) => {
               <ResponsiveImage 
                 desktopImage={desktopImage}
                 mobileImage={mobileImage}
-                className="w-full h-[250px] md:h-[356px] object-cover pb-[22px] border-b border-black" 
+                className="w-full h-[168.75px] md:h-[353.75px] object-cover pb-[22px] border-b border-black" 
                 alt={project.imagenes?.alt || project.titulo} 
               />
-              <h3 className="font-baskerville text-base text-right md:text-left pb-5 md:pb-0 md:text-[24.5px] mt-4 leading-none">
+              <h3 className="font-baskerville text-base text-right md:text-left pb-5 md:pb-0 md:text-2xl mt-4 leading-none">
                 {project.titulo}
               </h3>
             </Link>

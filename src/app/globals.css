@@ -477,8 +477,8 @@ body {
 
 /* Marquee animation - Safari optimized */
 .animate-marquee {
-  -webkit-animation: marquee 25s linear infinite;
-  animation: marquee 25s linear infinite;
+  -webkit-animation: marquee 18s linear infinite;
+  animation: marquee 18s linear infinite;
   will-change: transform;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
