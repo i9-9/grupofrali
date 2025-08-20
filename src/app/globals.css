@@ -442,31 +442,34 @@ body {
 /* Clase base para animación de números */
 .stat-number-animated {
   opacity: 0;
+}
+
+.stat-number-animated.animate {
   animation: fadeInFromLeft 0.6s ease-out forwards;
 }
 
 /* Delays secuenciales para cada número */
-.stat-number-delay-1 {
+.stat-number-delay-1.animate {
   animation-delay: 0.3s;
 }
 
-.stat-number-delay-2 {
+.stat-number-delay-2.animate {
   animation-delay: 0.6s;
 }
 
-.stat-number-delay-3 {
+.stat-number-delay-3.animate {
   animation-delay: 0.9s;
 }
 
-.stat-number-delay-4 {
+.stat-number-delay-4.animate {
   animation-delay: 1.2s;
 }
 
-.stat-number-delay-5 {
+.stat-number-delay-5.animate {
   animation-delay: 1.5s;
 }
 
-.stat-number-delay-6 {
+.stat-number-delay-6.animate {
   animation-delay: 1.8s;
 }
 

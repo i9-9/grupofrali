@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import projectsData from "@/data/projects.json"
@@ -43,7 +43,6 @@ function ResponsiveImage({
   )
 }
 
-
 interface ProjectImage {
   desarrollos_mobile?: string
   desarrollos_desktop?: string
@@ -75,6 +74,16 @@ const categories = [
 
 export default function DesarrollosProyectos() {
 const [selectedCategory, setSelectedCategory] = useState("VER TODOS")
+const projectsRef = useRef<HTMLElement>(null)
+
+const scrollToProjects = () => {
+  if (projectsRef.current) {
+    projectsRef.current.scrollIntoView({
+      behavior: 'smooth', 
+      block:'start'
+    })
+  }
+}
 
 const photos = useMemo(() => [
   "/images/desarrollos/1.jpg",
@@ -89,20 +98,33 @@ const filteredProjects = selectedCategory === "VER TODOS"
 
 const handleCategoryChange = (category: string) => {
   setSelectedCategory(category)
+
+  setTimeout(() => {
+    scrollToProjects()
+  }, 100)
 }
 
   return (
     <main className="bg-[#EFEFEF]">
-      <div className="content-wrapper ">
-        <div className="grid">
-          <div className="col-6 md:col-6 pt-36 md:pt-24">
-            <h1 className="font-baskerville text-black lg:pr-6" style={{ fontSize: 'clamp(36px, 3.2vw, 54px)', lineHeight: 'clamp(40px, 3.6vw, 68px)' }}>
-              DIVERSIFICACIÓN ESTRATÉGICA, <br/> VISIÓN A LARGO PLAZO</h1>
-              <p className="text-black pt-[22px] tracking-[0.01em] max-w-[600px] leading-[1]" style={{ fontSize: 'clamp(17px, 1.3vw, 19px)' }}>
-              En Grupo Frali desarrollamos y gestionamos proyectos en sectores estratégicos, combinando experiencia, innovación y compromiso. Con una estrategia basada en la diversificación de inversiones en distintos mercados y segmentos de negocio, y con presencia en Argentina, Estados Unidos y Uruguay, apostamos a una evolución constante, abiertos a nuevas oportunidades que integren infraestructura, naturaleza, calidad de vida y eficiencia productiva.
+      {/* Hero Section con layout híbrido */}
+      <section className="relative flex items-center pt-16 md:pt-24">
+        {/* Contenido de texto usando content-wrapper */}
+        <div className="content-wrapper relative z-10 w-full">
+          <div className="grid">
+            <div className="col-6 md:col-6 pt-24 md:pt-0">
+              <h1 className="text-h1-baskerville text-black lg:pr-6">
+                DIVERSIFICACIÓN ESTRATÉGICA, <br/> VISIÓN A LARGO PLAZO
+              </h1>
+              <p className="text-body1-archivo text-black pt-[22px] md:text-[19px]! tracking-[0.01em] max-w-[800px]">
+                En Grupo Frali desarrollamos y gestionamos proyectos en sectores estratégicos, combinando experiencia, innovación y compromiso. Con una estrategia basada en la diversificación de inversiones en distintos mercados y segmentos de negocio, y con presencia en Argentina, Estados Unidos y Uruguay, apostamos a una evolución constante, abiertos a nuevas oportunidades que integren infraestructura, naturaleza, calidad de vida y eficiencia productiva.
               </p>
+            </div>
           </div>
-          <div className="hidden md:block absolute top-0 right-0 md:w-[50%] xl:w-[45%] 2xl:w-[40%] max-w-[800px] w-full h-full z-0 md:pt-24">
+        </div>
+        
+        {/* AutoSlider que se extiende hasta el borde derecho y centrado verticalmente */}
+        <div className="hidden md:block absolute inset-y-0 right-0 w-1/2 items-center z-0 pt-18">
+          <div className="w-full h-[500px]">
             <AutoSlider 
               images={photos}
               altText="Desarrollo"
@@ -110,10 +132,14 @@ const handleCategoryChange = (category: string) => {
             />
           </div>
         </div>
-        <div className="grid pt-8 md:pt-16 grid-cols-12 mt-16 md:mt-0 xl:mt-32 2xl:mt-40">
+      </section>
+
+      {/* Sección de proyectos - mantiene tu estructura original */}
+      <div className="content-wrapper">
+        <div className="grid pt-6 md:pt-8 mt-8 md:mt-12">
           {/* Mobile layout - título ocupa toda la columna y filtros debajo */}
           <div className="md:hidden col-6">
-            <h2 className="font-baskerville leading-7" style={{ fontSize: 'clamp(26px, 2.2vw, 32px)' }}>PROYECTOS</h2>
+            <h2 className="font-baskerville leading-7">PROYECTOS</h2>
             
             {/* Filtros mobile en dos filas debajo del título */}
             <div className="flex flex-col font-baskerville gap-y-3 mt-4 md:mt-6" style={{ fontSize: 'clamp(18px, 4vw, 22px)' }}>
@@ -123,7 +149,7 @@ const handleCategoryChange = (category: string) => {
                   <h4 
                     key={category}
                     onClick={() => handleCategoryChange(category)}
-                    className={`flex justify-center filter-item items-center rounded-[5px] text-center px-3 py-2 flex-1 text-xs ${
+                    className={`flex justify-center filter-item items-center rounded-[5px] text-center px-3 py-2 flex-1 text-xs cursor-pointer ${
                       selectedCategory === category 
                         ? 'bg-black text-white' 
                         : 'bg-gray-200 text-gray-600'
@@ -140,7 +166,7 @@ const handleCategoryChange = (category: string) => {
                   <h4 
                     key={category}
                     onClick={() => handleCategoryChange(category)}
-                    className={`flex justify-center filter-item items-center rounded-[5px] text-center px-3 py-2 flex-1 text-xs ${
+                    className={`flex justify-center filter-item items-center rounded-[5px] text-center px-3 py-2 flex-1 text-xs cursor-pointer ${
                       selectedCategory === category 
                         ? 'bg-black text-white' 
                         : 'bg-gray-200 text-gray-600'
@@ -155,7 +181,7 @@ const handleCategoryChange = (category: string) => {
           
           {/* Desktop layout - estructura original */}
           <div className="hidden md:block md:col-start-1 md:col-span-3">
-            <h2 className="font-baskerville leading-7" style={{ fontSize: 'clamp(26px, 2.2vw, 32px)' }}>PROYECTOS</h2>
+            <h2 className="text-small-baskerville">PROYECTOS</h2>
           </div>
           <div className="hidden md:block md:col-start-3 md:col-span-3">
             <div className="flex flex-col font-baskerville gap-y-1 leading-7" style={{ fontSize: 'clamp(22px, 1.8vw, 26px)' }}>
@@ -163,7 +189,7 @@ const handleCategoryChange = (category: string) => {
                 <h4 
                   key={category}
                   onClick={() => handleCategoryChange(category)}
-                  className={`filter-item ${selectedCategory === category ? 'active' : 'inactive'}`}
+                  className={`filter-item cursor-pointer ${selectedCategory === category ? 'active' : 'inactive'}`}
                 >
                   {category}
                 </h4>
@@ -173,7 +199,7 @@ const handleCategoryChange = (category: string) => {
         </div>
       </div>
 
-      <section className="content-wrapper pb-16">
+      <section ref={projectsRef} className="content-wrapper pb-16">
         <div className="grid gap-2 md:gap-[10px] mt-16 md:mt-40">
           {filteredProjects.map((project) => {
             const desktopImage = getDesarrollosImage(project, false)
