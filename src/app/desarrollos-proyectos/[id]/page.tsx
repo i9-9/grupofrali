@@ -60,6 +60,9 @@ export default function DesarrolloProyecto() {
 
   const hasImages = mobileImages.length > 0 || desktopImages.length > 0
 
+  // Variable para detectar LA RESERVA CARDALES
+  const isReservaCardales = project?.titulo === 'LA RESERVA CARDALES'
+
   // Detectar imagen activa en el scroll - Mobile
   useEffect(() => {
     const handleScroll = () => {
@@ -209,92 +212,99 @@ export default function DesarrolloProyecto() {
             <div className="py-12">
               <div className="stats-custom-layout">
                 {Object.entries(project.estadisticas).map(([key, value]) => {
-                  // Función para separar número y texto (misma lógica que desktop)
+                  // Función simplificada para parsear estadísticas con 4 tipos claros
                   const parseValue = (val: string) => {
-                    const str = val.toString()
-                    console.log('Parsing value:', str)
-                    // Caso especial para códigos como "T6-360" - tratar como número
-                    const codigo = str.match(/^([A-Z]\d+-\d+)$/i)
-                    console.log('Codigo match:', codigo)
-                    if (codigo) {
-                      console.log('Found codigo, returning as number')
-                      return { 
-                        isTextOnly: false, 
-                        number: codigo[1], 
-                        unit: '', 
-                        text: '' 
-                      }
-                    }
+                    const str = val.toString().trim()
                     
-                    // Detectar si es solo texto (no empieza con número)
+                    // Tipo 1: TEXTO - Solo texto sin números al inicio
                     if (isNaN(Number(str.charAt(0))) && !str.match(/^\d/)) {
-                      return { isTextOnly: true, number: '', text: str, unit: '' }
-                    }
-                    
-                    // Separar número, unidad técnica y texto descriptivo
-                    const techUnitMatch = str.match(/^([\d,.]+)\s+(MW|GWH|KWH|MW|M²|H|KG|TON)\s*(.*)$/i)
-                    if (techUnitMatch) {
                       return { 
-                        isTextOnly: false, 
-                        number: techUnitMatch[1], 
-                        unit: techUnitMatch[2], 
-                        text: techUnitMatch[3] 
+                        isTextOnly: true,
+                        number: '',
+                        text: str,
+                        unit: ''
                       }
                     }
                     
-                    // Caso especial para "5 ESTRELLAS" - mantener junto
-                    const estrellas = str.match(/^(\d+)\s+(ESTRELLAS?)$/i)
-                    if (estrellas) {
+                    // Caso especial: "100% COMERCIALIZADO Y HABITADO" debe tratarse como texto completo
+                    if (str === "100% COMERCIALIZADO Y HABITADO") {
                       return { 
-                        isTextOnly: false, 
-                        number: estrellas[1], 
-                        unit: '', 
-                        text: estrellas[2] 
+                        isTextOnly: true,
+                        number: '',
+                        text: str,
+                        unit: ''
                       }
                     }
                     
-                    // Caso especial para "18 HOYOS" - mantener junto
-                    const hoyos = str.match(/^(\d+)\s+(HOYOS?)$/i)
-                    if (hoyos) {
+                    // Caso especial para porcentajes con texto
+                    const porcentajeConTexto = str.match(/^([\d,.]+%)\s+(.+)$/)
+                    if (porcentajeConTexto) {
                       return { 
-                        isTextOnly: false, 
-                        number: hoyos[1], 
-                        unit: '', 
-                        text: hoyos[2] 
+                        isTextOnly: false,
+                        number: porcentajeConTexto[1],
+                        text: porcentajeConTexto[2],
+                        unit: ''
                       }
                     }
                     
-                    // Caso especial para "TONELADAS" - mantener palabra completa
-                    const toneladas = str.match(/^([\d,.]+)\s+(TONELADAS.*)$/i)
-                    if (toneladas) {
+                    // Tipo 2: NUMERO - Solo números (incluyendo decimales y porcentajes)
+                    const soloNumero = str.match(/^([\d,.]+[%]?)$/)
+                    if (soloNumero) {
                       return { 
-                        isTextOnly: false, 
-                        number: toneladas[1], 
-                        unit: '', 
-                        text: toneladas[2] 
+                        isTextOnly: false,
+                        number: soloNumero[1],
+                        text: '',
+                        unit: ''
                       }
                     }
                     
-                    // Separar número con porcentaje o unidad simple
-                    const simpleMatch = str.match(/^([\d,.]+)\s*([%A-Z]*)\s*(.*)$/)
-                    if (simpleMatch && simpleMatch[2]) {
+                    // Tipo 3: NUMERO CON UNIDAD - Número seguido de unidad técnica corta
+                    const numeroConUnidad = str.match(/^([\d,.]+)\s+(MW|GWH|KWH|M²|H|KG|TON|€|USD|\$)$/i)
+                    if (numeroConUnidad) {
                       return { 
-                        isTextOnly: false, 
-                        number: simpleMatch[1] + simpleMatch[2], 
-                        unit: '', 
-                        text: simpleMatch[3] 
+                        isTextOnly: false,
+                        number: numeroConUnidad[1],
+                        unit: numeroConUnidad[2],
+                        text: ''
                       }
                     }
                     
-                    // Si no hay texto adicional, es solo número
-                    return { isTextOnly: false, number: str, text: '', unit: '' }
+                    // Caso especial para "HOYOS" y "ESTRELLAS" - número arriba, texto abajo
+                    const hoyosEstrellas = str.match(/^(\d+)\s+(HOYOS?|ESTRELLAS?)$/i)
+                    if (hoyosEstrellas) {
+                      return { 
+                        isTextOnly: false,
+                        number: hoyosEstrellas[1],
+                        text: hoyosEstrellas[2],
+                        unit: ''
+                      }
+                    }
+                    
+                    // Tipo 4: NUMERO CON TEXTO - Número seguido de texto descriptivo
+                    const numeroConTexto = str.match(/^([\d,.]+)\s+(.+)$/)
+                    if (numeroConTexto) {
+                      return { 
+                        isTextOnly: false,
+                        number: numeroConTexto[1],
+                        text: numeroConTexto[2],
+                        unit: ''
+                      }
+                    }
+                    
+                    // Fallback: tratar como número
+                    return { 
+                      isTextOnly: false,
+                      number: str,
+                      text: '',
+                      unit: ''
+                    }
                   }
                   
                   const parsed = parseValue(value.toString())
                   
                   return (
-                    <div key={key} className="border-t border-black pt-1 pb-0 md:pt-0 md:pb-0 flex justify-between items-start min-h-[60px] md:min-h-[20px]">
-                      <div className="font-archivo text-black uppercase tracking-wider leading-none max-w-[50%] text-[14px] md:text-[13px] self-start" style={{ wordBreak: 'break-word', hyphens: 'auto' }}>
+                    <div key={key} className="border-t border-black pt-3 pb-1 md:pt-2 md:pb-1 flex justify-between items-start min-h-[60px] md:min-h-[20px]">
+                      <div className="font-archivo text-black uppercase tracking-wider leading-none max-w-[50%] text-[14px] md:text-[13px] self-start" style={{ wordBreak: 'break-word' }}>
                         {key.replace(/_/g, ' ').split(' ').map((word, index) => (
                           <span key={index}>
                             {word}
@@ -309,12 +319,33 @@ export default function DesarrolloProyecto() {
                           <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none break-words">
                             {parsed.text}
                           </div>
+                        ) : parsed.text && (parsed.text.toUpperCase() === 'HOYOS' || parsed.text.toUpperCase() === 'ESTRELLAS') ? (
+                          // Caso especial para HOYOS y ESTRELLAS - número arriba, texto abajo
+                          <>
+                            <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: '2.5rem' }}>
+                              {parsed.number}
+                            </span>
+                            <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none">
+                              {parsed.text}
+                            </div>
+                          </>
                         ) : (
+                          // Caso normal - número y unidad/texto
                           <div className="flex flex-col items-end">
-                            {parsed.text && (parsed.text.toUpperCase() === 'HOYOS' || parsed.text.toUpperCase() === 'ESTRELLAS') ? (
-                              // Caso especial para HOYOS y ESTRELLAS - número arriba, texto abajo
-                              <>
+                            {parsed.unit ? (
+                              // Número con unidad en línea
+                              <div className="flex items-baseline gap-1">
                                 <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: 'clamp(18px, 5vw, 30px)' }}>
+                                  {parsed.number}
+                                </span>
+                                <span className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none">
+                                  {parsed.unit}
+                                </span>
+                              </div>
+                            ) : parsed.text ? (
+                              // Número arriba, texto abajo
+                              <>
+                                <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: '2.5rem' }}>
                                   {parsed.number}
                                 </span>
                                 <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none">
@@ -322,29 +353,10 @@ export default function DesarrolloProyecto() {
                                 </div>
                               </>
                             ) : (
-                              // Caso normal - número y unidad/texto en línea
-                              <>
-                                <div className="flex items-baseline gap-1">
-                                  <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: 'clamp(18px, 5vw, 30px)' }}>
-                                    {parsed.number}
-                                  </span>
-                                  {parsed.unit && (
-                                    <span className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none">
-                                      {parsed.unit}
-                                    </span>
-                                  )}
-                                  {!parsed.unit && parsed.text && (
-                                    <span className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none">
-                                      {parsed.text}
-                                    </span>
-                                  )}
-                                </div>
-                                {parsed.unit && parsed.text && (
-                                  <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none">
-                                    {parsed.text}
-                                  </div>
-                                )}
-                              </>
+                              // Solo número
+                              <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: '2.5rem' }}>
+                                {parsed.number}
+                              </span>
                             )}
                           </div>
                         )}
@@ -400,12 +412,13 @@ export default function DesarrolloProyecto() {
               <span className="text-[#151714] font-baskerville font-medium" style={{ fontSize: 'clamp(16px, 1.5vw, 19px)' }}>{project.categoria}</span>
             </div>
             
-            {/* Título con altura fija */}
-            <div className="h-24 md:h-32 lg:h-36 flex items-start mb-6">
+            {/* Título con altura fija - AJUSTADO PARA LA RESERVA CARDALES */}
+            <div className={`flex items-start ${isReservaCardales ? 'h-16 md:h-20 lg:h-24 mb-2' : 'h-24 md:h-32 lg:h-36 mb-6'}`}>
               <h1 className="font-archivo text-black leading-tight" style={{ fontSize: 'clamp(24px, 36px, 48px)' }}>{project.titulo}</h1>
             </div>
-            {/* Contenido con espacio flexible */}
-            <div className="flex-1 flex flex-col justify-start space-y-6">
+            
+            {/* Contenido con espacio flexible - AJUSTADO PARA LA RESERVA CARDALES */}
+            <div className={`flex-1 flex flex-col justify-start ${isReservaCardales ? 'space-y-1' : 'space-y-8'}`}>
               <p className="text-black flex items-center" style={{ fontSize: 'clamp(12px, 1vw, 16px)' }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="mr-2 md:w-[18px] md:h-[18px]">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
@@ -419,85 +432,103 @@ export default function DesarrolloProyecto() {
               </p>
             </div>
             
-            {/* Estadísticas desktop */}
+            {/* Estadísticas desktop - AJUSTADO PARA LA RESERVA CARDALES */}
             {project.estadisticas && (
-              <div className="grid !grid-cols-2 gap-2 mt-16">
+              <div className={`grid !grid-cols-2 gap-2 ${isReservaCardales ? 'mt-2' : 'mt-16'}`}>
                 {Object.entries(project.estadisticas).map(([key, value]) => {
-                  // Función para separar número y texto
+                  // Función simplificada para parsear estadísticas con 4 tipos claros
                   const parseValue = (val: string) => {
-                    const str = val.toString()
-                    console.log('Desktop parsing value:', str)
-                    // Caso especial para códigos como "T6-360" - tratar como número
-                    const codigo = str.match(/^([A-Z]\d+-\d+)$/i)
-                    console.log('Desktop codigo match:', codigo)
-                    if (codigo) {
-                      console.log('Desktop found codigo, returning as number')
-                      return { 
-                        isTextOnly: false, 
-                        number: codigo[1], 
-                        unit: '', 
-                        text: '' 
-                      }
-                    }
+                    const str = val.toString().trim()
                     
-                    // Detectar si es solo texto (no empieza con número)
+                    // Tipo 1: TEXTO - Solo texto sin números al inicio
                     if (isNaN(Number(str.charAt(0))) && !str.match(/^\d/)) {
-                      return { isTextOnly: true, number: '', text: str, unit: '' }
-                    }
-                    
-                    // Separar número, unidad técnica y texto descriptivo
-                    const techUnitMatch = str.match(/^([\d,.]+)\s+(MW|GWH|KWH|MW|M²|H|KG|TON)\s*(.*)$/i)
-                    if (techUnitMatch) {
                       return { 
-                        isTextOnly: false, 
-                        number: techUnitMatch[1], 
-                        unit: techUnitMatch[2], 
-                        text: techUnitMatch[3] 
+                        isTextOnly: true,
+                        number: '',
+                        text: str,
+                        unit: ''
                       }
                     }
                     
-                    // Caso especial para "5 ESTRELLAS" - mantener junto
-                    const estrellas = str.match(/^(\d+)\s+(ESTRELLAS?)$/i)
-                    if (estrellas) {
+                    // Caso especial: "100% COMERCIALIZADO Y HABITADO" debe tratarse como texto completo
+                    if (str === "100% COMERCIALIZADO Y HABITADO") {
                       return { 
-                        isTextOnly: false, 
-                        number: estrellas[1], 
-                        unit: '', 
-                        text: estrellas[2] 
+                        isTextOnly: true,
+                        number: '',
+                        text: str,
+                        unit: ''
                       }
                     }
                     
-                    // Caso especial para "18 HOYOS" - mantener junto
-                    const hoyos = str.match(/^(\d+)\s+(HOYOS?)$/i)
-                    if (hoyos) {
+                    // Caso especial para porcentajes con texto
+                    const porcentajeConTexto = str.match(/^([\d,.]+%)\s+(.+)$/)
+                    if (porcentajeConTexto) {
                       return { 
-                        isTextOnly: false, 
-                        number: hoyos[1], 
-                        unit: '', 
-                        text: hoyos[2] 
+                        isTextOnly: false,
+                        number: porcentajeConTexto[1],
+                        text: porcentajeConTexto[2],
+                        unit: ''
                       }
                     }
                     
-                    // Separar número con porcentaje o unidad simple
-                    const simpleMatch = str.match(/^([\d,.]+)\s*([%A-Z]*)\s*(.*)$/)
-                    if (simpleMatch && simpleMatch[2]) {
+                    // Tipo 2: NUMERO - Solo números (incluyendo decimales y porcentajes)
+                    const soloNumero = str.match(/^([\d,.]+[%]?)$/)
+                    if (soloNumero) {
                       return { 
-                        isTextOnly: false, 
-                        number: simpleMatch[1] + simpleMatch[2], 
-                        unit: '', 
-                        text: simpleMatch[3] 
+                        isTextOnly: false,
+                        number: soloNumero[1],
+                        text: '',
+                        unit: ''
                       }
                     }
                     
-                    // Si no hay texto adicional, es solo número
-                    return { isTextOnly: false, number: str, text: '', unit: '' }
+                    // Tipo 3: NUMERO CON UNIDAD - Número seguido de unidad técnica corta
+                    const numeroConUnidad = str.match(/^([\d,.]+)\s+(MW|GWH|KWH|M²|H|KG|TON|€|USD|\$)$/i)
+                    if (numeroConUnidad) {
+                      return { 
+                        isTextOnly: false,
+                        number: numeroConUnidad[1],
+                        unit: numeroConUnidad[2],
+                        text: ''
+                      }
+                    }
+                    
+                    // Caso especial para "HOYOS" y "ESTRELLAS" - número arriba, texto abajo
+                    const hoyosEstrellas = str.match(/^(\d+)\s+(HOYOS?|ESTRELLAS?)$/i)
+                    if (hoyosEstrellas) {
+                      return { 
+                        isTextOnly: false,
+                        number: hoyosEstrellas[1],
+                        text: hoyosEstrellas[2],
+                        unit: ''
+                      }
+                    }
+                    
+                    // Tipo 4: NUMERO CON TEXTO - Número seguido de texto descriptivo
+                    const numeroConTexto = str.match(/^([\d,.]+)\s+(.+)$/)
+                    if (numeroConTexto) {
+                      return { 
+                        isTextOnly: false,
+                        number: numeroConTexto[1],
+                        text: numeroConTexto[2],
+                        unit: ''
+                      }
+                    }
+                    
+                    // Fallback: tratar como número
+                    return { 
+                      isTextOnly: false,
+                      number: str,
+                      text: '',
+                      unit: ''
+                    }
                   }
                   
                   const parsed = parseValue(value.toString())
                   
                   return (
-                    <div key={key} className="border-t border-black pt-0.5 pb-0 md:pt-0 md:pb-0 flex justify-between items-start min-h-[60px] md:min-h-[20px]">
-                      <div className="font-archivo text-black uppercase tracking-wider leading-none text-[14px] md:text-[13px] self-start" style={{ wordBreak: 'break-word', hyphens: 'auto' }}>
+                    <div key={key} className="border-t border-black pt-3 pb-1 md:pt-2 md:pb-1 flex justify-between items-start min-h-[60px] md:min-h-[20px]">
+                      <div className="font-archivo text-black uppercase tracking-wider leading-none text-[14px] md:text-[0.8rem] self-start" style={{ wordBreak: 'break-word' }}>
                         {key.replace(/_/g, ' ').split(' ').map((word, index) => (
                           <span key={index}>
                             {word}
@@ -509,45 +540,47 @@ export default function DesarrolloProyecto() {
                       </div>
                       <div className="text-right self-center max-w-[45%]">
                         {parsed.isTextOnly ? (
-                          <div className="font-archivo text-black uppercase tracking-wider leading-none break-words" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
+                          <div className="font-archivo text-black uppercase tracking-wider leading-none break-words text-[0.8rem]">
                             {parsed.text}
                           </div>
+                        ) : parsed.text && (parsed.text.toUpperCase() === 'HOYOS' || parsed.text.toUpperCase() === 'ESTRELLAS') ? (
+                          // Caso especial para HOYOS y ESTRELLAS - número arriba, texto abajo
+                          <>
+                            <span className="text-h2-archivo text-black font-archivo-light leading-none">
+                              {parsed.number}
+                            </span>
+                            <div className="font-archivo text-black uppercase tracking-wider leading-none text-[0.8rem]">
+                              {parsed.text}
+                            </div>
+                          </>
                         ) : (
+                          // Caso normal - número y unidad/texto
                           <div className="flex flex-col items-end">
-                            {parsed.text && (parsed.text.toUpperCase() === 'HOYOS' || parsed.text.toUpperCase() === 'ESTRELLAS') ? (
-                              // Caso especial para HOYOS y ESTRELLAS - número arriba, texto abajo
-                              <>
-                                <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: 'clamp(18px, 2.2vw, 30px)' }}>
+                            {parsed.unit ? (
+                              // Número con unidad en línea
+                              <div className="flex items-baseline gap-1">
+                                <span className="text-h2-archivo text-black font-archivo-light leading-none">
                                   {parsed.number}
                                 </span>
-                                <div className="font-archivo text-black uppercase tracking-wider leading-none" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
+                                <span className="font-archivo text-black uppercase tracking-wider leading-none text-[0.8rem]">
+                                  {parsed.unit}
+                                </span>
+                              </div>
+                            ) : parsed.text ? (
+                              // Número arriba, texto abajo
+                              <>
+                                <span className="text-h2-archivo text-black font-archivo-light leading-none">
+                                  {parsed.number}
+                                </span>
+                                <div className="font-archivo text-black uppercase tracking-wider leading-none text-[0.8rem]">
                                   {parsed.text}
                                 </div>
                               </>
                             ) : (
-                              // Caso normal - número y unidad/texto en línea
-                              <>
-                                <div className="flex items-baseline gap-1">
-                                  <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: 'clamp(18px, 2.2vw, 30px)' }}>
-                                    {parsed.number}
-                                  </span>
-                                  {parsed.unit && (
-                                    <span className="font-archivo text-black uppercase tracking-wider leading-none" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
-                                      {parsed.unit}
-                                    </span>
-                                  )}
-                                  {!parsed.unit && parsed.text && (
-                                    <span className="font-archivo text-black uppercase tracking-wider leading-none" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
-                                      {parsed.text}
-                                    </span>
-                                  )}
-                                </div>
-                                {parsed.unit && parsed.text && (
-                                  <div className="font-archivo text-black uppercase tracking-wider leading-none" style={{ fontSize: 'clamp(9px, 0.8vw, 14px)' }}>
-                                    {parsed.text}
-                                  </div>
-                                )}
-                              </>
+                              // Solo número
+                              <span className="text-h2-archivo text-black font-archivo-light leading-none">
+                                {parsed.number}
+                              </span>
                             )}
                           </div>
                         )}
