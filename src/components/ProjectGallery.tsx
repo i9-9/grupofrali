@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -88,16 +88,14 @@ export default function ProjectGallery() {
                 <div className="absolute inset-0 bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300" />
               </div>
               <div className="border-t border-black pt-6 pb-4">
-                <div className="flex justify-between items-start w-full">
+                <div className="flex items-start w-full">
                   {/* Número a la izquierda */}
-                  <h3 className="font-light">(0{index + 1})</h3>
+                  <h3 className="font-light mr-4">(0{index + 1})</h3>
 
-                  {/* Título alineado a la izquierda, pegado al margen derecho */}
-                  <div className="text-left w-[160px] md:w-[200px] lg:w-[220px]">
-                    <h3 className="font-baskerville text-sm md:text-[22px] text-black leading-tight">
-                      {project.titulo}
-                    </h3>
-                  </div>
+                  {/* Título alineado a la izquierda, ocupando todo el espacio restante */}
+                  <h3 className="font-baskerville text-sm md:text-[22px] text-black leading-tight flex-1">
+                    {project.titulo}
+                  </h3>
                 </div>
               </div>
             </Link>
