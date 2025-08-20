@@ -115,7 +115,7 @@ const handleCategoryChange = (category: string) => {
               <h1 className="text-h1-baskerville text-black lg:pr-6">
                 DIVERSIFICACIÓN ESTRATÉGICA, <br/> VISIÓN A LARGO PLAZO
               </h1>
-              <p className="md:text-[19px] text-black pt-[22px] tracking-[0.01em] max-w-[800px]">
+              <p className="md:text-[19px] text-black pt-[22px] tracking-[0.01em] max-w-[650px] leading-tight">
                 En Grupo Frali desarrollamos y gestionamos proyectos en sectores estratégicos, combinando experiencia, innovación y compromiso. Con una estrategia basada en la diversificación de inversiones en distintos mercados y segmentos de negocio, y con presencia en Argentina, Estados Unidos y Uruguay, apostamos a una evolución constante, abiertos a nuevas oportunidades que integren infraestructura, naturaleza, calidad de vida y eficiencia productiva.
               </p>
             </div>
@@ -134,7 +134,7 @@ const handleCategoryChange = (category: string) => {
         </div>
       </section>
 
-      {/* Sección de proyectos - mantiene tu estructura original */}
+      {/* Sección de proyectos - con alineación corregida */}
       <div className="content-wrapper">
         <div className="grid pt-6 md:pt-8 mt-8 md:mt-12">
           {/* Mobile layout - título ocupa toda la columna y filtros debajo */}
@@ -179,11 +179,11 @@ const handleCategoryChange = (category: string) => {
             </div>
           </div>
           
-          {/* Desktop layout - estructura original */}
+          {/* Desktop layout - usando columnas separadas */}
           <div className="hidden md:block md:col-start-1 md:col-span-3">
             <h2 className="text-small-baskerville">PROYECTOS</h2>
           </div>
-          <div className="hidden md:block md:col-start-3 md:col-span-3">
+          <div className="hidden md:block md:col-start-4 md:col-span-4">
             <div className="flex flex-col font-baskerville gap-y-1 leading-7" style={{ fontSize: 'clamp(22px, 1.8vw, 26px)' }}>
               {categories.map((category) => (
                 <h4 
