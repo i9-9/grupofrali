@@ -115,7 +115,7 @@ const handleCategoryChange = (category: string) => {
               <h1 className="text-h1-baskerville text-black lg:pr-6">
                 DIVERSIFICACIÓN ESTRATÉGICA, <br/> VISIÓN A LARGO PLAZO
               </h1>
-              <p className="text-body1-archivo text-black pt-[22px] md:text-[19px]! tracking-[0.01em] max-w-[800px]">
+              <p className="md:text-[19px] text-black pt-[22px] tracking-[0.01em] max-w-[800px]">
                 En Grupo Frali desarrollamos y gestionamos proyectos en sectores estratégicos, combinando experiencia, innovación y compromiso. Con una estrategia basada en la diversificación de inversiones en distintos mercados y segmentos de negocio, y con presencia en Argentina, Estados Unidos y Uruguay, apostamos a una evolución constante, abiertos a nuevas oportunidades que integren infraestructura, naturaleza, calidad de vida y eficiencia productiva.
               </p>
             </div>
@@ -123,7 +123,7 @@ const handleCategoryChange = (category: string) => {
         </div>
         
         {/* AutoSlider que se extiende hasta el borde derecho y centrado verticalmente */}
-        <div className="hidden md:block absolute inset-y-0 right-0 w-1/2 items-center z-0 pt-18">
+        <div className="hidden md:block absolute inset-y-0 right-0 w-1/2 items-center z-0 pt-16">
           <div className="w-full h-[500px]">
             <AutoSlider 
               images={photos}

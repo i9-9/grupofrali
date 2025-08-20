@@ -564,3 +564,27 @@ body {
     margin-top: 0px !important;
   }
 }
+
+/* ========================================
+   HEADER MOBILE - ALTURAS Y ESPACIOS
+   ======================================== */
+
+/* Altura del header mobile */
+.h-30 {
+  height: 120px; /* 7.5rem = 120px */
+}
+
+/* Padding top para menú mobile */
+.pt-14 {
+  padding-top: 56px; /* 3.5rem = 56px */
+}
+
+/* Padding bottom para menú mobile */
+.pb-20 {
+  padding-bottom: 80px; /* 5rem = 80px */
+}
+
+/* Padding top personalizado para desarrollos */
+.pt-18 {
+  padding-top: 72px; /* 4.5rem = 72px */
+}
