@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -66,34 +66,6 @@ const projects: Project[] = [
 
 export default function ProjectGallery() {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
-
-  // Detectar proyecto activo en el scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!scrollRef.current) return;
-
-      const container = scrollRef.current;
-      const scrollLeft = container.scrollLeft;
-      const containerWidth = container.clientWidth;
-      const scrollWidth = container.scrollWidth;
-
-      // Calcular el progreso del scroll (0 a 1)
-      const scrollProgress = scrollLeft / (scrollWidth - containerWidth);
-
-      // Convertir el progreso a índice de proyecto
-      const activeIndex = Math.round(scrollProgress * (projects.length - 1));
-      setActiveProjectIndex(
-        Math.max(0, Math.min(activeIndex, projects.length - 1))
-      );
-    };
-
-    const container = scrollRef.current;
-    if (container) {
-      container.addEventListener("scroll", handleScroll);
-      return () => container.removeEventListener("scroll", handleScroll);
-    }
-  }, []);
 
   return (
     <div className="relative w-full">

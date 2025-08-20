@@ -12,9 +12,9 @@ interface StatItemProps {
 
 export function StatItem({ number, unit, label, delay }: StatItemProps) {
 
-  const { ref, isVisible } = useIntersectionObserver({
+  const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>({
     threshold: 0.3,
-    rootmargin: '0px 0px -50px 0px',
+    rootMargin: '0px 0px -50px 0px',
     triggerOnce: true
   }); 
 

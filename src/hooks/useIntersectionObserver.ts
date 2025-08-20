@@ -1,8 +1,18 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
-export function useIntersectionObserver() {
+interface IntersectionObserverOptions {
+  threshold?: number;
+  rootMargin?: string;
+  triggerOnce?: boolean;
+}
+
+export function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>(
+  options?: IntersectionObserverOptions
+) {
+  const { threshold = 0.3, rootMargin = "0px 0px -50px 0px", triggerOnce = true } =
+    options || {};
   const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef(null);
+  const ref = useRef<T | null>(null);
 
   useEffect(() => {
     const element = ref.current;
@@ -12,19 +22,15 @@ export function useIntersectionObserver() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.unobserve(element); // Dejar de vigilar
+          if (triggerOnce) observer.unobserve(element);
         }
       },
-      {
-        threshold: 0.3, // 30% visible, se activa.
-        rootMargin: '0px 0px -50px 0px' // 50px antes de ser visible
-      }
+      { threshold, rootMargin }
     );
 
     observer.observe(element);
-
     return () => observer.disconnect();
-  }, []);
+  }, [threshold, rootMargin, triggerOnce]);
 
   return { ref, isVisible };
 }
