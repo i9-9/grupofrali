@@ -1,12 +1,10 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import projectsData from "@/data/projects.json"
-
-
 
 export default function DesarrolloProyecto() {
   const params = useParams()
@@ -21,6 +19,23 @@ export default function DesarrolloProyecto() {
   // Buscar el proyecto por ID
   const project = projectsData.proyectos.find(p => p.id === projectId)
   
+  // Crear URL de vuelta que preserva el filtro y hace scroll a proyectos
+  const getBackUrl = useMemo(() => {
+    if (!project) return '/desarrollos-proyectos'
+    
+    const params = new URLSearchParams()
+    
+    // Agregar categoría si no es "VER TODOS"
+    if (project.categoria !== "VER TODOS") {
+      params.set('categoria', project.categoria)
+    }
+    
+    // Agregar parámetro para hacer scroll a proyectos
+    params.set('scrollTo', 'projects')
+    
+    return `/desarrollos-proyectos?${params.toString()}`
+  }, [project])
+  
   // Encontrar el índice del proyecto actual y calcular anterior/siguiente con navegación circular
   const currentProjectIndex = projectsData.proyectos.findIndex(p => p.id === projectId)
   const previousProject = currentProjectIndex > 0 
@@ -30,7 +45,6 @@ export default function DesarrolloProyecto() {
     ? projectsData.proyectos[currentProjectIndex + 1] 
     : projectsData.proyectos[0] // Primer proyecto
   
-
 
   const mobileImages: string[] = (() => {
     if (!project?.imagenes?.individual_mobile) return []
@@ -169,7 +183,7 @@ export default function DesarrolloProyecto() {
           isTransitioning ? 'opacity-0' : 'opacity-100'
         }`}>
           <div className="flex items-center gap-2 mb-2">
-            <Link href="/desarrollos-proyectos" className="text-[#151714]">
+            <Link href={getBackUrl} className="text-[#151714]">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
               </svg>
@@ -186,99 +200,99 @@ export default function DesarrolloProyecto() {
             {project.locacion}
           </p>
           
-                      <p className="text-[#151714] text-base leading-6 md:leading-5 mb-12">
-              {project.descripcion}
-            </p>
-            
-            {/* Estadísticas mobile */}
-            {project.estadisticas && (
-              <div className="py-12">
-                <div className="stats-custom-layout">
-              {Object.entries(project.estadisticas).map(([key, value]) => {
-                // Función para separar número y texto (misma lógica que desktop)
-                const parseValue = (val: string) => {
-                  const str = val.toString()
-                  console.log('Parsing value:', str)
-                  // Caso especial para códigos como "T6-360" - tratar como número
-                  const codigo = str.match(/^([A-Z]\d+-\d+)$/i)
-                  console.log('Codigo match:', codigo)
-                  if (codigo) {
-                    console.log('Found codigo, returning as number')
-                    return { 
-                      isTextOnly: false, 
-                      number: codigo[1], 
-                      unit: '', 
-                      text: '' 
+          <p className="text-[#151714] text-base leading-6 md:leading-5 mb-12">
+            {project.descripcion}
+          </p>
+          
+          {/* Estadísticas mobile */}
+          {project.estadisticas && (
+            <div className="py-12">
+              <div className="stats-custom-layout">
+                {Object.entries(project.estadisticas).map(([key, value]) => {
+                  // Función para separar número y texto (misma lógica que desktop)
+                  const parseValue = (val: string) => {
+                    const str = val.toString()
+                    console.log('Parsing value:', str)
+                    // Caso especial para códigos como "T6-360" - tratar como número
+                    const codigo = str.match(/^([A-Z]\d+-\d+)$/i)
+                    console.log('Codigo match:', codigo)
+                    if (codigo) {
+                      console.log('Found codigo, returning as number')
+                      return { 
+                        isTextOnly: false, 
+                        number: codigo[1], 
+                        unit: '', 
+                        text: '' 
+                      }
                     }
-                  }
-                  
-                  // Detectar si es solo texto (no empieza con número)
-                  if (isNaN(Number(str.charAt(0))) && !str.match(/^\d/)) {
-                    return { isTextOnly: true, number: '', text: str, unit: '' }
-                  }
-                  
-                  // Separar número, unidad técnica y texto descriptivo
-                  const techUnitMatch = str.match(/^([\d,.]+)\s+(MW|GWH|KWH|MW|M²|H|KG|TON)\s*(.*)$/i)
-                  if (techUnitMatch) {
-                    return { 
-                      isTextOnly: false, 
-                      number: techUnitMatch[1], 
-                      unit: techUnitMatch[2], 
-                      text: techUnitMatch[3] 
+                    
+                    // Detectar si es solo texto (no empieza con número)
+                    if (isNaN(Number(str.charAt(0))) && !str.match(/^\d/)) {
+                      return { isTextOnly: true, number: '', text: str, unit: '' }
                     }
-                  }
-                  
-                  // Caso especial para "5 ESTRELLAS" - mantener junto
-                  const estrellas = str.match(/^(\d+)\s+(ESTRELLAS?)$/i)
-                  if (estrellas) {
-                    return { 
-                      isTextOnly: false, 
-                      number: estrellas[1], 
-                      unit: '', 
-                      text: estrellas[2] 
+                    
+                    // Separar número, unidad técnica y texto descriptivo
+                    const techUnitMatch = str.match(/^([\d,.]+)\s+(MW|GWH|KWH|MW|M²|H|KG|TON)\s*(.*)$/i)
+                    if (techUnitMatch) {
+                      return { 
+                        isTextOnly: false, 
+                        number: techUnitMatch[1], 
+                        unit: techUnitMatch[2], 
+                        text: techUnitMatch[3] 
+                      }
                     }
-                  }
-                  
-                  // Caso especial para "18 HOYOS" - mantener junto
-                  const hoyos = str.match(/^(\d+)\s+(HOYOS?)$/i)
-                  if (hoyos) {
-                    return { 
-                      isTextOnly: false, 
-                      number: hoyos[1], 
-                      unit: '', 
-                      text: hoyos[2] 
+                    
+                    // Caso especial para "5 ESTRELLAS" - mantener junto
+                    const estrellas = str.match(/^(\d+)\s+(ESTRELLAS?)$/i)
+                    if (estrellas) {
+                      return { 
+                        isTextOnly: false, 
+                        number: estrellas[1], 
+                        unit: '', 
+                        text: estrellas[2] 
+                      }
                     }
-                  }
-                  
-                  // Caso especial para "TONELADAS" - mantener palabra completa
-                  const toneladas = str.match(/^([\d,.]+)\s+(TONELADAS.*)$/i)
-                  if (toneladas) {
-                    return { 
-                      isTextOnly: false, 
-                      number: toneladas[1], 
-                      unit: '', 
-                      text: toneladas[2] 
+                    
+                    // Caso especial para "18 HOYOS" - mantener junto
+                    const hoyos = str.match(/^(\d+)\s+(HOYOS?)$/i)
+                    if (hoyos) {
+                      return { 
+                        isTextOnly: false, 
+                        number: hoyos[1], 
+                        unit: '', 
+                        text: hoyos[2] 
+                      }
                     }
-                  }
-                  
-                  // Separar número con porcentaje o unidad simple
-                  const simpleMatch = str.match(/^([\d,.]+)\s*([%A-Z]*)\s*(.*)$/)
-                  if (simpleMatch && simpleMatch[2]) {
-                    return { 
-                      isTextOnly: false, 
-                      number: simpleMatch[1] + simpleMatch[2], 
-                      unit: '', 
-                      text: simpleMatch[3] 
+                    
+                    // Caso especial para "TONELADAS" - mantener palabra completa
+                    const toneladas = str.match(/^([\d,.]+)\s+(TONELADAS.*)$/i)
+                    if (toneladas) {
+                      return { 
+                        isTextOnly: false, 
+                        number: toneladas[1], 
+                        unit: '', 
+                        text: toneladas[2] 
+                      }
                     }
+                    
+                    // Separar número con porcentaje o unidad simple
+                    const simpleMatch = str.match(/^([\d,.]+)\s*([%A-Z]*)\s*(.*)$/)
+                    if (simpleMatch && simpleMatch[2]) {
+                      return { 
+                        isTextOnly: false, 
+                        number: simpleMatch[1] + simpleMatch[2], 
+                        unit: '', 
+                        text: simpleMatch[3] 
+                      }
+                    }
+                    
+                    // Si no hay texto adicional, es solo número
+                    return { isTextOnly: false, number: str, text: '', unit: '' }
                   }
                   
-                  // Si no hay texto adicional, es solo número
-                  return { isTextOnly: false, number: str, text: '', unit: '' }
-                }
-                
-                const parsed = parseValue(value.toString())
-                
-                                  return (
+                  const parsed = parseValue(value.toString())
+                  
+                  return (
                     <div key={key} className="border-t border-black pt-1 pb-0 md:pt-0 md:pb-0 flex justify-between items-start min-h-[60px] md:min-h-[20px]">
                       <div className="font-archivo text-black uppercase tracking-wider leading-none max-w-[50%] text-[14px] md:text-[13px] self-start" style={{ wordBreak: 'break-word', hyphens: 'auto' }}>
                         {key.replace(/_/g, ' ').split(' ').map((word, index) => (
@@ -291,7 +305,7 @@ export default function DesarrolloProyecto() {
                         ))}
                       </div>
                       <div className="text-right self-center max-w-[45%]">
-                                              {parsed.isTextOnly ? (
+                        {parsed.isTextOnly ? (
                           <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none break-words">
                             {parsed.text}
                           </div>
@@ -334,11 +348,11 @@ export default function DesarrolloProyecto() {
                             )}
                           </div>
                         )}
+                      </div>
                     </div>
-                  </div>
-                )
-              })}
-                </div>
+                  )
+                })}
+              </div>
             </div>
           )}
         </div>
@@ -378,7 +392,7 @@ export default function DesarrolloProyecto() {
           <div className="max-w-xl md:max-w-2xl">
             {/* Header fijo */}
             <div className="flex items-center gap-2 mb-4">
-              <Link href="/desarrollos-proyectos" className="text-black hover:text-black/80 transition-colors">
+              <Link href={getBackUrl} className="text-black hover:text-black/80 transition-colors">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { useRouter, useSearchParams } from "next/navigation"
 import projectsData from "@/data/projects.json"
 import AutoSlider from "@/components/AutoSlider"
 
@@ -73,36 +74,75 @@ const categories = [
 ]
 
 export default function DesarrollosProyectos() {
-const [selectedCategory, setSelectedCategory] = useState("VER TODOS")
-const projectsRef = useRef<HTMLElement>(null)
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  
+  // Obtener el filtro de la URL, por defecto "VER TODOS"
+  const [selectedCategory, setSelectedCategory] = useState(() => {
+    const categoryFromUrl = searchParams.get('categoria')
+    return categoryFromUrl && categories.includes(categoryFromUrl) ? categoryFromUrl : "VER TODOS"
+  })
+  
+  const projectsRef = useRef<HTMLElement>(null)
 
-const scrollToProjects = () => {
-  if (projectsRef.current) {
-    projectsRef.current.scrollIntoView({
-      behavior: 'smooth', 
-      block:'start'
-    })
+  // Efecto para hacer scroll a los proyectos cuando venimos de vuelta de un proyecto individual
+  useEffect(() => {
+    const shouldScrollToProjects = searchParams.get('scrollTo') === 'projects'
+    if (shouldScrollToProjects && projectsRef.current) {
+      // Remover el parámetro scrollTo de la URL
+      const params = new URLSearchParams(searchParams.toString())
+      params.delete('scrollTo')
+      const newUrl = params.toString() ? `?${params.toString()}` : '/desarrollos-proyectos'
+      router.replace(newUrl, { scroll: false })
+      
+      // Hacer scroll a la sección de proyectos
+      setTimeout(() => {
+        projectsRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        })
+      }, 100)
+    }
+  }, [searchParams, router])
+
+  const scrollToProjects = () => {
+    if (projectsRef.current) {
+      projectsRef.current.scrollIntoView({
+        behavior: 'smooth', 
+        block:'start'
+      })
+    }
   }
-}
 
-const photos = useMemo(() => [
-  "/images/desarrollos/1.jpg",
-  "/images/desarrollos/2.jpg",
-  "/images/desarrollos/3.jpg",
-  "/images/desarrollos/4.jpg",
-], [])
+  const photos = useMemo(() => [
+    "/images/desarrollos/1.jpg",
+    "/images/desarrollos/2.jpg",
+    "/images/desarrollos/3.jpg",
+    "/images/desarrollos/4.jpg",
+  ], [])
 
-const filteredProjects = selectedCategory === "VER TODOS" 
-  ? projectsData.proyectos 
-  : projectsData.proyectos.filter(project => project.categoria === selectedCategory)
+  const filteredProjects = selectedCategory === "VER TODOS" 
+    ? projectsData.proyectos 
+    : projectsData.proyectos.filter(project => project.categoria === selectedCategory)
 
-const handleCategoryChange = (category: string) => {
-  setSelectedCategory(category)
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category)
+    
+    // Actualizar la URL con el nuevo filtro
+    const params = new URLSearchParams(searchParams.toString())
+    if (category === "VER TODOS") {
+      params.delete('categoria')
+    } else {
+      params.set('categoria', category)
+    }
+    
+    const newUrl = params.toString() ? `?${params.toString()}` : '/desarrollos-proyectos'
+    router.replace(newUrl, { scroll: false })
 
-  setTimeout(() => {
-    scrollToProjects()
-  }, 100)
-}
+    setTimeout(() => {
+      scrollToProjects()
+    }, 100)
+  }
 
   return (
     <main className="bg-[#EFEFEF]">
