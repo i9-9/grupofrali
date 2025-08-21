@@ -12,9 +12,14 @@ export default function DesarrolloProyecto() {
   const params = useParams()
   const router = useRouter()
   const projectId = params.id as string
-  const scrollRef = useRef<HTMLDivElement>(null)
   const desktopScrollRef = useRef<HTMLDivElement>(null)
-  const [activeImageIndex, setActiveImageIndex] = useState(0)
+  
+  // Estados para carrusel mobile con transform
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [touchStart, setTouchStart] = useState(0)
+  const [touchEnd, setTouchEnd] = useState(0)
+  const [isDragging, setIsDragging] = useState(false)
+  
   const [activeDesktopImageIndex, setActiveDesktopImageIndex] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
   
@@ -79,26 +84,51 @@ export default function DesarrolloProyecto() {
   // Variable para detectar LA RESERVA CARDALES
   const isReservaCardales = project?.titulo === 'LA RESERVA CARDALES'
 
-  // Detectar imagen activa en el scroll - Mobile
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!scrollRef.current) return
-      
-      const container = scrollRef.current
-      const containerWidth = container.clientWidth
-      const scrollLeft = container.scrollLeft
-      
-      // Calcular qué imagen está más centrada
-      const activeIndex = Math.round(scrollLeft / containerWidth)
-      setActiveImageIndex(Math.min(activeIndex, mobileImages.length - 1))
-    }
+  // Funciones para carrusel mobile con transform
+  const goToSlide = (index: number) => {
+    setCurrentSlide(Math.max(0, Math.min(index, mobileImages.length - 1)))
+  }
 
-    const container = scrollRef.current
-    if (container) {
-      container.addEventListener('scroll', handleScroll)
-      return () => container.removeEventListener('scroll', handleScroll)
+  const nextSlide = () => {
+    if (currentSlide < mobileImages.length - 1) {
+      setCurrentSlide(currentSlide + 1)
     }
-  }, [mobileImages.length])
+  }
+
+  const prevSlide = () => {
+    if (currentSlide > 0) {
+      setCurrentSlide(currentSlide - 1)
+    }
+  }
+
+  // Manejar gestos táctiles
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX)
+    setIsDragging(true)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+    
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > 50
+    const isRightSwipe = distance < -50
+
+    if (isLeftSwipe) {
+      nextSlide()
+    }
+    if (isRightSwipe) {
+      prevSlide()
+    }
+    
+    setIsDragging(false)
+    setTouchStart(0)
+    setTouchEnd(0)
+  }
 
   // Detectar imagen activa en el scroll - Desktop
   useEffect(() => {
@@ -337,69 +367,48 @@ export default function DesarrolloProyecto() {
     <main className="min-h-screen md:h-screen md:overflow-hidden bg-[#EFEFEF] relative">
       {/* Mobile Layout */}
       <div className="md:hidden flex flex-col">
-        {/* CARRUSEL MOBILE OPTIMIZADO - SIN LÍNEAS BLANCAS */}
-        <div className="w-full h-[504px] relative">
+        {/* CARRUSEL MOBILE CON TRANSFORM - SIN LÍNEAS BLANCAS */}
+        <div className="w-full h-[504px] relative overflow-hidden bg-black">
           {hasImages ? (
             <>
-              {/* Contenedor principal del carrusel */}
+              {/* Contenedor de slides con transform */}
               <div 
-                ref={scrollRef}
-                className="w-full h-full overflow-x-auto scrollbar-hidden"
-                style={{ 
-                  scrollSnapType: 'x mandatory',
-                  // Prevenir líneas blancas
-                  transform: 'translate3d(0,0,0)',
-                  backfaceVisibility: 'hidden',
-                  perspective: '1000px',
-                  willChange: 'scroll-position'
+                className="flex h-full transition-transform duration-300 ease-out"
+                style={{
+                  width: `${mobileImages.length * 100}%`,
+                  transform: `translateX(-${currentSlide * (100 / mobileImages.length)}%)`,
                 }}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
               >
-                {/* Wrapper interno con flexbox */}
-                <div 
-                  className="flex h-full"
-                  style={{
-                    width: `${mobileImages.length * 100}%`,
-                    height: '100%'
-                  }}
-                >
-                  {mobileImages.map((imageSrc, index) => (
-                    <div 
-                      key={index} 
-                      className="relative"
+                {mobileImages.map((imageSrc, index) => (
+                  <div 
+                    key={index} 
+                    className="relative flex-shrink-0"
+                    style={{
+                      width: `${100 / mobileImages.length}%`,
+                      height: '100%'
+                    }}
+                  >
+                    <Image 
+                      src={imageSrc} 
+                      alt={`${project.imagenes?.alt || project.titulo} - Imagen ${index + 1}`}
+                      fill
+                      sizes="100vw"
+                      className={`object-cover transition-opacity duration-300 ${
+                        isTransitioning ? 'opacity-0' : 'opacity-100'
+                      }`}
                       style={{
-                        width: `${100 / mobileImages.length}%`,
-                        height: '100%',
-                        flexShrink: 0,
-                        scrollSnapAlign: 'start',
-                        // Eliminar gaps completamente
-                        margin: 0,
-                        padding: 0,
-                        border: 'none',
-                        outline: 'none'
+                        objectFit: 'cover'
                       }}
-                    >
-                      <Image 
-                        src={imageSrc} 
-                        alt={`${project.imagenes?.alt || project.titulo} - Imagen ${index + 1}`}
-                        fill
-                        sizes="100vw"
-                        className={`object-cover transition-opacity duration-300 ${
-                          isTransitioning ? 'opacity-0' : 'opacity-100'
-                        }`}
-                        style={{
-                          // Asegurar cobertura completa
-                          display: 'block',
-                          transform: 'translate3d(0,0,0)',
-                          backfaceVisibility: 'hidden'
-                        }}
-                        priority={index === 0}
-                      />
-                    </div>
-                  ))}
-                </div>
+                      priority={index === 0}
+                    />
+                  </div>
+                ))}
               </div>
               
-              {/* Barra de paginación */}
+              {/* Barra de progreso */}
               {mobileImages.length > 1 && (
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
                   <div className="rounded-full px-3 py-2">
@@ -408,10 +417,27 @@ export default function DesarrolloProyecto() {
                         className="absolute top-0 h-full bg-white rounded-full transition-all duration-300 ease-out"
                         style={{ 
                           width: `${100 / mobileImages.length}%`,
-                          left: `${(activeImageIndex * 100) / mobileImages.length}%`
+                          left: `${(currentSlide * 100) / mobileImages.length}%`
                         }}
                       />
                     </div>
+                  </div>
+                </div>
+              )}
+              
+              {/* Indicadores de dots opcionales */}
+              {mobileImages.length > 1 && mobileImages.length <= 5 && (
+                <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-10">
+                  <div className="flex space-x-2">
+                    {mobileImages.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => goToSlide(index)}
+                        className={`w-2 h-2 rounded-full transition-colors ${
+                          index === currentSlide ? 'bg-white' : 'bg-white/30'
+                        }`}
+                      />
+                    ))}
                   </div>
                 </div>
               )}
@@ -465,31 +491,6 @@ export default function DesarrolloProyecto() {
               </div>
             </div>
           )}
-        </div>
-        
-        {/* Flechas de navegación mobile */}
-        <div className="hidden md:flex fixed bottom-2 left-0 right-0 justify-between pointer-events-none z-50 px-4">
-          {/* Flecha anterior */}
-          <button
-            onClick={() => navigateToProject(previousProject)}
-            className="pointer-events-auto w-12 h-12 flex items-center hover:opacity-70 transition-opacity"
-            aria-label={`Ir a proyecto anterior: ${previousProject.titulo}`}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
-              <path d="M19 12H5M12 19l-7-7 7-7"/>
-            </svg>
-          </button>
-          
-          {/* Flecha siguiente */}
-          <button
-            onClick={() => navigateToProject(nextProject)}
-            className="pointer-events-auto w-12 h-12 flex items-center justify-center hover:opacity-70 transition-opacity"
-            aria-label={`Ir a proyecto siguiente: ${nextProject.titulo}`}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </button>
         </div>
       </div>
 

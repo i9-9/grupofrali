@@ -114,7 +114,7 @@ export default function QuienesSomos() {
 
         <div className="grid pb-16">
           <div className="col-6 md:col-6">
-            <p className="text-[#151714] tracking-[0.01em] leading-[1.2] md:leading-[1] text-base md:text-[1.4rem]">
+            <p className="text-[#151714] tracking-[0.01em] leading-[1.2] md:leading-[1] text-base md:text-[1.18rem]">
               Con casi 30 años de trayectoria, consolidamos nuestro liderazgo a través de proyectos que combinan innovación, compromiso y una gestión profesional orientada al valor de largo plazo, en Argentina, Estados Unidos y Uruguay. Nuestra fortaleza está en la capacidad de evolucionar, diversificar e invertir en el futuro.
             </p>
           </div>
@@ -145,7 +145,7 @@ export default function QuienesSomos() {
                       </span>
                     </div>
                     <div className="flex-1 pl-12">
-                      <p className="font-archivo text-black text-base md:text-[1.4rem] leading-[1.2] md:leading-[1]">
+                      <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
                         {valor.titulo}
                       </p>
                     </div>
@@ -162,7 +162,7 @@ export default function QuienesSomos() {
                       <span className="text-small-archivo text-black flex-shrink-0">
                         ({valores[0].numero})
                       </span>
-                      <p className="font-archivo text-black text-base md:text-[1.4rem] leading-[1.2] md:leading-[1]">
+                      <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
                         {valores[0].titulo}
                       </p>
                     </div>
@@ -173,7 +173,7 @@ export default function QuienesSomos() {
                       <span className="text-small-archivo text-black flex-shrink-0">
                         ({valores[2].numero})
                       </span>
-                      <p className="font-archivo text-black text-base md:text-[1.4rem] leading-[1.2] md:leading-[1]">
+                      <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
                         {valores[2].titulo}
                       </p>
                     </div>
@@ -187,7 +187,7 @@ export default function QuienesSomos() {
                       <span className="text-small-archivo text-black flex-shrink-0">
                         ({valores[1].numero})
                       </span>
-                      <p className="font-archivo text-black text-base md:text-[1.4rem] leading-[1.2] md:leading-[1]">
+                      <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
                         {valores[1].titulo}
                       </p>
                     </div>
@@ -198,7 +198,7 @@ export default function QuienesSomos() {
                       <span className="text-small-archivo text-black flex-shrink-0">
                         ({valores[3].numero})
                       </span>
-                      <p className="font-archivo text-black text-base md:text-[1.4rem] leading-[1.2] md:leading-[1]">
+                      <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
                         {valores[3].titulo}
                       </p>
                     </div>
@@ -225,9 +225,9 @@ export default function QuienesSomos() {
                 </h3>
               </div>
               <div className="flex-1 pl-12">
-                <p className="font-archivo text-black text-base md:text-[1.4rem] leading-[1.2] md:leading-[1]">
-                  Impulsar proyectos de inversión que generen valor económico, social y humano, fortaleciendo el crecimiento de las comunidades donde operamos.
-                </p>
+                              <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+                Impulsar proyectos de inversión que generen valor económico, social y humano, fortaleciendo el crecimiento de las comunidades donde operamos.
+              </p>
               </div>
             </div>
             
@@ -239,9 +239,9 @@ export default function QuienesSomos() {
                 </h3>
               </div>
               <div className="flex-1 pl-12">
-                <p className="font-archivo text-black text-base md:text-[1.4rem] leading-[1.2] md:leading-[1]">
-                  Consolidarnos como un actor estratégico en la generación de desarrollos de alto impacto, combinando responsabilidad, innovación y visión de futuro.
-                </p>
+                              <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+                Consolidarnos como un actor estratégico en la generación de desarrollos de alto impacto, combinando responsabilidad, innovación y visión de futuro.
+              </p>
               </div>
             </div>
           </div>
@@ -262,13 +262,13 @@ export default function QuienesSomos() {
 
         <div className="grid">
           <div className="col-6 md:col-6 space-y-6">
-            <p className="text-black text-base md:text-[1.4rem] leading-[1.2] md:leading-[1]">
-              Desde nuestros inicios, canalizamos inversiones en sectores estratégicos, trabajando con un enfoque profesional y una mirada a largo plazo. Nuestros proyectos en real estate, agroindustria, energía y hotelería reflejan un modelo de gestión basado en la diversificación y el compromiso con el impacto positivo. Hoy operamos en Argentina, Estados Unidos y Uruguay, ampliando nuestra presencia en segmentos clave de manera planificada.
-            </p>
+                          <p className="text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+                Desde nuestros inicios, canalizamos inversiones en sectores estratégicos, trabajando con un enfoque profesional y una mirada a largo plazo. Nuestros proyectos en real estate, agroindustria, energía y hotelería reflejan un modelo de gestión basado en la diversificación y el compromiso con el impacto positivo. Hoy operamos en Argentina, Estados Unidos y Uruguay, ampliando nuestra presencia en segmentos clave de manera planificada.
+              </p>
 
-            <p className="text-black text-base md:text-[1.4rem] leading-[1.2] md:leading-[1]">
-              Fieles a nuestro espíritu dinámico, continuamos analizando nuevas oportunidades de desarrollo e inversión, abiertos a expandir nuestra participación en distintos mercados, siempre con la visión de generar valor perdurable. Nuestro directorio está conformado por profesionales con experiencia local e internacional, comprometidos con la excelencia y el crecimiento estratégico del grupo.
-            </p>
+                          <p className="text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+                Fieles a nuestro espíritu dinámico, continuamos analizando nuevas oportunidades de desarrollo e inversión, abiertos a expandir nuestra participación en distintos mercados, siempre con la visión de generar valor perdurable. Nuestro directorio está conformado por profesionales con experiencia local e internacional, comprometidos con la excelencia y el crecimiento estratégico del grupo.
+              </p>
           </div>
 
           <div className="col-6 md:col-6">
