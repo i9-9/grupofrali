@@ -221,6 +221,17 @@ export default function DesarrolloProyecto() {
         }
       }
       
+      // Caso especial para códigos de zonificación como "T6-360"
+      const zonificacion = str.match(/^(T\d+-\d+)$/i)
+      if (zonificacion) {
+        return { 
+          isTextOnly: false,
+          number: str,
+          text: '',
+          unit: ''
+        }
+      }
+      
       // Tipo 4: NUMERO CON TEXTO - Número seguido de texto descriptivo
       const numeroConTexto = str.match(/^([\d,.]+)\s+(.+)$/)
       if (numeroConTexto) {
@@ -252,7 +263,7 @@ export default function DesarrolloProyecto() {
     })
 
     return (
-      <div className={`pt-3 pb-1 md:pt-2 md:pb-0 flex justify-between items-start min-h-[60px] md:min-h-[20px] project-stats-line ${getLineDelayClass(index)} ${isVisible ? 'animate' : ''}`}>
+      <div className={`pt-3 pb-1 flex justify-between items-start min-h-[60px] md:min-h-[20px] project-stats-line ${getLineDelayClass(index)} ${isVisible ? 'animate' : ''} ${parsed.isTextOnly ? 'text-only' : ''}`}>
         <div className="font-archivo text-black uppercase tracking-wider leading-none max-w-[50%] md:text-[0.8rem] text-[14px] md:text-[13px] self-start" style={{ wordBreak: 'break-word' }}>
           {statKey.replace(/_/g, ' ').split(' ').map((word, index) => (
             <span key={index}>
@@ -284,7 +295,7 @@ export default function DesarrolloProyecto() {
               {parsed.unit ? (
                 // Número con unidad en línea
                 <div className="flex items-baseline gap-1">
-                  <span className="font-archivo text-black font-archivo-light leading-none text-h2-arquivo md:text-h2-archivo" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? 'clamp(18px, 5vw, 30px)' : '1.875rem' }}>
+                  <span className="font-archivo text-black font-archivo-light leading-none text-h2-arquivo md:text-h2-archivo" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '2.5rem' : '1.875rem' }}>
                     {displayValue}
                   </span>
                   <span className="font-archivo text-black uppercase tracking-wider leading-none text-stat-description md:text-[0.8rem]" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? 'clamp(14px, 3vw, 20px)' : undefined }}>

@@ -45,7 +45,7 @@ export function StatItem({ number, unit, label, delay, lineDelay }: StatItemProp
   return (
     <div
       ref={ref}
-      className={`pt-1 mb-1 w-full flex stat-line ${lineDelay} ${isVisible ? 'animate' : ''}`}
+      className={`pt-4 md:pt-4 mb-8 md:mb-12 w-full flex stat-line ${lineDelay} ${isVisible ? 'animate' : ''}`}
     >
       {/* Contenedor que asegura separación entre número y label */}
       <div className="flex justify-between items-start w-full">

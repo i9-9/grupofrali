@@ -921,3 +921,19 @@ body {
 .quienes-somos-line-delay-4.animate::after {
   animation-delay: 0.1s; /* EL GRUPO (se anima independiente) */
 }
+
+/* ========================================
+   PADDING FORZADO PARA ESTADÍSTICAS DE PROYECTOS EN DESKTOP
+   ======================================== */
+
+/* Forzar altura consistente en desktop para todas las filas de estadísticas */
+@media (min-width: 768px) {
+  .project-stats-line {
+    min-height: 3rem !important; /* 48px - altura mínima para todas las filas */
+  }
+  
+  /* Filas que solo tienen texto - más altura para compensar la falta de números grandes */
+  .project-stats-line.text-only {
+    min-height: 3.5rem !important; /* 56px - altura compensatoria para filas de solo texto */
+  }
+}
