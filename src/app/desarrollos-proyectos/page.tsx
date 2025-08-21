@@ -10,13 +10,11 @@ import AutoSlider from "@/components/AutoSlider"
 function ResponsiveImage({ 
   desktopImage, 
   mobileImage, 
-  alt, 
-  className = ""
+  alt
 }: {
   desktopImage: string
   mobileImage: string
   alt: string
-  className?: string
 }) {
   const [isMobile, setIsMobile] = useState(false)
 
