@@ -51,13 +51,13 @@ export default function Home() {
             {/* CONCEPTOS - arriba de stats izquierdas (columnas 1-5) */}
             <div className="col-6 md:col-1-to-5 flex flex-col order-2 md:order-1">
               <div className="flex justify-between pb-8 items-center mt-auto">
-                <h3 className="text-small-archivo text-black">
+                <h3 className="font-baskerville text-black">
                   VISIÓN DE FUTURO
                 </h3>
-                <h3 className="text-small-archivo text-black">
+                <h3 className="font-baskerville text-black">
                   INNOVACIÓN
                 </h3>
-                <h3 className="text-small-archivo text-black">
+                <h3 className="font-baskerville text-black">
                   SOLIDEZ
                 </h3>
               </div>
@@ -76,7 +76,7 @@ export default function Home() {
 
             {/* ESTADÍSTICAS - Layout 5+2+5 en Desktop */}
             {/* Columna 1: Estadísticas izquierda (columnas 1-5) */}
-            <div className="col-6 md:col-1-to-5 order-3 md:order-3">
+            <div className="col-6 md:col-1-to-5 order-3 md:order-3 md:pb-8">
               <StatItem
                 number="14"
                 label="PROYECTOS DESARROLLADOS"
@@ -99,7 +99,7 @@ export default function Home() {
             </div>
 
             {/* Columna 2: Estadísticas derecha (columnas 8-12) */}
-            <div className="col-6 md:col-8-to-12 order-4 md:order-4">
+            <div className="col-6 md:col-8-to-12 order-4 md:order-4 md:pb-8">
               <StatItem
                 number="7800"
                 unit="ha"

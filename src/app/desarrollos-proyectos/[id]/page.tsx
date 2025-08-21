@@ -342,7 +342,7 @@ export default function DesarrolloProyecto() {
                         ) : parsed.text && (parsed.text.toUpperCase() === 'HOYOS' || parsed.text.toUpperCase() === 'ESTRELLAS') ? (
                           // Caso especial para HOYOS y ESTRELLAS - número arriba, texto abajo
                           <>
-                            <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: '2.5rem' }}>
+                            <span className="font-archivo text-black project-stats-number leading-none" style={{ fontSize: '2.5rem' }}>
                               {parsed.number}
                             </span>
                             <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none">
@@ -355,7 +355,7 @@ export default function DesarrolloProyecto() {
                             {parsed.unit ? (
                               // Número con unidad en línea
                               <div className="flex items-baseline gap-1">
-                                <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: 'clamp(18px, 5vw, 30px)' }}>
+                                <span className="font-archivo text-black project-stats-number leading-none" style={{ fontSize: 'clamp(18px, 5vw, 30px)' }}>
                                   {parsed.number}
                                 </span>
                                 <span className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none">
@@ -365,7 +365,7 @@ export default function DesarrolloProyecto() {
                             ) : parsed.text ? (
                               // Número arriba, texto abajo
                               <>
-                                <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: '2.5rem' }}>
+                                <span className="font-archivo text-black project-stats-number leading-none" style={{ fontSize: '2.5rem' }}>
                                   {parsed.number}
                                 </span>
                                 <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none">
@@ -374,7 +374,7 @@ export default function DesarrolloProyecto() {
                               </>
                             ) : (
                               // Solo número
-                              <span className="font-archivo text-black font-archivo-light leading-none" style={{ fontSize: '2.5rem' }}>
+                              <span className="font-archivo text-black project-stats-number leading-none" style={{ fontSize: '2.5rem' }}>
                                 {parsed.number}
                               </span>
                             )}
@@ -560,16 +560,16 @@ export default function DesarrolloProyecto() {
                       </div>
                       <div className="text-right self-center max-w-[45%]">
                         {parsed.isTextOnly ? (
-                          <div className="font-archivo text-black uppercase tracking-wider leading-none break-words text-[0.8rem]">
+                          <div className="font-archivo text-black uppercase tracking-wider leading-none break-words" style={{ fontSize: 'clamp(14px, 2.5vw, 16px)' }}>
                             {parsed.text}
                           </div>
                         ) : parsed.text && (parsed.text.toUpperCase() === 'HOYOS' || parsed.text.toUpperCase() === 'ESTRELLAS') ? (
                           // Caso especial para HOYOS y ESTRELLAS - número arriba, texto abajo
                           <>
-                            <span className="text-h2-archivo text-black font-archivo-light leading-none">
+                            <span className="text-h2-archivo text-black font-archivo-thin leading-none">
                               {parsed.number}
                             </span>
-                            <div className="font-archivo text-black uppercase tracking-wider leading-none text-[0.8rem]">
+                            <div className="font-archivo text-black uppercase tracking-wider leading-none" style={{ fontSize: 'clamp(14px, 3vw, 20px)' }}>
                               {parsed.text}
                             </div>
                           </>
@@ -579,26 +579,26 @@ export default function DesarrolloProyecto() {
                             {parsed.unit ? (
                               // Número con unidad en línea
                               <div className="flex items-baseline gap-1">
-                                <span className="text-h2-archivo text-black font-archivo-light leading-none">
+                                <span className="text-h2-archivo text-black project-stats-number leading-none">
                                   {parsed.number}
                                 </span>
-                                <span className="font-archivo text-black uppercase tracking-wider leading-none text-[0.8rem]">
+                                <span className="font-archivo text-black uppercase tracking-wider leading-none" style={{ fontSize: 'clamp(14px, 3vw, 20px)' }}>
                                   {parsed.unit}
                                 </span>
                               </div>
                             ) : parsed.text ? (
-                              // Número arriba, texto abajo
+                                                            // Número arriba, texto abajo
                               <>
-                                <span className="text-h2-archivo text-black font-archivo-light leading-none">
+                                <span className="text-h2-archivo text-black project-stats-number leading-none">
                                   {parsed.number}
                                 </span>
-                                <div className="font-archivo text-black uppercase tracking-wider leading-none text-[0.8rem]">
+                                <div className="font-archivo text-black uppercase tracking-wider leading-none" style={{ fontSize: 'clamp(14px, 2.5vw, 16px)' }}>
                                   {parsed.text}
                                 </div>
                               </>
                             ) : (
                               // Solo número
-                              <span className="text-h2-archivo text-black font-archivo-light leading-none">
+                              <span className="text-h2-archivo text-black font-archivo-thin leading-none">
                                 {parsed.number}
                               </span>
                             )}

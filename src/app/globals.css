@@ -20,8 +20,16 @@
 
 @font-face {
   font-family: 'Archivo';
+  src: url('/fonts/Archivo-Thin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Archivo';
   src: url('/fonts/Archivo-Regular.ttf') format('truetype');
-  font-weight: 400;
+  font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
@@ -69,7 +77,7 @@ html {
 body {
   color: #151714;
   font-family: 'Archivo', sans-serif;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 /* ========================================
@@ -97,7 +105,7 @@ body {
   font-family: 'Archivo', sans-serif;
   font-size: 2.2rem;
   line-height: 1.2;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 /* H3 BASKERVILLE - 1.5rem */
@@ -113,7 +121,7 @@ body {
   font-family: 'Archivo', sans-serif;
   font-size: 1.75rem;
   line-height: 1.4;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 /* BODY 2 ARCHIVO - 1rem */
@@ -121,15 +129,15 @@ body {
   font-family: 'Archivo', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 /* SMALL ARCHIVO - 0.8rem */
 .text-small-archivo {
   font-family: 'Archivo', sans-serif;
   font-size: 0.8rem;
-  line-height: 1.3;
-  font-weight: 400;
+  line-height: 1.1;
+  font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -139,7 +147,7 @@ body {
   font-family: 'Archivo', sans-serif;
   font-size: 1.5rem;
   line-height: 1.4;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 /* 12 ARCHIVO - 0.75rem */
@@ -147,7 +155,7 @@ body {
   font-family: 'Archivo', sans-serif;
   font-size: 0.75rem;
   line-height: 1.3;
-  font-weight: 400;
+  font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -202,9 +210,14 @@ body {
   font-weight: 300;
 }
 
+.font-archivo-thin {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 100 !important;
+}
+
 .font-archivo-regular {
   font-family: 'Archivo', sans-serif;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 .font-archivo-bold {
@@ -265,7 +278,7 @@ body {
 
 .filter-item.inactive {
   color: #9ca3af;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 /* Header superpuesto */
@@ -393,15 +406,20 @@ body {
   font-family: 'Archivo', sans-serif;
   font-size: 5.4rem; /* 86.4px en base 16px */
   line-height: 0.85;
-  font-weight: 300;
+  font-weight: 100 !important;
   letter-spacing: -0.02em;
+}
+
+/* Números de estadísticas en páginas de proyectos - Forzar Thin */
+.project-stats-number {
+  font-weight: 100 !important;
 }
 
 .text-stat-unit { 
   font-family: 'Archivo', sans-serif;
   font-size: 1.5rem; /* 24px - proporcional al número grande */
   line-height: 0.9;
-  font-weight: 300;
+  font-weight: 100 !important;
 }
 
 /* Responsive para números grandes - Siguiendo nueva escala mobile */
@@ -857,4 +875,49 @@ body {
 
 .project-stats-line-delay-8.animate::before {
   animation-delay: 1.5s;
+}
+
+/* ========================================
+   ANIMACIÓN DE LÍNEAS QUIENES SOMOS
+   ======================================== */
+
+/* Clase base para líneas de Quiénes Somos */
+.quienes-somos-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.quienes-somos-line::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #000;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.8s ease-out;
+}
+
+/* Clase para activar la animación */
+.quienes-somos-line.animate::after {
+  animation: drawLine 0.8s ease-out forwards;
+}
+
+/* Delays secuenciales para líneas de Quiénes Somos */
+.quienes-somos-line-delay-1.animate::after {
+  animation-delay: 0.1s; /* VALORES */
+}
+
+.quienes-somos-line-delay-2.animate::after {
+  animation-delay: 0.3s; /* NUESTRO ADN */
+}
+
+.quienes-somos-line-delay-3.animate::after {
+  animation-delay: 0.5s; /* MISIÓN */
+}
+
+.quienes-somos-line-delay-4.animate::after {
+  animation-delay: 0.1s; /* EL GRUPO (se anima independiente) */
 }

@@ -1,7 +1,29 @@
+'use client'
+
 import React from 'react'
 import Image from 'next/image'
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver"
 
 export default function QuienesSomos() {
+  // Intersection Observers para las diferentes secciones
+  const { ref: valoresRef, isVisible: isValoresVisible } = useIntersectionObserver<HTMLDivElement>({
+    threshold: 0.3,
+    rootMargin: '0px 0px -50px 0px',
+    triggerOnce: true
+  })
+
+  const { ref: adnRef, isVisible: isAdnVisible } = useIntersectionObserver<HTMLDivElement>({
+    threshold: 0.3,
+    rootMargin: '0px 0px -50px 0px',
+    triggerOnce: true
+  })
+
+  const { ref: grupoRef, isVisible: isGrupoVisible } = useIntersectionObserver<HTMLDivElement>({
+    threshold: 0.3,
+    rootMargin: '0px 0px -50px 0px',
+    triggerOnce: true
+  })
+
   const valores = [
     {
       numero: "01",
@@ -70,10 +92,10 @@ export default function QuienesSomos() {
     <main className="bg-[#EFEFEF] text-[#151714]">
       {/* Hero Section */}
       <div className="content-wrapper">
-        <div className="grid pt-36 md:pt-24 pb-12">
+        <div className="grid pt-36 md:pt-24 pb-6">
           <div className="col-6 md:col-12">
             {/* Mobile version */}
-            <h1 className="md:hidden text-h1-baskerville text-[#151714]">
+            <h1 className="md:hidden text-h1-baskerville text-[#151714]" style={{ fontSize: '1.5rem', lineHeight: '1.2' }}>
               DESARROLLAMOS<br />
               INVERSIONES ESTRATÉGICAS<br />
               EN SECTORES CLAVE PARA<br />
@@ -82,7 +104,7 @@ export default function QuienesSomos() {
             </h1>
             
             {/* Desktop version */}
-            <h1 className="hidden md:block text-h1-baskerville text-[#151714]">
+            <h1 className="hidden md:block text-h1-baskerville text-[#151714]" style={{ lineHeight: '1.4' }}>
               DESARROLLAMOS INVERSIONES ESTRATÉGICAS<br />
               EN SECTORES CLAVE PARA EL CRECIMIENTO<br />
               ECONÓMICO Y SOCIAL.
@@ -92,7 +114,7 @@ export default function QuienesSomos() {
 
         <div className="grid pb-16">
           <div className="col-6 md:col-6">
-            <p className="text-[#151714] tracking-[0.01em] leading-[1] text-base">
+            <p className="text-[#151714] tracking-[0.01em] leading-[1.2] md:leading-[1] text-base">
               Con casi 30 años de trayectoria, consolidamos nuestro liderazgo a través de proyectos que combinan innovación, compromiso y una gestión profesional orientada al valor de largo plazo, en Argentina, Estados Unidos y Uruguay. Nuestra fortaleza está en la capacidad de evolucionar, diversificar e invertir en el futuro.
             </p>
           </div>
@@ -103,10 +125,10 @@ export default function QuienesSomos() {
       <section className="content-wrapper pb-20 ">
         <div className="grid gap-y-32 md:gap-y-0 mb-20">
           {/* Columna Izquierda: VALORES */}
-          <div className="col-6 md:col-6 pb-16 md:pb-0">
-            {/* Título VALORES */}
-            <div className="border-b border-black pb-2 mb-4">
-              <h2 className="text-small-baskerville">
+          <div className="col-6 md:col-6 pb-16 md:pb-0" ref={valoresRef}>
+            {/* Título VALORES con línea animada */}
+            <div className={`pb-2 mb-4 quienes-somos-line quienes-somos-line-delay-1 ${isValoresVisible ? 'animate' : ''}`}>
+              <h2 className="text-small-baskerville md:text-small-baskerville" style={{ fontSize: '1.5rem', lineHeight: '1.2' }}>
                 VALORES
               </h2>
             </div>
@@ -187,16 +209,16 @@ export default function QuienesSomos() {
           </div>
 
           {/* Columna Derecha: NUESTRO ADN */}
-          <div className="col-6 md:col-6">
-            {/* Título NUESTRO ADN */}
-            <div className="border-b border-black pb-2 mb-4">
-              <h2 className="text-small-baskerville">
+          <div className="col-6 md:col-6" ref={adnRef}>
+            {/* Título NUESTRO ADN con línea animada */}
+            <div className={`pb-2 mb-4 quienes-somos-line quienes-somos-line-delay-2 ${isAdnVisible ? 'animate' : ''}`}>
+              <h2 className="text-small-baskerville md:text-small-baskerville" style={{ fontSize: '1.5rem', lineHeight: '1.2' }}>
                 NUESTRO ADN
               </h2>
             </div>
             
-            {/* MISIÓN con flexbox */}
-            <div className="flex items-start border-b border-black pb-4 mb-8">
+            {/* MISIÓN con línea animada */}
+            <div className={`flex items-start pb-4 mb-8 quienes-somos-line quienes-somos-line-delay-3 ${isAdnVisible ? 'animate' : ''}`}>
               <div className="w-32 flex-shrink-0">
                 <h3 className="text-small-archivo text-black tracking-wider">
                   MISIÓN
@@ -209,7 +231,7 @@ export default function QuienesSomos() {
               </div>
             </div>
             
-            {/* VISIÓN con flexbox */}
+            {/* VISIÓN sin línea */}
             <div className="flex items-start pb-4 mb-8">
               <div className="w-32 flex-shrink-0">
                 <h3 className="text-small-archivo text-black tracking-wider">
@@ -217,7 +239,7 @@ export default function QuienesSomos() {
                 </h3>
               </div>
               <div className="flex-1 pl-12">
-                <p className="font-archivo text-black text-base leading-[1.4]">
+                <p className="font-archivo text-black text-base leading-[1.5]">
                   Consolidarnos como un actor estratégico en la generación de desarrollos de alto impacto, combinando responsabilidad, innovación y visión de futuro.
                 </p>
               </div>
@@ -228,21 +250,23 @@ export default function QuienesSomos() {
 
       {/* El Grupo Section */}
       <section className="content-wrapper pb-20 md:pb-52">
-        <div className="grid pb-8">
+        <div className="grid pb-8" ref={grupoRef}>
           <div className="col-6 md:col-12">
-            <h2 className="text-h1-baskerville text-black border-b border-black pb-4">
-              EL GRUPO
-            </h2>
+            <div className={`quienes-somos-line quienes-somos-line-delay-4 ${isGrupoVisible ? 'animate' : ''}`}>
+              <h2 className="text-h1-baskerville text-black pb-4" style={{ fontSize: '1.5rem', lineHeight: '1.2' }}>
+                EL GRUPO
+              </h2>
+            </div>
           </div>
         </div>
 
         <div className="grid">
           <div className="col-6 md:col-6 space-y-6">
-            <p className="text-black text-base leading-[1]">
+            <p className="text-black text-base leading-[1.6]">
               Desde nuestros inicios, canalizamos inversiones en sectores estratégicos, trabajando con un enfoque profesional y una mirada a largo plazo. Nuestros proyectos en real estate, agroindustria, energía y hotelería reflejan un modelo de gestión basado en la diversificación y el compromiso con el impacto positivo. Hoy operamos en Argentina, Estados Unidos y Uruguay, ampliando nuestra presencia en segmentos clave de manera planificada.
             </p>
 
-            <p className="text-black text-base leading-[1]">
+            <p className="text-black text-base leading-[1.6]">
               Fieles a nuestro espíritu dinámico, continuamos analizando nuevas oportunidades de desarrollo e inversión, abiertos a expandir nuestra participación en distintos mercados, siempre con la visión de generar valor perdurable. Nuestro directorio está conformado por profesionales con experiencia local e internacional, comprometidos con la excelencia y el crecimiento estratégico del grupo.
             </p>
           </div>
@@ -270,7 +294,7 @@ export default function QuienesSomos() {
       <section className="content-wrapper pb-16">
         <div className="grid pb-8">
           <div className="col-6 md:col-12">
-            <h2 className="font-baskerville text-black" style={{ fontSize: 'clamp(32px, 3.5vw, 48px)', lineHeight: '1.2' }}>
+            <h2 className="font-baskerville text-black" style={{ fontSize: 'clamp(24px, 3.5vw, 48px)', lineHeight: '1.2' }}>
               MANAGEMENT
             </h2>
           </div>

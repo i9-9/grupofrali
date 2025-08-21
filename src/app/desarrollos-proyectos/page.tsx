@@ -34,13 +34,22 @@ function ResponsiveImage({
   const imageSrc = isMobile ? mobileImage : desktopImage
 
   return (
-    <Image 
-      src={imageSrc} 
-      alt={alt}
-      width={300}
-      height={200}
-      className={className}
-    />
+    <div className="w-full pb-[22px] border-b border-black">
+      {/* Desktop: siempre el mismo aspect ratio */}
+      {/* Mobile: aspect ratio diferente para el layout mobile */}
+      <div 
+        className="w-full overflow-hidden"
+        style={{ aspectRatio: isMobile ? '16/9' : '347/355' }}
+      >
+        <Image 
+          src={imageSrc} 
+          alt={alt}
+          width={400}
+          height={400}
+          className="w-full h-full object-cover"
+        />
+      </div>
+    </div>
   )
 }
 
@@ -251,12 +260,11 @@ export default function DesarrollosProyectos() {
             <Link 
               key={project.id}
               href={`/desarrollos-proyectos/${project.id}`} 
-              className="col-6  md:col-4 lg:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out pt-4 "
+              className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out pt-4 "
             >
               <ResponsiveImage 
                 desktopImage={desktopImage}
                 mobileImage={mobileImage}
-                className="w-full h-[168.75px] md:h-[353.75px] object-cover pb-[22px] border-b border-black" 
                 alt={project.imagenes?.alt || project.titulo} 
               />
               <h3 className="font-baskerville text-base text-right md:text-left pb-5 md:pb-0 md:text-2xl mt-4 leading-none">
