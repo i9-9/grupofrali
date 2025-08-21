@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import HamburgerIcon from "../icons/HamburgerIcon"
 import DownArrowIcon from "../icons/DownArrowIcon"
 import { usePathname } from 'next/navigation'
@@ -29,10 +29,12 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
   const [animationClass, setAnimationClass] = useState("")
+  const [showLines, setShowLines] = useState(false)
 
   const toggleMenu = () => {
     if (isOpen) {
       // Cerrar menu
+      setShowLines(false) // Ocultar líneas inmediatamente
       setIsAnimating(true)
       setAnimationClass("mobile-menu-exit-active")
       setTimeout(() => {
@@ -49,6 +51,11 @@ export default function Header() {
       setTimeout(() => {
         setAnimationClass("mobile-menu-enter-active")
       }, 10) // 10ms es suficiente para que React procese el primer cambio de estado
+      
+      // Activar animación de líneas antes de que el menú termine de aparecer
+      setTimeout(() => {
+        setShowLines(true)
+      }, 200) // Delay reducido para que las líneas empiecen antes
     }
   }
 
@@ -145,26 +152,31 @@ export default function Header() {
                 GRUPO FRALI
               </h1>
             </Link>
-            <ul className="flex flex-col text-[#151714] text-lg divide-y divide-[#151714] border-y border-[#151714]">
-              {mobileItems.map((item, index) => {
-                const isCurrent = pathname === item.href
-                return (
-                  <li
-                    key={index}
-                    className="font-archivo-light py-4 flex justify-between items-center"
-                    onClick={toggleMenu}
-                  >
-                    <Link
-                      href={item.href}
-                      className={`flex justify-between w-full ${isCurrent ? 'font-bold' : ''}`}
+            
+            {/* Contenedor del menú con líneas animadas */}
+            <div className={`mobile-menu-border-top mobile-menu-border-bottom mobile-menu-line-delay-0 mobile-menu-line-delay-5 ${showLines ? 'animate' : ''}`}>
+              <ul className="flex flex-col text-[#151714] text-lg">
+                {mobileItems.map((item, index) => {
+                  const isCurrent = pathname === item.href
+                  return (
+                    <li
+                      key={index}
+                      className={`font-archivo-light py-4 flex justify-between items-center mobile-menu-item mobile-menu-line-delay-${index + 1} ${showLines ? 'animate' : ''}`}
+                      onClick={toggleMenu}
                     >
-                      <span>{item.name}</span>
-                      <span>(0{index + 1})</span>
-                    </Link>
-                  </li>
-                )
-              })}
-            </ul>
+                      <Link
+                        href={item.href}
+                        className={`flex justify-between w-full ${isCurrent ? 'font-bold' : ''}`}
+                      >
+                        <span>{item.name}</span>
+                        <span>(0{index + 1})</span>
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+            
             <div className="flex justify-between items-center">
               <span className="cursor-default">
                 <h4 className="py-14">EN</h4>

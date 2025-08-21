@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useMemo } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver"
 import projectsData from "@/data/projects.json"
 
 export default function DesarrolloProyecto() {
@@ -15,6 +16,20 @@ export default function DesarrolloProyecto() {
   const [activeImageIndex, setActiveImageIndex] = useState(0)
   const [activeDesktopImageIndex, setActiveDesktopImageIndex] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  
+  // Intersection Observer para estadísticas mobile
+  const { ref: mobileStatsRef, isVisible: isMobileStatsVisible } = useIntersectionObserver<HTMLDivElement>({
+    threshold: 0.3,
+    rootMargin: '0px 0px -50px 0px',
+    triggerOnce: true
+  })
+
+  // Intersection Observer para estadísticas desktop
+  const { ref: desktopStatsRef, isVisible: isDesktopStatsVisible } = useIntersectionObserver<HTMLDivElement>({
+    threshold: 0.3,
+    rootMargin: '0px 0px -50px 0px',
+    triggerOnce: true
+  })
   
   // Buscar el proyecto por ID
   const project = projectsData.proyectos.find(p => p.id === projectId)
@@ -119,6 +134,11 @@ export default function DesarrolloProyecto() {
       setIsTransitioning(false)
     }, 300) // Duración total de la transición
   }
+
+  // Función para crear delay class según el índice
+  const getLineDelayClass = (index: number) => {
+    return `project-stats-line-delay-${index + 1}`
+  }
   
   if (!project) {
     return (
@@ -207,11 +227,11 @@ export default function DesarrolloProyecto() {
             {project.descripcion}
           </p>
           
-          {/* Estadísticas mobile */}
+          {/* Estadísticas mobile con animaciones */}
           {project.estadisticas && (
-            <div className="py-12">
+            <div className="py-12" ref={mobileStatsRef}>
               <div className="stats-custom-layout">
-                {Object.entries(project.estadisticas).map(([key, value]) => {
+                {Object.entries(project.estadisticas).map(([key, value], index) => {
                   // Función simplificada para parsear estadísticas con 4 tipos claros
                   const parseValue = (val: string) => {
                     const str = val.toString().trim()
@@ -303,7 +323,7 @@ export default function DesarrolloProyecto() {
                   const parsed = parseValue(value.toString())
                   
                   return (
-                    <div key={key} className="border-t border-black pt-3 pb-1 md:pt-2 md:pb-1 flex justify-between items-start min-h-[60px] md:min-h-[20px]">
+                    <div key={key} className={`pt-3 pb-1 md:pt-2 md:pb-1 flex justify-between items-start min-h-[60px] md:min-h-[20px] project-stats-line ${getLineDelayClass(index)} ${isMobileStatsVisible ? 'animate' : ''}`}>
                       <div className="font-archivo text-black uppercase tracking-wider leading-none max-w-[50%] text-[14px] md:text-[13px] self-start" style={{ wordBreak: 'break-word' }}>
                         {key.replace(/_/g, ' ').split(' ').map((word, index) => (
                           <span key={index}>
@@ -432,10 +452,10 @@ export default function DesarrolloProyecto() {
               </p>
             </div>
             
-            {/* Estadísticas desktop - AJUSTADO PARA LA RESERVA CARDALES */}
+            {/* Estadísticas desktop con animaciones - AJUSTADO PARA LA RESERVA CARDALES */}
             {project.estadisticas && (
-              <div className={`grid !grid-cols-2 gap-2 ${isReservaCardales ? 'mt-2' : 'mt-16'}`}>
-                {Object.entries(project.estadisticas).map(([key, value]) => {
+              <div className={`grid !grid-cols-2 gap-2 ${isReservaCardales ? 'mt-2' : 'mt-16'}`} ref={desktopStatsRef}>
+                {Object.entries(project.estadisticas).map(([key, value], index) => {
                   // Función simplificada para parsear estadísticas con 4 tipos claros
                   const parseValue = (val: string) => {
                     const str = val.toString().trim()
@@ -527,7 +547,7 @@ export default function DesarrolloProyecto() {
                   const parsed = parseValue(value.toString())
                   
                   return (
-                    <div key={key} className="border-t border-black pt-3 pb-1 md:pt-2 md:pb-1 flex justify-between items-start min-h-[60px] md:min-h-[20px]">
+                    <div key={key} className={`pt-3 pb-1 md:pt-2 md:pb-1 flex justify-between items-start min-h-[60px] md:min-h-[20px] project-stats-line ${getLineDelayClass(index)} ${isDesktopStatsVisible ? 'animate' : ''}`}>
                       <div className="font-archivo text-black uppercase tracking-wider leading-none text-[14px] md:text-[0.8rem] self-start" style={{ wordBreak: 'break-word' }}>
                         {key.replace(/_/g, ' ').split(' ').map((word, index) => (
                           <span key={index}>

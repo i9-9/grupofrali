@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from 'react';
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 export default function Contacto() {
   const [formData, setFormData] = useState({
@@ -9,6 +10,13 @@ export default function Contacto() {
     email: '',
     asunto: '',
     mensaje: ''
+  });
+
+  // Intersection Observer para el formulario
+  const { ref: formRef, isVisible: isFormVisible } = useIntersectionObserver<HTMLDivElement>({
+    threshold: 0.2,
+    rootMargin: '0px 0px -50px 0px',
+    triggerOnce: true
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -38,30 +46,34 @@ export default function Contacto() {
           </div>
 
           {/* Formulario - Columnas 1-6 en mobile, 7-12 en desktop */}
-          <div className="col-6 md:col-span-6 md:col-start-7 order-2">
+          <div className="col-6 md:col-span-6 md:col-start-7 order-2" ref={formRef}>
             <div className="space-y-8 mt-0 md:mt-36">
               {/* Nombre y Apellido - separados en mobile, juntos en desktop */}
               <div className="flex flex-col md:flex-row md:space-x-6 space-y-8 md:space-y-0">
                 <div className="flex-1">
-                  <input
-                    type="text"
-                    name="nombre"
-                    value={formData.nombre}
-                    onChange={handleInputChange}
-                    className="w-full bg-transparent border-b border-black pb-2 text-black font-archivo text-base tracking-wider focus:outline-none focus:border-black"
-                  />
+                  <div className={`form-field form-field-delay-1 ${isFormVisible ? 'animate' : ''}`}>
+                    <input
+                      type="text"
+                      name="nombre"
+                      value={formData.nombre}
+                      onChange={handleInputChange}
+                      className="w-full bg-transparent pb-2 text-black font-archivo text-base tracking-wider focus:outline-none border-0"
+                    />
+                  </div>
                   <label className="block mt-2 font-archivo text-black tracking-wider text-base">
                     NOMBRE
                   </label>
                 </div>
                 <div className="flex-1">
-                  <input
-                    type="text"
-                    name="apellido"
-                    value={formData.apellido}
-                    onChange={handleInputChange}
-                    className="w-full bg-transparent border-b border-black pb-2 text-black font-archivo text-base tracking-wider focus:outline-none focus:border-black"
-                  />
+                  <div className={`form-field form-field-delay-1b ${isFormVisible ? 'animate' : ''}`}>
+                    <input
+                      type="text"
+                      name="apellido"
+                      value={formData.apellido}
+                      onChange={handleInputChange}
+                      className="w-full bg-transparent pb-2 text-black font-archivo text-base tracking-wider focus:outline-none border-0"
+                    />
+                  </div>
                   <label className="block mt-2 font-archivo text-black tracking-wider text-base">
                     APELLIDO
                   </label>
@@ -70,13 +82,15 @@ export default function Contacto() {
 
               {/* Email */}
               <div>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full bg-transparent border-b border-black pb-2 text-black font-archivo text-base tracking-wider focus:outline-none focus:border-black"
-                />
+                <div className={`form-field form-field-delay-2 ${isFormVisible ? 'animate' : ''}`}>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="w-full bg-transparent pb-2 text-black font-archivo text-base tracking-wider focus:outline-none border-0"
+                  />
+                </div>
                 <label className="block mt-2 font-archivo text-black tracking-wider text-base">
                   E-MAIL
                 </label>
@@ -84,13 +98,15 @@ export default function Contacto() {
 
               {/* Asunto */}
               <div>
-                <input
-                  type="text"
-                  name="asunto"
-                  value={formData.asunto}
-                  onChange={handleInputChange}
-                  className="w-full bg-transparent border-b border-black pb-2 text-black font-archivo text-base tracking-wider focus:outline-none focus:border-black"
-                />
+                <div className={`form-field form-field-delay-3 ${isFormVisible ? 'animate' : ''}`}>
+                  <input
+                    type="text"
+                    name="asunto"
+                    value={formData.asunto}
+                    onChange={handleInputChange}
+                    className="w-full bg-transparent pb-2 text-black font-archivo text-base tracking-wider focus:outline-none border-0"
+                  />
+                </div>
                 <label className="block mt-2 font-archivo text-black tracking-wider text-base">
                   ASUNTO
                 </label>
@@ -98,13 +114,15 @@ export default function Contacto() {
 
               {/* Mensaje */}
               <div>
-                <textarea
-                  name="mensaje"
-                  value={formData.mensaje}
-                  onChange={handleInputChange}
-                  rows={4}
-                  className="w-full bg-transparent border-b border-black pb-2 text-black font-archivo text-base tracking-wider resize-none focus:outline-none focus:border-black"
-                />
+                <div className={`form-field form-field-delay-4 ${isFormVisible ? 'animate' : ''}`}>
+                  <textarea
+                    name="mensaje"
+                    value={formData.mensaje}
+                    onChange={handleInputChange}
+                    rows={4}
+                    className="w-full bg-transparent pb-2 text-black font-archivo text-base tracking-wider resize-none focus:outline-none border-0"
+                  />
+                </div>
                 <label className="block mt-2 font-archivo text-black tracking-wider text-base">
                   MENSAJE
                 </label>

@@ -74,24 +74,27 @@ export default function Home() {
               </p>
             </div>
 
-                        {/* ESTADÍSTICAS - Layout 5+2+5 en Desktop */}
+            {/* ESTADÍSTICAS - Layout 5+2+5 en Desktop */}
             {/* Columna 1: Estadísticas izquierda (columnas 1-5) */}
             <div className="col-6 md:col-1-to-5 order-3 md:order-3">
               <StatItem
                 number="14"
                 label="PROYECTOS DESARROLLADOS"
                 delay="stat-number-delay-1"
+                lineDelay="stat-line-delay-1"
               />
               <StatItem
                 number="300 MM"
                 unit="USD"
                 label="VALOR TOTAL DE ACTIVOS"
                 delay="stat-number-delay-2"
+                lineDelay="stat-line-delay-2"
               />
               <StatItem
                 number="5"
                 label="PROYECTOS EN PLANIFICACIÓN"
                 delay="stat-number-delay-3"
+                lineDelay="stat-line-delay-3"
               />
             </div>
 
@@ -102,17 +105,20 @@ export default function Home() {
                 unit="ha"
                 label="HÉCTAREAS AGRÍCOLAS"
                 delay="stat-number-delay-4"
+                lineDelay="stat-line-delay-4"
               />
               <StatItem
                 number="+300"
                 label="N° EMPLEADOS & COLABORADORES"
                 delay="stat-number-delay-5"
+                lineDelay="stat-line-delay-5"
               />
               <StatItem
                 number="+100.000"
                 unit="m²"
                 label="SUPERFICIE CONSTRUIDA"
                 delay="stat-number-delay-6"
+                lineDelay="stat-line-delay-6"
               />
             </div>
           </div>
