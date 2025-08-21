@@ -65,7 +65,7 @@ export default function Home() {
 
             {/* PÁRRAFO - arriba de stats derechas (columnas 8-12) */}
             <div className="col-6 md:col-8-to-12 order-1 md:order-2 flex flex-col">
-              <p className="text-body2-archivo text-black mb-12 mt-auto">
+              <p className="text-body2-archivo text-black mb-12 mt-auto leading-[1]">
                 Con casi 30 años de trayectoria, en Grupo Frali desarrollamos
                 inversiones estratégicas en real estate, agroindustria,
                 hotelería y energías renovables. Apostamos a proyectos que

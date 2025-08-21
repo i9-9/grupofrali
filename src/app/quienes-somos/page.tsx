@@ -310,6 +310,7 @@ export default function QuienesSomos() {
                   alt={`${person.nombre} ${person.apellido}`}
                   width={300}
                   height={400}
+                  quality={100}
                   className="w-full h-auto object-contain grayscale"
                 />
                 
