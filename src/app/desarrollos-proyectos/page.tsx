@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState, useRef } from "react"
+import { useEffect, useMemo, useState, useRef, Suspense } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
@@ -82,7 +82,8 @@ const categories = [
   "HOTELERIA"
 ]
 
-export default function DesarrollosProyectos() {
+// Componente que usa useSearchParams - debe estar envuelto en Suspense
+function DesarrollosProyectosContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   
@@ -277,5 +278,20 @@ export default function DesarrollosProyectos() {
       </section>
 
     </main>
-  );
+  )
+}
+
+export default function DesarrollosProyectos() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#EFEFEF] flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-black mx-auto mb-4"></div>
+          <p className="text-black">Cargando proyectos...</p>
+        </div>
+      </div>
+    }>
+      <DesarrollosProyectosContent />
+    </Suspense>
+  )
 }
