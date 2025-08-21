@@ -285,8 +285,7 @@ export default function DesarrollosProyectos() {
     <Suspense fallback={
       <div className="min-h-screen bg-[#EFEFEF] flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-black mx-auto mb-4"></div>
-          <p className="text-black">Cargando proyectos...</p>
+          <h1 className="font-baskerville header-logo-mobile text-black text-4xl md:text-6xl">GRUPO FRALI</h1>
         </div>
       </div>
     }>

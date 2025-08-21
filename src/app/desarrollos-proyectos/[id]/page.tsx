@@ -425,22 +425,7 @@ export default function DesarrolloProyecto() {
                 </div>
               )}
               
-              {/* Indicadores de dots opcionales */}
-              {mobileImages.length > 1 && mobileImages.length <= 5 && (
-                <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-10">
-                  <div className="flex space-x-2">
-                    {mobileImages.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => goToSlide(index)}
-                        className={`w-2 h-2 rounded-full transition-colors ${
-                          index === currentSlide ? 'bg-white' : 'bg-white/30'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </div>
-              )}
+
             </>
           ) : (
             <div className="h-full flex items-center justify-center bg-gray-100">
