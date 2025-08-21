@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver"
+import { useCounterAnimation } from "@/hooks/useCounterAnimation"
 import projectsData from "@/data/projects.json"
 
 export default function DesarrolloProyecto() {
@@ -139,6 +140,179 @@ export default function DesarrolloProyecto() {
   const getLineDelayClass = (index: number) => {
     return `project-stats-line-delay-${index + 1}`
   }
+
+  // Componente para estadística individual con contador animado
+  const StatisticItem = ({ 
+    statKey, 
+    value, 
+    index, 
+    isVisible 
+  }: { 
+    statKey: string, 
+    value: string, 
+    index: number, 
+    isVisible: boolean 
+  }) => {
+    // Función simplificada para parsear estadísticas con 4 tipos claros
+    const parseValue = (val: string) => {
+      const str = val.toString().trim()
+      
+      // Tipo 1: TEXTO - Solo texto sin números al inicio
+      if (isNaN(Number(str.charAt(0))) && !str.match(/^\d/)) {
+        return { 
+          isTextOnly: true,
+          number: '',
+          text: str,
+          unit: ''
+        }
+      }
+      
+      // Caso especial: "100% COMERCIALIZADO Y HABITADO" debe tratarse como texto completo
+      if (str === "100% COMERCIALIZADO Y HABITADO") {
+        return { 
+          isTextOnly: true,
+          number: '',
+          text: str,
+          unit: ''
+        }
+      }
+      
+      // Caso especial para porcentajes con texto
+      const porcentajeConTexto = str.match(/^([\d,.]+%)\s+(.+)$/)
+      if (porcentajeConTexto) {
+        return { 
+          isTextOnly: false,
+          number: porcentajeConTexto[1],
+          text: porcentajeConTexto[2],
+          unit: ''
+        }
+      }
+      
+      // Tipo 2: NUMERO - Solo números (incluyendo decimales y porcentajes)
+      const soloNumero = str.match(/^([\d,.]+[%]?)$/)
+      if (soloNumero) {
+        return { 
+          isTextOnly: false,
+          number: soloNumero[1],
+          text: '',
+          unit: ''
+        }
+      }
+      
+      // Tipo 3: NUMERO CON UNIDAD - Número seguido de unidad técnica corta
+      const numeroConUnidad = str.match(/^([\d,.]+)\s+(MW|GWH|KWH|M²|H|KG|TON|€|USD|\$)$/i)
+      if (numeroConUnidad) {
+        return { 
+          isTextOnly: false,
+          number: numeroConUnidad[1],
+          unit: numeroConUnidad[2],
+          text: ''
+        }
+      }
+      
+      // Caso especial para "HOYOS" y "ESTRELLAS" - número arriba, texto abajo
+      const hoyosEstrellas = str.match(/^(\d+)\s+(HOYOS?|ESTRELLAS?)$/i)
+      if (hoyosEstrellas) {
+        return { 
+          isTextOnly: false,
+          number: hoyosEstrellas[1],
+          text: hoyosEstrellas[2],
+          unit: ''
+        }
+      }
+      
+      // Tipo 4: NUMERO CON TEXTO - Número seguido de texto descriptivo
+      const numeroConTexto = str.match(/^([\d,.]+)\s+(.+)$/)
+      if (numeroConTexto) {
+        return { 
+          isTextOnly: false,
+          number: numeroConTexto[1],
+          text: numeroConTexto[2],
+          unit: ''
+        }
+      }
+      
+      // Fallback: tratar como número
+      return { 
+        isTextOnly: false,
+        number: str,
+        text: '',
+        unit: ''
+      }
+    }
+
+    const parsed = parseValue(value.toString())
+
+    // Hook de animación de conteo para números
+    const { displayValue } = useCounterAnimation({
+      targetValue: parsed.number,
+      isVisible,
+      duration: 1500,
+      delay: index * 200 // 200ms entre cada estadística
+    })
+
+    return (
+      <div className={`pt-3 pb-1 md:pt-2 md:pb-0 flex justify-between items-start min-h-[60px] md:min-h-[20px] project-stats-line ${getLineDelayClass(index)} ${isVisible ? 'animate' : ''}`}>
+        <div className="font-archivo text-black uppercase tracking-wider leading-none max-w-[50%] md:text-[0.8rem] text-[14px] md:text-[13px] self-start" style={{ wordBreak: 'break-word' }}>
+          {statKey.replace(/_/g, ' ').split(' ').map((word, index) => (
+            <span key={index}>
+              {word}
+              {index === 1 && <br />}
+              {index > 1 && index < statKey.replace(/_/g, ' ').split(' ').length - 1 && ' '}
+              {index === 0 && index < statKey.replace(/_/g, ' ').split(' ').length - 1 && ' '}
+            </span>
+          ))}
+        </div>
+        <div className="text-right self-center max-w-[45%]">
+          {parsed.isTextOnly ? (
+            <div className="font-archivo text-black uppercase tracking-wider leading-none break-words text-stat-description md:text-[0.8rem]" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? 'clamp(14px, 2.5vw, 16px)' : undefined }}>
+              {parsed.text}
+            </div>
+          ) : parsed.text && (parsed.text.toUpperCase() === 'HOYOS' || parsed.text.toUpperCase() === 'ESTRELLAS') ? (
+            // Caso especial para HOYOS y ESTRELLAS - número arriba, texto abajo
+            <>
+              <span className="font-archivo text-black font-archivo-light leading-none text-h2-archivo md:text-h2-archivo" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '2.5rem' : '1.875rem' }}>
+                {displayValue}
+              </span>
+              <div className="font-archivo text-black uppercase tracking-wider leading-none text-stat-description md:text-[0.8rem]" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? 'clamp(14px, 3vw, 20px)' : undefined }}>
+                {parsed.text}
+              </div>
+            </>
+          ) : (
+            // Caso normal - número y unidad/texto
+            <div className="flex flex-col items-end">
+              {parsed.unit ? (
+                // Número con unidad en línea
+                <div className="flex items-baseline gap-1">
+                  <span className="font-archivo text-black font-archivo-light leading-none text-h2-arquivo md:text-h2-archivo" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? 'clamp(18px, 5vw, 30px)' : '1.875rem' }}>
+                    {displayValue}
+                  </span>
+                  <span className="font-archivo text-black uppercase tracking-wider leading-none text-stat-description md:text-[0.8rem]" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? 'clamp(14px, 3vw, 20px)' : undefined }}>
+                    {parsed.unit}
+                  </span>
+                </div>
+              ) : parsed.text ? (
+                // Número arriba, texto abajo
+                <>
+                  <span className="font-archivo text-black font-archivo-light leading-none text-h2-archivo md:text-h2-archivo" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '2.5rem' : '1.875rem' }}>
+                    {displayValue}
+                  </span>
+                  <div className="font-archivo text-black uppercase tracking-wider leading-none text-stat-description md:text-[0.8rem]" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? 'clamp(14px, 2.5vw, 16px)' : undefined }}>
+                    {parsed.text}
+                  </div>
+                </>
+              ) : (
+                // Solo número
+                <span className="font-archivo text-black font-archivo-light leading-none text-h2-archivo md:text-h2-archivo" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '2.5rem' : '1.875rem' }}>
+                  {displayValue}
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    )
+  }
   
   if (!project) {
     return (
@@ -231,159 +405,15 @@ export default function DesarrolloProyecto() {
           {project.estadisticas && (
             <div className="py-12" ref={mobileStatsRef}>
               <div className="stats-custom-layout">
-                {Object.entries(project.estadisticas).map(([key, value], index) => {
-                  // Función simplificada para parsear estadísticas con 4 tipos claros
-                  const parseValue = (val: string) => {
-                    const str = val.toString().trim()
-                    
-                    // Tipo 1: TEXTO - Solo texto sin números al inicio
-                    if (isNaN(Number(str.charAt(0))) && !str.match(/^\d/)) {
-                      return { 
-                        isTextOnly: true,
-                        number: '',
-                        text: str,
-                        unit: ''
-                      }
-                    }
-                    
-                    // Caso especial: "100% COMERCIALIZADO Y HABITADO" debe tratarse como texto completo
-                    if (str === "100% COMERCIALIZADO Y HABITADO") {
-                      return { 
-                        isTextOnly: true,
-                        number: '',
-                        text: str,
-                        unit: ''
-                      }
-                    }
-                    
-                    // Caso especial para porcentajes con texto
-                    const porcentajeConTexto = str.match(/^([\d,.]+%)\s+(.+)$/)
-                    if (porcentajeConTexto) {
-                      return { 
-                        isTextOnly: false,
-                        number: porcentajeConTexto[1],
-                        text: porcentajeConTexto[2],
-                        unit: ''
-                      }
-                    }
-                    
-                    // Tipo 2: NUMERO - Solo números (incluyendo decimales y porcentajes)
-                    const soloNumero = str.match(/^([\d,.]+[%]?)$/)
-                    if (soloNumero) {
-                      return { 
-                        isTextOnly: false,
-                        number: soloNumero[1],
-                        text: '',
-                        unit: ''
-                      }
-                    }
-                    
-                    // Tipo 3: NUMERO CON UNIDAD - Número seguido de unidad técnica corta
-                    const numeroConUnidad = str.match(/^([\d,.]+)\s+(MW|GWH|KWH|M²|H|KG|TON|€|USD|\$)$/i)
-                    if (numeroConUnidad) {
-                      return { 
-                        isTextOnly: false,
-                        number: numeroConUnidad[1],
-                        unit: numeroConUnidad[2],
-                        text: ''
-                      }
-                    }
-                    
-                    // Caso especial para "HOYOS" y "ESTRELLAS" - número arriba, texto abajo
-                    const hoyosEstrellas = str.match(/^(\d+)\s+(HOYOS?|ESTRELLAS?)$/i)
-                    if (hoyosEstrellas) {
-                      return { 
-                        isTextOnly: false,
-                        number: hoyosEstrellas[1],
-                        text: hoyosEstrellas[2],
-                        unit: ''
-                      }
-                    }
-                    
-                    // Tipo 4: NUMERO CON TEXTO - Número seguido de texto descriptivo
-                    const numeroConTexto = str.match(/^([\d,.]+)\s+(.+)$/)
-                    if (numeroConTexto) {
-                      return { 
-                        isTextOnly: false,
-                        number: numeroConTexto[1],
-                        text: numeroConTexto[2],
-                        unit: ''
-                      }
-                    }
-                    
-                    // Fallback: tratar como número
-                    return { 
-                      isTextOnly: false,
-                      number: str,
-                      text: '',
-                      unit: ''
-                    }
-                  }
-                  
-                  const parsed = parseValue(value.toString())
-                  
-                  return (
-                    <div key={key} className={`pt-3 pb-1 md:pt-2 md:pb-1 flex justify-between items-start min-h-[60px] md:min-h-[20px] project-stats-line ${getLineDelayClass(index)} ${isMobileStatsVisible ? 'animate' : ''}`}>
-                      <div className="font-archivo text-black uppercase tracking-wider leading-none max-w-[50%] text-[14px] md:text-[13px] self-start" style={{ wordBreak: 'break-word' }}>
-                        {key.replace(/_/g, ' ').split(' ').map((word, index) => (
-                          <span key={index}>
-                            {word}
-                            {index === 1 && <br />}
-                            {index > 1 && index < key.replace(/_/g, ' ').split(' ').length - 1 && ' '}
-                            {index === 0 && index < key.replace(/_/g, ' ').split(' ').length - 1 && ' '}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="text-right self-center max-w-[45%]">
-                        {parsed.isTextOnly ? (
-                          <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none break-words">
-                            {parsed.text}
-                          </div>
-                        ) : parsed.text && (parsed.text.toUpperCase() === 'HOYOS' || parsed.text.toUpperCase() === 'ESTRELLAS') ? (
-                          // Caso especial para HOYOS y ESTRELLAS - número arriba, texto abajo
-                          <>
-                            <span className="font-archivo text-black project-stats-number leading-none" style={{ fontSize: '2.5rem' }}>
-                              {parsed.number}
-                            </span>
-                            <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none">
-                              {parsed.text}
-                            </div>
-                          </>
-                        ) : (
-                          // Caso normal - número y unidad/texto
-                          <div className="flex flex-col items-end">
-                            {parsed.unit ? (
-                              // Número con unidad en línea
-                              <div className="flex items-baseline gap-1">
-                                <span className="font-archivo text-black project-stats-number leading-none" style={{ fontSize: 'clamp(18px, 5vw, 30px)' }}>
-                                  {parsed.number}
-                                </span>
-                                <span className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none">
-                                  {parsed.unit}
-                                </span>
-                              </div>
-                            ) : parsed.text ? (
-                              // Número arriba, texto abajo
-                              <>
-                                <span className="font-archivo text-black project-stats-number leading-none" style={{ fontSize: '2.5rem' }}>
-                                  {parsed.number}
-                                </span>
-                                <div className="font-archivo text-black uppercase tracking-wider text-stat-description leading-none">
-                                  {parsed.text}
-                                </div>
-                              </>
-                            ) : (
-                              // Solo número
-                              <span className="font-archivo text-black project-stats-number leading-none" style={{ fontSize: '2.5rem' }}>
-                                {parsed.number}
-                              </span>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )
-                })}
+                {Object.entries(project.estadisticas).map(([key, value], index) => (
+                  <StatisticItem 
+                    key={key}
+                    statKey={key}
+                    value={value}
+                    index={index}
+                    isVisible={isMobileStatsVisible}
+                  />
+                ))}
               </div>
             </div>
           )}
@@ -454,160 +484,16 @@ export default function DesarrolloProyecto() {
             
             {/* Estadísticas desktop con animaciones - AJUSTADO PARA LA RESERVA CARDALES */}
             {project.estadisticas && (
-              <div className={`grid !grid-cols-2 gap-2 ${isReservaCardales ? 'mt-2' : 'mt-16'}`} ref={desktopStatsRef}>
-                {Object.entries(project.estadisticas).map(([key, value], index) => {
-                  // Función simplificada para parsear estadísticas con 4 tipos claros
-                  const parseValue = (val: string) => {
-                    const str = val.toString().trim()
-                    
-                    // Tipo 1: TEXTO - Solo texto sin números al inicio
-                    if (isNaN(Number(str.charAt(0))) && !str.match(/^\d/)) {
-                      return { 
-                        isTextOnly: true,
-                        number: '',
-                        text: str,
-                        unit: ''
-                      }
-                    }
-                    
-                    // Caso especial: "100% COMERCIALIZADO Y HABITADO" debe tratarse como texto completo
-                    if (str === "100% COMERCIALIZADO Y HABITADO") {
-                      return { 
-                        isTextOnly: true,
-                        number: '',
-                        text: str,
-                        unit: ''
-                      }
-                    }
-                    
-                    // Caso especial para porcentajes con texto
-                    const porcentajeConTexto = str.match(/^([\d,.]+%)\s+(.+)$/)
-                    if (porcentajeConTexto) {
-                      return { 
-                        isTextOnly: false,
-                        number: porcentajeConTexto[1],
-                        text: porcentajeConTexto[2],
-                        unit: ''
-                      }
-                    }
-                    
-                    // Tipo 2: NUMERO - Solo números (incluyendo decimales y porcentajes)
-                    const soloNumero = str.match(/^([\d,.]+[%]?)$/)
-                    if (soloNumero) {
-                      return { 
-                        isTextOnly: false,
-                        number: soloNumero[1],
-                        text: '',
-                        unit: ''
-                      }
-                    }
-                    
-                    // Tipo 3: NUMERO CON UNIDAD - Número seguido de unidad técnica corta
-                    const numeroConUnidad = str.match(/^([\d,.]+)\s+(MW|GWH|KWH|M²|H|KG|TON|€|USD|\$)$/i)
-                    if (numeroConUnidad) {
-                      return { 
-                        isTextOnly: false,
-                        number: numeroConUnidad[1],
-                        unit: numeroConUnidad[2],
-                        text: ''
-                      }
-                    }
-                    
-                    // Caso especial para "HOYOS" y "ESTRELLAS" - número arriba, texto abajo
-                    const hoyosEstrellas = str.match(/^(\d+)\s+(HOYOS?|ESTRELLAS?)$/i)
-                    if (hoyosEstrellas) {
-                      return { 
-                        isTextOnly: false,
-                        number: hoyosEstrellas[1],
-                        text: hoyosEstrellas[2],
-                        unit: ''
-                      }
-                    }
-                    
-                    // Tipo 4: NUMERO CON TEXTO - Número seguido de texto descriptivo
-                    const numeroConTexto = str.match(/^([\d,.]+)\s+(.+)$/)
-                    if (numeroConTexto) {
-                      return { 
-                        isTextOnly: false,
-                        number: numeroConTexto[1],
-                        text: numeroConTexto[2],
-                        unit: ''
-                      }
-                    }
-                    
-                    // Fallback: tratar como número
-                    return { 
-                      isTextOnly: false,
-                      number: str,
-                      text: '',
-                      unit: ''
-                    }
-                  }
-                  
-                  const parsed = parseValue(value.toString())
-                  
-                  return (
-                    <div key={key} className={`pt-3 pb-1 md:pt-2 md:pb-1 flex justify-between items-start min-h-[60px] md:min-h-[20px] project-stats-line ${getLineDelayClass(index)} ${isDesktopStatsVisible ? 'animate' : ''}`}>
-                      <div className="font-archivo text-black uppercase tracking-wider leading-none text-[14px] md:text-[0.8rem] self-start" style={{ wordBreak: 'break-word' }}>
-                        {key.replace(/_/g, ' ').split(' ').map((word, index) => (
-                          <span key={index}>
-                            {word}
-                            {index === 1 && <br />}
-                            {index > 1 && index < key.replace(/_/g, ' ').split(' ').length - 1 && ' '}
-                            {index === 0 && index < key.replace(/_/g, ' ').split(' ').length - 1 && ' '}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="text-right self-center max-w-[45%]">
-                        {parsed.isTextOnly ? (
-                          <div className="font-archivo text-black uppercase tracking-wider leading-none break-words" style={{ fontSize: 'clamp(14px, 2.5vw, 16px)' }}>
-                            {parsed.text}
-                          </div>
-                        ) : parsed.text && (parsed.text.toUpperCase() === 'HOYOS' || parsed.text.toUpperCase() === 'ESTRELLAS') ? (
-                          // Caso especial para HOYOS y ESTRELLAS - número arriba, texto abajo
-                          <>
-                            <span className="text-h2-archivo text-black font-archivo-thin leading-none">
-                              {parsed.number}
-                            </span>
-                            <div className="font-archivo text-black uppercase tracking-wider leading-none" style={{ fontSize: 'clamp(14px, 3vw, 20px)' }}>
-                              {parsed.text}
-                            </div>
-                          </>
-                        ) : (
-                          // Caso normal - número y unidad/texto
-                          <div className="flex flex-col items-end">
-                            {parsed.unit ? (
-                              // Número con unidad en línea
-                              <div className="flex items-baseline gap-1">
-                                <span className="text-h2-archivo text-black project-stats-number leading-none">
-                                  {parsed.number}
-                                </span>
-                                <span className="font-archivo text-black uppercase tracking-wider leading-none" style={{ fontSize: 'clamp(14px, 3vw, 20px)' }}>
-                                  {parsed.unit}
-                                </span>
-                              </div>
-                            ) : parsed.text ? (
-                                                            // Número arriba, texto abajo
-                              <>
-                                <span className="text-h2-archivo text-black project-stats-number leading-none">
-                                  {parsed.number}
-                                </span>
-                                <div className="font-archivo text-black uppercase tracking-wider leading-none" style={{ fontSize: 'clamp(14px, 2.5vw, 16px)' }}>
-                                  {parsed.text}
-                                </div>
-                              </>
-                            ) : (
-                              // Solo número
-                              <span className="text-h2-archivo text-black font-archivo-thin leading-none">
-                                {parsed.number}
-                              </span>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )
-                })}
+              <div className={`grid !grid-cols-2 gap-2 md:gap-x-6 md:gap-y-1 mt-16`} ref={desktopStatsRef}>
+                {Object.entries(project.estadisticas).map(([key, value], index) => (
+                  <StatisticItem 
+                    key={key}
+                    statKey={key}
+                    value={value}
+                    index={index}
+                    isVisible={isDesktopStatsVisible}
+                  />
+                ))}
               </div>
             )}
           </div>

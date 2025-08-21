@@ -25,7 +25,7 @@ export default function RRHH() {
         </div>
 
         <div className="grid">
-          <div className="col-6 md:col-span-5 space-y-6 md:space-y-6 space-y-4">
+          <div className="col-6 md:col-span-6 space-y-6 md:space-y-6 space-y-4">
             <p className="text-black text-base leading-none">
               El crecimiento sostenido de nuestros desarrollos se apoya 
               en el compromiso y la calidad humana de nuestro 
@@ -35,23 +35,21 @@ export default function RRHH() {
               colaborador.
             </p>
             
-            {/* Segundo párrafo en mobile */}
-            <div className="md:hidden">
-              <p className="text-black mb-8 text-base leading-none">
-                Si compartís nuestra visión y<br />
-                buscás desarrollarte en un entorno<br />
-                profesional y dinámico, te invitamos<br />
-                a enviarnos tu perfil.
-              </p>
-              
-              <div>
-                <a 
-                  href="mailto:RRHH@GRUPOFRALI.COM" 
-                  className="font-archivo font-normal text-black text-base hover:opacity-70 transition-opacity"
-                >
-                  RRHH@GRUPOFRALI.COM
-                </a>
-              </div>
+          </div>
+          
+          {/* Segundo párrafo en mobile - Columna completa */}
+          <div className="md:hidden col-6">
+            <p className="text-black mb-8 text-base leading-none">
+              Si compartís nuestra visión y buscás desarrollarte en un entorno profesional y dinámico, te invitamos a enviarnos tu perfil.
+            </p>
+            
+            <div>
+              <a 
+                href="mailto:RRHH@GRUPOFRALI.COM" 
+                className="font-archivo font-normal text-black text-base hover:opacity-70 transition-opacity"
+              >
+                RRHH@GRUPOFRALI.COM
+              </a>
             </div>
           </div>
 
