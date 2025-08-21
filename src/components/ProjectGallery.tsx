@@ -24,7 +24,7 @@ const projects: Project[] = [
   },
   {
     id: "sofitel-la-reserva-cardales",
-    titulo: "SOFITEL LA RESERVA CARDALES",
+    titulo: "SOFITEL LA RESERVA\nCARDALES",
     categoria: "HOTELERIA",
     locacion: "Campana, Buenos Aires",
     imagen: "/images/projects/sofitel/home-gallery/sofitel-home.jpg",
@@ -40,7 +40,7 @@ const projects: Project[] = [
   },
   {
     id: "la-banderita-parque-eolico",
-    titulo: "LA BANDERITA PARQUE EÓLICO",
+    titulo: "LA BANDERITA PARQUE\nEÓLICO",
     categoria: "ENERGIA RENOVABLE",
     locacion: "General Acha, La Pampa",
     imagen: "/images/projects/la-banderita-parque-eolico/home-gallery/labanderita-home.jpg",
@@ -48,7 +48,7 @@ const projects: Project[] = [
   },
   {
     id: "elvis-river-sunflower-river",
-    titulo: "ELVIS RIVER Y SUNFLOWER RIVER",
+    titulo: "ELVIS RIVER Y\nSUNFLOWER RIVER",
     categoria: "AGROPECUARIA",
     locacion: "Mississippi, Estados Unidos",
     imagen: "/images/projects/elvis-river-sunflower-river/home-gallery/elvis-home.jpg",
@@ -66,6 +66,20 @@ const projects: Project[] = [
 
 export default function ProjectGallery() {
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const renderTitle = (titulo: string) => {
+    const lines = titulo.split('\n');
+    if (lines.length === 1) {
+      return titulo;
+    }
+    return (
+      <>
+        {lines.map((line, index) => (
+          <div key={index}>{line}</div>
+        ))}
+      </>
+    );
+  };
 
   return (
     <div className="relative w-full">
@@ -92,10 +106,12 @@ export default function ProjectGallery() {
                   {/* Número a la izquierda */}
                   <h3 className="font-light mr-4">(0{index + 1})</h3>
 
-                  {/* Título alineado a la izquierda, ocupando todo el espacio restante */}
-                  <h3 className="font-baskerville text-sm md:text-[22px] text-black leading-tight flex-1">
-                    {project.titulo}
-                  </h3>
+                  {/* Contenedor que empuja el título al borde derecho */}
+                  <div className="flex-1 text-right">
+                    <h3 className="font-baskerville text-sm md:text-[22px] text-black leading-tight text-left inline-block">
+                      {renderTitle(project.titulo)}
+                    </h3>
+                  </div>
                 </div>
               </div>
             </Link>
