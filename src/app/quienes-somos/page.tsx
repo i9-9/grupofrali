@@ -49,42 +49,42 @@ export default function QuienesSomos() {
       nombre: "SEBASTIAN",
       apellido: "LANUSSE",
       cargo: "DIRECTOR GENERAL",
-      imagen: "/images/management/lanusse.jpg"
+      imagen: "/images/management/lanusse.png"
     },
     {
       numero: "02", 
       nombre: "HORACIO",
       apellido: "ANTELO",
       cargo: "DIRECTOR DE OPERACIONES",
-      imagen: "/images/management/antelo.jpg"
+      imagen: "/images/management/antelo.png"
     },
     {
       numero: "03",
       nombre: "INÉS",
       apellido: "GEMINI",
       cargo: "DIRECTORA FINANCIERA",
-      imagen: "/images/management/gemini.jpg"
+      imagen: "/images/management/gemini.png"
     },
     {
       numero: "04",
       nombre: "SEAN",
       apellido: "DUGGAN",
       cargo: "REAL ESTATE MANAGER",
-      imagen: "/images/management/duggan.jpg"
+      imagen: "/images/management/duggan.png"
     },
     {
       numero: "05",
       nombre: "JOAQUÍN",
       apellido: "GOICOCHEA",
       cargo: "ASSET MANAGER",
-      imagen: "/images/management/goicochea.jpg"
+      imagen: "/images/management/goicochea.png"
     },
     {
       numero: "06",
       nombre: "JOAQUÍN NAZAR",
       apellido: "ANCHORENA",
       cargo: "AGRO BUSINESS",
-      imagen: "/images/management/nazar-anchorena.jpg"
+      imagen: "/images/management/nazar-anchorena.png"
     }
   ];
 
@@ -308,8 +308,8 @@ export default function QuienesSomos() {
                 <Image
                   src={person.imagen}
                   alt={`${person.nombre} ${person.apellido}`}
-                  width={300}
-                  height={400}
+                  width={600}
+                  height={800}
                   quality={100}
                   className="w-full h-auto object-contain grayscale"
                 />

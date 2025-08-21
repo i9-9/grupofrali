@@ -157,8 +157,19 @@ export default function DesarrolloProyecto() {
     const parseValue = (val: string) => {
       const str = val.toString().trim()
       
+      // Caso especial para códigos de zonificación como "T6-360" - MOVER ARRIBA
+      const zonificacion = str.match(/^(T\d+-\d+)$/i)
+      if (zonificacion) {
+        return { 
+          isTextOnly: false,
+          number: str, // Todo el código se trata como número
+          text: '',
+          unit: ''
+        }
+      }
+      
       // Tipo 1: TEXTO - Solo texto sin números al inicio
-      if (isNaN(Number(str.charAt(0))) && !str.match(/^\d/)) {
+      if (isNaN(Number(str.charAt(0))) && !str.match(/^\d/) && !str.match(/^T\d/i)) {
         return { 
           isTextOnly: true,
           number: '',
@@ -217,17 +228,6 @@ export default function DesarrolloProyecto() {
           isTextOnly: false,
           number: hoyosEstrellas[1],
           text: hoyosEstrellas[2],
-          unit: ''
-        }
-      }
-      
-      // Caso especial para códigos de zonificación como "T6-360"
-      const zonificacion = str.match(/^(T\d+-\d+)$/i)
-      if (zonificacion) {
-        return { 
-          isTextOnly: false,
-          number: str,
-          text: '',
           unit: ''
         }
       }
@@ -337,34 +337,71 @@ export default function DesarrolloProyecto() {
     <main className="min-h-screen md:h-screen md:overflow-hidden bg-[#EFEFEF] relative">
       {/* Mobile Layout */}
       <div className="md:hidden flex flex-col">
-        {/* Galería de imágenes mobile - carrusel con paginación */}
-        <div className="w-full h-[504px] overflow-hidden relative">
+        {/* CARRUSEL MOBILE OPTIMIZADO - SIN LÍNEAS BLANCAS */}
+        <div className="w-full h-[504px] relative">
           {hasImages ? (
             <>
-              {/* Carrusel de imágenes */}
+              {/* Contenedor principal del carrusel */}
               <div 
                 ref={scrollRef}
-                className="flex overflow-x-auto h-full scrollbar-hidden snap-x snap-mandatory"
-                style={{ scrollSnapType: 'x mandatory' }}
+                className="w-full h-full overflow-x-auto scrollbar-hidden"
+                style={{ 
+                  scrollSnapType: 'x mandatory',
+                  // Prevenir líneas blancas
+                  transform: 'translate3d(0,0,0)',
+                  backfaceVisibility: 'hidden',
+                  perspective: '1000px',
+                  willChange: 'scroll-position'
+                }}
               >
-                {mobileImages.map((imageSrc, index) => (
-                  <div key={index} className="flex-shrink-0 w-full h-full snap-start">
-                    <Image 
-                      src={imageSrc} 
-                      alt={`${project.imagenes?.alt || project.titulo} - Imagen ${index + 1}`}
-                      width={600}
-                      height={400}
-                      className={`w-full h-full object-cover transition-opacity duration-300 ${
-                        isTransitioning ? 'opacity-0' : 'opacity-100'
-                      }`}
-                    />
-                  </div>
-                ))}
+                {/* Wrapper interno con flexbox */}
+                <div 
+                  className="flex h-full"
+                  style={{
+                    width: `${mobileImages.length * 100}%`,
+                    height: '100%'
+                  }}
+                >
+                  {mobileImages.map((imageSrc, index) => (
+                    <div 
+                      key={index} 
+                      className="relative"
+                      style={{
+                        width: `${100 / mobileImages.length}%`,
+                        height: '100%',
+                        flexShrink: 0,
+                        scrollSnapAlign: 'start',
+                        // Eliminar gaps completamente
+                        margin: 0,
+                        padding: 0,
+                        border: 'none',
+                        outline: 'none'
+                      }}
+                    >
+                      <Image 
+                        src={imageSrc} 
+                        alt={`${project.imagenes?.alt || project.titulo} - Imagen ${index + 1}`}
+                        fill
+                        sizes="100vw"
+                        className={`object-cover transition-opacity duration-300 ${
+                          isTransitioning ? 'opacity-0' : 'opacity-100'
+                        }`}
+                        style={{
+                          // Asegurar cobertura completa
+                          display: 'block',
+                          transform: 'translate3d(0,0,0)',
+                          backfaceVisibility: 'hidden'
+                        }}
+                        priority={index === 0}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
               
-              {/* Barra de paginación - mobile horizontal */}
+              {/* Barra de paginación */}
               {mobileImages.length > 1 && (
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
                   <div className="rounded-full px-3 py-2">
                     <div className="relative w-24 h-1 bg-white/30 rounded-full overflow-hidden">
                       <div 
@@ -430,7 +467,7 @@ export default function DesarrolloProyecto() {
           )}
         </div>
         
-        {/* Flechas de navegación desktop */}
+        {/* Flechas de navegación mobile */}
         <div className="hidden md:flex fixed bottom-2 left-0 right-0 justify-between pointer-events-none z-50 px-4">
           {/* Flecha anterior */}
           <button
@@ -461,7 +498,7 @@ export default function DesarrolloProyecto() {
         {/* Panel de información desktop */}
         <div className={`absolute left-0 top-0 w-1/2 h-full bg-[#EFEFEF] z-10 p-4 md:p-6 lg:p-8 pt-16 md:pt-20 lg:pt-24 flex flex-col transition-opacity duration-300 ${
           isTransitioning ? 'opacity-0' : 'opacity-100'
-        }`}>
+        } ${project?.titulo === 'SOFITEL LA RESERVA CARDALES' ? 'pb-32' : ''}`}>
           <div className="max-w-xl md:max-w-2xl">
             {/* Header fijo */}
             <div className="flex items-center gap-2 mb-4">
@@ -480,7 +517,7 @@ export default function DesarrolloProyecto() {
             
             {/* Contenido con espacio flexible - AJUSTADO PARA LA RESERVA CARDALES */}
             <div className={`flex-1 flex flex-col justify-start ${isReservaCardales ? 'space-y-1' : 'space-y-8'}`}>
-              <p className="text-black flex items-center" style={{ fontSize: 'clamp(12px, 1vw, 16px)' }}>
+              <p className={`text-black flex items-center ${project?.titulo === 'SOFITEL LA RESERVA CARDALES' ? 'mb-2' : ''}`} style={{ fontSize: 'clamp(12px, 1vw, 16px)' }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="mr-2 md:w-[18px] md:h-[18px]">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                   <circle cx="12" cy="10" r="3"/>
@@ -488,14 +525,14 @@ export default function DesarrolloProyecto() {
                 {project.locacion}
               </p>
               
-              <p className="text-[#151714] leading-none" style={{ fontSize: 'clamp(14px, 1.25vw, 16px)' }}>
+              <p className={`text-[#151714] leading-none ${project?.titulo === 'SOFITEL LA RESERVA CARDALES' ? 'mb-4' : ''}`} style={{ fontSize: 'clamp(14px, 1.25vw, 16px)' }}>
                 {project.descripcion}
               </p>
             </div>
             
             {/* Estadísticas desktop con animaciones - AJUSTADO PARA LA RESERVA CARDALES */}
             {project.estadisticas && (
-              <div className={`grid !grid-cols-2 gap-2 md:gap-x-6 md:gap-y-1 mt-16`} ref={desktopStatsRef}>
+              <div className={`grid !grid-cols-2 gap-2 md:gap-x-6 md:gap-y-1 ${project?.titulo === 'SOFITEL LA RESERVA CARDALES' ? 'mt-8' : 'mt-16'}`} ref={desktopStatsRef}>
                 {Object.entries(project.estadisticas).map(([key, value], index) => (
                   <StatisticItem 
                     key={key}
@@ -513,51 +550,51 @@ export default function DesarrolloProyecto() {
         {/* Galería de imágenes desktop - carrusel vertical */}
         <div className="absolute right-0 top-0 w-1/2 h-full overflow-hidden">
           <div className="relative w-full h-full">
-          {hasImages ? (
-            <>
-              {/* Carrusel de imágenes desktop */}
-              <div 
-                ref={desktopScrollRef}
-                className="flex flex-col overflow-y-auto h-full scrollbar-hidden snap-y snap-mandatory"
-                style={{ scrollSnapType: 'y mandatory' }}
-              >
-                {desktopImages.map((imageSrc, index) => (
-                  <div key={index} className="flex-shrink-0 w-full h-full snap-start">
-                    <Image 
-                      src={imageSrc} 
-                      alt={`${project.imagenes?.alt || project.titulo} - Imagen ${index + 1}`}
-                      width={800}
-                      height={600}
-                      className={`w-full h-full object-cover transition-opacity duration-300 ${
-                        isTransitioning ? 'opacity-0' : 'opacity-100'
-                      }`}
-                    />
-                  </div>
-                ))}
-              </div>
-              
-              {/* Barra de paginación - desktop vertical */}
-              {desktopImages.length > 1 && (
-                <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                  <div className="rounded-full px-2 py-3">
-                    <div className="relative w-1 h-24 bg-white/30 rounded-full overflow-hidden">
-                      <div 
-                        className="absolute left-0 w-full bg-[#efefef] rounded-full transition-all duration-300 ease-out"
-                        style={{ 
-                          height: `${100 / desktopImages.length}%`,
-                          top: `${(activeDesktopImageIndex * 100) / desktopImages.length}%`
-                        }}
+            {hasImages ? (
+              <>
+                {/* Carrusel de imágenes desktop */}
+                <div 
+                  ref={desktopScrollRef}
+                  className="flex flex-col overflow-y-auto h-full scrollbar-hidden snap-y snap-mandatory"
+                  style={{ scrollSnapType: 'y mandatory' }}
+                >
+                  {desktopImages.map((imageSrc, index) => (
+                    <div key={index} className="flex-shrink-0 w-full h-full snap-start">
+                      <Image 
+                        src={imageSrc} 
+                        alt={`${project.imagenes?.alt || project.titulo} - Imagen ${index + 1}`}
+                        width={800}
+                        height={600}
+                        className={`w-full h-full object-cover transition-opacity duration-300 ${
+                          isTransitioning ? 'opacity-0' : 'opacity-100'
+                        }`}
                       />
                     </div>
-                  </div>
+                  ))}
                 </div>
-              )}
-            </>
-          ) : (
-            <div className="h-full flex items-center justify-center bg-gray-100">
-              <p className="text-gray-500">No hay imágenes disponibles</p>
-            </div>
-          )}
+                
+                {/* Barra de paginación - desktop vertical */}
+                {desktopImages.length > 1 && (
+                  <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+                    <div className="rounded-full px-2 py-3">
+                      <div className="relative w-1 h-24 bg-white/30 rounded-full overflow-hidden">
+                        <div 
+                          className="absolute left-0 w-full bg-[#efefef] rounded-full transition-all duration-300 ease-out"
+                          style={{ 
+                            height: `${100 / desktopImages.length}%`,
+                            top: `${(activeDesktopImageIndex * 100) / desktopImages.length}%`
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="h-full flex items-center justify-center bg-gray-100">
+                <p className="text-gray-500">No hay imágenes disponibles</p>
+              </div>
+            )}
           </div>
         </div>
         
