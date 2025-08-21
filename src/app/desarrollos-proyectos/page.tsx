@@ -284,8 +284,8 @@ export default function DesarrollosProyectos() {
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-[#EFEFEF] flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="font-baskerville header-logo-mobile text-black text-4xl md:text-6xl">GRUPO FRALI</h1>
+        <div className="text-center animate-pulse">
+          <h1 className="font-baskerville header-logo-mobile text-black text-2xl md:text-3xl animate-scale-grow">GRUPO FRALI</h1>
         </div>
       </div>
     }>

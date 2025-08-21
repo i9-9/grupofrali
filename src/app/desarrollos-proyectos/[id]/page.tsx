@@ -396,6 +396,7 @@ export default function DesarrolloProyecto() {
                       alt={`${project.imagenes?.alt || project.titulo} - Imagen ${index + 1}`}
                       fill
                       sizes="100vw"
+                      quality={100}
                       className={`object-cover transition-opacity duration-300 ${
                         isTransitioning ? 'opacity-0' : 'opacity-100'
                       }`}
@@ -551,6 +552,7 @@ export default function DesarrolloProyecto() {
                         alt={`${project.imagenes?.alt || project.titulo} - Imagen ${index + 1}`}
                         width={800}
                         height={600}
+                        quality={100}
                         className={`w-full h-full object-cover transition-opacity duration-300 ${
                           isTransitioning ? 'opacity-0' : 'opacity-100'
                         }`}
