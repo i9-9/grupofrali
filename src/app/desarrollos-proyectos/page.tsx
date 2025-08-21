@@ -42,8 +42,9 @@ function ResponsiveImage({
         <Image 
           src={imageSrc} 
           alt={alt}
-          width={400}
-          height={400}
+          width={isMobile ? 400 : 400}
+          height={isMobile ? 225 : 400}
+          quality={100}
           className="w-full h-full object-cover"
         />
       </div>
