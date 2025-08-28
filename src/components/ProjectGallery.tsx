@@ -10,7 +10,7 @@ export default function ProjectGallery() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { language } = useLanguage();
   
-  // Obtener solo los proyectos que tienen home_gallery y verificar que la imagen sea válida
+  // Obtener solo los 6 proyectos específicos en el orden requerido
   const validProjectIds = [
     'septiembre',
     'sofitel-la-reserva-cardales',
@@ -24,7 +24,7 @@ export default function ProjectGallery() {
   const projects = validProjectIds
     .map(id => projectsData.proyectos.find(project => project.id === id))
     .filter((project): project is NonNullable<typeof project> => 
-      project !== undefined && project.imagenes?.home_gallery !== undefined
+      project !== undefined
     );
   
 
