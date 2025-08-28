@@ -106,8 +106,8 @@
     "title": "QUIENES SOMOS",
     "hero": {
       "title": "DESARROLLAMOS INVERSIONES ESTRATÉGICAS EN SECTORES CLAVE PARA EL CRECIMIENTO ECONÓMICO Y SOCIAL",
-      "titleMobile": "DESARROLLAMOS INVERSIONES<br />ESTRATÉGICAS EN SECTORES<br />CLAVE PARA EL CRECIMIENTO<br />ECONÓMICO Y SOCIAL.",
-      "titleDesktop": "DESARROLLAMOS INVERSIONES ESTRATÉGICAS<br />EN SECTORES CLAVE PARA EL CRECIMIENTO<br />ECONÓMICO Y SOCIAL."
+      "titleMobile": "DESARROLLAMOS INVERSIONES ESTRATÉGICAS EN SECTORES CLAVE PARA EL CRECIMIENTO ECONÓMICO Y SOCIAL",
+      "titleDesktop": "DESARROLLAMOS INVERSIONES ESTRATÉGICAS EN SECTORES CLAVE PARA EL CRECIMIENTO ECONÓMICO Y SOCIAL"
     },
     "description": "Con casi 30 años de trayectoria, consolidamos nuestro liderazgo a través de proyectos que combinan innovación, compromiso y una gestión profesional orientada al valor de largo plazo, en Argentina, Estados Unidos y Uruguay. Nuestra fortaleza está en la capacidad de evolucionar, diversificar e invertir en el futuro.",
     "values": {
@@ -148,12 +148,12 @@
         {
           "name": "HORACIO",
           "surname": "ANTELO",
-          "position": "DIRECTOR DE<br />OPERACIONES"
+          "position": "DIRECTOR DE OPERACIONES"
         },
         {
           "name": "INÉS",
           "surname": "GEMINI",
-          "position": "DIRECTORA<br />FINANCIERA"
+          "position": "DIRECTORA FINANCIERA"
         },
         {
           "name": "SEAN",
@@ -197,7 +197,7 @@
     "description": "El crecimiento sostenido de nuestros desarrollos se construye sobre el compromiso y la calidad humana de nuestro equipo. Fomentamos un ambiente de trabajo basado en el profesionalismo, la responsabilidad y la mejora continua, apoyando tanto el crecimiento personal como profesional de cada colaborador.",
     "joinTeam": {
       "title": "SUMATE A NUESTRO EQUIPO",
-      "description": "Si compartís nuestra visión y<br />buscás desarrollarte en un entorno<br />profesional y dinámico, te invitamos<br />a enviarnos tu perfil."
+      "description": "Si compartís nuestra visión y buscás desarrollarte en un entorno profesional y dinámico, te invitamos a enviarnos tu perfil."
     },
     "positions": {
       "title": "POSICIONES ABIERTAS",

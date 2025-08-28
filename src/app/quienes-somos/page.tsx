@@ -278,9 +278,9 @@ export default function QuienesSomos() {
                 </div>
                 <div className="flex-1 pl-12">
                   <h3 className="font-baskerville text-black" style={{ fontSize: 'clamp(18px, 1.8vw, 24px)', lineHeight: '1.3' }}>
-                    WE CONTINUE TO<br />
-                    CREATE OPPORTUNITIES THAT<br />
-                    DRIVE THE FUTURE
+                    SEGUIMOS CREANDO<br />
+                    OPORTUNIDADES QUE<br />
+                    IMPULSAN EL FUTURO
                   </h3>
                 </div>
               </div>

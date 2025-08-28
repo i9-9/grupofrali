@@ -120,8 +120,8 @@
     "title": "ABOUT US",
     "hero": {
       "title": "STRATEGIC VISION, RESPONSIBLE GROWTH",
-      "titleMobile": "STRATEGIC VISION,<br />RESPONSIBLE GROWTH",
-      "titleDesktop": "STRATEGIC VISION,<br />RESPONSIBLE GROWTH"
+      "titleMobile": "STRATEGIC VISION, RESPONSIBLE GROWTH",
+      "titleDesktop": "STRATEGIC VISION, RESPONSIBLE GROWTH"
     },
     "description": "At Grupo Frali, we develop strategic investments in key sectors that drive economic and social progress. With nearly 30 years of experience, we have strengthened our leadership through projects that combine innovation, commitment, and professional management focused on long-term value in Argentina, the United States, and Uruguay. Our strength lies in our ability to evolve, diversify, and invest in the future.",
     "values": {
@@ -162,12 +162,12 @@
         {
           "name": "HORACIO",
           "surname": "ANTELO",
-          "position": "CHIEF OPERATING<br />OFFICER"
+          "position": "CHIEF OPERATING OFFICER"
         },
         {
           "name": "INÉS",
           "surname": "GEMINI",
-          "position": "CHIEF FINANCIAL<br />OFFICER"
+          "position": "CHIEF FINANCIAL OFFICER"
         },
         {
           "name": "SEAN",
@@ -211,7 +211,7 @@
     "description": "The sustained growth of our developments is built on the commitment and human quality of our team. We foster a work environment based on professionalism, responsibility, and continuous improvement, supporting both the personal and professional growth of every collaborator.",
     "joinTeam": {
       "title": "JOIN OUR TEAM",
-      "description": "If you share our vision and<br />seek to grow in a professional<br />and dynamic environment, we<br />invite you to send us your profile."
+      "description": "If you share our vision and seek to grow in a professional and dynamic environment, we invite you to send us your profile."
     },
     "positions": {
       "title": "OPEN POSITIONS",
