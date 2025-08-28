@@ -1,4 +1,24 @@
+"use client";
+
+import { useTranslations } from "@/hooks/useTranslations";
+
 export default function RRHH() {
+  const { t, isReady } = useTranslations();
+
+  if (!isReady) {
+    return (
+      <main className="bg-[#EFEFEF]">
+        <div className="content-wrapper pt-36 md:pt-24 pb-32">
+          <div className="grid">
+            <div className="col-6 md:col-8">
+              <div className="h-16 bg-gray-200 animate-pulse rounded"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="bg-[#EFEFEF]">
       {/* Hero */}
@@ -6,20 +26,18 @@ export default function RRHH() {
         <div className="grid pt-36 md:pt-24 pb-32">
           <div className="col-6 md:col-8">
             <h1 className="text-h1-baskerville text-black">
-              UN EQUIPO QUE<br />
-              CRECE EN CADA<br />
-              PROYECTO
+              {t("hr.title")}
             </h1>
           </div>
         </div>
       </div>
 
-      {/* Sumate a Nuestro Equipo */}
+      {/* Join Our Team */}
       <section className="content-wrapper pb-16">
         <div className="grid pb-8">
           <div className="col-6 md:col-12">
             <h2 className="text-small-baskerville text-black">
-              SUMATE A NUESTRO EQUIPO
+              {t("hr.joinTeam.title")}
             </h2>
           </div>
         </div>
@@ -27,21 +45,16 @@ export default function RRHH() {
         <div className="grid">
           <div className="col-6 md:col-span-6 space-y-6 md:space-y-6 space-y-4">
             <p className="text-black text-base leading-none">
-              El crecimiento sostenido de nuestros desarrollos se apoya 
-              en el compromiso y la calidad humana de nuestro 
-              equipo. Fomentamos un ambiente de trabajo basado en el 
-              profesionalismo, la responsabilidad y la mejora continua, 
-              acompañando el desarrollo personal y profesional de cada 
-              colaborador.
+              {t("hr.description")}
             </p>
-            
           </div>
           
-          {/* Segundo párrafo en mobile - Columna completa */}
+          {/* Second paragraph in mobile - Full column */}
           <div className="md:hidden col-6">
-            <p className="text-black mb-8 text-base leading-none">
-              Si compartís nuestra visión y buscás desarrollarte en un entorno profesional y dinámico, te invitamos a enviarnos tu perfil.
-            </p>
+            <p 
+              className="text-black mb-8 text-base leading-none"
+              dangerouslySetInnerHTML={{ __html: t("hr.joinTeam.description") }}
+            />
             
             <div>
               <a 
@@ -53,14 +66,12 @@ export default function RRHH() {
             </div>
           </div>
 
-          {/* Segundo párrafo en desktop */}
+          {/* Second paragraph in desktop */}
           <div className="hidden md:block col-6 md:col-7-to-12 mb-20 md:mb-40">
-            <p className="text-black mb-8 text-base leading-none">
-              Si compartís nuestra visión y<br />
-              buscás desarrollarte en un entorno<br />
-              profesional y dinámico, te invitamos<br />
-              a enviarnos tu perfil.
-            </p>
+            <p 
+              className="text-black mb-8 text-base leading-none"
+              dangerouslySetInnerHTML={{ __html: t("hr.joinTeam.description") }}
+            />
             
             <div>
               <a 
@@ -73,7 +84,6 @@ export default function RRHH() {
           </div>
         </div>
       </section>
-
     </main>
   );
 }

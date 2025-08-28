@@ -1,0 +1,237 @@
+{
+  "common": {
+    "navigation": {
+      "home": "HOME",
+      "about": "ABOUT US",
+      "projects": "DEVELOPMENTS & INVESTMENTS",
+      "hr": "HR",
+      "contact": "CONTACT"
+    },
+    "footer": {
+      "allRightsReserved": "All rights reserved",
+      "grupoFrali": "Grupo Frali"
+    },
+    "buttons": {
+      "back": "BACK TO TOP",
+      "next": "NEXT",
+      "previous": "PREVIOUS",
+      "viewAll": "VIEW ALL"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "SHAPING GROWTH WITH STRATEGIC VISION",
+      "titleMobile": "SHAPING GROWTH WITH STRATEGIC VISION",
+      "titleDesktop": "SHAPING GROWTH WITH STRATEGIC VISION",
+      "titleDesktopLine1": "SHAPING GROWTH",
+      "titleDesktopLine2": "WITH STRATEGIC VISION"
+    },
+    "concepts": {
+      "vision": "FUTURE VISION",
+      "innovation": "INNOVATION", 
+      "solidity": "SOLIDITY"
+    },
+    "description": "For almost 30 years, Grupo Frali has been driving strategic investments across real estate, agribusiness, hospitality, and renewable energy. We are committed to projects that foster economic growth, strengthen communities, and create lasting value in Argentina, the United States, and Uruguay. Innovation, resilience, and a vision for the future define who we are.",
+    "stats": {
+      "totalAssets": "Total Assets",
+      "projectsDelivered": "Projects Delivered or Underway",
+      "builtArea": "Built Area",
+      "farmland": "Farmland",
+      "team": "Team",
+      "upcomingProjects": "Upcoming Projects"
+    },
+    "featuredProjects": {
+      "title": "Projects That Shape Our Journey",
+      "subtitle": "Featured Projects",
+      "projects": [
+        "La Reserva Cardales",
+        "Sofitel La Reserva Cardales",
+        "Septiembre",
+        "La Banderita Wind Farm",
+        "Elvis River & SunFlower River (U.S.)",
+        "Edgewater River (Miami)"
+      ]
+    },
+    "businessAreas": {
+      "title": "DIVERSIFICATION FOR SUSTAINABLE GROWTH",
+      "titleLine1": "DIVERSIFICATION FOR",
+      "titleLine2": "SUSTAINABLE GROWTH"
+    },
+    "projects": {
+      "title": "PROJECTS",
+      "seeMore": "SEE MORE"
+    },
+    "categories": {
+      "realEstate": "REAL ESTATE",
+      "renewableEnergy": "RENEWABLE ENERGY",
+      "hospitality": "HOSPITALITY",
+      "agribusiness": "AGRIBUSINESS"
+    },
+    "projectGallery": {
+      "categories": {
+        "realEstate": "REAL ESTATE",
+        "hospitality": "HOSPITALITY",
+        "renewableEnergy": "RENEWABLE ENERGY",
+        "agribusiness": "AGRIBUSINESS"
+      },
+      "locations": {
+        "escobarBuenosAires": "Escobar, Buenos Aires",
+        "campanaBuenosAires": "Campana, Buenos Aires",
+        "generalAchaLaPampa": "General Acha, La Pampa",
+        "mississippiUSA": "Mississippi, United States",
+        "miamiUSA": "Miami, United States"
+      }
+    }
+  },
+  "projects": {
+    "title": "DEVELOPMENTS & INVESTMENTS",
+    "description": "Discover our project portfolio that reflects the diversity and scope of our strategic investments.",
+    "hero": {
+      "title": "STRATEGIC DIVERSIFICATION,<br/>LONG-TERM VISION",
+      "description": "At Grupo Frali, we develop and manage projects in strategic sectors, combining experience, innovation, and commitment. With a strategy built on diversifying investments across markets and business segments, and with a presence in Argentina, the United States, and Uruguay, we remain committed to constant evolution, open to new opportunities that integrate infrastructure, nature, quality of life, and productive efficiency."
+    },
+    "sectionTitle": "PROJECTS",
+    "categories": {
+      "all": "VIEW ALL",
+      "realEstate": "REAL ESTATE",
+      "renewableEnergy": "RENEWABLE ENERGY",
+      "hospitality": "HOSPITALITY",
+      "agroindustry": "AGRIBUSINESS"
+    },
+    "filters": {
+      "title": "FILTER BY CATEGORY",
+      "apply": "APPLY FILTERS",
+      "clear": "CLEAR FILTERS"
+    }
+  },
+  "projectDetails": {
+    "navigation": {
+      "backToProjects": "BACK TO PROJECTS",
+      "nextProject": "NEXT PROJECT",
+      "previousProject": "PREVIOUS PROJECT"
+    },
+    "sections": {
+      "overview": "OVERVIEW",
+      "statistics": "STATISTICS",
+      "gallery": "GALLERY"
+    }
+  },
+  "about": {
+    "title": "ABOUT US",
+    "hero": {
+      "title": "STRATEGIC VISION, RESPONSIBLE GROWTH",
+      "titleMobile": "STRATEGIC VISION,<br />RESPONSIBLE GROWTH",
+      "titleDesktop": "STRATEGIC VISION,<br />RESPONSIBLE GROWTH"
+    },
+    "description": "At Grupo Frali, we develop strategic investments in key sectors that drive economic and social progress. With nearly 30 years of experience, we have strengthened our leadership through projects that combine innovation, commitment, and professional management focused on long-term value in Argentina, the United States, and Uruguay. Our strength lies in our ability to evolve, diversify, and invest in the future.",
+    "values": {
+      "title": "VALUES",
+      "items": [
+        "Commitment to responsible development",
+        "Strength and professionalism in every project",
+        "Innovation applied to management and growth",
+        "Integrity as the foundation of our actions"
+      ]
+    },
+    "dna": {
+      "title": "OUR DNA",
+      "mission": {
+        "title": "MISSION",
+        "description": "To promote investment projects that generate economic, social, and human value, strengthening the growth of the communities where we operate."
+      },
+      "vision": {
+        "title": "VISION",
+        "description": "To consolidate our role as a strategic player in the development of high-impact projects, combining responsibility, innovation, and a forward-looking vision."
+      }
+    },
+    "group": {
+      "title": "THE GROUP",
+      "description1": "Since our beginnings, we have channeled investments into strategic sectors, working with a professional approach and a long-term perspective. Our projects in real estate, agribusiness, energy, and hospitality reflect a management model based on diversification and a strong commitment to positive impact. Today, we operate in Argentina, the United States, and Uruguay, expanding our presence in key segments in a planned and sustainable way.",
+      "description2": "True to our dynamic spirit, we continue to analyze new opportunities for development and investment, remaining open to expanding into new markets, always guided by the vision of creating lasting value.",
+      "future": "WE CONTINUE TO CREATE OPPORTUNITIES THAT DRIVE THE FUTURE"
+    },
+    "management": {
+      "title": "MANAGEMENT",
+      "description": "Our Board is composed of professionals with both local and international experience, committed to excellence and the Group's strategic growth.",
+      "positions": [
+        {
+          "name": "SEBASTIAN",
+          "surname": "LANUSSE",
+          "position": "CHIEF EXECUTIVE OFFICER"
+        },
+        {
+          "name": "HORACIO",
+          "surname": "ANTELO",
+          "position": "CHIEF OPERATING<br />OFFICER"
+        },
+        {
+          "name": "INÉS",
+          "surname": "GEMINI",
+          "position": "CHIEF FINANCIAL<br />OFFICER"
+        },
+        {
+          "name": "SEAN",
+          "surname": "DUGGAN",
+          "position": "REAL ESTATE MANAGER"
+        },
+        {
+          "name": "JOAQUÍN",
+          "surname": "GOICOECHEA",
+          "position": "ASSET MANAGER / CONTROLLER"
+        },
+        {
+          "name": "JOAQUÍN NAZAR",
+          "surname": "ANCHORENA",
+          "position": "AGRIBUSINESS"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "title": "LET'S KEEP IN TOUCH",
+    "form": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "E-mail",
+      "subject": "Subject",
+      "message": "Message",
+      "send": "SEND",
+      "required": "Required field"
+    },
+    "contactInfo": {
+      "generalInfo": "INFO@GRUPOFRALI.COM",
+      "pressComms": "PRENSA@GRUPOFRALI.COM",
+      "phone": "+54 3489 466110",
+      "address": "PANAMERICANA HIGHWAY N°9, KM 61",
+      "city": "(2804) CAMPANA, BS AS, ARGENTINA"
+    }
+  },
+  "hr": {
+    "title": "A TEAM THAT GROWS WITH EVERY PROJECT",
+    "description": "The sustained growth of our developments is built on the commitment and human quality of our team. We foster a work environment based on professionalism, responsibility, and continuous improvement, supporting both the personal and professional growth of every collaborator.",
+    "joinTeam": {
+      "title": "JOIN OUR TEAM",
+      "description": "If you share our vision and<br />seek to grow in a professional<br />and dynamic environment, we<br />invite you to send us your profile."
+    },
+    "positions": {
+      "title": "OPEN POSITIONS",
+      "apply": "APPLY"
+    }
+  },
+  "footer": {
+    "navigation": {
+      "home": "HOME",
+      "aboutUs": "ABOUT US",
+      "developments": "DEVELOPMENTS & INVESTMENTS",
+      "humanResources": "HUMAN RESOURCES",
+      "contact": "CONTACT"
+    },
+    "contact": {
+      "email": "INFO@GRUPOFRALI.COM",
+      "phone": "+54 3489 466110",
+      "address": "PANAMERICANA HIGHWAY Nº9, KM 61 (2804)",
+      "city": "CAMPANA, ARGENTINA."
+    },
+    "copyright": "© 2025 GRUPO FRALI\nALL RIGHTS RESERVED"
+  }
+}

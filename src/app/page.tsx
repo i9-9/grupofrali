@@ -5,8 +5,11 @@ import RandomVideo from "@/components/RandomVideo";
 import ProjectGallery from "@/components/ProjectGallery";
 import { StatItem } from "@/components/StatItem";
 import Link from "next/link";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 function HomeContent() {
+  const { t, language } = useLanguage()
+  
   return (
     <main>
       {/* Video Hero */}
@@ -27,24 +30,22 @@ function HomeContent() {
             <div className="col-6 md:col-6">
               {/* Mobile */}
               <h2 className="md:hidden text-h1-baskerville text-black mb-8">
-                IMPULSAMOS EL
-                <br />
-                DESARROLLO
-                <br />
-                CON VISIÓN
-                <br />
-                ESTRATÉGICA
-                <br />
+                {t("home.hero.titleMobile").split(' ').map((word, index) => (
+                  <span key={index}>
+                    {word}
+                    <br />
+                  </span>
+                ))}
               </h2>
 
               {/* Desktop */}
               <h2 className="hidden md:block text-h1-baskerville text-black mb-8">
                 <span className="whitespace-nowrap mb-1">
-                  IMPULSAMOS EL DESARROLLO
+                  {t("home.hero.titleDesktopLine1")}
                 </span>
                 <br />
                 <span className="whitespace-nowrap">
-                  CON VISIÓN ESTRATÉGICA
+                  {t("home.hero.titleDesktopLine2")}
                 </span>
               </h2>
             </div>
@@ -53,13 +54,13 @@ function HomeContent() {
             <div className="col-6 md:col-1-to-5 flex flex-col order-2 md:order-1">
               <div className="flex justify-between pb-8 items-center mt-auto">
                 <h3 className="font-baskerville text-black">
-                  VISIÓN DE FUTURO
+                  {t("home.concepts.vision")}
                 </h3>
                 <h3 className="font-baskerville text-black">
-                  INNOVACIÓN
+                  {t("home.concepts.innovation")}
                 </h3>
                 <h3 className="font-baskerville text-black">
-                  SOLIDEZ
+                  {t("home.concepts.solidity")}
                 </h3>
               </div>
             </div>
@@ -67,11 +68,7 @@ function HomeContent() {
             {/* PÁRRAFO - arriba de stats derechas (columnas 8-12) */}
             <div className="col-6 md:col-8-to-12 order-1 md:order-2 flex flex-col">
               <p className="text-body2-archivo text-black mb-12 mt-auto leading-[1]">
-                Con casi 30 años de trayectoria, en Grupo Frali desarrollamos
-                inversiones estratégicas en real estate, agroindustria,
-                hotelería y energías renovables. Apostamos a proyectos que
-                combinan crecimiento económico, compromiso con el entorno y
-                generación de valor en Argentina, EE. UU. y Uruguay.
+                {t("home.description")}
               </p>
             </div>
 
@@ -80,44 +77,44 @@ function HomeContent() {
             <div className="col-6 md:col-1-to-5 order-3 md:order-3 md:pb-8">
               <StatItem
                 number="14"
-                label="PROYECTOS DESARROLLADOS"
+                label={t("home.stats.projectsDelivered")}
                 delay="stat-number-delay-1"
                 lineDelay="stat-line-delay-1"
               />
               <StatItem
                 number="300 MM"
                 unit="USD"
-                label="VALOR TOTAL DE ACTIVOS"
+                label={t("home.stats.totalAssets")}
                 delay="stat-number-delay-2"
                 lineDelay="stat-line-delay-2"
               />
               <StatItem
                 number="5"
-                label="PROYECTOS EN PLANIFICACIÓN"
+                label={t("home.stats.upcomingProjects")}
                 delay="stat-number-delay-3"
                 lineDelay="stat-line-delay-3"
               />
             </div>
-
+            
             {/* Columna 2: Estadísticas derecha (columnas 8-12) */}
             <div className="col-6 md:col-8-to-12 order-4 md:order-4 md:pb-8">
               <StatItem
                 number="7800"
                 unit="ha"
-                label="HÉCTAREAS AGRÍCOLAS"
+                label={t("home.stats.farmland")}
                 delay="stat-number-delay-4"
                 lineDelay="stat-line-delay-4"
               />
               <StatItem
                 number="+300"
-                label="N° EMPLEADOS & COLABORADORES"
+                label={t("home.stats.team")}
                 delay="stat-number-delay-5"
                 lineDelay="stat-line-delay-5"
               />
               <StatItem
                 number="+100.000"
                 unit="m²"
-                label="SUPERFICIE CONSTRUIDA"
+                label={t("home.stats.builtArea")}
                 delay="stat-number-delay-6"
                 lineDelay="stat-line-delay-6"
               />
@@ -125,6 +122,8 @@ function HomeContent() {
           </div>
         </div>
       </section>
+
+
 
       {/* Marquee Logos */}
       <section className="py-40 overflow-hidden bg-[#efefef]">
@@ -259,10 +258,10 @@ function HomeContent() {
         <div className="content-wrapper">
           {/* Header */}
           <div className="flex justify-between items-baseline mb-8">
-            <h3 className="text-small-archivo">PROYECTOS</h3>
+            <h3 className="text-small-archivo">{t("home.projects.title")}</h3>
             <Link href="/desarrollos-proyectos" className="md:hidden">
               <h3 className="text-small-archivo underline hover:text-black/50 transition-colors duration-300">
-                VER MÁS
+                {t("home.projects.seeMore")}
               </h3>
             </Link>
           </div>
@@ -270,20 +269,31 @@ function HomeContent() {
           <div className="mb-12 flex justify-between items-end">
             <div>
               <h2 className="md:hidden text-h1-baskerville">
-                DIVERSIFICACIÓN <br />
-                PARA CRECER DE
+                {t("home.businessAreas.titleLine1")}
                 <br />
-                MANERA SOSTENIBLE
+                {t("home.businessAreas.titleLine2")}
+                {language === 'es' && (
+                  <>
+                    <br />
+                    {t("home.businessAreas.titleLine3")}
+                  </>
+                )}
               </h2>
               <h2 className="hidden md:block text-h1-baskerville">
-                DIVERSIFICACIÓN PARA <br />
-                CRECER DE MANERA <br />
-                SOSTENIBLE
+                {t("home.businessAreas.titleLine1")}
+                <br />
+                {t("home.businessAreas.titleLine2")}
+                {language === 'es' && (
+                  <>
+                    <br />
+                    {t("home.businessAreas.titleLine3")}
+                  </>
+                )}
               </h2>
             </div>
             <Link href="/desarrollos-proyectos" className="hidden md:block">
               <h3 className="text-small-archivo underline hover:text-black/50 transition-colors duration-300">
-                VER MÁS
+                {t("home.projects.seeMore")}
               </h3>
             </Link>
           </div>

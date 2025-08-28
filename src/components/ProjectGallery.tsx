@@ -3,83 +3,31 @@
 import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-interface Project {
-  id: string;
-  titulo: string;
-  categoria: string;
-  locacion: string;
-  imagen: string;
-  alt: string;
-}
-
-const projects: Project[] = [
-  {
-    id: "septiembre",
-    titulo: "SEPTIEMBRE",
-    categoria: "REAL ESTATE",
-    locacion: "Escobar, Buenos Aires",
-    imagen: "/images/projects/septiembre/home-gallery/septiembre-home.jpg",
-    alt: "Vista aérea del barrio Septiembre con club house",
-  },
-  {
-    id: "sofitel-la-reserva-cardales",
-    titulo: "SOFITEL LA RESERVA\nCARDALES",
-    categoria: "HOTELERIA",
-    locacion: "Campana, Buenos Aires",
-    imagen: "/images/projects/sofitel/home-gallery/sofitel-home.jpg",
-    alt: "Hotel Sofitel con piscina y paisajismo",
-  },
-  {
-    id: "la-reserva-cardales",
-    titulo: "LA RESERVA CARDALES",
-    categoria: "REAL ESTATE",
-    locacion: "Campana, Buenos Aires",
-    imagen: "/images/projects/la-reserva-cardales/home-gallery/reserva-home.jpg",
-    alt: "Club house junto al campo de golf",
-  },
-  {
-    id: "la-banderita-parque-eolico",
-    titulo: "LA BANDERITA PARQUE\nEÓLICO",
-    categoria: "ENERGIA RENOVABLE",
-    locacion: "General Acha, La Pampa",
-    imagen: "/images/projects/la-banderita-parque-eolico/home-gallery/labanderita-home.jpg",
-    alt: "Parque eólico con aerogeneradores",
-  },
-  {
-    id: "elvis-river-sunflower-river",
-    titulo: "ELVIS RIVER Y\nSUNFLOWER RIVER",
-    categoria: "AGROPECUARIA",
-    locacion: "Mississippi, Estados Unidos",
-    imagen: "/images/projects/elvis-river-sunflower-river/home-gallery/elvis-home.jpg",
-    alt: "Vista aérea de campos agrícolas con sistemas de riego",
-  },
-  {
-    id: "edgewater-river",
-    titulo: "EDGEWATER RIVER",
-    categoria: "REAL ESTATE",
-    locacion: "Miami, Estados Unidos",
-    imagen: "/images/projects/edgewater-river/home-gallery/edgewater-home.jpg",
-    alt: "Desarrollo residencial moderno en Miami",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
+import projectsData from "@/data/projects.json";
 
 export default function ProjectGallery() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { language } = useLanguage();
+  
+  // Obtener solo los proyectos que tienen home_gallery y verificar que la imagen sea válida
+  const validProjectIds = [
+    'septiembre',
+    'sofitel-la-reserva-cardales',
+    'la-reserva-cardales',
+    'la-banderita-parque-eolico',
+    'elvis-river-sunflower-river',
+    'edgewater-river'
+  ];
 
-  const renderTitle = (titulo: string) => {
-    const lines = titulo.split('\n');
-    if (lines.length === 1) {
-      return titulo;
-    }
-    return (
-      <>
-        {lines.map((line, index) => (
-          <div key={index}>{line}</div>
-        ))}
-      </>
+  // Obtener los proyectos en el orden específico
+  const projects = validProjectIds
+    .map(id => projectsData.proyectos.find(project => project.id === id))
+    .filter((project): project is NonNullable<typeof project> => 
+      project !== undefined && project.imagenes?.home_gallery !== undefined
     );
-  };
+  
+
 
   return (
     <div className="relative w-full">
@@ -93,8 +41,8 @@ export default function ProjectGallery() {
             >
               <div className="relative overflow-hidden aspect-[343/350] mb-4">
                 <Image
-                  src={project.imagen}
-                  alt={project.alt}
+                  src={project.imagenes.home_gallery || ''}
+                  alt={project.imagenes.alt || ''}
                   width={343}
                   height={350}
                   className="object-cover w-full h-full"
@@ -108,9 +56,12 @@ export default function ProjectGallery() {
 
                   {/* Contenedor que empuja el título al borde derecho */}
                   <div className="flex-1 text-right">
-                    <h3 className="font-baskerville text-sm md:text-[22px] text-black leading-tight text-left inline-block">
-                      {renderTitle(project.titulo)}
-                    </h3>
+                    <h3 
+                      className="font-baskerville text-sm md:text-[22px] text-black leading-tight text-left inline-block"
+                      dangerouslySetInnerHTML={{ 
+                        __html: language === 'en' ? project.title_en : project.titulo 
+                      }}
+                    />
                   </div>
                 </div>
               </div>

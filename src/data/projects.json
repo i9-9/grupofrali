@@ -3,9 +3,13 @@
     {
       "id": "la-banderita-parque-eolico",
       "titulo": "LA BANDERITA PARQUE EÓLICO",
+      "title_en": "LA BANDERITA WIND FARM",
       "categoria": "ENERGIA RENOVABLE",
+      "category_en": "RENEWABLE ENERGY",
       "locacion": "General Acha, La Pampa",
+      "location_en": "La Pampa, Argentina",
       "descripcion": "Ubicado en General Acha, provincia de La Pampa, el Parque Eólico La Banderita representa nuestro compromiso con el desarrollo energético sustentable y la eficiencia operativa. En 2019, Grupo Frali lideró el desarrollo integral de La Banderita. Desde su inversión inicial hasta la puesta en operación, el proyecto fue diseñado, gestionado y ejecutado por el Grupo. El Parque abastece anualmente a 70.000 hogares, contribuyendo a la diversificación de la matriz energética de Argentina y a la reducción de emisiones de CO₂. Diseñado en etapas, proyectamos alcanzar una potencia total de 100 MW.",
+      "description_en": "Located in General Acha, La Pampa Province, La Banderita Wind Farm embodies our commitment to sustainable energy development and operational efficiency. In 2019, Grupo Frali led the project's comprehensive development—from the initial investment to its commissioning. Designed, managed, and executed entirely by the Group, the wind farm now supplies energy to 70,000 households annually, contributing to the diversification of Argentina's energy matrix and the reduction of CO₂ emissions. Built in stages, it is projected to reach a total capacity of 100 MW.",
       "imagenes": {
         "home_gallery": "/images/projects/la-banderita-parque-eolico/home-gallery/labanderita-home.jpg",
         "desarrollos_mobile": "/images/projects/la-banderita-parque-eolico/desarrollos/mobile/labanderita.png",
@@ -25,14 +29,26 @@
         "estado": "EN OPERACIÓN",
         "hogares_abastecidos": "70.000",
         "reduccion_emisiones_anuales": "82.724 TONELADAS DE CO₂"
+      },
+      "statistics_en": {
+        "installed_capacity": "36.75 MW",
+        "historical_capacity_factor": "52.08%",
+        "average_annual_production": "168.8 GWh",
+        "status": "OPERATIONAL",
+        "households_supplied": "70,000",
+        "annual_emissions_reduction": "82,724 TONNES OF CO₂"
       }
     },
     {
       "id": "septiembre",
       "titulo": "SEPTIEMBRE",
+      "title_en": "SEPTIEMBRE",
       "categoria": "REAL ESTATE",
+      "category_en": "REAL ESTATE",
       "locacion": "Escobar, Buenos Aires",
+      "location_en": "Escobar, Buenos Aires",
       "descripcion": "Barrio Septiembre marcó el inicio de la actividad inmobiliaria de Grupo Frali, convirtiéndose en uno de los primeros barrios privados de gran escala desarrollados en el Ramal Escobar. Refleja nuestra capacidad para generar desarrollos urbanos integrales, anticipándonos a las tendencias de crecimiento de una región. Con una superficie total de 60 hectáreas y 428 lotes, Septiembre integra urbanismo e infraestructura en una propuesta consolidada, hoy 100% comercializada y habitada. Ubicado en el Km 47,5 de Panamericana, el barrio cuenta con accesos ágiles y una variedad de servicios que potencia su calidad de vida. Dentro de su masterplan, desarrollamos dos emprendimientos integrados que complementan la propuesta residencial: Terrazas de Septiembre y Casas de Septiembre.",
+      "description_en": "Septiembre marked Grupo Frali's entry into the real estate sector, becoming one of the first large-scale gated communities developed along the Escobar corridor. It reflects our ability to create comprehensive urban developments, anticipating regional growth trends. With a total area of 60 hectares and 428 lots, Septiembre integrates urban planning and infrastructure into a consolidated residential proposal, now fully sold and inhabited. Located at Km 47.5 of Panamericana Highway, the community offers convenient access and a variety of services that enhance its quality of life. As part of its master plan, Grupo Frali developed two complementary projects: Terrazas de Septiembre and Casas de Septiembre.",
       "imagenes": {
         "home_gallery": "/images/projects/septiembre/home-gallery/septiembre-home.jpg",
         "desarrollos_mobile": "/images/projects/septiembre/desarrollos/mobile/septiembre.png",
@@ -54,14 +70,26 @@
         "estado": "100% COMERCIALIZADO Y HABITADO",
         "hectareas_de_superficie_total": "60",
         "canchas_tenis": "XXX"
+      },
+      "statistics_en": {
+        "club_house": "1",
+        "soccer_and_hockey_fields": "XXX",
+        "residential_lots": "428",
+        "status": "100% SOLD AND INHABITED",
+        "total_area_hectares": "60",
+        "tennis_courts": "XXX"
       }
     },
     {
       "id": "la-reserva-cardales",
       "titulo": "LA RESERVA CARDALES",
+      "title_en": "LA RESERVA CARDALES",
       "categoria": "REAL ESTATE",
+      "category_en": "REAL ESTATE",
       "locacion": "Campana, Buenos Aires",
+      "location_en": "Campana, Buenos Aires",
       "descripcion": "La Reserva Cardales es uno de los desarrollos más relevantes de Grupo Frali, pionero en la Argentina en reunir residencias, golf, hotelería de lujo y espacios comerciales dentro de un mismo masterplan de gran escala. Ubicado en el Km 61 de la Ruta Panamericana Ramal Campana, el barrio se extiende sobre 185 hectáreas y ofrece 550 lotes residenciales inmersos en un entorno natural cuidadosamente diseñado. El proyecto cuenta con un reconocido campo de golf diseñado por Caprinle & Capdepont que fue sede del PGA Tour Latinoamérica en 2013, un Club House con servicios exclusivos y el hotel cinco estrellas Sofitel La Reserva Cardales, integrando deporte, hospitalidad y vida residencial en una propuesta única. La Reserva Cardales también incluye desarrollos complementarios como La Villette Golf Residences, GreenHouse y 3 macro lotes reservados para futuros desarrollos residenciales y comerciales.",
+      "description_en": "La Reserva Cardales is one of Grupo Frali's landmark developments, pioneering in Argentina by integrating residences, golf, luxury hospitality, and commercial spaces into a single large-scale master plan. Located at Km 61 of Panamericana Highway (Campana), the community spans 185 hectares with over 550 residential lots, surrounded by a carefully designed natural environment. The project features a renowned golf course by Caprile & Capdepont (host of the PGA Tour Latin America in 2013), an exclusive Club House, and the five-star Sofitel La Reserva Cardales. Complementary developments include La Villette Golf Residences, GreenHouse, and three macro-lots reserved for future residential and commercial use. As the first Resort Country Club + Luxury Hotel in Argentina, La Reserva Cardales reflects Grupo Frali's commitment to creating integrated communities that combine quality of life, premium infrastructure, and a vision for the future.",
       "imagenes": {
         "home_gallery": "/images/projects/la-reserva-cardales/home-gallery/reserva-home.jpg",
         "desarrollos_mobile": "/images/projects/la-reserva-cardales/desarrollos/mobile/la-reserva.png",
@@ -87,14 +115,28 @@
         "estado": "CONSOLIDADO Y EN COMERCIALIZACIÓN ETAPA FINAL",
         "canchas_tenis": "6",
         "espacios_comunes": "GIMNASIO, SALÓN DE USOS MÚLTIPLES Y CLUB HOUSE"
+      },
+      "statistics_en": {
+        "residential_lots": "556",
+        "green_areas": "60%",
+        "total_area_hectares": "185",
+        "lagoon_hectares": "20",
+        "golf_course": "18 holes",
+        "status": "CONSOLIDATED, FINAL STAGE OF COMMERCIALIZATION",
+        "tennis_courts": "6",
+        "common_spaces": "GYM, MULTIPURPOSE HALL AND CLUB HOUSE"
       }
     },
     {
       "id": "sofitel-la-reserva-cardales",
       "titulo": "SOFITEL LA RESERVA CARDALES",
+      "title_en": "SOFITEL LA RESERVA CARDALES",
       "categoria": "HOTELERIA",
+      "category_en": "HOSPITALITY",
       "locacion": "Campana, Buenos Aires",
+      "location_en": "Campana, Buenos Aires",
       "descripcion": "Sofitel La Reserva Cardales es el hotel cinco estrellas desarrollado por Grupo Frali y operado bajo la gestión de la cadena internacional Sofitel (Accor Hotels), dentro del masterplan de La Reserva Cardales, en Campana, Buenos Aires. Forma parte del primer proyecto en Argentina en integrar un resort country club y un hotel de lujo en un mismo entorno planificado, sobre 185 hectáreas de naturaleza y servicios de alta calidad. Con 160 habitaciones, un centro de convenciones de gran capacidad, spa, piscinas y gastronomía de primer nivel, Sofitel La Reserva Cardales se posicionó como destino turístico para huéspedes de todo el mundo, además de ser un espacio elegido por grandes empresas para eventos corporativos y congresos de gran escala. En 2010 fue sede de la Cumbre de UNASUR con la participación de todos los mandatarios y cancilleres de la región. Actualmente, es elegido continuamente por delegaciones deportivas de relevancia internacional.",
+      "description_en": "Sofitel La Reserva Cardales is a five-star hotel developed by Grupo Frali and operated under the management of the international Sofitel (Accor Hotels) brand, within La Reserva Cardales master plan in Campana, Buenos Aires. It forms part of the first project in Argentina to integrate a country club resort and a luxury hotel within a single planned environment of 185 hectares of nature and premium services. With 160 rooms, a large-capacity convention center, spa, pools, and top-tier gastronomy, Sofitel La Reserva Cardales has become a destination for guests from around the world, as well as a preferred venue for major corporations to host large-scale events and conferences. In 2010, it hosted the UNASUR Summit with the participation of all regional presidents and foreign ministers. Today, it continues to be chosen by leading international sports delegations and high-profile events.",
       "imagenes": {
         "home_gallery": "/images/projects/sofitel/home-gallery/sofitel-home.jpg",
         "desarrollos_mobile": "/images/projects/sofitel/desarrollos/mobile/sofitel.png",
@@ -118,14 +160,26 @@
         "salones_para_evento": "14",
         "restaurantes_gourmet": "3",
         "estado": "EN OPERACIÓN"
+      },
+      "statistics_en": {
+        "rooms": "160",
+        "convention_center_capacity": "1,200",
+        "quality": "5 STARS",
+        "event_halls": "14",
+        "gourmet_restaurants": "3",
+        "status": "OPERATIONAL"
       }
     },
     {
       "id": "terrazas-de-septiembre",
       "titulo": "TERRAZAS DE SEPTIEMBRE",
+      "title_en": "TERRAZAS DE SEPTIEMBRE",
       "categoria": "REAL ESTATE",
+      "category_en": "REAL ESTATE",
       "locacion": "Escobar, Buenos Aires",
+      "location_en": "Escobar, Buenos Aires",
       "descripcion": "Terrazas de Septiembre es un emprendimiento residencial desarrollado por Grupo Frali dentro del masterplan de Barrio Septiembre, en Escobar. Con 61 unidades distribuidas en 3.950 m² construidos, el proyecto fue diseñado como una propuesta de departamentos de renting, respondiendo a la demanda generada por el crecimiento de los parques industriales de la zona. Terrazas de Septiembre integra funcionalidad, calidad constructiva y cercanía a centros de actividad económica, en un entorno consolidado y de fácil acceso.",
+      "description_en": "Developed within the Septiembre master plan, Terrazas de Septiembre is a residential project designed to meet the demand generated by the growth of nearby industrial parks. With 61 units across 3,950 m², the development offers functional rental apartments, combining construction quality with proximity to economic hubs. Set within a consolidated environment with direct access, the project reflects Grupo Frali's capacity to adapt to market demands.",
       "imagenes": {
         "desarrollos_mobile": "/images/projects/terrazas-de-septiembre/desarrollos/mobile/terrazas.png",
         "desarrollos_desktop": "/images/projects/terrazas-de-septiembre/desarrollos/desktop/terrazas.jpg",
@@ -142,14 +196,24 @@
         "tipologia": "DEPARTAMENTOS DE RENTING",
         "unidades_residenciales": "61",
         "estado": "EN OPERACIÓN"
+      },
+      "statistics_en": {
+        "built_area": "3,950 m²",
+        "typology": "RENTAL APARTMENTS",
+        "residential_units": "61",
+        "status": "OPERATIONAL"
       }
     },
     {
       "id": "casas-de-septiembre",
       "titulo": "CASAS DE SEPTIEMBRE",
+      "title_en": "CASAS DE SEPTIEMBRE",
       "categoria": "REAL ESTATE",
+      "category_en": "REAL ESTATE",
       "locacion": "Escobar, Buenos Aires",
+      "location_en": "Escobar, Buenos Aires",
       "descripcion": "Casas de Septiembre es un conjunto de viviendas desarrollado y construido por Grupo Frali como parte del crecimiento integral de Barrio Septiembre. El emprendimiento reúne 50 casas en lote propio, totalizando 9.000 m² destinados a propuestas llave en mano que combinan diseño arquitectónico, calidad constructiva y armonía con el entorno verde del barrio. Con acceso ágil por el Km 47,5 de Panamericana Ramal Escobar, Casas de Septiembre refuerza la visión de Grupo Frali de desarrollar proyectos pensados para vivir y proyectar en comunidad.",
+      "description_en": "Casas de Septiembre is a residential complex of 50 turnkey homes developed by Grupo Frali within the broader Septiembre master plan. The project totals 9,000 m² and combines architectural design, construction quality, and integration with the community's green surroundings. Located at Km 47.5 of Panamericana Highway, Casas de Septiembre reinforces the Group's vision of creating spaces designed for both living and community growth.",
       "imagenes": {
         "home_gallery": "/images/projects/casas-de-septiembre/home-gallery.jpg",
         "desarrollos_mobile": "/images/projects/casas-de-septiembre/desarrollos/mobile/casas.png",
@@ -170,14 +234,24 @@
         "desarrollo": "LLAVE EN MANO",
         "casas": "50",
         "estado": "100% COMERCIALIZADO Y HABITADO"
+      },
+      "statistics_en": {
+        "built_area": "9,000 m²",
+        "development": "TURNKEY",
+        "houses": "50",
+        "status": "100% SOLD AND INHABITED"
       }
     },
     {
       "id": "green-house",
       "titulo": "GREEN HOUSE",
+      "title_en": "GREEN HOUSE",
       "categoria": "REAL ESTATE",
+      "category_en": "REAL ESTATE",
       "locacion": "Campana, Buenos Aires",
+      "location_en": "Campana, Buenos Aires",
       "descripcion": "GreenHouse es el nuevo emprendimiento residencial de media densidad que Grupo Frali proyecta dentro de La Reserva Cardales. Concebido para integrarse al entorno natural ya existente, Green House propondrá unidades que combinarán diseño contemporáneo, eficiencia en el uso de espacios y conexión con áreas verdes comunes. Ubicado en una de las zonas de mayor consolidación del desarrollo, a menos de 20 metros del Hotel Sofitel La Reserva Cardales, y con acceso ágil a infraestructura deportiva, social y comercial, el proyecto representa una nueva etapa de crecimiento dentro del masterplan original. Actualmente en etapa de planificación, Green House refleja la continuidad de la visión de Grupo Frali de generar propuestas habitacionales innovadoras y adaptadas a las nuevas demandas de vivienda.",
+      "description_en": "GreenHouse is a medium-density residential development projected by Grupo Frali within La Reserva Cardales. Conceived to integrate seamlessly with its natural surroundings, the project will offer contemporary apartments that balance efficient space use with access to shared green areas. Located less than 20 meters from the Sofitel La Reserva Cardales hotel and close to sports, social, and commercial infrastructure, GreenHouse represents the next stage of growth within the original master plan. Currently in the planning phase, the project reflects Grupo Frali's ongoing commitment to innovative housing solutions tailored to evolving residential demands.",
       "imagenes": {
         "desarrollos_mobile": "/images/projects/green-house/desarrollos/mobile/green-house.png",
         "desarrollos_desktop": "/images/projects/green-house/desarrollos/desktop/green-house.jpg",
@@ -194,14 +268,24 @@
         "tipo": "MULTIFAMILIAR",
         "espacios_comunes": "SUM, PILETA & GYM",
         "estado": "EN PLANIFICACIÓN"
+      },
+      "statistics_en": {
+        "apartments": "80",
+        "type": "MULTIFAMILY",
+        "common_spaces": "MULTIPURPOSE HALL, POOL & GYM",
+        "status": "IN PLANNING"
       }
     },
     {
       "id": "chacras-de-mar",
       "titulo": "CHACRAS DE MAR",
+      "title_en": "CHACRAS DE MAR",
       "categoria": "REAL ESTATE",
+      "category_en": "REAL ESTATE",
       "locacion": "Rochas, Uruguay",
+      "location_en": "Rocha, Uruguay",
       "descripcion": "Chacras de Mar es el nuevo desarrollo de Grupo Frali en Rocha, una de las regiones de mayor proyección inmobiliaria de Uruguay. El proyecto propone un conjunto de chacras de gran superficie, diseñadas para integrarse armónicamente al paisaje natural y brindar un estilo de vida único en contacto con la naturaleza y el mar. Ubicado a pocos minutos de las playas más reconocidas de José Ignacio, Chacras de Mar ofrece una propuesta exclusiva, en un entorno de alta valorización turística y residencial. Actualmente en etapa de planificación, el proyecto refleja la apuesta de Grupo Frali por crear propuestas innovadoras que combinan inversión inmobiliaria prestigiosa con la preservación del entorno natural.",
+      "description_en": "Chacras de Mar is Grupo Frali's latest development in Rocha, one of Uruguay's most promising real estate regions. The project envisions large rural residential lots designed to harmonize with the natural landscape, offering a unique lifestyle experience in direct contact with nature and the sea. Just minutes from José Ignacio's most renowned beaches, Chacras de Mar provides an exclusive opportunity in a high-value tourist and residential market. Currently in planning, the project reflects Grupo Frali's commitment to creating innovative developments that balance investment opportunities with environmental preservation.",
       "imagenes": {
         "home_gallery": "/images/projects/chacras-de-mar/home-gallery.jpg",
         "desarrollos_mobile": "/images/projects/chacras-de-mar/desarrollos/mobile/chacras.png",
@@ -223,14 +307,24 @@
         "inversion_total": "000000",
         "superficie": "168 m²",
         "estado": "EN PLANIFICACIÓN"
+      },
+      "statistics_en": {
+        "number_of_lots": "30",
+        "total_investment": "000000",
+        "area": "168 m²",
+        "status": "IN PLANNING"
       }
     },
     {
       "id": "edgewater-river",
       "titulo": "EDGEWATER RIVER",
+      "title_en": "EDGEWATER RIVER",
       "categoria": "REAL ESTATE",
+      "category_en": "REAL ESTATE",
       "locacion": "Miami, Estados Unidos",
+      "location_en": "Miami, United States",
       "descripcion": "Edgewater River es un proyecto mixto que Grupo Frali proyecta en uno de los barrios de mayor crecimiento de Miami: Edgewater. Ubicado sobre Biscayne Boulevard, a metros de la bahía, el desarrollo contempla usos residenciales, comerciales y de oficinas, integrando más de 750.000 m² construibles en una zona reconocida por su dinamismo urbano, su proximidad a áreas de arte, cultura y recreación, y su alta valorización inmobiliaria. La zonificación T6-360 permite una densificación vertical que acompaña el perfil en desarrollo del distrito. Actualmente en etapa de planificación, Edgewater River representa un paso firme en la expansión internacional del Grupo, con foco en mercados estratégicos y proyectos de escala global.",
+      "description_en": "Edgewater River is a mixed-use project planned by Grupo Frali in one of Miami's fastest-growing districts: Edgewater. Located on Biscayne Boulevard, steps from the bay, the project integrates residential, commercial, and office uses, with over 750,000 m² of buildable area. Its zoning (T6-36O) enables vertical density that aligns with the district's evolving skyline. Currently in the planning stage, Edgewater River represents a decisive step in Grupo Frali's international expansion, with a focus on strategic markets and large-scale projects.",
       "imagenes": {
         "desarrollos_mobile": "/images/projects/edgewater-river/desarrollos/mobile/edgewater.png",
         "desarrollos_desktop": "/images/projects/edgewater-river/desarrollos/desktop/edgewater.png",
@@ -250,14 +344,25 @@
         "zonificacion": "T6-360",
         "estado": "EN PLANIFICACIÓN",
         "superficie_construir": "750.000 m²"
+      },
+      "statistics_en": {
+        "area": "60,000 m²",
+        "typology": "MIXED USE: COMMERCIAL, RESIDENTIAL AND OFFICES",
+        "zoning": "T6-36O",
+        "status": "IN PLANNING",
+        "buildable_area": "750,000 m²"
       }
     },
     {
       "id": "santa-regina",
       "titulo": "SANTA REGINA",
+      "title_en": "SANTA REGINA",
       "categoria": "AGROPECUARIA",
+      "category_en": "AGRIBUSINESS",
       "locacion": "General Villegas, Buenos Aires",
+      "location_en": "General Villegas, Buenos Aires",
       "descripcion": "Santa Regina es el campo productivo de 4.300 hectáreas que Grupo Frali gestiona en General Villegas, provincia de Buenos Aires. Con un modelo de producción diversificada —75% destinado a agricultura y 25% a ganadería—, la unidad opera con foco en la eficiencia y el uso responsable de los recursos naturales, incorporando prácticas adaptadas a los desafíos actuales del sector agropecuario. La superficie dedicada a ganadería se maneja con rodeo propio sobre pasturas implantadas y pastizales naturales, complementando la rotación agrícola. Confiando en el potencial de desarrollo del país, uno de los principales objetivos del Grupo es continuar ampliando sus inversiones agropecuarias en el mediano plazo.",
+      "description_en": "Santa Regina is a 4,300-hectare productive farm managed by Grupo Frali in General Villegas, Buenos Aires Province. With a diversified production model, 75% dedicated to agriculture and 25% to livestock, the unit operates with a focus on efficiency and the responsible use of natural resources, incorporating practices adapted to the sector's current challenges. Livestock activity is carried out with the Group's own herd on both implanted pastures and natural grasslands, complementing crop rotation. With confidence in Argentina's development potential, one of the Group's key objectives is to continue expanding its agribusiness investments in the medium term.",
       "imagenes": {
         "home_gallery": "/images/projects/santa-regina/home-gallery.jpg",
         "desarrollos_mobile": "/images/projects/santa-regina/desarrollos/mobile/santa-regina.png",
@@ -276,17 +381,28 @@
         "superficie": "4300 H",
         "produccion_agricola": "75%",
         "estado": "EN OPERACIÓN"
+      },
+      "statistics_en": {
+        "livestock_production": "25%",
+        "area": "4,300 H",
+        "agricultural_production": "75%",
+        "status": "OPERATIONAL"
       }
     },
     {
       "id": "elvis-river-sunflower-river",
       "titulo": "ELVIS RIVER Y SUNFLOWER RIVER",
+      "title_en": "ELVIS RIVER & SUNFLOWER RIVER",
       "categoria": "AGROPECUARIA",
+      "category_en": "AGRIBUSINESS",
       "locacion": "Mississipi, Estados Unidos",
+      "location_en": "Mississippi, United States",
       "descripcion": "Elvis River y SunFlower River son dos campos agrícolas que Grupo Frali gestiona en el estado de Mississippi, Estados Unidos. Juntos suman 3.500 hectáreas dedicadas íntegramente a producción agrícola, con cultivos de soja, maíz, arroz y algodón, y más del 90% de la superficie equipada con sistemas de riego. Ubicados en una de las regiones agrícolas más fértiles del país, estos campos operan con foco en el rendimiento por hectárea y la eficiencia productiva, orientados al abastecimiento de mercados locales e internacionales de commodities.",
-      "imagenes": {
-        "home_gallery": "/images/projects/elvis-river/home-gallery.jpg",
-        "desarrollos_mobile": "/images/projects/elvis-river-sunflower-river/desarrollos/mobile/elvis.png",
+      "description_en": "Elvis River and SunFlower River are two farms managed by Grupo Frali in the state of Mississippi, United States. Together they comprise 3,500 hectares fully dedicated to agriculture, producing soybeans, corn, rice, and cotton, with over 90% of the land equipped with irrigation systems. Located in one of the most fertile agricultural regions in the country, these farms focus on maximizing yields per hectare and achieving production efficiency, oriented toward supplying both local and international commodity markets. The Group's operations in the United States reflect its international outlook and commitment to geographic diversification of investments.",
+              "imagenes": {
+          "home_gallery": "/images/projects/elvis-river-sunflower-river/home-gallery/elvis-home.jpg",
+          "alt": "Elvis River and SunFlower River Farms",
+          "desarrollos_mobile": "/images/projects/elvis-river-sunflower-river/desarrollos/mobile/elvis.png",
         "desarrollos_desktop": "/images/projects/elvis-river-sunflower-river/desarrollos/desktop/elvis.jpg",
         "individual_mobile": [
           "/images/projects/elvis-river-sunflower-river/individual/mobile/individual-mobile-1.jpg"
@@ -303,14 +419,25 @@
         "cultivos": "SOJA, MAÍZ, ARROZ Y ALGODÓN",
         "estado": "EN OPERACIÓN",
         "tipo_de_produccion": "100% AGRICULTURA"
+      },
+      "statistics_en": {
+        "area": "3,500 H",
+        "irrigation": "90%",
+        "crops": "SOYBEANS, CORN, RICE AND COTTON",
+        "status": "OPERATIONAL",
+        "production_type": "100% AGRICULTURE"
       }
     },
     {
       "id": "la-villette-golf-residences",
       "titulo": "LA VILLETTE GOLF RESIDENCES",
+      "title_en": "LA VILLETTE GOLF RESIDENCES",
       "categoria": "REAL ESTATE",
+      "category_en": "REAL ESTATE",
       "locacion": "Campana, Buenos Aires",
+      "location_en": "Campana, Buenos Aires",
       "descripcion": "La Villette Golf Residences es un desarrollo residencial de 6 edificios de apartamentos aterrazados concebido por Grupo Frali dentro del masterplan de La Reserva Cardales. Con 102 unidades distribuidas en 16.650 m² construidos, el proyecto ofrece departamentos de 2, 3 y 4 ambientes, todos con jardín o terraza propia, integrando privacidad, diseño contemporáneo y vistas al campo de golf. Ubicado junto al trazado del golf y con acceso inmediato a los servicios, espacios verdes y al Club House del barrio, La Villette combina la comodidad de un entorno residencial con la conexión directa a la infraestructura premium que ofrece el barrio.",
+      "description_en": "La Villette Golf Residences is a residential project of six terraced apartment buildings developed within La Reserva Cardales. With 102 units totaling 16,650 m², the project offers 2-, 3-, and 4-bedroom apartments, each with a private terrace or garden. Its design integrates privacy, contemporary architecture, and direct views of the golf course. Residents enjoy immediate access to the neighborhood's green areas, Club House, and premium infrastructure, combining the convenience of apartment living with a resort-like environment.",
       "imagenes": {
         "desarrollos_mobile": "/images/projects/la-villette-golf-residences/desarrollos/mobile/la-villete.png",
         "desarrollos_desktop": "/images/projects/la-villette-golf-residences/desarrollos/desktop/la-villete.jpg",
@@ -330,6 +457,11 @@
         "superficie_construida": "16650 m²",
         "estado": "EN COMERCIALIZACIÓN ETAPA FINAL",
         "unidades_residenciales": "102"
+      },
+      "statistics_en": {
+        "built_area": "16,650 m²",
+        "status": "FINAL STAGE OF COMMERCIALIZATION",
+        "residential_units": "102"
       }
     }
   ]

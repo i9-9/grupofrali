@@ -2,8 +2,11 @@
 
 import { useState } from 'react';
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { useTranslations } from "@/hooks/useTranslations";
 
 export default function Contacto() {
+  const { t, isReady } = useTranslations();
+
   const [formData, setFormData] = useState({
     nombre: '',
     apellido: '',
@@ -33,6 +36,20 @@ export default function Contacto() {
     console.log('Formulario enviado:', formData);
   };
 
+  if (!isReady) {
+    return (
+      <main className="bg-[#EFEFEF]">
+        <div className="content-wrapper pb-20">
+          <div className="grid pt-36 md:pt-24 pb-20">
+            <div className="col-6 md:col-span-6 order-1">
+              <div className="h-16 bg-gray-200 animate-pulse rounded"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="bg-[#EFEFEF]">
       <div className="content-wrapper pb-20">
@@ -40,8 +57,7 @@ export default function Contacto() {
           {/* Título primero siempre - Columnas 1-6 */}
           <div className="col-6 md:col-span-6 order-1">
             <h1 className="text-h1-baskerville text-black pb-24">
-              ENVIANOS<br />
-              TU CONSULTA
+              {t('contact.title')}
             </h1>
           </div>
 
@@ -61,7 +77,7 @@ export default function Contacto() {
                     />
                   </div>
                   <label className="block mt-2 font-archivo text-black tracking-wider text-base">
-                    NOMBRE
+                    {t('contact.form.firstName')}
                   </label>
                 </div>
                 <div className="flex-1">
@@ -75,7 +91,7 @@ export default function Contacto() {
                     />
                   </div>
                   <label className="block mt-2 font-archivo text-black tracking-wider text-base">
-                    APELLIDO
+                    {t('contact.form.lastName')}
                   </label>
                 </div>
               </div>
@@ -92,7 +108,7 @@ export default function Contacto() {
                   />
                 </div>
                 <label className="block mt-2 font-archivo text-black tracking-wider text-base">
-                  E-MAIL
+                  {t('contact.form.email')}
                 </label>
               </div>
 
@@ -108,7 +124,7 @@ export default function Contacto() {
                   />
                 </div>
                 <label className="block mt-2 font-archivo text-black tracking-wider text-base">
-                  ASUNTO
+                  {t('contact.form.subject')}
                 </label>
               </div>
 
@@ -124,7 +140,7 @@ export default function Contacto() {
                   />
                 </div>
                 <label className="block mt-2 font-archivo text-black tracking-wider text-base">
-                  MENSAJE
+                  {t('contact.form.message')}
                 </label>
                 
                 {/* Botón Enviar en el flujo normal */}
@@ -133,7 +149,7 @@ export default function Contacto() {
                     onClick={handleSubmit}
                     className="font-archivo text-black/30 tracking-wider hover:opacity-70 transition-opacity text-base cursor-pointer"
                   >
-                    ENVIAR
+                    {t('contact.form.send')}
                   </button>
                 </div>
               </div>
@@ -148,7 +164,7 @@ export default function Contacto() {
                   href="mailto:INFO@GRUPOFRALI.COM" 
                   className="font-archivo text-black hover:opacity-70 transition-opacity leading-tight text-base"
                 >
-                  INFO@GRUPOFRALI.COM
+                  {t('contact.contactInfo.generalInfo')}
                 </a>
               </div>
               
@@ -157,7 +173,7 @@ export default function Contacto() {
                   href="mailto:PRENSA@GRUPOFRALI.COM" 
                   className="font-archivo text-black hover:opacity-70 transition-opacity leading-tight text-base"
                 >
-                  PRENSA@GRUPOFRALI.COM
+                  {t('contact.contactInfo.pressComms')}
                 </a>
               </div>
               
@@ -166,17 +182,17 @@ export default function Contacto() {
                   href="tel:+543489466110" 
                   className="font-archivo text-black hover:opacity-70 transition-opacity leading-tight text-base"
                 >
-                  +54 3489 466110
+                  {t('contact.contactInfo.phone')}
                 </a>
               </div>
             </div>
 
             <div className="space-y-0">
               <p className="font-archivo text-black leading-tight text-base">
-                RUTA PANAMERICANA N°9, KM 61
+                {t('contact.contactInfo.address')}
               </p>
               <p className="font-archivo text-black leading-tight text-base">
-                (2804) CAMPANA, BS AS, ARGENTINA
+                {t('contact.contactInfo.city')}
               </p>
             </div>
           </div>

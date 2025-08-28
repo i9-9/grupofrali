@@ -1,0 +1,223 @@
+{
+  "common": {
+    "navigation": {
+      "home": "INICIO",
+      "about": "QUIENES SOMOS",
+      "projects": "DESARROLLOS E INVERSIONES",
+      "hr": "RRHH",
+      "contact": "CONTACTO"
+    },
+    "footer": {
+      "allRightsReserved": "Todos los derechos reservados",
+      "grupoFrali": "Grupo Frali"
+    },
+    "buttons": {
+      "back": "VOLVER ARRIBA",
+      "next": "SIGUIENTE",
+      "previous": "ANTERIOR",
+      "viewAll": "VER TODOS"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "IMPULSAMOS EL DESARROLLO CON VISIÓN ESTRATÉGICA",
+      "titleMobile": "IMPULSAMOS EL DESARROLLO CON VISIÓN ESTRATÉGICA",
+      "titleDesktop": "IMPULSAMOS EL DESARROLLO CON VISIÓN ESTRATÉGICA",
+      "titleDesktopLine1": "IMPULSAMOS EL DESARROLLO",
+      "titleDesktopLine2": "CON VISIÓN ESTRATÉGICA"
+    },
+    "concepts": {
+      "vision": "VISIÓN DE FUTURO",
+      "innovation": "INNOVACIÓN",
+      "solidity": "SOLIDEZ"
+    },
+    "description": "Con casi 30 años de trayectoria, en Grupo Frali desarrollamos inversiones estratégicas en real estate, agroindustria, hotelería y energías renovables. Apostamos a proyectos que combinan crecimiento económico, compromiso con el entorno y generación de valor en Argentina, EE. UU. y Uruguay.",
+    "stats": {
+      "totalAssets": "VALOR TOTAL DE ACTIVOS",
+      "projectsDelivered": "PROYECTOS DESARROLLADOS",
+      "builtArea": "SUPERFICIE CONSTRUIDA",
+      "farmland": "HÉCTAREAS AGRÍCOLAS",
+      "team": "EMPLEADOS Y COLABORADORES",
+      "upcomingProjects": "PROYECTOS EN PLANIFICACIÓN"
+    },
+    "featuredProjects": {
+      "title": "PROYECTOS QUE MARCAN NUESTRO CAMINO",
+      "subtitle": "PROYECTOS DESTACADOS",
+      "projects": [
+        "La Reserva Cardales",
+        "Sofitel La Reserva Cardales",
+        "Septiembre",
+        "La Banderita Wind Farm",
+        "Elvis River & SunFlower River (U.S.)",
+        "Edgewater River (Miami)"
+      ]
+    },
+    "businessAreas": {
+      "title": "DIVERSIFICACIÓN PARA CRECER DE MANERA SOSTENIBLE",
+      "titleLine1": "DIVERSIFICACIÓN PARA",
+      "titleLine2": "CRECER DE MANERA",
+      "titleLine3": "SOSTENIBLE"
+    },
+    "projects": {
+      "title": "PROYECTOS",
+      "seeMore": "VER MÁS"
+    },
+    "categories": {
+      "realEstate": "REAL ESTATE",
+      "renewableEnergy": "ENERGIA RENOVABLE",
+      "hospitality": "HOTELERIA",
+      "agribusiness": "AGROPECUARIA"
+    }
+  },
+  "projects": {
+    "title": "DESARROLLOS E INVERSIONES",
+    "description": "Descubrí nuestra cartera de proyectos que refleja la diversidad y el alcance de nuestras inversiones estratégicas.",
+    "hero": {
+      "title": "DIVERSIFICACIÓN ESTRATÉGICA,<br/>VISIÓN A LARGO PLAZO",
+      "description": "En Grupo Frali desarrollamos y gestionamos proyectos en sectores estratégicos, combinando experiencia, innovación y compromiso. Con una estrategia basada en la diversificación de inversiones en distintos mercados y segmentos de negocio, y con presencia en Argentina, Estados Unidos y Uruguay, apostamos a una evolución constante, abiertos a nuevas oportunidades que integren infraestructura, naturaleza, calidad de vida y eficiencia productiva."
+    },
+    "sectionTitle": "PROYECTOS",
+    "categories": {
+      "all": "VER TODOS",
+      "realEstate": "REAL ESTATE",
+      "renewableEnergy": "ENERGIA RENOVABLE",
+      "hospitality": "HOTELERIA",
+      "agroindustry": "AGROPECUARIA"
+    },
+    "filters": {
+      "title": "FILTRAR POR CATEGORÍA",
+      "apply": "APLICAR FILTROS",
+      "clear": "LIMPIAR FILTROS"
+    }
+  },
+  "projectDetails": {
+    "navigation": {
+      "backToProjects": "VOLVER A PROYECTOS",
+      "nextProject": "SIGUIENTE PROYECTO",
+      "previousProject": "PROYECTO ANTERIOR"
+    },
+    "sections": {
+      "overview": "RESUMEN",
+      "statistics": "ESTADÍSTICAS",
+      "gallery": "GALERÍA"
+    }
+  },
+  "about": {
+    "title": "QUIENES SOMOS",
+    "hero": {
+      "title": "DESARROLLAMOS INVERSIONES ESTRATÉGICAS EN SECTORES CLAVE PARA EL CRECIMIENTO ECONÓMICO Y SOCIAL",
+      "titleMobile": "DESARROLLAMOS INVERSIONES<br />ESTRATÉGICAS EN SECTORES<br />CLAVE PARA EL CRECIMIENTO<br />ECONÓMICO Y SOCIAL.",
+      "titleDesktop": "DESARROLLAMOS INVERSIONES ESTRATÉGICAS<br />EN SECTORES CLAVE PARA EL CRECIMIENTO<br />ECONÓMICO Y SOCIAL."
+    },
+    "description": "Con casi 30 años de trayectoria, consolidamos nuestro liderazgo a través de proyectos que combinan innovación, compromiso y una gestión profesional orientada al valor de largo plazo, en Argentina, Estados Unidos y Uruguay. Nuestra fortaleza está en la capacidad de evolucionar, diversificar e invertir en el futuro.",
+    "values": {
+      "title": "VALORES",
+      "items": [
+        "Compromiso con el desarrollo responsable",
+        "Solidez y profesionalismo en cada proyecto",
+        "Innovación aplicada a la gestión y al crecimiento",
+        "Integridad como pilar de nuestras acciones"
+      ]
+    },
+    "dna": {
+      "title": "NUESTRO ADN",
+      "mission": {
+        "title": "MISIÓN",
+        "description": "Impulsar proyectos de inversión que generen valor económico, social y humano, fortaleciendo el crecimiento de las comunidades donde operamos."
+      },
+      "vision": {
+        "title": "VISIÓN",
+        "description": "Consolidarnos como un actor estratégico en la generación de desarrollos de alto impacto, combinando responsabilidad, innovación y visión de futuro."
+      }
+    },
+    "group": {
+      "title": "EL GRUPO",
+      "description1": "Desde nuestros inicios, canalizamos inversiones en sectores estratégicos, trabajando con un enfoque profesional y una mirada a largo plazo. Nuestros proyectos en real estate, agroindustria, energía y hotelería reflejan un modelo de gestión basado en la diversificación y el compromiso con el impacto positivo. Hoy operamos en Argentina, Estados Unidos y Uruguay, ampliando nuestra presencia en segmentos clave de manera planificada.",
+      "description2": "Fieles a nuestro espíritu dinámico, continuamos analizando nuevas oportunidades de desarrollo e inversión, abiertos a expandir nuestra participación en distintos mercados, siempre con la visión de generar valor perdurable. Nuestro directorio está conformado por profesionales con experiencia local e internacional, comprometidos con la excelencia y el crecimiento estratégico del grupo.",
+      "future": "SEGUIMOS CREANDO OPORTUNIDADES QUE IMPULSAN EL FUTURO"
+    },
+    "management": {
+      "title": "MANAGEMENT",
+      "description": "Nuestro directorio está conformado por profesionales con experiencia local e internacional, comprometidos con la excelencia y el crecimiento estratégico del grupo.",
+      "positions": [
+        {
+          "name": "SEBASTIAN",
+          "surname": "LANUSSE",
+          "position": "DIRECTOR GENERAL"
+        },
+        {
+          "name": "HORACIO",
+          "surname": "ANTELO",
+          "position": "DIRECTOR DE<br />OPERACIONES"
+        },
+        {
+          "name": "INÉS",
+          "surname": "GEMINI",
+          "position": "DIRECTORA<br />FINANCIERA"
+        },
+        {
+          "name": "SEAN",
+          "surname": "DUGGAN",
+          "position": "REAL ESTATE MANAGER"
+        },
+        {
+          "name": "JOAQUÍN",
+          "surname": "GOICOECHEA",
+          "position": "ASSET MANAGER"
+        },
+        {
+          "name": "JOAQUÍN NAZAR",
+          "surname": "ANCHORENA",
+          "position": "AGRO BUSINESS"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "title": "ENVIANOS TU CONSULTA",
+    "form": {
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Email",
+      "subject": "Asunto",
+      "message": "Mensaje",
+      "send": "ENVIAR",
+      "required": "Campo requerido"
+    },
+    "contactInfo": {
+      "generalInfo": "INFO@GRUPOFRALI.COM",
+      "pressComms": "PRENSA@GRUPOFRALI.COM",
+      "phone": "+54 3489 466110",
+      "address": "RUTA PANAMERICANA N°9, KM 61",
+      "city": "(2804) CAMPANA, BS AS, ARGENTINA"
+    }
+  },
+  "hr": {
+    "title": "UN EQUIPO QUE CRECE CON CADA PROYECTO",
+    "description": "El crecimiento sostenido de nuestros desarrollos se construye sobre el compromiso y la calidad humana de nuestro equipo. Fomentamos un ambiente de trabajo basado en el profesionalismo, la responsabilidad y la mejora continua, apoyando tanto el crecimiento personal como profesional de cada colaborador.",
+    "joinTeam": {
+      "title": "SUMATE A NUESTRO EQUIPO",
+      "description": "Si compartís nuestra visión y<br />buscás desarrollarte en un entorno<br />profesional y dinámico, te invitamos<br />a enviarnos tu perfil."
+    },
+    "positions": {
+      "title": "POSICIONES ABIERTAS",
+      "apply": "POSTULARSE"
+    }
+  },
+  "footer": {
+    "navigation": {
+      "home": "HOME",
+      "aboutUs": "QUIÉNES SOMOS",
+      "developments": "DESARROLLOS E INVERSIONES",
+      "humanResources": "RECURSOS HUMANOS",
+      "contact": "CONTACTO"
+    },
+    "contact": {
+      "email": "INFO@GRUPOFRALI.COM",
+      "phone": "+54 3489 466110",
+      "address": "RUTA PANAMERICANA Nº9, KM 61 (2804)",
+      "city": "CAMPANA, ARGENTINA."
+    },
+    "copyright": "© 2025 GRUPO FRALI\nTODOS LOS DERECHOS RESERVADOS"
+  }
+}

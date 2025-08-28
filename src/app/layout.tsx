@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ConditionalLayout from "@/components/layout/ConditionalLayout";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 export const metadata: Metadata = {
   title: "Grupo Frali",
@@ -14,11 +15,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body>
-        <ConditionalLayout>
-          {children}
-        </ConditionalLayout>
+        <LanguageProvider>
+          <ConditionalLayout>
+            {children}
+          </ConditionalLayout>
+        </LanguageProvider>
       </body>
     </html>
   );

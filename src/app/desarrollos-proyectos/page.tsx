@@ -6,6 +6,7 @@ import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
 import projectsData from "@/data/projects.json"
 import AutoSlider from "@/components/AutoSlider"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 function ResponsiveImage({ 
   desktopImage, 
@@ -73,26 +74,51 @@ const getDesarrollosImage = (project: Project, isMobile: boolean = false): strin
   return project.imagenes?.[baseKey] || ''
 }
 
-const categories = [
-  "VER TODOS",
-  "ENERGIA RENOVABLE", 
-  "REAL ESTATE",
-  "AGROPECUARIA",
-  "HOTELERIA"
-]
-
 // Componente que usa useSearchParams - debe estar envuelto en Suspense
 function DesarrollosProyectosContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const { t, language } = useLanguage()
   
+  const categories = [
+    t("projects.categories.all"),
+    t("projects.categories.renewableEnergy"), 
+    t("projects.categories.realEstate"),
+    t("projects.categories.agroindustry"),
+    t("projects.categories.hospitality")
+  ]
+
   // Obtener el filtro de la URL, por defecto "VER TODOS"
   const [selectedCategory, setSelectedCategory] = useState(() => {
     const categoryFromUrl = searchParams.get('categoria')
-    return categoryFromUrl && categories.includes(categoryFromUrl) ? categoryFromUrl : "VER TODOS"
+    if (categoryFromUrl) {
+      // Buscar la categoría correspondiente en el idioma actual
+      const project = projectsData.proyectos.find(p => p.categoria === categoryFromUrl)
+      if (project) {
+        return language === 'en' ? project.category_en : project.categoria
+      }
+    }
+    return t("projects.categories.all")
   })
   
   const projectsRef = useRef<HTMLElement>(null)
+
+  // Valor estable para la categoría "VER TODOS"
+  const allCategoryValue = useMemo(() => t("projects.categories.all"), [t])
+
+  // Efecto para actualizar selectedCategory cuando cambie el idioma
+  useEffect(() => {
+    const categoryFromUrl = searchParams.get('categoria')
+    if (categoryFromUrl) {
+      const project = projectsData.proyectos.find(p => p.categoria === categoryFromUrl)
+      if (project) {
+        setSelectedCategory(language === 'en' ? project.category_en : project.categoria)
+      }
+    } else {
+      // Si no hay categoría en la URL, establecer "VER TODOS" por defecto
+      setSelectedCategory(allCategoryValue)
+    }
+  }, [language, searchParams, allCategoryValue])
 
   // Efecto para hacer scroll a los proyectos cuando venimos de vuelta de un proyecto individual
   useEffect(() => {
@@ -130,19 +156,28 @@ function DesarrollosProyectosContent() {
     "/images/desarrollos/4.jpg",
   ], [])
 
-  const filteredProjects = selectedCategory === "VER TODOS" 
+  const filteredProjects = selectedCategory === t("projects.categories.all")
     ? projectsData.proyectos 
-    : projectsData.proyectos.filter(project => project.categoria === selectedCategory)
+    : projectsData.proyectos.filter(project => {
+        const projectCategory = language === 'en' ? project.category_en : project.categoria
+        return projectCategory === selectedCategory
+      })
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category)
     
     // Actualizar la URL con el nuevo filtro
     const params = new URLSearchParams(searchParams.toString())
-    if (category === "VER TODOS") {
+    if (category === t("projects.categories.all")) {
       params.delete('categoria')
     } else {
-      params.set('categoria', category)
+      // Buscar la categoría correspondiente en español para la URL
+      const spanishCategory = projectsData.proyectos.find(project => {
+        const projectCategory = language === 'en' ? project.category_en : project.categoria
+        return projectCategory === category
+      })?.categoria || category
+      
+      params.set('categoria', spanishCategory)
     }
     
     const newUrl = params.toString() ? `?${params.toString()}` : '/desarrollos-proyectos'
@@ -161,11 +196,12 @@ function DesarrollosProyectosContent() {
         <div className="content-wrapper relative z-10 w-full">
           <div className="grid">
             <div className="col-6 md:col-6 pt-24 md:pt-0">
-              <h1 className="text-h1-baskerville text-black lg:pr-6">
-                DIVERSIFICACIÓN ESTRATÉGICA, <br/> VISIÓN A LARGO PLAZO
-              </h1>
+              <h1 
+                className="text-h1-baskerville text-black lg:pr-6"
+                dangerouslySetInnerHTML={{ __html: t('projects.hero.title') }}
+              />
               <p className="md:text-[19px] text-black pt-[22px] tracking-[0.01em] max-w-[650px] leading-tight">
-                En Grupo Frali desarrollamos y gestionamos proyectos en sectores estratégicos, combinando experiencia, innovación y compromiso. Con una estrategia basada en la diversificación de inversiones en distintos mercados y segmentos de negocio, y con presencia en Argentina, Estados Unidos y Uruguay, apostamos a una evolución constante, abiertos a nuevas oportunidades que integren infraestructura, naturaleza, calidad de vida y eficiencia productiva.
+                {t('projects.hero.description')}
               </p>
             </div>
           </div>
@@ -188,7 +224,7 @@ function DesarrollosProyectosContent() {
         <div className="grid pt-6 md:pt-8 mt-8 md:mt-12">
           {/* Mobile layout - título ocupa toda la columna y filtros debajo */}
           <div className="md:hidden col-6">
-            <h2 className="font-baskerville leading-7 text-[1.5rem]">PROYECTOS</h2>
+            <h2 className="font-baskerville leading-7 text-[1.5rem]">{t('projects.sectionTitle')}</h2>
             
             {/* Filtros mobile en dos filas debajo del título */}
             <div className="flex flex-col font-baskerville gap-y-3 mt-4 md:mt-6" >
@@ -230,7 +266,7 @@ function DesarrollosProyectosContent() {
           
           {/* Desktop layout - usando columnas separadas */}
           <div className="hidden md:block md:col-start-1 md:col-span-3">
-            <h2 className="text-small-baskerville">PROYECTOS</h2>
+            <h2 className="text-small-baskerville">{t('projects.sectionTitle')}</h2>
           </div>
           <div className="hidden md:block md:col-start-4 md:col-span-4">
             <div className="flex flex-col font-baskerville gap-y-1 leading-7" style={{ fontSize: 'clamp(22px, 1.8vw, 26px)' }}>
@@ -265,10 +301,10 @@ function DesarrollosProyectosContent() {
               <ResponsiveImage 
                 desktopImage={desktopImage}
                 mobileImage={mobileImage}
-                alt={project.imagenes?.alt || project.titulo} 
+                alt={project.imagenes?.alt || (language === 'en' ? project.title_en : project.titulo)} 
               />
               <h3 className="font-baskerville text-base text-right md:text-left pb-5 md:pb-0 md:text-2xl mt-4 leading-none">
-                {project.titulo}
+                {language === 'en' ? project.title_en : project.titulo}
               </h3>
             </Link>
             )

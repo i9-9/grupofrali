@@ -1,35 +1,49 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import HamburgerIcon from "../icons/HamburgerIcon"
 import DownArrowIcon from "../icons/DownArrowIcon"
 import { usePathname } from 'next/navigation'
 import Link from "next/link"
-
-const menuItems = [
-  { name: "QUIENES SOMOS", href: "/quienes-somos" },
-  { name: "DESARROLLOS & PROYECTOS", href: "/desarrollos-proyectos" },
-  { name: "RRHH", href: "/rrhh" },
-  { name: "CONTACTO", href: "/contacto" },
-  { name: "EN", href: "#", static: true }
-]
-
-const mobileItems = [
-  { name: "HOME", href: "/" },
-  { name: "QUIENES SOMOS", href: "/quienes-somos" },
-  { name: "DESARROLLOS & PROYECTOS", href: "/desarrollos-proyectos" },
-  { name: "RRHH", href: "/rrhh" },
-  { name: "CONTACTO", href: "/contacto" }
-]
+import { useLanguage } from "@/contexts/LanguageContext"
+import LanguageSwitcher from "./language-switcher"
 
 export default function Header() {
   const pathname = usePathname()
+  const { t, language } = useLanguage()
   const isHome = pathname === "/"
   const isProjectPage = pathname.startsWith("/desarrollos-proyectos/") && pathname !== "/desarrollos-proyectos"
   const [isOpen, setIsOpen] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
   const [animationClass, setAnimationClass] = useState("")
   const [showLines, setShowLines] = useState(false)
+  const [isReady, setIsReady] = useState(false)
+  
+  // Verificar si las traducciones están listas
+  useEffect(() => {
+    if (language && t("common.navigation.about")) {
+      setIsReady(true)
+    }
+  }, [language, t])
+  
+  // No mostrar el header hasta que esté listo
+  if (!isReady) {
+    return null
+  }
+  
+  const menuItems = [
+    { name: t("common.navigation.about"), href: "/quienes-somos" },
+    { name: t("common.navigation.projects"), href: "/desarrollos-proyectos" },
+    { name: t("common.navigation.hr"), href: "/rrhh" },
+    { name: t("common.navigation.contact"), href: "/contacto" }
+  ]
+
+  const mobileItems = [
+    { name: t("common.navigation.home"), href: "/" },
+    { name: t("common.navigation.about"), href: "/quienes-somos" },
+    { name: t("common.navigation.hr"), href: "/rrhh" },
+    { name: t("common.navigation.contact"), href: "/contacto" }
+  ]
 
   const toggleMenu = () => {
     if (isOpen) {
@@ -83,18 +97,15 @@ export default function Header() {
                 <ul className="flex gap-5 header-menu-items text-white">
                   {menuItems.map((item, index) => (
                     <li key={index}>
-                      {item.static ? (
-                        <span className="cursor-default">
-                          {item.name}
-                        </span>
-                      ) : (
-                        <Link href={item.href}>
-                          {item.name}
-                        </Link>
-                      )}
+                      <Link href={item.href}>
+                        {item.name}
+                      </Link>
                     </li>
                   ))}
                 </ul>
+                <div className="ml-6 text-white">
+                  <LanguageSwitcher />
+                </div>
               </div>
             ) : (
               <div className="flex justify-between items-center h-14">
@@ -103,27 +114,26 @@ export default function Header() {
                     GRUPO FRALI
                     </h1>
                 </Link>
-                <ul className="flex gap-5 header-menu-items">
-                  {menuItems.map((item, index) => {
-                    const isCurrent = pathname === item.href
-                    const textColor = isProjectPage ? 'text-white' : 'text-black'
-                    const hoverColor = isProjectPage ? 'hover:text-white/30' : 'hover:text-black/30'
-                    const currentColor = isProjectPage ? 'text-white/30' : 'text-black/30'
-                    return (
-                      <li key={index}>
-                        {item.static ? (
-                          <span className={`cursor-default ${textColor}`}>
-                            {item.name}
-                          </span>
-                        ) : (
+                <div className="flex items-center gap-5">
+                  <ul className="flex gap-5 header-menu-items">
+                    {menuItems.map((item, index) => {
+                      const isCurrent = pathname === item.href
+                      const textColor = isProjectPage ? 'text-white' : 'text-black'
+                      const hoverColor = isProjectPage ? 'hover:text-white/30' : 'hover:text-black/30'
+                      const currentColor = isProjectPage ? 'text-white/30' : 'text-black/30'
+                      return (
+                        <li key={index}>
                           <Link href={item.href} className={`${isCurrent ? currentColor : textColor} ${hoverColor} transition-colors duration-400`}>
                             {item.name}
                           </Link>
-                        )}
-                      </li>
-                    )
-                  })}
-                </ul>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                  <div className={`ml-2 ${isProjectPage ? 'text-white' : 'text-black'}`}>
+                    <LanguageSwitcher />
+                  </div>
+                </div>
               </div>
             )}
           </div>
@@ -178,9 +188,9 @@ export default function Header() {
             </div>
             
             <div className="flex justify-between items-center">
-              <span className="cursor-default">
-                <h4 className="py-14">EN</h4>
-              </span>
+              <div className="py-14">
+                <LanguageSwitcher />
+              </div>
               <div onClick={toggleMenu}>
                 <DownArrowIcon className="rotate-180" />
               </div>

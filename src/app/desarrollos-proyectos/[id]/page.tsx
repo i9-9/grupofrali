@@ -6,11 +6,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver"
 import { useCounterAnimation } from "@/hooks/useCounterAnimation"
+import { useLanguage } from "@/contexts/LanguageContext"
 import projectsData from "@/data/projects.json"
 
 export default function DesarrolloProyecto() {
   const params = useParams()
   const router = useRouter()
+  const { language } = useLanguage()
   const projectId = params.id as string
   const desktopScrollRef = useRef<HTMLDivElement>(null)
   
@@ -82,7 +84,7 @@ export default function DesarrolloProyecto() {
   const hasImages = mobileImages.length > 0 || desktopImages.length > 0
 
   // Variable para detectar LA RESERVA CARDALES
-  const isReservaCardales = project?.titulo === 'LA RESERVA CARDALES'
+  const isReservaCardales = (language === 'en' ? project?.title_en : project?.titulo) === 'LA RESERVA CARDALES'
 
   // Funciones para carrusel mobile con transform
   const goToSlide = (index: number) => {
@@ -312,7 +314,7 @@ export default function DesarrolloProyecto() {
           ) : parsed.text && (parsed.text.toUpperCase() === 'HOYOS' || parsed.text.toUpperCase() === 'ESTRELLAS') ? (
             // Caso especial para HOYOS y ESTRELLAS - número arriba, texto abajo
             <>
-              <span className="font-archivo text-black font-archivo-light leading-none text-h2-archivo md:text-h2-archivo" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '2.5rem' : '1.875rem' }}>
+              <span className="font-archivo text-black font-archivo-light leading-none text-h2-arquivo md:text-h2-archivo" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '2.5rem' : '1.875rem' }}>
                 {displayValue}
               </span>
               <div className="font-archivo text-black uppercase tracking-wider leading-none text-stat-description md:text-[0.8rem]" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? 'clamp(14px, 3vw, 20px)' : undefined }}>
@@ -325,7 +327,7 @@ export default function DesarrolloProyecto() {
               {parsed.unit ? (
                 // Número con unidad en línea
                 <div className="flex items-baseline gap-1">
-                  <span className="font-archivo text-black font-archivo-light leading-none text-h2-arquivo md:text-h2-archivo" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '2.5rem' : '1.875rem' }}>
+                  <span className="font-archivo text-black font-arquivo-light leading-none text-h2-arquivo md:text-h2-archivo" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '2.5rem' : '1.875rem' }}>
                     {displayValue}
                   </span>
                   <span className="font-archivo text-black uppercase tracking-wider leading-none text-stat-description md:text-[0.8rem]" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? 'clamp(14px, 3vw, 20px)' : undefined }}>
@@ -335,7 +337,7 @@ export default function DesarrolloProyecto() {
               ) : parsed.text ? (
                 // Número arriba, texto abajo
                 <>
-                  <span className="font-archivo text-black font-archivo-light leading-none text-h2-archivo md:text-h2-archivo" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '2.5rem' : '1.875rem' }}>
+                  <span className="font-archivo text-black font-arquivo-light leading-none text-h2-arquivo md:text-h2-archivo" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '2.5rem' : '1.875rem' }}>
                     {displayValue}
                   </span>
                   <div className="font-archivo text-black uppercase tracking-wider leading-none text-stat-description md:text-[0.8rem]" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? 'clamp(14px, 2.5vw, 16px)' : undefined }}>
@@ -344,7 +346,7 @@ export default function DesarrolloProyecto() {
                 </>
               ) : (
                 // Solo número
-                <span className="font-archivo text-black font-archivo-light leading-none text-h2-archivo md:text-h2-archivo" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '2.5rem' : '1.875rem' }}>
+                <span className="font-archivo text-black font-arquivo-light leading-none text-h2-arquivo md:text-h2-archivo" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '2.5rem' : '1.875rem' }}>
                   {displayValue}
                 </span>
               )}
@@ -377,6 +379,10 @@ export default function DesarrolloProyecto() {
                 style={{
                   width: `${mobileImages.length * 100}%`,
                   transform: `translateX(-${currentSlide * (100 / mobileImages.length)}%)`,
+                  // Eliminar gaps y asegurar que no hay espacios
+                  gap: 0,
+                  margin: 0,
+                  padding: 0
                 }}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
@@ -388,12 +394,17 @@ export default function DesarrolloProyecto() {
                     className="relative flex-shrink-0"
                     style={{
                       width: `${100 / mobileImages.length}%`,
-                      height: '100%'
+                      height: '100%',
+                      // Asegurar que no hay espacios entre slides
+                      margin: 0,
+                      padding: 0,
+                      border: 'none',
+                      outline: 'none'
                     }}
                   >
                     <Image 
                       src={imageSrc} 
-                      alt={`${project.imagenes?.alt || project.titulo} - Imagen ${index + 1}`}
+                      alt={`${project.imagenes?.alt || (language === 'en' ? project.title_en : project.titulo)} - Imagen ${index + 1}`}
                       fill
                       sizes="100vw"
                       quality={100}
@@ -401,7 +412,12 @@ export default function DesarrolloProyecto() {
                         isTransitioning ? 'opacity-0' : 'opacity-100'
                       }`}
                       style={{
-                        objectFit: 'cover'
+                        objectFit: 'cover',
+                        // Eliminar cualquier espacio en la imagen
+                        display: 'block',
+                        margin: 0,
+                        padding: 0,
+                        border: 'none'
                       }}
                       priority={index === 0}
                     />
@@ -445,27 +461,27 @@ export default function DesarrolloProyecto() {
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
               </svg>
             </Link>
-            <span className="text-black font-baskerville text-base">{project.categoria}</span>
+            <span className="text-black font-baskerville text-base">{language === 'en' ? project.category_en : project.categoria}</span>
           </div>
           
-          <h1 className="font-archivo text-3xl md:text-4xl text-black leading-tight mb-12 md:mb-15">{project.titulo}</h1>
+          <h1 className="font-archivo text-3xl md:text-4xl text-black leading-tight mb-12 md:mb-15">{language === 'en' ? project.title_en : project.titulo}</h1>
           <p className="text-[#151714] text-sm mb-4 flex items-center">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="mr-1 text-black">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
               <circle cx="12" cy="10" r="3"/>
             </svg>
-            {project.locacion}
+            {language === 'en' ? project.location_en : project.locacion}
           </p>
           
           <p className="text-[#151714] text-base leading-6 md:leading-5 mb-12">
-            {project.descripcion}
+            {language === 'en' ? project.description_en : project.descripcion}
           </p>
           
           {/* Estadísticas mobile con animaciones */}
-          {project.estadisticas && (
+          {(language === 'en' ? project.statistics_en : project.estadisticas) && (
             <div className="py-12" ref={mobileStatsRef}>
               <div className="stats-custom-layout">
-                {Object.entries(project.estadisticas).map(([key, value], index) => (
+                {Object.entries(language === 'en' ? project.statistics_en : project.estadisticas).map(([key, value], index) => (
                   <StatisticItem 
                     key={key}
                     statKey={key}
@@ -485,7 +501,7 @@ export default function DesarrolloProyecto() {
         {/* Panel de información desktop */}
         <div className={`absolute left-0 top-0 w-1/2 h-full bg-[#EFEFEF] z-10 p-4 md:p-6 lg:p-8 pt-16 md:pt-20 lg:pt-24 flex flex-col transition-opacity duration-300 ${
           isTransitioning ? 'opacity-0' : 'opacity-100'
-        } ${project?.titulo === 'SOFITEL LA RESERVA CARDALES' ? 'pb-32' : ''}`}>
+        } ${(language === 'en' ? project?.title_en : project?.titulo) === 'SOFITEL LA RESERVA CARDALES' ? 'pb-32' : ''}`}>
           <div className="max-w-xl md:max-w-2xl">
             {/* Header fijo */}
             <div className="flex items-center gap-2 mb-4">
@@ -494,33 +510,33 @@ export default function DesarrolloProyecto() {
                   <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
               </Link>
-              <span className="text-[#151714] font-baskerville font-medium" style={{ fontSize: 'clamp(16px, 1.5vw, 19px)' }}>{project.categoria}</span>
+              <span className="text-[#151714] font-baskerville font-medium" style={{ fontSize: 'clamp(16px, 1.5vw, 19px)' }}>{language === 'en' ? project.category_en : project.categoria}</span>
             </div>
             
             {/* Título con altura fija - AJUSTADO PARA LA RESERVA CARDALES */}
             <div className={`flex items-start ${isReservaCardales ? 'h-16 md:h-20 lg:h-24 mb-2' : 'h-24 md:h-32 lg:h-36 mb-6'}`}>
-              <h1 className="font-archivo text-black leading-tight" style={{ fontSize: 'clamp(24px, 36px, 48px)' }}>{project.titulo}</h1>
+              <h1 className="font-archivo text-black leading-tight" style={{ fontSize: 'clamp(24px, 36px, 48px)' }}>{language === 'en' ? project.title_en : project.titulo}</h1>
             </div>
             
             {/* Contenido con espacio flexible - AJUSTADO PARA LA RESERVA CARDALES */}
             <div className={`flex-1 flex flex-col justify-start ${isReservaCardales ? 'space-y-1' : 'space-y-8'}`}>
-              <p className={`text-black flex items-center ${project?.titulo === 'SOFITEL LA RESERVA CARDALES' ? 'mb-2' : ''}`} style={{ fontSize: 'clamp(12px, 1vw, 16px)' }}>
+              <p className={`text-black flex items-center ${(language === 'en' ? project?.title_en : project?.titulo) === 'SOFITEL LA RESERVA CARDALES' ? 'mb-2' : ''}`} style={{ fontSize: 'clamp(12px, 1vw, 16px)' }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="mr-2 md:w-[18px] md:h-[18px]">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                   <circle cx="12" cy="10" r="3"/>
                 </svg>
-                {project.locacion}
+                {language === 'en' ? project.location_en : project.locacion}
               </p>
               
-              <p className={`text-[#151714] leading-none ${project?.titulo === 'SOFITEL LA RESERVA CARDALES' ? 'mb-4' : ''}`} style={{ fontSize: 'clamp(14px, 1.25vw, 16px)' }}>
-                {project.descripcion}
+              <p className={`text-[#151714] leading-none ${(language === 'en' ? project?.title_en : project?.titulo) === 'SOFITEL LA RESERVA CARDALES' ? 'mb-4' : ''}`} style={{ fontSize: 'clamp(14px, 1.25vw, 16px)' }}>
+                {language === 'en' ? project.description_en : project.descripcion}
               </p>
             </div>
             
             {/* Estadísticas desktop con animaciones - AJUSTADO PARA LA RESERVA CARDALES */}
-            {project.estadisticas && (
-              <div className={`grid !grid-cols-2 gap-2 md:gap-x-6 md:gap-y-1 ${project?.titulo === 'SOFITEL LA RESERVA CARDALES' ? 'mt-8' : 'mt-16'}`} ref={desktopStatsRef}>
-                {Object.entries(project.estadisticas).map(([key, value], index) => (
+            {(language === 'en' ? project.statistics_en : project.estadisticas) && (
+              <div className={`grid !grid-cols-2 gap-2 md:gap-x-6 md:gap-y-1 ${(language === 'en' ? project?.title_en : project?.titulo) === 'SOFITEL LA RESERVA CARDALES' ? 'mt-8' : 'mt-16'}`} ref={desktopStatsRef}>
+                {Object.entries(language === 'en' ? project.statistics_en : project.estadisticas).map(([key, value], index) => (
                   <StatisticItem 
                     key={key}
                     statKey={key}
@@ -549,7 +565,7 @@ export default function DesarrolloProyecto() {
                     <div key={index} className="flex-shrink-0 w-full h-full snap-start">
                       <Image 
                         src={imageSrc} 
-                        alt={`${project.imagenes?.alt || project.titulo} - Imagen ${index + 1}`}
+                        alt={`${project.imagenes?.alt || (language === 'en' ? project.title_en : project.titulo)} - Imagen ${index + 1}`}
                         width={800}
                         height={600}
                         quality={100}

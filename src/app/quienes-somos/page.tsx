@@ -3,8 +3,11 @@
 import React from 'react'
 import Image from 'next/image'
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver"
+import { useTranslations } from "@/hooks/useTranslations"
 
 export default function QuienesSomos() {
+  const { t, isReady } = useTranslations()
+  
   // Intersection Observers para las diferentes secciones
   const { ref: valoresRef, isVisible: isValoresVisible } = useIntersectionObserver<HTMLDivElement>({
     threshold: 0.3,
@@ -24,69 +27,38 @@ export default function QuienesSomos() {
     triggerOnce: true
   })
 
-  const valores = [
-    {
-      numero: "01",
-      titulo: "Compromiso con el desarrollo responsable"
-    },
-    {
-      numero: "02", 
-      titulo: "Solidez y profesionalismo en cada proyecto"
-    },
-    {
-      numero: "03",
-      titulo: "Innovación aplicada a la gestión y al crecimiento"
-    },
-    {
-      numero: "04",
-      titulo: "Integridad como pilar de nuestras acciones"
-    }
-  ];
+  // Verificar que las traducciones estén listas
+  if (!isReady) {
+    return (
+      <main className="bg-[#EFEFEF] text-[#151714]">
+        <div className="content-wrapper pt-36 md:pt-24 pb-6">
+          <div className="grid">
+            <div className="col-6 md:col-12">
+              <div className="h-16 bg-gray-200 animate-pulse rounded"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
 
-  const management = [
-    {
-      numero: "01",
-      nombre: "SEBASTIAN",
-      apellido: "LANUSSE",
-      cargo: "DIRECTOR GENERAL",
-      imagen: "/images/management/lanusse.png"
-    },
-    {
-      numero: "02", 
-      nombre: "HORACIO",
-      apellido: "ANTELO",
-      cargo: "DIRECTOR DE OPERACIONES",
-      imagen: "/images/management/antelo.png"
-    },
-    {
-      numero: "03",
-      nombre: "INÉS",
-      apellido: "GEMINI",
-      cargo: "DIRECTORA FINANCIERA",
-      imagen: "/images/management/gemini.png"
-    },
-    {
-      numero: "04",
-      nombre: "SEAN",
-      apellido: "DUGGAN",
-      cargo: "REAL ESTATE MANAGER",
-      imagen: "/images/management/duggan.png"
-    },
-    {
-      numero: "05",
-      nombre: "JOAQUÍN",
-      apellido: "GOICOCHEA",
-      cargo: "ASSET MANAGER",
-      imagen: "/images/management/goicochea.png"
-    },
-    {
-      numero: "06",
-      nombre: "JOAQUÍN NAZAR",
-      apellido: "ANCHORENA",
-      cargo: "AGRO BUSINESS",
-      imagen: "/images/management/nazar-anchorena.png"
-    }
-  ];
+  // Obtener valores y management de las traducciones
+  const valoresItems = t('about.values.items') || [];
+  const managementPositions = t('about.management.positions') || [];
+
+  // Crear estructuras de datos con números
+  const valores = Array.isArray(valoresItems) ? valoresItems.map((valor: string, index: number) => ({
+    numero: String(index + 1).padStart(2, '0'),
+    titulo: valor
+  })) : [];
+
+  const management = Array.isArray(managementPositions) ? managementPositions.map((person: { name: string; surname: string; position: string }, index: number) => ({
+    numero: String(index + 1).padStart(2, '0'),
+    nombre: person.name,
+    apellido: person.surname,
+    cargo: person.position,
+    imagen: `/images/management/${person.name.toLowerCase().replace(' ', '-')}.png`
+  })) : [];
 
   return (
     <main className="bg-[#EFEFEF] text-[#151714]">
@@ -95,27 +67,25 @@ export default function QuienesSomos() {
         <div className="grid pt-36 md:pt-24 pb-6">
           <div className="col-6 md:col-12">
             {/* Mobile version */}
-            <h1 className="md:hidden text-h1-baskerville text-[#151714]" style={{ fontSize: '1.5rem', lineHeight: '1.2' }}>
-              DESARROLLAMOS<br />
-              INVERSIONES ESTRATÉGICAS<br />
-              EN SECTORES CLAVE PARA<br />
-              EL CRECIMIENTO<br />
-              ECONÓMICO Y SOCIAL.
-            </h1>
+            <h1 
+              className="md:hidden text-h1-baskerville text-[#151714]" 
+              style={{ fontSize: '1.5rem', lineHeight: '1.2' }}
+              dangerouslySetInnerHTML={{ __html: t('about.hero.titleMobile') }}
+            />
             
             {/* Desktop version */}
-            <h1 className="hidden md:block text-h1-baskerville text-[#151714]" style={{ lineHeight: '1.3' }}>
-              DESARROLLAMOS INVERSIONES ESTRATÉGICAS<br />
-              EN SECTORES CLAVE PARA EL CRECIMIENTO<br />
-              ECONÓMICO Y SOCIAL.
-            </h1>
+            <h1 
+              className="hidden md:block text-h1-baskerville text-[#151714]" 
+              style={{ lineHeight: '1.3' }}
+              dangerouslySetInnerHTML={{ __html: t('about.hero.titleDesktop') }}
+            />
           </div>
         </div>
 
         <div className="grid pb-16">
           <div className="col-6 md:col-6">
             <p className="text-[#151714] tracking-[0.01em] leading-[1.2] md:leading-[1] text-base md:text-[1.18rem]">
-              Con casi 30 años de trayectoria, consolidamos nuestro liderazgo a través de proyectos que combinan innovación, compromiso y una gestión profesional orientada al valor de largo plazo, en Argentina, Estados Unidos y Uruguay. Nuestra fortaleza está en la capacidad de evolucionar, diversificar e invertir en el futuro.
+              {t('about.description')}
             </p>
           </div>
         </div>
@@ -129,7 +99,7 @@ export default function QuienesSomos() {
             {/* Título VALORES con línea animada */}
             <div className={`pb-2 mb-4 quienes-somos-line quienes-somos-line-delay-1 ${isValoresVisible ? 'animate' : ''}`}>
               <h2 className="text-small-baskerville md:text-small-baskerville" style={{ fontSize: '1.5rem', lineHeight: '1.2' }}>
-                VALORES
+                {t('about.values.title')}
               </h2>
             </div>
             
@@ -137,7 +107,7 @@ export default function QuienesSomos() {
             <div className="space-y-6 md:space-y-8">
               {/* Mobile: todos en columna */}
               <div className="block md:hidden space-y-6">
-                {valores.map((valor) => (
+                {valores.map((valor: { numero: string; titulo: string }) => (
                   <div key={valor.numero} className="flex items-start">
                     <div className="w-32 flex-shrink-0">
                       <span className="text-small-archivo text-black">
@@ -158,50 +128,58 @@ export default function QuienesSomos() {
                 {/* Fila 1 */}
                 <div className="flex gap-6">
                   <div className="flex-1">
-                    <div className="flex items-start space-x-4">
-                      <span className="text-small-archivo text-black flex-shrink-0">
-                        ({valores[0].numero})
-                      </span>
-                      <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
-                        {valores[0].titulo}
-                      </p>
-                    </div>
+                    {valores[0] && (
+                      <div className="flex items-start space-x-4">
+                        <span className="text-small-archivo text-black flex-shrink-0">
+                          ({valores[0].numero})
+                        </span>
+                        <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+                          {valores[0].titulo}
+                        </p>
+                      </div>
+                    )}
                   </div>
                   
                   <div className="flex-1">
-                    <div className="flex items-start space-x-4">
-                      <span className="text-small-archivo text-black flex-shrink-0">
-                        ({valores[2].numero})
-                      </span>
-                      <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
-                        {valores[2].titulo}
-                      </p>
-                    </div>
+                    {valores[2] && (
+                      <div className="flex items-start space-x-4">
+                        <span className="text-small-archivo text-black flex-shrink-0">
+                          ({valores[2].numero})
+                        </span>
+                        <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+                          {valores[2].titulo}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
                 
                 {/* Fila 2 */}
                 <div className="flex gap-6">
                   <div className="flex-1">
-                    <div className="flex items-start space-x-4">
-                      <span className="text-small-archivo text-black flex-shrink-0">
-                        ({valores[1].numero})
-                      </span>
-                      <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
-                        {valores[1].titulo}
-                      </p>
-                    </div>
+                    {valores[1] && (
+                      <div className="flex items-start space-x-4">
+                        <span className="text-small-archivo text-black flex-shrink-0">
+                          ({valores[1].numero})
+                        </span>
+                        <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+                          {valores[1].titulo}
+                        </p>
+                      </div>
+                    )}
                   </div>
                   
                   <div className="flex-1">
-                    <div className="flex items-start space-x-4">
-                      <span className="text-small-archivo text-black flex-shrink-0">
-                        ({valores[3].numero})
-                      </span>
-                      <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
-                        {valores[3].titulo}
-                      </p>
-                    </div>
+                    {valores[3] && (
+                      <div className="flex items-start space-x-4">
+                        <span className="text-small-archivo text-black flex-shrink-0">
+                          ({valores[3].numero})
+                        </span>
+                        <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+                          {valores[3].titulo}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -213,7 +191,7 @@ export default function QuienesSomos() {
             {/* Título NUESTRO ADN con línea animada */}
             <div className={`pb-2 mb-4 quienes-somos-line quienes-somos-line-delay-2 ${isAdnVisible ? 'animate' : ''}`}>
               <h2 className="text-small-baskerville md:text-small-baskerville" style={{ fontSize: '1.5rem', lineHeight: '1.2' }}>
-                NUESTRO ADN
+                {t('about.dna.title')}
               </h2>
             </div>
             
@@ -221,13 +199,13 @@ export default function QuienesSomos() {
             <div className={`flex items-start pb-4 mb-8 quienes-somos-line quienes-somos-line-delay-3 ${isAdnVisible ? 'animate' : ''}`}>
               <div className="w-32 flex-shrink-0">
                 <h3 className="text-small-archivo text-black tracking-wider">
-                  MISIÓN
+                  {t('about.dna.mission.title')}
                 </h3>
               </div>
               <div className="flex-1 pl-12">
-                              <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
-                Impulsar proyectos de inversión que generen valor económico, social y humano, fortaleciendo el crecimiento de las comunidades donde operamos.
-              </p>
+                <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+                  {t('about.dna.mission.description')}
+                </p>
               </div>
             </div>
             
@@ -235,13 +213,13 @@ export default function QuienesSomos() {
             <div className="flex items-start pb-4 mb-8">
               <div className="w-32 flex-shrink-0">
                 <h3 className="text-small-archivo text-black tracking-wider">
-                  VISIÓN
+                  {t('about.dna.vision.title')}
                 </h3>
               </div>
               <div className="flex-1 pl-12">
-                              <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
-                Consolidarnos como un actor estratégico en la generación de desarrollos de alto impacto, combinando responsabilidad, innovación y visión de futuro.
-              </p>
+                <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+                  {t('about.dna.vision.description')}
+                </p>
               </div>
             </div>
           </div>
@@ -254,7 +232,7 @@ export default function QuienesSomos() {
           <div className="col-6 md:col-12">
             <div className={`quienes-somos-line quienes-somos-line-delay-4 ${isGrupoVisible ? 'animate' : ''}`}>
               <h2 className="text-h1-baskerville text-black pb-4" style={{ fontSize: '1.5rem', lineHeight: '1.2' }}>
-                EL GRUPO
+                {t('about.group.title')}
               </h2>
             </div>
           </div>
@@ -262,13 +240,13 @@ export default function QuienesSomos() {
 
         <div className="grid">
           <div className="col-6 md:col-6 space-y-6">
-                          <p className="text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
-                Desde nuestros inicios, canalizamos inversiones en sectores estratégicos, trabajando con un enfoque profesional y una mirada a largo plazo. Nuestros proyectos en real estate, agroindustria, energía y hotelería reflejan un modelo de gestión basado en la diversificación y el compromiso con el impacto positivo. Hoy operamos en Argentina, Estados Unidos y Uruguay, ampliando nuestra presencia en segmentos clave de manera planificada.
-              </p>
+            <p className="text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+              {t('about.group.description1')}
+            </p>
 
-                          <p className="text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
-                Fieles a nuestro espíritu dinámico, continuamos analizando nuevas oportunidades de desarrollo e inversión, abiertos a expandir nuestra participación en distintos mercados, siempre con la visión de generar valor perdurable. Nuestro directorio está conformado por profesionales con experiencia local e internacional, comprometidos con la excelencia y el crecimiento estratégico del grupo.
-              </p>
+            <p className="text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+              {t('about.group.description2')}
+            </p>
           </div>
 
           <div className="col-6 md:col-6">
@@ -279,9 +257,9 @@ export default function QuienesSomos() {
                 </div>
                 <div className="flex-1 pl-12">
                   <h3 className="font-baskerville text-black" style={{ fontSize: 'clamp(18px, 1.8vw, 24px)', lineHeight: '1.3' }}>
-                    SEGUIMOS CREANDO<br />
-                    OPORTUNIDADES QUE<br />
-                    IMPULSAN EL FUTURO
+                    WE CONTINUE TO<br />
+                    CREATE OPPORTUNITIES THAT<br />
+                    DRIVE THE FUTURE
                   </h3>
                 </div>
               </div>
@@ -295,13 +273,13 @@ export default function QuienesSomos() {
         <div className="grid pb-8">
           <div className="col-6 md:col-12">
             <h2 className="font-baskerville text-black" style={{ fontSize: 'clamp(24px, 3.5vw, 48px)', lineHeight: '1.2' }}>
-              MANAGEMENT
+              {t('about.management.title')}
             </h2>
           </div>
         </div>
 
         <div className="grid">
-          {management.map((person) => (
+          {management.map((person: { numero: string; nombre: string; apellido: string; cargo: string; imagen: string }) => (
             <React.Fragment key={person.numero}>
               {/* Imagen - 5 columnas mobile, 3 columnas desktop */}
               <div className="col-5 md:col-3 mb-8 md:mb-12">
