@@ -6,7 +6,7 @@ import { useIntersectionObserver } from "@/hooks/useIntersectionObserver"
 import { useTranslations } from "@/hooks/useTranslations"
 
 export default function QuienesSomos() {
-  const { t, isReady } = useTranslations()
+  const { t, isReady, getValue } = useTranslations()
   
   // Intersection Observers para las diferentes secciones
   const { ref: valoresRef, isVisible: isValoresVisible } = useIntersectionObserver<HTMLDivElement>({
@@ -42,9 +42,9 @@ export default function QuienesSomos() {
     );
   }
 
-  // Obtener valores y management de las traducciones
-  const valoresItems = t('about.values.items') || [];
-  const managementPositions = t('about.management.positions') || [];
+  // Obtener valores y management de las traducciones usando getValue para arrays
+  const valoresItems = getValue('about.values.items') as string[] | undefined;
+  const managementPositions = getValue('about.management.positions') as Array<{ name: string; surname: string; position: string }> | undefined;
 
   // Crear estructuras de datos con números
   const valores = Array.isArray(valoresItems) ? valoresItems.map((valor: string, index: number) => ({
@@ -52,13 +52,34 @@ export default function QuienesSomos() {
     titulo: valor
   })) : [];
 
-  const management = Array.isArray(managementPositions) ? managementPositions.map((person: { name: string; surname: string; position: string }, index: number) => ({
-    numero: String(index + 1).padStart(2, '0'),
-    nombre: person.name,
-    apellido: person.surname,
-    cargo: person.position,
-    imagen: `/images/management/${person.name.toLowerCase().replace(' ', '-')}.png`
-  })) : [];
+  const management = Array.isArray(managementPositions) ? managementPositions.map((person: { name: string; surname: string; position: string }, index: number) => {
+    // Generar la ruta de imagen basada en el nombre y apellido
+    let imageName = '';
+    if (person.name === 'JOAQUÍN NAZAR' && person.surname === 'ANCHORENA') {
+      imageName = 'nazar-anchorena';
+    } else if (person.name === 'JOAQUÍN' && person.surname === 'GOICOECHEA') {
+      imageName = 'goicochea';
+    } else if (person.name === 'SEAN' && person.surname === 'DUGGAN') {
+      imageName = 'duggan';
+    } else if (person.name === 'INÉS' && person.surname === 'GEMINI') {
+      imageName = 'gemini';
+    } else if (person.name === 'HORACIO' && person.surname === 'ANTELO') {
+      imageName = 'antelo';
+    } else if (person.name === 'SEBASTIAN' && person.surname === 'LANUSSE') {
+      imageName = 'lanusse';
+    } else {
+      // Fallback: usar el apellido en minúsculas
+      imageName = person.surname.toLowerCase();
+    }
+
+    return {
+      numero: String(index + 1).padStart(2, '0'),
+      nombre: person.name,
+      apellido: person.surname,
+      cargo: person.position,
+      imagen: `/images/management/${imageName}.png`
+    };
+  }) : [];
 
   return (
     <main className="bg-[#EFEFEF] text-[#151714]">
