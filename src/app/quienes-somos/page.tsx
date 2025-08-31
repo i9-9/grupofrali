@@ -6,7 +6,7 @@ import { useIntersectionObserver } from "@/hooks/useIntersectionObserver"
 import { useTranslations } from "@/hooks/useTranslations"
 
 export default function QuienesSomos() {
-  const { t, isReady, getValue } = useTranslations()
+  const { t, getValue } = useTranslations()
   
   // Intersection Observers para las diferentes secciones
   const { ref: valoresRef, isVisible: isValoresVisible } = useIntersectionObserver<HTMLDivElement>({
@@ -27,20 +27,7 @@ export default function QuienesSomos() {
     triggerOnce: true
   })
 
-  // Verificar que las traducciones estén listas
-  if (!isReady) {
-    return (
-      <main className="bg-[#EFEFEF] text-[#151714]">
-        <div className="content-wrapper pt-36 md:pt-24 pb-6">
-          <div className="grid">
-            <div className="col-6 md:col-12">
-              <div className="h-16 bg-gray-200 animate-pulse rounded"></div>
-            </div>
-          </div>
-        </div>
-      </main>
-    );
-  }
+  // Las traducciones están manejadas por ConditionalLayout
 
   // Obtener valores y management de las traducciones usando getValue para arrays
   const valoresItems = getValue('about.values.items') as string[] | undefined;

@@ -4,6 +4,8 @@
       "id": "la-banderita-parque-eolico",
       "titulo": "LA BANDERITA PARQUE EÓLICO",
       "title_en": "LA BANDERITA WIND FARM",
+      "home_title": "LA BANDERITA PARQUE\nEÓLICO",
+      "home_title_en": "LA BANDERITA\nWIND FARM",
       "categoria": "ENERGIA RENOVABLE",
       "category_en": "RENEWABLE ENERGY",
       "locacion": "General Acha, La Pampa",
@@ -131,6 +133,8 @@
       "id": "sofitel-la-reserva-cardales",
       "titulo": "SOFITEL LA RESERVA CARDALES",
       "title_en": "SOFITEL LA RESERVA CARDALES",
+      "home_title": "SOFITEL LA RESERVA\nCARDALES",
+      "home_title_en": "SOFITEL LA RESERVA\nCARDALES",
       "categoria": "HOTELERIA",
       "category_en": "HOSPITALITY",
       "locacion": "Campana, Buenos Aires",
@@ -394,16 +398,17 @@
       "id": "elvis-river-sunflower-river",
       "titulo": "ELVIS RIVER Y SUNFLOWER RIVER",
       "title_en": "ELVIS RIVER & SUNFLOWER RIVER",
+      "home_title": "ELVIS RIVER Y\nSUNFLOWER RIVER",
+      "home_title_en": "ELVIS RIVER &\nSUNFLOWER RIVER",
       "categoria": "AGROPECUARIA",
       "category_en": "AGRIBUSINESS",
       "locacion": "Mississipi, Estados Unidos",
       "location_en": "Mississippi, United States",
       "descripcion": "Elvis River y SunFlower River son dos campos agrícolas que Grupo Frali gestiona en el estado de Mississippi, Estados Unidos. Juntos suman 3.500 hectáreas dedicadas íntegramente a producción agrícola, con cultivos de soja, maíz, arroz y algodón, y más del 90% de la superficie equipada con sistemas de riego. Ubicados en una de las regiones agrícolas más fértiles del país, estos campos operan con foco en el rendimiento por hectárea y la eficiencia productiva, orientados al abastecimiento de mercados locales e internacionales de commodities.",
       "description_en": "Elvis River and SunFlower River are two farms managed by Grupo Frali in the state of Mississippi, United States. Together they comprise 3,500 hectares fully dedicated to agriculture, producing soybeans, corn, rice, and cotton, with over 90% of the land equipped with irrigation systems. Located in one of the most fertile agricultural regions in the country, these farms focus on maximizing yields per hectare and achieving production efficiency, oriented toward supplying both local and international commodity markets. The Group's operations in the United States reflect its international outlook and commitment to geographic diversification of investments.",
-              "imagenes": {
-          "home_gallery": "/images/projects/elvis-river-sunflower-river/home-gallery/elvis-home.jpg",
-          "alt": "Elvis River and SunFlower River Farms",
-          "desarrollos_mobile": "/images/projects/elvis-river-sunflower-river/desarrollos/mobile/elvis.png",
+      "imagenes": {
+        "home_gallery": "/images/projects/elvis-river-sunflower-river/home-gallery/elvis-home.jpg",
+        "desarrollos_mobile": "/images/projects/elvis-river-sunflower-river/desarrollos/mobile/elvis.png",
         "desarrollos_desktop": "/images/projects/elvis-river-sunflower-river/desarrollos/desktop/elvis.jpg",
         "individual_mobile": [
           "/images/projects/elvis-river-sunflower-river/individual/mobile/individual-mobile-1.jpg"
@@ -411,8 +416,7 @@
         "individual_desktop": [
           "/images/projects/elvis-river-sunflower-river/individual/desktop/individual-desktop-1.jpg",
           "/images/projects/elvis-river-sunflower-river/individual/desktop/individual-desktop-2.jpg"
-        ],
-        "alt": "Vista aérea de campos agrícolas con sistemas de riego"
+        ]
       },
       "estadisticas": {
         "superficie": "3500 H",
@@ -465,5 +469,13 @@
         "residential_units": "102"
       }
     }
+  ],
+  "home_gallery_ids": [
+    "septiembre",
+    "sofitel-la-reserva-cardales",
+    "la-reserva-cardales",
+    "la-banderita-parque-eolico",
+    "elvis-river-sunflower-river",
+    "edgewater-river"
   ]
 }

@@ -42,6 +42,17 @@ export default function DesarrolloProyecto() {
   // Buscar el proyecto por ID
   const project = projectsData.proyectos.find(p => p.id === projectId)
   
+  // Mapa de logos por proyecto (versiones en blanco)
+  const projectLogos: Record<string, string> = {
+    'septiembre': '/images/project-logos/septiembre.svg',
+    'terrazas-de-septiembre': '/images/project-logos/septiembre.svg',
+    'casas-de-septiembre': '/images/project-logos/septiembre.svg',
+    'la-reserva-cardales': '/images/project-logos/lareservacardales.svg',
+    'sofitel-la-reserva-cardales': '/images/project-logos/sofitel.svg',
+    'santa-regina': '/images/project-logos/santa-regina.svg'
+  }
+  const logoSrc = project ? projectLogos[project.id] : undefined
+  
   // Crear URL de vuelta que preserva el filtro y hace scroll a proyectos
   const getBackUrl = useMemo(() => {
     if (!project) return '/desarrollos-proyectos'
@@ -290,7 +301,8 @@ export default function DesarrolloProyecto() {
     const { displayValue } = useCounterAnimation({
       targetValue: parsed.number,
       isVisible,
-      duration: 1500,
+      // Duración total fija (incluye delay) para sincronizar el final
+      duration: 3000,
       delay: index * 200 // 200ms entre cada estadística
     })
 
@@ -424,6 +436,20 @@ export default function DesarrolloProyecto() {
                   </div>
                 ))}
               </div>
+              
+              {/* Logo overlay - mobile */}
+              {logoSrc && (
+                <div className="absolute left-1/2 -translate-x-1/2 bottom-12 z-10 pointer-events-none">
+                  <Image
+                    src={logoSrc}
+                    alt={`${language === 'en' ? project.title_en : project.titulo} logo`}
+                    width={200}
+                    height={80}
+                    className="w-[140px] h-auto"
+                    priority
+                  />
+                </div>
+              )}
               
               {/* Barra de progreso */}
               {mobileImages.length > 1 && (
@@ -576,6 +602,20 @@ export default function DesarrolloProyecto() {
                     </div>
                   ))}
                 </div>
+                
+                {/* Logo overlay - desktop */}
+                {logoSrc && (
+                  <div className="absolute bottom-6 left-6 z-10 pointer-events-none">
+                    <Image
+                      src={logoSrc}
+                      alt={`${language === 'en' ? project.title_en : project.titulo} logo`}
+                      width={220}
+                      height={90}
+                      className="w-[180px] h-auto"
+                      priority
+                    />
+                  </div>
+                )}
                 
                 {/* Barra de paginación - desktop vertical */}
                 {desktopImages.length > 1 && (

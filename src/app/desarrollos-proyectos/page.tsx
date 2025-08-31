@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState, useRef, Suspense } from "react"
+import { useEffect, useMemo, useState, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
@@ -317,15 +317,5 @@ function DesarrollosProyectosContent() {
 }
 
 export default function DesarrollosProyectos() {
-  return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-[#EFEFEF] flex items-center justify-center">
-        <div className="text-center animate-pulse">
-          <h1 className="font-baskerville header-logo-mobile text-black text-2xl md:text-3xl animate-scale-grow">GRUPO FRALI</h1>
-        </div>
-      </div>
-    }>
-      <DesarrollosProyectosContent />
-    </Suspense>
-  )
+  return <DesarrollosProyectosContent />
 }

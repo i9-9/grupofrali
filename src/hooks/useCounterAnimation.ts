@@ -86,13 +86,17 @@ export const useCounterAnimation = ({
 
     hasAnimatedRef.current = true;
 
+    // Interpretar `duration` como tiempo total hasta finalizar (incluye el delay)
+    // Para que todos terminen juntos: duración efectiva = duration - delay
+    const effectiveDuration = Math.max(100, duration - delay);
+
     timeoutRef.current = setTimeout(() => {
       const startTime = Date.now();
       const startValue = 0;
 
       const animate = () => {
         const elapsed = Date.now() - startTime;
-        const progress = Math.min(elapsed / duration, 1);
+        const progress = Math.min(elapsed / effectiveDuration, 1);
         
         // Usar easing function para suavizar la animación
         const easeOutExpo = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);

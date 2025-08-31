@@ -1,6 +1,5 @@
 "use client";
 
-import { Suspense } from "react";
 import RandomVideo from "@/components/RandomVideo";
 import ProjectGallery from "@/components/ProjectGallery";
 import { StatItem } from "@/components/StatItem";
@@ -306,15 +305,5 @@ function HomeContent() {
 }
 
 export default function Home() {
-  return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-[#EFEFEF] flex items-center justify-center">
-        <div className="text-center animate-pulse">
-          <h1 className="font-baskerville header-logo-mobile text-black text-2xl md:text-3xl animate-scale-grow">GRUPO FRALI</h1>
-        </div>
-      </div>
-    }>
-      <HomeContent />
-    </Suspense>
-  );
+  return <HomeContent />;
 }

@@ -23,16 +23,23 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const loadTranslations = async () => {
+      console.log(`🔄 Cargando traducciones para: ${language}`)
       setIsLoading(true)
+      setIsReady(false)
+      
+      let success = false
       try {
         const translationModule = await import(`@/data/translations/${language}.json`)
         setTranslations(translationModule.default)
-        setIsReady(true)
+        success = true
+        console.log(`✅ Traducciones cargadas para: ${language}`)
       } catch (error) {
-        console.error(`Error loading translations for ${language}:`, error)
-        setIsReady(false)
+        console.error(`❌ Error loading translations for ${language}:`, error)
+        success = false
       } finally {
         setIsLoading(false)
+        setIsReady(success)
+        console.log(`🏁 isLoading: false, isReady: ${success}`)
       }
     }
 

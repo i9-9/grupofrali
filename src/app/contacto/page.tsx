@@ -5,7 +5,7 @@ import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { useTranslations } from "@/hooks/useTranslations";
 
 export default function Contacto() {
-  const { t, isReady } = useTranslations();
+  const { t } = useTranslations();
 
   const [formData, setFormData] = useState({
     nombre: '',
@@ -35,20 +35,6 @@ export default function Contacto() {
     // Aquí iría la lógica para enviar el formulario
     console.log('Formulario enviado:', formData);
   };
-
-  if (!isReady) {
-    return (
-      <main className="bg-[#EFEFEF]">
-        <div className="content-wrapper pb-20">
-          <div className="grid pt-36 md:pt-24 pb-20">
-            <div className="col-6 md:col-span-6 order-1">
-              <div className="h-16 bg-gray-200 animate-pulse rounded"></div>
-            </div>
-          </div>
-        </div>
-      </main>
-    );
-  }
 
   return (
     <main className="bg-[#EFEFEF]">

@@ -38,7 +38,8 @@ export function StatItem({ number, unit, label, delay, lineDelay }: StatItemProp
   const { displayValue } = useCounterAnimation({
     targetValue: number,
     isVisible,
-    duration: 1500, // 1.5 segundos para la animación de conteo
+    // Duración total fija (incluye delay) para que todos terminen juntos
+    duration: 3000,
     delay: counterDelay
   });
 

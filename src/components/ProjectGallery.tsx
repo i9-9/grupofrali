@@ -10,18 +10,39 @@ export default function ProjectGallery() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { language } = useLanguage();
   
-  // Obtener solo los 6 proyectos específicos en el orden requerido
-  const validProjectIds = [
-    'septiembre',
-    'sofitel-la-reserva-cardales',
-    'la-reserva-cardales',
-    'la-banderita-parque-eolico',
-    'elvis-river-sunflower-river',
-    'edgewater-river'
-  ];
+  type GalleryProject = {
+    id: string;
+    titulo: string;
+    title_en: string;
+    home_title?: string;
+    home_title_en?: string;
+  };
 
-  // Obtener los proyectos en el orden específico
-  const projects = validProjectIds
+  const getDisplayTitle = (project: GalleryProject): string => {
+    const home = language === 'en' ? project.home_title_en : project.home_title;
+    if (home && home.length > 0) return home;
+    return language === 'en' ? project.title_en : project.titulo;
+  };
+
+  const renderTitle = (titulo: string) => {
+    const lines = titulo.split('\n');
+    if (lines.length === 1) {
+      return titulo;
+    }
+    return (
+      <>
+        {lines.map((line, index) => (
+          <span key={index}>
+            {line}
+            {index < lines.length - 1 ? <br /> : null}
+          </span>
+        ))}
+      </>
+    );
+  };
+  
+  // Obtener los proyectos en el orden específico desde projects.json
+  const projects = (projectsData.home_gallery_ids || [])
     .map(id => projectsData.proyectos.find(project => project.id === id))
     .filter((project): project is NonNullable<typeof project> => 
       project !== undefined
@@ -55,13 +76,10 @@ export default function ProjectGallery() {
                   <h3 className="font-light mr-4">(0{index + 1})</h3>
 
                   {/* Contenedor que empuja el título al borde derecho */}
-                  <div className="flex-1 text-right">
-                    <h3 
-                      className="font-baskerville text-sm md:text-[22px] text-black leading-tight text-left inline-block"
-                      dangerouslySetInnerHTML={{ 
-                        __html: language === 'en' ? project.title_en : project.titulo 
-                      }}
-                    />
+                  <div className="flex-1 flex justify-end">
+                    <h3 className="font-baskerville text-sm md:text-[22px] text-black leading-tight text-left inline-block whitespace-pre-line">
+                      {renderTitle(getDisplayTitle(project))}
+                    </h3>
                   </div>
                 </div>
               </div>

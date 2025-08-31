@@ -17,19 +17,7 @@ export default function Header() {
   const [isAnimating, setIsAnimating] = useState(false)
   const [animationClass, setAnimationClass] = useState("")
   const [showLines, setShowLines] = useState(false)
-  const [isReady, setIsReady] = useState(false)
-  
-  // Verificar si las traducciones están listas
-  useEffect(() => {
-    if (language && t("common.navigation.about")) {
-      setIsReady(true)
-    }
-  }, [language, t])
-  
-  // No mostrar el header hasta que esté listo
-  if (!isReady) {
-    return null
-  }
+  // El loading está manejado por ConditionalLayout
   
   const menuItems = [
     { name: t("common.navigation.about"), href: "/quienes-somos" },

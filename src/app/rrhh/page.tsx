@@ -3,21 +3,7 @@
 import { useTranslations } from "@/hooks/useTranslations";
 
 export default function RRHH() {
-  const { t, isReady } = useTranslations();
-
-  if (!isReady) {
-    return (
-      <main className="bg-[#EFEFEF]">
-        <div className="content-wrapper pt-36 md:pt-24 pb-32">
-          <div className="grid">
-            <div className="col-6 md:col-8">
-              <div className="h-16 bg-gray-200 animate-pulse rounded"></div>
-            </div>
-          </div>
-        </div>
-      </main>
-    );
-  }
+  const { t } = useTranslations();
 
   return (
     <main className="bg-[#EFEFEF]">
@@ -43,9 +29,10 @@ export default function RRHH() {
         </div>
 
         <div className="grid">
-          <div className="col-6 md:col-span-6 space-y-6 md:space-y-6 space-y-4">
+          <div className="col-6 md:col-span-6 md:space-y-6 space-y-4">
             <p className="text-black text-base leading-none">
               {t("hr.description")}
+
             </p>
           </div>
           
