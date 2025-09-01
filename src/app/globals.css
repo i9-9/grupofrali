@@ -963,16 +963,3 @@ body {
   animation: scaleGrow 2s ease-out infinite;
 }
 
-/* Animación sutil de crecimiento para el loader */
-@keyframes loaderGrow {
-  0% {
-    transform: scale(0.98);
-  }
-  100% {
-    transform: scale(1.02);
-  }
-}
-
-.animate-scale-slow {
-  animation: loaderGrow 4s ease-in-out infinite alternate;
-}
