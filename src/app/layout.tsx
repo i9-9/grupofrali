@@ -1,4 +1,3 @@
-// layout.tsx
 import type { Metadata } from "next";
 import "./globals.css";
 import ConditionalLayout from "@/components/layout/ConditionalLayout";
@@ -11,6 +10,22 @@ export const metadata: Metadata = {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
     apple: '/favicon.ico',
+  },
+  openGraph: {
+    title: "Grupo Frali",
+    description: "Con casi 30 años de trayectoria, en Grupo Frali desarrollamos inversiones estratégicas en real estate, agroindustria, hotelería y energías renovables.",
+    images: [
+      {
+        url: '/images/seo/OGImage.png',
+        alt: 'Grupo Frali',
+      }
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Grupo Frali',
+    description: 'Con casi 30 años de trayectoria, en Grupo Frali desarrollamos inversiones estratégicas en real estate, agroindustria, hotelería y energías renovables.',
+    images: ['/images/seo/OGImage.png'],
   },
 };
 
