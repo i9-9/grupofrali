@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import HamburgerIcon from "../icons/HamburgerIcon"
 import DownArrowIcon from "../icons/DownArrowIcon"
 import { usePathname } from 'next/navigation'
@@ -10,7 +10,7 @@ import LanguageSwitcher from "./language-switcher"
 
 export default function Header() {
   const pathname = usePathname()
-  const { t, language } = useLanguage()
+  const { t } = useLanguage()
   const isHome = pathname === "/"
   const isProjectPage = pathname.startsWith("/desarrollos-proyectos/") && pathname !== "/desarrollos-proyectos"
   const [isOpen, setIsOpen] = useState(false)

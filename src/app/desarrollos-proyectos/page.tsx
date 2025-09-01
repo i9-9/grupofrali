@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState, useRef } from "react"
+import { useEffect, useMemo, useState, useRef, Suspense } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
@@ -316,6 +316,29 @@ function DesarrollosProyectosContent() {
   )
 }
 
+function LoadingFallback() {
+  return (
+    <main className="bg-[#EFEFEF]">
+      <section className="relative flex items-center pt-16 md:pt-24">
+        <div className="content-wrapper relative z-10 w-full">
+          <div className="grid">
+            <div className="col-6 md:col-6 pt-24 md:pt-0">
+              <div className="animate-pulse">
+                <div className="h-16 bg-gray-300 rounded mb-4"></div>
+                <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  )
+}
+
 export default function DesarrollosProyectos() {
-  return <DesarrollosProyectosContent />
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <DesarrollosProyectosContent />
+    </Suspense>
+  )
 }

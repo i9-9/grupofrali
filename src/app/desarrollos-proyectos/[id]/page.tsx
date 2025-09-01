@@ -20,7 +20,7 @@ export default function DesarrolloProyecto() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [touchStart, setTouchStart] = useState(0)
   const [touchEnd, setTouchEnd] = useState(0)
-  const [isDragging, setIsDragging] = useState(false)
+
   
   const [activeDesktopImageIndex, setActiveDesktopImageIndex] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
@@ -97,10 +97,7 @@ export default function DesarrolloProyecto() {
   // Variable para detectar LA RESERVA CARDALES
   const isReservaCardales = (language === 'en' ? project?.title_en : project?.titulo) === 'LA RESERVA CARDALES'
 
-  // Funciones para carrusel mobile con transform
-  const goToSlide = (index: number) => {
-    setCurrentSlide(Math.max(0, Math.min(index, mobileImages.length - 1)))
-  }
+
 
   const nextSlide = () => {
     if (currentSlide < mobileImages.length - 1) {
@@ -117,7 +114,6 @@ export default function DesarrolloProyecto() {
   // Manejar gestos táctiles
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStart(e.targetTouches[0].clientX)
-    setIsDragging(true)
   }
 
   const handleTouchMove = (e: React.TouchEvent) => {
@@ -138,7 +134,6 @@ export default function DesarrolloProyecto() {
       prevSlide()
     }
     
-    setIsDragging(false)
     setTouchStart(0)
     setTouchEnd(0)
   }
@@ -308,7 +303,7 @@ export default function DesarrolloProyecto() {
 
     return (
       <div className={`pt-3 pb-1 flex justify-between items-start min-h-[60px] md:min-h-[20px] project-stats-line ${getLineDelayClass(index)} ${isVisible ? 'animate' : ''} ${parsed.isTextOnly ? 'text-only' : ''}`}>
-        <div className="font-archivo text-black uppercase tracking-wider leading-none max-w-[50%] md:text-[0.8rem] text-[14px] md:text-[13px] self-start" style={{ wordBreak: 'break-word' }}>
+        <div className="font-archivo text-black uppercase tracking-wider leading-none max-w-[50%] text-[14px] md:text-[13px] self-start" style={{ wordBreak: 'break-word' }}>
           {statKey.replace(/_/g, ' ').split(' ').map((word, index) => (
             <span key={index}>
               {word}
