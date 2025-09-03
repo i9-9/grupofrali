@@ -29,7 +29,8 @@ export default function Header() {
   const mobileItems = [
     { name: t("common.navigation.home"), href: "/" },
     { name: t("common.navigation.about"), href: "/quienes-somos" },
-    { name: t("common.navigation.hr"), href: "/rrhh" },
+    { name: t("common.navigation.projects"), href: "/desarrollos-proyectos" },
+    { name: t("common.navigation.hrMobile"), href: "/rrhh" },
     { name: t("common.navigation.contact"), href: "/contacto" }
   ]
 
