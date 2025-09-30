@@ -7,6 +7,7 @@ function getContentfulClient() {
     accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN ? 'Present' : 'Missing',
     environment: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT || 'master',
   })
+  console.log('Deploy trigger - checking env vars...')
   
   return createClient({
     space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID!,
