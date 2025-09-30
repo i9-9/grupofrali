@@ -60,7 +60,7 @@ export default function ProjectImageSlider({
     }
   }
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
+  const handleTouchEnd = () => {
     if (!isTracking) return
     
     setIsTracking(false)

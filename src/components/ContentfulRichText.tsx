@@ -1,35 +1,50 @@
 import React from 'react'
 
 interface ContentfulRichTextProps {
-  content: any
+  content: ContentfulRichTextContent
   className?: string
 }
 
+interface ContentfulRichTextContent {
+  content?: ContentfulRichTextNode[]
+}
+
+interface ContentfulRichTextNode {
+  nodeType: string
+  content?: ContentfulRichTextNode[]
+  value?: string
+  marks?: ContentfulRichTextMark[]
+}
+
+interface ContentfulRichTextMark {
+  type: string
+}
+
 // Función para renderizar contenido rico de Contentful
-function renderRichText(content: any): React.ReactNode {
+function renderRichText(content: ContentfulRichTextContent): React.ReactNode {
   if (!content || !content.content) return null
 
-  return content.content.map((node: any, index: number) => {
+  return content.content.map((node: ContentfulRichTextNode, index: number) => {
     switch (node.nodeType) {
       case 'paragraph':
         return (
           <p key={index} className="mb-1">
-            {node.content?.map((textNode: any, textIndex: number) => {
+            {node.content?.map((textNode: ContentfulRichTextNode) => {
               if (textNode.nodeType === 'text') {
-                let text = textNode.value
+                let text: React.ReactNode = textNode.value
                 
                 // Aplicar marcas de formato
                 if (textNode.marks) {
-                  textNode.marks.forEach((mark: any) => {
+                  textNode.marks.forEach((mark: ContentfulRichTextMark) => {
                     switch (mark.type) {
                       case 'bold':
-                        text = <strong key={textIndex}>{text}</strong>
+                        text = <strong>{text}</strong>
                         break
                       case 'italic':
-                        text = <em key={textIndex}>{text}</em>
+                        text = <em>{text}</em>
                         break
                       case 'underline':
-                        text = <u key={textIndex}>{text}</u>
+                        text = <u>{text}</u>
                         break
                     }
                   })
@@ -45,7 +60,7 @@ function renderRichText(content: any): React.ReactNode {
       case 'heading-1':
         return (
           <h1 key={index} className="text-4xl font-bold mb-6">
-            {node.content?.map((textNode: any, textIndex: number) => {
+            {node.content?.map((textNode: ContentfulRichTextNode) => {
               if (textNode.nodeType === 'text') {
                 return textNode.value
               }
@@ -57,7 +72,7 @@ function renderRichText(content: any): React.ReactNode {
       case 'heading-2':
         return (
           <h2 key={index} className="text-3xl font-bold mb-4">
-            {node.content?.map((textNode: any, textIndex: number) => {
+            {node.content?.map((textNode: ContentfulRichTextNode) => {
               if (textNode.nodeType === 'text') {
                 return textNode.value
               }
@@ -69,7 +84,7 @@ function renderRichText(content: any): React.ReactNode {
       case 'heading-3':
         return (
           <h3 key={index} className="text-2xl font-bold mb-3">
-            {node.content?.map((textNode: any, textIndex: number) => {
+            {node.content?.map((textNode: ContentfulRichTextNode) => {
               if (textNode.nodeType === 'text') {
                 return textNode.value
               }
@@ -81,11 +96,11 @@ function renderRichText(content: any): React.ReactNode {
       case 'unordered-list':
         return (
           <ul key={index} className="list-disc list-inside mb-4">
-            {node.content?.map((listItem: any, itemIndex: number) => {
+            {node.content?.map((listItem: ContentfulRichTextNode, itemIndex: number) => {
               if (listItem.nodeType === 'list-item') {
                 return (
                   <li key={itemIndex} className="mb-2">
-                    {listItem.content?.map((textNode: any, textIndex: number) => {
+                    {listItem.content?.map((textNode: ContentfulRichTextNode) => {
                       if (textNode.nodeType === 'text') {
                         return textNode.value
                       }
@@ -102,11 +117,11 @@ function renderRichText(content: any): React.ReactNode {
       case 'ordered-list':
         return (
           <ol key={index} className="list-decimal list-inside mb-4">
-            {node.content?.map((listItem: any, itemIndex: number) => {
+            {node.content?.map((listItem: ContentfulRichTextNode, itemIndex: number) => {
               if (listItem.nodeType === 'list-item') {
                 return (
                   <li key={itemIndex} className="mb-2">
-                    {listItem.content?.map((textNode: any, textIndex: number) => {
+                    {listItem.content?.map((textNode: ContentfulRichTextNode) => {
                       if (textNode.nodeType === 'text') {
                         return textNode.value
                       }
@@ -123,7 +138,7 @@ function renderRichText(content: any): React.ReactNode {
       case 'blockquote':
         return (
           <blockquote key={index} className="border-l-4 border-gray-300 pl-4 italic mb-4">
-            {node.content?.map((textNode: any, textIndex: number) => {
+            {node.content?.map((textNode: ContentfulRichTextNode) => {
               if (textNode.nodeType === 'text') {
                 return textNode.value
               }

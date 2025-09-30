@@ -59,7 +59,26 @@ export default function ContentfulTeam({
 }
 
 interface TeamMemberCardProps {
-  member: any
+  member: {
+    sys: {
+      id: string
+    }
+    fields: {
+      name: string
+      position: string
+      positionEn: string
+      photo?: {
+        fields: {
+          file: {
+            url: string
+          }
+          title?: string
+        }
+      }
+      bio?: string
+      bioEn?: string
+    }
+  }
   language: string
 }
 

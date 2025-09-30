@@ -23,6 +23,37 @@ export interface ContentfulCategory {
   }
 }
 
+export interface ContentfulMedia {
+  fields: {
+    file: {
+      url: string
+      contentType: string
+      details?: {
+        size: number
+        image?: {
+          width: number
+          height: number
+        }
+      }
+    }
+    title?: string
+    description?: string
+  }
+}
+
+export interface ContentfulRichText {
+  content?: Array<{
+    nodeType: string
+    content?: Array<{
+      nodeType: string
+      value?: string
+      marks?: Array<{
+        type: string
+      }>
+    }>
+  }>
+}
+
 export interface ContentfulProject {
   sys: {
     id: string
@@ -32,16 +63,16 @@ export interface ContentfulProject {
     title: string
     titleEn: string
     slug: string
-    description: any // Rich text
-    descriptionEn: any // Rich text
+    description: ContentfulRichText
+    descriptionEn: ContentfulRichText
     category: ContentfulCategory
     location?: string
     locationEn?: string
-    desarrolloDesktop?: any // Media
-    desarrolloMobile?: any // Media
-    galeriaDesktop?: any[] // Media array
-    galeriaMobile?: any[] // Media array
-    imagenHome?: any // Media
+    desarrolloDesktop?: ContentfulMedia
+    desarrolloMobile?: ContentfulMedia
+    galeriaDesktop?: ContentfulMedia[]
+    galeriaMobile?: ContentfulMedia[]
+    imagenHome?: ContentfulMedia
     estadisticas?: Array<{
       nombre: string
       nombreEn: string
@@ -67,7 +98,7 @@ export interface ContentfulTeamMember {
     name: string
     position: string
     positionEn: string
-    photo?: any // Media
+    photo?: ContentfulMedia
     bio?: string
     bioEn?: string
     isActive: boolean
@@ -86,7 +117,7 @@ export interface ContentfulStatistic {
     value: string
     unit?: string
     unitEn?: string
-    icon?: any // Media
+    icon?: ContentfulMedia
     displayOrder: number
     isActive: boolean
   }
@@ -117,11 +148,11 @@ export interface ContentfulHomePage {
     titleEn: string
     heroTitle: string
     heroTitleEn: string
-    description: any // Rich text
-    descriptionEn: any // Rich text
-    videosDesktop?: any[] // Media array
-    videosMobile?: any[] // Media array
-    logosMarquee?: any[] // Media array
+    description: ContentfulRichText
+    descriptionEn: ContentfulRichText
+    videosDesktop?: ContentfulMedia[]
+    videosMobile?: ContentfulMedia[]
+    logosMarquee?: ContentfulMedia[]
     proyectosDestacados?: ContentfulProject[]
     maxProyectosDestacados?: number
     miembrosEquipo?: ContentfulTeamMember[]
@@ -143,7 +174,7 @@ export async function getHomePageData(): Promise<ContentfulHomePage | null> {
       limit: 1
     })
     
-    return response.items[0] as ContentfulHomePage || null
+    return response.items[0] as unknown as ContentfulHomePage || null
   } catch (error) {
     console.error('Error fetching home page data:', error)
     return null
@@ -156,10 +187,10 @@ export async function getProjects(): Promise<ContentfulProject[]> {
       content_type: 'project',
       include: 3, // Incluir referencias a estadísticas
       'fields.isActive': true,
-      order: 'fields.displayOrder'
+      order: ['fields.displayOrder']
     })
     
-    return response.items as ContentfulProject[]
+    return response.items as unknown as ContentfulProject[]
   } catch (error) {
     console.error('Error fetching projects:', error)
     return []
@@ -173,10 +204,10 @@ export async function getFeaturedProjects(): Promise<ContentfulProject[]> {
       include: 3, // Incluir referencias a estadísticas
       'fields.isActive': true,
       'fields.isFeatured': true,
-      order: 'fields.displayOrder'
+      order: ['fields.displayOrder']
     })
     
-    return response.items as ContentfulProject[]
+    return response.items as unknown as ContentfulProject[]
   } catch (error) {
     console.error('Error fetching featured projects:', error)
     return []
@@ -190,10 +221,10 @@ export async function getHomeGalleryProjects(): Promise<ContentfulProject[]> {
       include: 3, // Incluir referencias a estadísticas
       'fields.isActive': true,
       'fields.isFeatured': true,
-      order: 'fields.homeGalleryOrder,fields.displayOrder'
+      order: ['fields.homeGalleryOrder', 'fields.displayOrder']
     })
     
-    return response.items as ContentfulProject[]
+    return response.items as unknown as ContentfulProject[]
   } catch (error) {
     console.error('Error fetching home gallery projects:', error)
     return []
@@ -205,10 +236,10 @@ export async function getTeamMembers(): Promise<ContentfulTeamMember[]> {
     const response = await contentfulClient.getEntries({
       content_type: 'teamMember',
       'fields.isActive': true,
-      order: 'fields.displayOrder'
+      order: ['fields.displayOrder']
     })
     
-    return response.items as ContentfulTeamMember[]
+    return response.items as unknown as ContentfulTeamMember[]
   } catch (error) {
     console.error('Error fetching team members:', error)
     return []
@@ -223,7 +254,7 @@ export async function getStatistics(): Promise<ContentfulStatistic[]> {
       order: ['fields.displayOrder']
     })
     
-    return response.items as ContentfulStatistic[]
+    return response.items as unknown as ContentfulStatistic[]
   } catch (error) {
     console.error('Error fetching statistics:', error)
     return []
@@ -240,7 +271,7 @@ export async function getProjectBySlug(slug: string): Promise<ContentfulProject 
       limit: 1
     })
     
-    return response.items[0] as ContentfulProject || null
+    return response.items[0] as unknown as ContentfulProject || null
   } catch (error) {
     console.error('Error fetching project by slug:', error)
     return null
@@ -252,10 +283,10 @@ export async function getCategories(): Promise<ContentfulCategory[]> {
     const response = await contentfulClient.getEntries({
       content_type: 'category',
       'fields.isActive': true,
-      order: 'fields.name'
+      order: ['fields.name']
     })
     
-    return response.items as ContentfulCategory[]
+    return response.items as unknown as ContentfulCategory[]
   } catch (error) {
     console.error('Error fetching categories:', error)
     return []
@@ -270,7 +301,7 @@ export async function getProjectStatistics(projectId: string): Promise<Contentfu
       include: 2
     })
     
-    return response.items as ContentfulProjectStatistic[]
+    return response.items as unknown as ContentfulProjectStatistic[]
   } catch (error) {
     console.error('Error fetching project statistics:', error)
     return []

@@ -48,7 +48,6 @@ export default function RandomVideo({ type }: Props) {
       }`}
       style={{
         ...videoStyle,
-        imageRendering: 'high-quality',
         imageRendering: '-webkit-optimize-contrast',
         backfaceVisibility: 'hidden',
         transform: 'translateZ(0)',
