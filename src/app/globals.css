@@ -257,6 +257,16 @@ body {
   letter-spacing: 0%;
 }
 
+/* Language switcher - mismo tamaño que menu items */
+.language-switcher {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: clamp(12px, 0.97vw, 14.62px); /* Mismo tamaño que header-menu-items */
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
 /* Estilos para filtros de categorías */
 .filter-item {
   cursor: pointer;

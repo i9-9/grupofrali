@@ -13,7 +13,7 @@ export default function LanguageSwitcher() {
   return (
     <button
       onClick={toggleLanguage}
-      className="font-medium text-sm hover:opacity-70 transition-opacity duration-200"
+      className="language-switcher hover:opacity-70 transition-opacity duration-200 flex items-center"
       aria-label={`Cambiar idioma a ${language === 'es' ? 'inglés' : 'Spanish'}`}
     >
       {language === 'es' ? 'EN' : 'ES'}
