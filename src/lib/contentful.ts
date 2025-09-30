@@ -1,11 +1,13 @@
 import { createClient } from 'contentful'
 
-// Cliente para Content Delivery API (lectura)
-export const contentfulClient = createClient({
-  space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID!,
-  accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN!,
-  environment: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT || 'master',
-})
+// Función para crear el cliente de Contentful
+function getContentfulClient() {
+  return createClient({
+    space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID!,
+    accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN!,
+    environment: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT || 'master',
+  })
+}
 
 // Tipos de datos de Contentful
 export interface ContentfulCategory {
@@ -167,7 +169,8 @@ export interface ContentfulHomePage {
 // Funciones helper para obtener datos
 export async function getHomePageData(): Promise<ContentfulHomePage | null> {
   try {
-    const response = await contentfulClient.getEntries({
+    const client = getContentfulClient()
+    const response = await client.getEntries({
       content_type: 'homePage',
       include: 3,
       'fields.isActive': true,
@@ -183,7 +186,8 @@ export async function getHomePageData(): Promise<ContentfulHomePage | null> {
 
 export async function getProjects(): Promise<ContentfulProject[]> {
   try {
-    const response = await contentfulClient.getEntries({
+    const client = getContentfulClient()
+    const response = await client.getEntries({
       content_type: 'project',
       include: 3, // Incluir referencias a estadísticas
       'fields.isActive': true,
@@ -199,7 +203,8 @@ export async function getProjects(): Promise<ContentfulProject[]> {
 
 export async function getFeaturedProjects(): Promise<ContentfulProject[]> {
   try {
-    const response = await contentfulClient.getEntries({
+    const client = getContentfulClient()
+    const response = await client.getEntries({
       content_type: 'project',
       include: 3, // Incluir referencias a estadísticas
       'fields.isActive': true,
@@ -216,7 +221,8 @@ export async function getFeaturedProjects(): Promise<ContentfulProject[]> {
 
 export async function getHomeGalleryProjects(): Promise<ContentfulProject[]> {
   try {
-    const response = await contentfulClient.getEntries({
+    const client = getContentfulClient()
+    const response = await client.getEntries({
       content_type: 'project',
       include: 3, // Incluir referencias a estadísticas
       'fields.isActive': true,
@@ -233,7 +239,8 @@ export async function getHomeGalleryProjects(): Promise<ContentfulProject[]> {
 
 export async function getTeamMembers(): Promise<ContentfulTeamMember[]> {
   try {
-    const response = await contentfulClient.getEntries({
+    const client = getContentfulClient()
+    const response = await client.getEntries({
       content_type: 'teamMember',
       'fields.isActive': true,
       order: ['fields.displayOrder']
@@ -248,7 +255,8 @@ export async function getTeamMembers(): Promise<ContentfulTeamMember[]> {
 
 export async function getStatistics(): Promise<ContentfulStatistic[]> {
   try {
-    const response = await contentfulClient.getEntries({
+    const client = getContentfulClient()
+    const response = await client.getEntries({
       content_type: 'statistic',
       'fields.isActive': true,
       order: ['fields.displayOrder']
@@ -263,7 +271,8 @@ export async function getStatistics(): Promise<ContentfulStatistic[]> {
 
 export async function getProjectBySlug(slug: string): Promise<ContentfulProject | null> {
   try {
-    const response = await contentfulClient.getEntries({
+    const client = getContentfulClient()
+    const response = await client.getEntries({
       content_type: 'project',
       include: 3, // Incluir referencias a estadísticas
       'fields.slug': slug,
@@ -280,7 +289,8 @@ export async function getProjectBySlug(slug: string): Promise<ContentfulProject 
 
 export async function getCategories(): Promise<ContentfulCategory[]> {
   try {
-    const response = await contentfulClient.getEntries({
+    const client = getContentfulClient()
+    const response = await client.getEntries({
       content_type: 'category',
       'fields.isActive': true,
       order: ['fields.name']
@@ -295,7 +305,8 @@ export async function getCategories(): Promise<ContentfulCategory[]> {
 
 export async function getProjectStatistics(projectId: string): Promise<ContentfulProjectStatistic[]> {
   try {
-    const response = await contentfulClient.getEntries({
+    const client = getContentfulClient()
+    const response = await client.getEntries({
       content_type: '7fjLXGmdgFUlcGjBFqrC0', // ProjectStatistic content type ID
       'fields.project.sys.id': projectId,
       include: 2
