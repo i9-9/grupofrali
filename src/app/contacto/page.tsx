@@ -42,7 +42,28 @@ export default function Contacto() {
         <div className="grid pt-36 md:pt-24 pb-20">
           {/* Título primero siempre - Columnas 1-6 */}
           <div className="col-6 md:col-span-6 order-1">
-            <h1 className="text-h1-baskerville text-black pb-24">
+            {/* Mobile: especificaciones exactas del diseño en w393 */}
+            <h1 
+              className="md:hidden font-baskerville text-black font-normal tracking-[0%] pb-24"
+              style={{ 
+                fontSize: 'clamp(40px, 10.2vw, 40px)', 
+                lineHeight: 'clamp(40px, 10.2vw, 40px)',
+                maxWidth: 'clamp(300px, 80vw, 400px)',
+                whiteSpace: 'pre-line'
+              }}
+            >
+              {t('contact.title')}
+            </h1>
+            {/* Desktop: especificaciones exactas del diseño en w1512 */}
+            <h1 
+              className="hidden md:block font-baskerville text-black font-normal tracking-[0%] pb-24"
+              style={{ 
+                fontSize: 'clamp(40px, 3.7vw, 56px)', 
+                lineHeight: 'clamp(40px, 4.7vw, 70.89px)',
+                maxWidth: 'clamp(400px, 35vw, 600px)',
+                whiteSpace: 'pre-line'
+              }}
+            >
               {t('contact.title')}
             </h1>
           </div>
@@ -62,7 +83,10 @@ export default function Contacto() {
                       className="w-full bg-transparent pb-2 text-black font-archivo text-base tracking-wider focus:outline-none border-0"
                     />
                   </div>
-                  <label className="block mt-2 font-archivo text-black tracking-wider text-base">
+                  <label className="block mt-2 font-archivo text-black uppercase contact-label-mobile md:hidden">
+                    {t('contact.form.firstName')}
+                  </label>
+                  <label className="hidden md:block mt-2 font-archivo text-black uppercase contact-label-desktop">
                     {t('contact.form.firstName')}
                   </label>
                 </div>
@@ -76,7 +100,10 @@ export default function Contacto() {
                       className="w-full bg-transparent pb-2 text-black font-archivo text-base tracking-wider focus:outline-none border-0"
                     />
                   </div>
-                  <label className="block mt-2 font-archivo text-black tracking-wider text-base">
+                  <label className="block mt-2 font-archivo text-black uppercase contact-label-mobile md:hidden">
+                    {t('contact.form.lastName')}
+                  </label>
+                  <label className="hidden md:block mt-2 font-archivo text-black uppercase contact-label-desktop">
                     {t('contact.form.lastName')}
                   </label>
                 </div>
@@ -93,7 +120,10 @@ export default function Contacto() {
                     className="w-full bg-transparent pb-2 text-black font-archivo text-base tracking-wider focus:outline-none border-0"
                   />
                 </div>
-                <label className="block mt-2 font-archivo text-black tracking-wider text-base">
+                <label className="block mt-2 font-archivo text-black uppercase contact-label-mobile md:hidden">
+                  {t('contact.form.email')}
+                </label>
+                <label className="hidden md:block mt-2 font-archivo text-black uppercase contact-label-desktop">
                   {t('contact.form.email')}
                 </label>
               </div>
@@ -109,7 +139,15 @@ export default function Contacto() {
                     className="w-full bg-transparent pb-2 text-black font-archivo text-base tracking-wider focus:outline-none border-0"
                   />
                 </div>
-                <label className="block mt-2 font-archivo text-black tracking-wider text-base">
+                <label 
+                  className="block mt-2 font-archivo text-black uppercase"
+                  style={{ 
+                    fontSize: 'clamp(16px, 1.02vw, 15.36px)', 
+                    lineHeight: '100%',
+                    letterSpacing: '0%',
+                    fontWeight: '400'
+                  }}
+                >
                   {t('contact.form.subject')}
                 </label>
               </div>
@@ -125,7 +163,15 @@ export default function Contacto() {
                     className="w-full bg-transparent pb-2 text-black font-archivo text-base tracking-wider resize-none focus:outline-none border-0"
                   />
                 </div>
-                <label className="block mt-2 font-archivo text-black tracking-wider text-base">
+                <label 
+                  className="block mt-2 font-archivo text-black uppercase"
+                  style={{ 
+                    fontSize: 'clamp(16px, 1.02vw, 15.36px)', 
+                    lineHeight: '100%',
+                    letterSpacing: '0%',
+                    fontWeight: '400'
+                  }}
+                >
                   {t('contact.form.message')}
                 </label>
                 
@@ -144,40 +190,74 @@ export default function Contacto() {
 
           {/* Información de contacto - Columnas 1-6 en desktop, después del formulario en mobile */}
           <div className="col-6 md:col-span-6 order-3">
-            <div className="space-y-0 mb-20 mt-32 md:-mt-64">
+            <div className="md:mb-20 mt-32 md:-mt-80">
               <div>
                 <a 
                   href="mailto:INFO@GRUPOFRALI.COM" 
-                  className="font-archivo text-black hover:opacity-70 transition-opacity leading-tight text-base"
+                  className="font-archivo text-black hover:opacity-70 transition-opacity uppercase"
+                  style={{
+                    fontSize: 'clamp(13.75px, 1.1vw, 16.54px)',
+                    lineHeight: '100%',
+                    letterSpacing: '0%',
+                    fontWeight: '400'
+                  }}
                 >
                   {t('contact.contactInfo.generalInfo')}
                 </a>
               </div>
               
-              <div>
+              <div className="-mt-1">
                 <a 
                   href="mailto:PRENSA@GRUPOFRALI.COM" 
-                  className="font-archivo text-black hover:opacity-70 transition-opacity leading-tight text-base"
+                  className="font-archivo text-black hover:opacity-70 transition-opacity uppercase"
+                  style={{
+                    fontSize: 'clamp(13.75px, 1.1vw, 16.54px)',
+                    lineHeight: '100%',
+                    letterSpacing: '0%',
+                    fontWeight: '400'
+                  }}
                 >
                   {t('contact.contactInfo.pressComms')}
                 </a>
               </div>
               
-              <div>
+              <div className="-mt-1">
                 <a 
                   href="tel:+543489466110" 
-                  className="font-archivo text-black hover:opacity-70 transition-opacity leading-tight text-base"
+                  className="font-archivo text-black hover:opacity-70 transition-opacity uppercase"
+                  style={{
+                    fontSize: 'clamp(13.75px, 1.1vw, 16.54px)',
+                    lineHeight: '100%',
+                    letterSpacing: '0%',
+                    fontWeight: '400'
+                  }}
                 >
                   {t('contact.contactInfo.phone')}
                 </a>
               </div>
             </div>
 
-            <div className="space-y-0">
-              <p className="font-archivo text-black leading-tight text-base">
+            <div className="space-y-0 md:mt-40 ">
+              <p 
+                className="font-archivo text-black uppercase"
+                style={{
+                  fontSize: 'clamp(13.75px, 1.1vw, 16.54px)',
+                  lineHeight: '100%',
+                  letterSpacing: '0%',
+                  fontWeight: '400'
+                }}
+              >
                 {t('contact.contactInfo.address')}
               </p>
-              <p className="font-archivo text-black leading-tight text-base">
+              <p 
+                className="font-archivo text-black uppercase"
+                style={{
+                  fontSize: 'clamp(13.75px, 1.1vw, 16.54px)',
+                  lineHeight: '100%',
+                  letterSpacing: '0%',
+                  fontWeight: '400'
+                }}
+              >
                 {t('contact.contactInfo.city')}
               </p>
             </div>

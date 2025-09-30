@@ -5,13 +5,15 @@ interface UseCounterAnimationProps {
   isVisible: boolean;
   duration?: number;
   delay?: number;
+  projectId?: string; // Agregar projectId para resetear solo cuando cambia el proyecto
 }
 
 export const useCounterAnimation = ({ 
   targetValue, 
   isVisible, 
   duration = 2000, 
-  delay = 0 
+  delay = 0,
+  projectId
 }: UseCounterAnimationProps) => {
   const [displayValue, setDisplayValue] = useState('0');
   const hasAnimatedRef = useRef(false);
@@ -37,14 +39,16 @@ export const useCounterAnimation = ({
         return num;
       }
       
-      // Para números con + al inicio
-      if (cleanStr.startsWith('+')) {
-        const num = parseFloat(cleanStr.replace(/[^\d.]/g, ''));
+      // Para números con + al inicio o números con puntos como separadores de miles
+      if (cleanStr.startsWith('+') || cleanStr.includes('.')) {
+        // Remover el + y tratar puntos como separadores de miles (removerlos)
+        const withoutPlus = cleanStr.replace('+', '');
+        const num = parseFloat(withoutPlus.replace(/\./g, ''));
         return num;
       }
       
-      // Para números normales, extraer solo los dígitos y puntos decimales
-      const num = parseFloat(cleanStr.replace(/[^\d.]/g, ''));
+      // Para números normales, extraer solo los dígitos
+      const num = parseFloat(cleanStr.replace(/[^\d]/g, ''));
       return isNaN(num) ? 0 : num;
     };
 
@@ -63,17 +67,15 @@ export const useCounterAnimation = ({
       const prefix = getPrefix(originalStr);
       const suffix = getSuffix(originalStr);
       
-      // Para números decimales, mantener un decimal
-      if (num % 1 !== 0) {
-        return `${prefix}${num.toFixed(1)}${suffix}`;
-      }
+      // Siempre redondear a entero durante la animación
+      const roundedNum = Math.round(num);
       
       // Para números enteros grandes, agregar comas cada 3 dígitos
-      if (num >= 1000 && !suffix) {
-        return `${prefix}${num.toLocaleString()}${suffix}`;
+      if (roundedNum >= 1000 && !suffix) {
+        return `${prefix}${roundedNum.toLocaleString()}${suffix}`;
       }
       
-      return `${prefix}${Math.round(num)}${suffix}`;
+      return `${prefix}${roundedNum}${suffix}`;
     };
 
     const targetNum = extractNumber(targetValue);
@@ -125,11 +127,11 @@ export const useCounterAnimation = ({
     };
   }, [isVisible, targetValue, duration, delay]);
 
-  // Reset cuando cambia el targetValue
+  // Reset cuando cambia el proyecto
   useEffect(() => {
     hasAnimatedRef.current = false;
     setDisplayValue('0');
-  }, [targetValue]);
+  }, [projectId]);
 
   return { displayValue };
 };

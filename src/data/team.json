@@ -1,0 +1,43 @@
+{
+  "management": {
+    "positions": [
+      {
+        "name": "SEBASTIAN",
+        "surname": "LANUSSE",
+        "position": "DIRECTOR GENERAL",
+        "positionEn": "CHIEF EXECUTIVE OFFICER"
+      },
+      {
+        "name": "HORACIO",
+        "surname": "ANTELO",
+        "position": "DIRECTOR DE OPERACIONES",
+        "positionEn": "CHIEF OPERATING OFFICER"
+      },
+      {
+        "name": "INÉS",
+        "surname": "GEMINI",
+        "position": "DIRECTORA FINANCIERA",
+        "positionEn": "CHIEF FINANCIAL OFFICER"
+      },
+      {
+        "name": "SEAN",
+        "surname": "DUGGAN",
+        "position": "REAL ESTATE MANAGER",
+        "positionEn": "REAL ESTATE MANAGER"
+      },
+      {
+        "name": "JOAQUÍN",
+        "surname": "GOICOECHEA",
+        "position": "ASSET MANAGER",
+        "positionEn": "ASSET MANAGER / CONTROLLER"
+      },
+      {
+        "name": "JOAQUÍN NAZAR",
+        "surname": "ANCHORENA",
+        "position": "AGRO BUSINESS",
+        "positionEn": "AGRIBUSINESS"
+      }
+    ]
+  }
+}
+

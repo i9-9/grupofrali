@@ -68,13 +68,13 @@ export default function Header() {
         <div className="content-wrapper">
           {/* Mobile */}
           <div className={`flex md:hidden items-center h-30 ${isHome ? 'justify-between' : 'justify-between'}`}>
-            <Link href='/'>
-                <h1 className={`font-baskerville header-logo-mobile whitespace-nowrap ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}>
+            <Link href='/' className="flex items-center">
+                <h1 className={`font-baskerville header-logo-mobile whitespace-nowrap mb-2 ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}>
                 GRUPO FRALI
                 </h1>
             </Link>
 
-            <button onClick={toggleMenu} className={isHome || isProjectPage ? 'text-white' : 'text-black'}>
+            <button onClick={toggleMenu} className={`flex items-center justify-center h-9 w-9 pb-2 sm:pb-3 ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}>
               {isOpen ? <></> : <HamburgerIcon />}
             </button>
           </div>
@@ -133,7 +133,7 @@ export default function Header() {
           <div className="content-wrapper">
             <div className="hidden md:block">
               <h1 className="font-baskerville text-white responsive-title leading-none whitespace-nowrap">
-                GRUPO FRALI
+                G R U P O &nbsp; F R A L I
               </h1>
             </div>
           </div>
@@ -143,7 +143,7 @@ export default function Header() {
       {(isOpen || isAnimating) && (
         <div
           className={`fixed top-0 left-0 right-0 bg-[#EBEBEB] z-50 md:hidden ${animationClass}`}
-          style={{ height: '80dvh', overflowY: 'auto' }}
+          style={{ height: '100vh', overflowY: 'auto' }}
         >
           <div className="content-wrapper">
             <Link href='/'>

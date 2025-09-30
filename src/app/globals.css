@@ -1,50 +1,26 @@
+@import url("https://use.typekit.net/mwm8rjz.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'Baskerville';
-  src: url('/fonts/baskerville.woff2') format('woff2');
-  font-weight: normal;
+/* Fuentes de Adobe Fonts */
+/* Baskerville - usando Adobe Fonts - solo peso 400 */
+.font-baskerville {
+  font-family: 'baskerville', 'Baskerville', serif;
+  font-weight: 400;
   font-style: normal;
-  font-display: swap;
 }
 
-@font-face {
-  font-family: 'Archivo';
-  src: url('/fonts/Archivo-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Archivo';
-  src: url('/fonts/Archivo-Thin.woff2') format('woff2');
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Archivo';
-  src: url('/fonts/Archivo-Regular.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Archivo';
-  src: url('/fonts/Archivo-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
+/* Archivo - usando Adobe Fonts */
+.font-archivo {
+  font-family: 'archivo', 'Archivo', sans-serif;
 }
 
 /* Deshabilitamos el smooth scroll nativo para usar uno personalizado */
 html {
   scroll-behavior: auto;
+  height: 100%;
 }
 
 /* Mobile menu animations */
@@ -86,19 +62,20 @@ body {
 
 /* H1 BASKERVILLE - 3.5rem */
 .text-h1-baskerville {
-  font-family: 'Baskerville', serif;
+  font-family: 'baskerville', 'Baskerville', serif;
   font-size: 3.5rem;
   line-height: 1.1;
-  font-weight: normal;
+  font-weight: 400;
 }
 
 /* SMALL BASKERVILLE - 1.75rem */
 .text-small-baskerville {
-  font-family: 'Baskerville', serif;
+  font-family: 'baskerville', 'Baskerville', serif;
   font-size: 1.75rem;
   line-height: 1.2;
-  font-weight: normal;
+  font-weight: 400;
 }
+
 
 /* H2 ARCHIVO - 2.2rem */
 .text-h2-archivo {
@@ -110,10 +87,10 @@ body {
 
 /* H3 BASKERVILLE - 1.5rem */
 .text-h3-baskerville {
-  font-family: 'Baskerville', serif;
+  font-family: 'baskerville', 'Baskerville', serif;
   font-size: 1.5rem;
   line-height: 1.2;
-  font-weight: normal;
+  font-weight: 400;
 }
 
 /* BODY 1 ARCHIVO - 1.75rem */
@@ -132,14 +109,15 @@ body {
   font-weight: 300;
 }
 
-/* SMALL ARCHIVO - 0.8rem */
+/* SMALL ARCHIVO - Labels de estadísticas */
 .text-small-archivo {
-  font-family: 'Archivo', sans-serif;
-  font-size: 0.8rem;
-  line-height: 1.1;
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-family: 'archivo', 'Archivo', sans-serif;
+  font-size: clamp(10px, 2.6vw, 13.26px); /* Mobile: 10px, Desktop: 13.26px */
+  line-height: clamp(11px, 2.8vw, 13.26px); /* Mobile: 11px, Desktop: 13.26px */
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0%;
+  text-align: left;
 }
 
 /* 24 ARCHIVO - 1.5rem */
@@ -170,6 +148,7 @@ body {
     font-size: 2.5rem; /* 40px */
   }
   
+  
   /* H2 ARCHIVO - 2.5rem mobile */
   .text-h2-archivo {
     font-size: 2.5rem; /* 40px */
@@ -198,11 +177,13 @@ body {
 
 /* Typography */
 .font-baskerville {
-  font-family: 'Baskerville', serif;
+  font-family: 'baskerville', 'Baskerville', serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .font-archivo {
-  font-family: 'Archivo', sans-serif;
+  font-family: 'archivo', 'Archivo', sans-serif;
 }
 
 .font-archivo-light {
@@ -227,22 +208,30 @@ body {
 
 /* Título que ocupa todo el ancho sin overflow */
 .responsive-title {
-  font-size: clamp(3rem, 6vw, 8rem);
+  font-size: clamp(3rem, 5vw, 10rem);
   white-space: nowrap;
   width: 100%;
   max-width: 100%;
-  text-align: center;
+  text-align: justify;
   margin: 0;
-  letter-spacing: clamp(0.3em, 5.5vw, 2em);
+  letter-spacing: 0;
   display: block;
   box-sizing: border-box;
   overflow: hidden;
+  text-align-last: justify;
+  word-spacing: 0;
+}
+
+@media (min-width: 768px) {
+  .responsive-title {
+    padding-top: 1rem;
+  }
 }
 
 /* Fix para pantallas problemáticas justo antes de mobile */
 @media (min-width: 600px) and (max-width: 900px) {
   .responsive-title {
-    letter-spacing: clamp(0.5em, 5.2vw, 0.9em);
+    letter-spacing: 0;
   }
 }
 
@@ -255,10 +244,17 @@ body {
 .header-logo-mobile {
   font-size: clamp(24px, 4vw, 28px);
   letter-spacing: clamp(0.5em, 0.8vw, 0.68em);
+  line-height: 1.1;
 }
 
+/* Nav links desktop - Escalado desde 1512px */
 .header-menu-items {
-  font-size: clamp(12px, 1vw, 14px);
+  font-family: 'Archivo', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(12px, 0.97vw, 14.62px); /* Escalado desde 1512px */
+  line-height: 100%;
+  letter-spacing: 0%;
 }
 
 /* Estilos para filtros de categorías */
@@ -273,12 +269,12 @@ body {
 
 .filter-item.active {
   color: #000;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .filter-item.inactive {
   color: #9ca3af;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* Header superpuesto */
@@ -296,6 +292,7 @@ body {
 /* Content Wrapper */
 .content-wrapper {
   width: 100%;
+  max-width: 1600px;
   margin: 0 auto;
   padding-left: 16px;
   padding-right: 16px;
@@ -405,11 +402,13 @@ body {
 
 /* Tamaños personalizados para estadísticas */
 .text-stat-number { 
-  font-family: 'Archivo', sans-serif;
-  font-size: 5.4rem; /* 86.4px en base 16px */
-  line-height: 0.85;
-  font-weight: 100 !important;
-  letter-spacing: -0.02em;
+  font-family: 'archivo', 'Archivo', sans-serif;
+  font-size: clamp(51.98px, 5.7vw, 85.99px); /* Mobile: 51.98px, Desktop: 85.99px */
+  line-height: 1;
+  font-weight: 300 !important;
+  font-style: normal;
+  letter-spacing: 0%;
+  vertical-align: top;
 }
 
 /* Números de estadísticas en páginas de proyectos - Forzar Thin */
@@ -419,7 +418,7 @@ body {
 
 .text-stat-unit { 
   font-family: 'Archivo', sans-serif;
-  font-size: 1.5rem; /* 24px - proporcional al número grande */
+  font-size: clamp(0.75rem, 1.6vw, 1.5rem); /* Escalado desde 1512px */
   line-height: 0.9;
   font-weight: 100 !important;
 }
@@ -427,7 +426,7 @@ body {
 /* Responsive para números grandes - Siguiendo nueva escala mobile */
 @media (max-width: 768px) {
   .text-stat-number { 
-    font-size: 2.5rem; /* Siguiendo H1/H2 mobile scale */
+    font-size: 51.98px; /* Especificación exacta del diseño en w393 */
   }
   
   .text-stat-unit { 
@@ -437,7 +436,7 @@ body {
 
 @media (max-width: 480px) {
   .text-stat-number { 
-    font-size: 3.5rem; /* Mantiene escala mobile */
+    font-size: 51.98px; /* Mantiene especificación exacta del diseño */
   }
   
   .text-stat-unit { 
@@ -634,7 +633,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 1px;
+  height: 1.5px;
   background-color: #000;
   transform: scaleX(0);
   transform-origin: left;
@@ -686,7 +685,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 1px;
+  height: 1.5px;
   background-color: #000;
   transform: scaleX(0);
   transform-origin: left;
@@ -746,7 +745,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 1px;
+  height: 1.5px;
   background-color: #151714;
   transform: scaleX(0);
   transform-origin: left;
@@ -765,7 +764,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 1px;
+  height: 1.5px;
   background-color: #151714;
   transform: scaleX(0);
   transform-origin: left;
@@ -779,7 +778,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 1px;
+  height: 1.5px;
   background-color: #151714;
   transform: scaleX(0);
   transform-origin: left;
@@ -834,7 +833,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 1px;
+  height: 1.5px;
   background-color: #000;
   transform: scaleX(0);
   transform-origin: left;
@@ -895,7 +894,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 1px;
+  height: 1.5px;
   background-color: #000;
   transform: scaleX(0);
   transform-origin: left;
@@ -905,6 +904,32 @@ body {
 /* Clase para activar la animación */
 .quienes-somos-line.animate::after {
   animation: drawLine 0.8s ease-out forwards;
+}
+
+/* Grosor consistente para todas las líneas de Quiénes Somos - Mobile */
+.quienes-somos-line::after,
+.quienes-somos-line-delay-1::after,
+.quienes-somos-line-delay-2::after,
+.quienes-somos-line-delay-3::after,
+.quienes-somos-line-delay-4::after {
+  height: 1.5px !important;
+  background-color: #000 !important;
+  border: none !important;
+  width: 100% !important;
+}
+
+/* Grosor consistente para todas las líneas de Quiénes Somos - Desktop */
+@media (min-width: 768px) {
+  .quienes-somos-line::after,
+  .quienes-somos-line-delay-1::after,
+  .quienes-somos-line-delay-2::after,
+  .quienes-somos-line-delay-3::after,
+  .quienes-somos-line-delay-4::after {
+    height: 1.5px !important;
+    background-color: #000 !important;
+    border: none !important;
+    width: 100% !important;
+  }
 }
 
 /* Delays secuenciales para líneas de Quiénes Somos */
@@ -925,6 +950,15 @@ body {
 }
 
 /* ========================================
+   LÍNEAS MÁS FINAS PARA ESTADÍSTICAS DE PROYECTOS INDIVIDUALES
+   ======================================== */
+
+/* Líneas más finas específicamente para la página de proyectos individual */
+.project-stats-line::before {
+  height: 1px !important; /* Más finas que las otras secciones */
+}
+
+/* ========================================
    PADDING FORZADO PARA ESTADÍSTICAS DE PROYECTOS EN DESKTOP
    ======================================== */
 
@@ -941,8 +975,111 @@ body {
 }
 
 /* ========================================
-   ANIMACIÓN DE ESCALA PARA LOADER
+   CLASES ESPECÍFICAS PARA PROYECTOS - SOBRESCRIBIR ESTILOS GLOBALES
    ======================================== */
+
+/* Título PROYECTOS - Mobile */
+.projects-title-mobile {
+  font-family: 'baskerville', 'Baskerville', serif !important;
+  font-size: clamp(23.74px, 6vw, 23.74px) !important;
+  line-height: clamp(35.69px, 9vw, 35.69px) !important;
+  letter-spacing: 0% !important;
+  font-weight: 400 !important;
+}
+
+/* Título PROYECTOS - Desktop */
+.projects-title-desktop {
+  font-family: 'baskerville', 'Baskerville', serif !important;
+  font-size: clamp(23.74px, 1.9vw, 28.74px) !important;
+  line-height: clamp(35.69px, 2.8vw, 43.2px) !important;
+  letter-spacing: 0% !important;
+  font-weight: 400 !important;
+}
+
+/* Filtros - Mobile */
+.projects-filters-mobile {
+  font-family: 'baskerville', 'Baskerville', serif !important;
+  font-size: clamp(12px, 3vw, 22px) !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  font-weight: 400 !important;
+}
+
+/* Filtros - Desktop */
+.projects-filters-desktop {
+  font-family: 'baskerville', 'Baskerville', serif !important;
+  font-size: clamp(22px, 1.9vw, 28px) !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  font-weight: 400 !important;
+}
+
+
+/* ========================================
+   CLASES ESPECÍFICAS PARA CONTACTO - SISTEMA DUAL SEPARADO
+   ======================================== */
+
+/* Labels del formulario - Mobile */
+.contact-label-mobile {
+  font-family: 'archivo', 'Archivo', sans-serif !important;
+  font-size: clamp(16px, 1.02vw, 15.36px) !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+}
+
+/* Labels del formulario - Desktop */
+.contact-label-desktop {
+  font-family: 'archivo', 'Archivo', sans-serif !important;
+  font-size: clamp(16px, 1.02vw, 15.36px) !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+}
+
+/* Información de contacto - Mobile */
+.contact-info-mobile {
+  font-family: 'archivo', 'Archivo', sans-serif !important;
+  font-size: clamp(13.75px, 1.1vw, 16.54px) !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+}
+
+/* Información de contacto - Desktop */
+.contact-info-desktop {
+  font-family: 'archivo', 'Archivo', sans-serif !important;
+  font-size: clamp(13.75px, 1.1vw, 16.54px) !important;
+  line-height: 100% !important;
+  letter-spacing: 0% !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+}
+
+/* ========================================
+   CLASES ESPECÍFICAS PARA RRHH - SISTEMA DUAL SEPARADO
+   ======================================== */
+
+/* H2 RRHH - Mobile */
+.rrhh-h2-mobile {
+  font-family: 'baskerville', 'Baskerville', serif !important;
+  font-size: clamp(25.04px, 6.4vw, 25.04px) !important;
+  line-height: clamp(42.94px, 10.9vw, 42.94px) !important;
+  letter-spacing: 0% !important;
+  font-weight: 400 !important;
+}
+
+/* H2 RRHH - Desktop */
+.rrhh-h2-desktop {
+  font-family: 'baskerville', 'Baskerville', serif !important;
+  font-size: clamp(28.35px, 2.2vw, 28.35px) !important;
+  line-height: clamp(48.62px, 3.5vw, 48.62px) !important;
+  letter-spacing: 0% !important;
+  font-weight: 400 !important;
+}
 
 @keyframes scaleGrow {
   0% {

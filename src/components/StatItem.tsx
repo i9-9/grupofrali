@@ -10,15 +10,19 @@ interface StatItemProps {
   label: string;
   delay?: string;
   lineDelay?: string;
+  isVisible?: boolean;
 }
 
-export function StatItem({ number, unit, label, delay, lineDelay }: StatItemProps) {
+export function StatItem({ number, unit, label, delay, lineDelay, isVisible: parentIsVisible }: StatItemProps) {
 
-  const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>({
+  const { ref, isVisible: localIsVisible } = useIntersectionObserver<HTMLDivElement>({
     threshold: 0.3,
     rootMargin: '0px 0px -50px 0px',
     triggerOnce: true
-  }); 
+  });
+
+  // Usar la visibilidad del padre si está disponible, sino usar la local
+  const isVisible = parentIsVisible !== undefined ? parentIsVisible : localIsVisible; 
 
   // Extraer delay numérico para la animación de conteo
   const getDelayFromClass = (delayClass?: string): number => {
@@ -45,22 +49,48 @@ export function StatItem({ number, unit, label, delay, lineDelay }: StatItemProp
 
   return (
     <div
-      ref={ref}
+      ref={parentIsVisible !== undefined ? undefined : ref}
       className={`pt-4 md:pt-4 mb-8 md:mb-12 w-full flex stat-line ${lineDelay} ${isVisible ? 'animate' : ''}`}
     >
       {/* Contenedor que asegura separación entre número y label */}
-      <div className="flex justify-between items-start w-full">
+      <div className="flex items-start w-full">
         
         {/* Número pegado al margen izquierdo */}
         <div
           className={`text-stat-number text-black stat-number-animated ${delay} ${isVisible ? 'animate' : '' }`}
+          style={{ 
+            lineHeight: '1', 
+            verticalAlign: 'top',
+            marginTop: '-10px'
+          }}
         >
           {displayValue}
-          {unit && <span className="text-stat-unit">{unit}</span>}
+          {unit && (
+            <>
+              {unit === 'MMUSD' ? (
+                <>
+                  <span className="text-stat-number">MM</span>
+                  <span className="text-stat-unit" style={{ fontSize: 'clamp(0.5rem, 1vw, 0.75rem)', verticalAlign: 'sub' }}>USD</span>
+                </>
+              ) : (
+                <span className="text-stat-unit">{unit}</span>
+              )}
+            </>
+          )}
         </div>
 
-        {/* Label alineado a la izquierda, pero al borde derecho */}
-        <div className="text-small-archivo text-black text-left w-[160px]">
+        {/* Spacer para empujar el label al borde derecho */}
+        <div className="flex-1"></div>
+
+        {/* Label alineado al borde derecho con text-left */}
+        <div 
+          className="text-small-archivo text-black text-left"
+          style={{
+            width: 'clamp(120px, 10.6vw, 160px)',
+            lineHeight: '1',
+            verticalAlign: 'top'
+          }}
+        >
           {label}
         </div>
       </div>

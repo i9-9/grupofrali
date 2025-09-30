@@ -1,13 +1,52 @@
-"use client";
+'use client'
 
 import RandomVideo from "@/components/RandomVideo";
-import ProjectGallery from "@/components/ProjectGallery";
-import { StatItem } from "@/components/StatItem";
+import ContentfulProjects from "@/components/ContentfulProjects";
+import ContentfulStats from "@/components/ContentfulStats";
 import Link from "next/link";
-import { useLanguage } from "@/contexts/LanguageContext";
+import ScrollArrow from "@/components/ScrollArrow";
+import { getStatistics, getHomeGalleryProjects } from "@/lib/contentful";
+import { useTranslations } from "@/hooks/useTranslations";
+import { useEffect, useState } from "react";
 
 function HomeContent() {
-  const { t, language } = useLanguage()
+  const { t, isReady } = useTranslations();
+  const [statistics, setStatistics] = useState<unknown[] | undefined>(undefined);
+  const [homeGalleryProjects, setHomeGalleryProjects] = useState<unknown[] | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const [statsData, projectsData] = await Promise.all([
+          getStatistics(),
+          getHomeGalleryProjects()
+        ]);
+        setStatistics(statsData);
+        setHomeGalleryProjects(projectsData);
+      } catch (error) {
+        console.error('Error loading data:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  // Mostrar loading mientras se cargan las traducciones y los datos
+  if (!isReady || isLoading) {
+    return (
+      <main>
+        <div className="h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black mx-auto mb-4"></div>
+            <p className="text-sm text-gray-600">Cargando...</p>
+          </div>
+        </div>
+      </main>
+    );
+  }
   
   return (
     <main>
@@ -19,104 +58,106 @@ function HomeContent() {
         <div className="relative z-10 h-full flex items-center justify-center">
           <div className="text-center text-white"></div>
         </div>
+        {/* Arrow bottom right */}
+        <ScrollArrow />
       </section>
 
       {/* Desarrollo */}
-      <section className="pt-16 bg-[#EFEFEF] ">
-        <div className="content-wrapper">
-          <div className="grid">
+      <section id="desarrollo-section" className="bg-[#EFEFEF]" style={{ paddingTop: 'clamp(4rem, 2.2vw, 8rem)' }}>
+        <div className="w-full max-w-[1600px] mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
+          <div className="grid grid-cols-6 md:grid-cols-12" style={{ gap: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
             {/* TÍTULO - 6 columnas */}
-            <div className="col-6 md:col-6">
-              {/* Mobile */}
-              <h2 className="md:hidden text-h1-baskerville text-black mb-8">
-                {t("home.hero.titleMobile").split(' ').map((word, index) => (
-                  <span key={index}>
-                    {word}
-                    <br />
-                  </span>
-                ))}
+            <div className="col-span-6 md:col-span-12 md:max-w-[60%]">
+              {/* Mobile version - 4 líneas */}
+              <h2 
+                className="md:hidden font-baskerville text-black font-normal" 
+                style={{ 
+                  fontSize: 'clamp(40px, 10.2vw, 40px)', 
+                  lineHeight: 'clamp(40px, 10.2vw, 40px)',
+                  letterSpacing: '0%',
+                  fontWeight: '400',
+                  marginBottom: 'clamp(1rem, 0.5vw, 2rem)'
+                }}
+              >
+                <div>{t("home.hero.titleMobileLine1")}</div>
+                <div>{t("home.hero.titleMobileLine2")}</div>
+                <div>{t("home.hero.titleMobileLine3")}</div>
+                <div>{t("home.hero.titleMobileLine4")}</div>
               </h2>
-
-              {/* Desktop */}
-              <h2 className="hidden md:block text-h1-baskerville text-black mb-8">
-                <span className="whitespace-nowrap mb-1">
-                  {t("home.hero.titleDesktopLine1")}
-                </span>
-                <br />
-                <span className="whitespace-nowrap">
-                  {t("home.hero.titleDesktopLine2")}
-                </span>
+              
+              {/* Desktop/Tablet version - 2 líneas */}
+              <h2 
+                className="hidden md:block font-baskerville text-black font-normal" 
+                style={{
+                  fontSize: 'clamp(40px, 3.7vw, 56px)',
+                  lineHeight: 'clamp(40px, 4.5vw, 68.14px)',
+                  letterSpacing: '0%',
+                  fontWeight: '400',
+                  marginBottom: 'clamp(1rem, 0.5vw, 2rem)'
+                }}
+              >
+                <div style={{ whiteSpace: 'nowrap' }}>{t("home.hero.titleLine1")}</div>
+                <div style={{ whiteSpace: 'nowrap' }}>{t("home.hero.titleLine2")}</div>
               </h2>
             </div>
 
             {/* CONCEPTOS - arriba de stats izquierdas (columnas 1-5) */}
-            <div className="col-6 md:col-1-to-5 flex flex-col order-2 md:order-1">
-              <div className="flex justify-between pb-8 items-center mt-auto">
-                <h3 className="font-baskerville text-black">
+            <div className="col-span-6 md:col-start-1 md:col-end-6 flex flex-col order-2 md:order-1 md:pt-24 md:pb-32">
+              <div className="flex justify-between items-center mt-auto pb-10 md:pb-0">
+                <h3 
+                  className="font-baskerville text-black font-normal leading-[100%] tracking-[0%]"
+                  style={{
+                    fontSize: 'clamp(13.66px, 1.15vw, 17.39px)', /* Mobile: 13.66px, Desktop: 17.39px */
+                    lineHeight: '100%'
+                  }}
+                >
                   {t("home.concepts.vision")}
                 </h3>
-                <h3 className="font-baskerville text-black">
+                <h3 
+                  className="font-baskerville text-black font-normal leading-[100%] tracking-[0%]"
+                  style={{
+                    fontSize: 'clamp(13.66px, 1.15vw, 17.39px)', /* Mobile: 13.66px, Desktop: 17.39px */
+                    lineHeight: '100%'
+                  }}
+                >
                   {t("home.concepts.innovation")}
                 </h3>
-                <h3 className="font-baskerville text-black">
+                <h3 
+                  className="font-baskerville text-black font-normal leading-[100%] tracking-[0%]"
+                  style={{
+                    fontSize: 'clamp(13.66px, 1.15vw, 17.39px)', /* Mobile: 13.66px, Desktop: 17.39px */
+                    lineHeight: '100%'
+                  }}
+                >
                   {t("home.concepts.solidity")}
                 </h3>
               </div>
             </div>
 
             {/* PÁRRAFO - arriba de stats derechas (columnas 8-12) */}
-            <div className="col-6 md:col-8-to-12 order-1 md:order-2 flex flex-col">
-              <p className="text-body2-archivo text-black mb-12 mt-auto leading-[1]">
+            <div className="col-span-6 md:col-start-8 md:col-end-13 order-1 md:order-2 flex flex-col md:pt-24 md:pb-32">
+              <p 
+                className="font-archivo text-black mt-auto font-normal leading-[100%] tracking-[0%] mb-20 md:mb-0"
+                style={{
+                  fontSize: 'clamp(16px, 1.27vw, 19.21px)', /* Mobile: 16px, Desktop: 19.21px */
+                  lineHeight: '100%',
+                }}
+              >
                 {t("home.description")}
               </p>
             </div>
 
             {/* ESTADÍSTICAS - Layout 5+2+5 en Desktop */}
             {/* Columna 1: Estadísticas izquierda (columnas 1-5) */}
-            <div className="col-6 md:col-1-to-5 order-3 md:order-3 md:pb-8">
-              <StatItem
-                number="14"
-                label={t("home.stats.projectsDelivered")}
-                delay="stat-number-delay-1"
-                lineDelay="stat-line-delay-1"
-              />
-              <StatItem
-                number="300 MM"
-                unit="USD"
-                label={t("home.stats.totalAssets")}
-                delay="stat-number-delay-2"
-                lineDelay="stat-line-delay-2"
-              />
-              <StatItem
-                number="5"
-                label={t("home.stats.upcomingProjects")}
-                delay="stat-number-delay-3"
-                lineDelay="stat-line-delay-3"
-              />
+            <div className="col-span-6 md:col-start-1 md:col-end-6 order-3 md:order-3" style={{ paddingBottom: 'clamp(1rem, 0.5vw, 2rem)' }}>
+              {/* @ts-expect-error - Type mismatch with ContentfulStats component */}
+              <ContentfulStats maxStats={3} startIndex={0} statistics={statistics} />
             </div>
             
             {/* Columna 2: Estadísticas derecha (columnas 8-12) */}
-            <div className="col-6 md:col-8-to-12 order-4 md:order-4 md:pb-8">
-              <StatItem
-                number="7800"
-                unit="ha"
-                label={t("home.stats.farmland")}
-                delay="stat-number-delay-4"
-                lineDelay="stat-line-delay-4"
-              />
-              <StatItem
-                number="+300"
-                label={t("home.stats.team")}
-                delay="stat-number-delay-5"
-                lineDelay="stat-line-delay-5"
-              />
-              <StatItem
-                number="+100.000"
-                unit="m²"
-                label={t("home.stats.builtArea")}
-                delay="stat-number-delay-6"
-                lineDelay="stat-line-delay-6"
-              />
+            <div className="col-span-6 md:col-start-8 md:col-end-13 order-4 md:order-4" style={{ paddingBottom: 'clamp(1rem, 0.5vw, 2rem)' }}>
+              {/* @ts-expect-error - Type mismatch with ContentfulStats component */}
+              <ContentfulStats maxStats={3} startIndex={3} statistics={statistics} />
             </div>
           </div>
         </div>
@@ -125,7 +166,7 @@ function HomeContent() {
 
 
       {/* Marquee Logos */}
-      <section className="py-40 overflow-hidden bg-[#efefef]">
+      <section className="py-20 md:py-40 overflow-hidden bg-[#efefef]">
         <div className="w-full overflow-hidden">
           <div className="flex gap-32 w-max animate-marquee">
             {/* Primera iteración de logos */}
@@ -254,50 +295,119 @@ function HomeContent() {
 
       {/* Proyectos Section */}
       <section className="pt-16 bg-[#efefef]">
-        <div className="content-wrapper">
+        <div className="w-full max-w-[1600px] mx-auto px-4 md:px-6">
           {/* Header */}
-          <div className="flex justify-between items-baseline mb-8">
-            <h3 className="text-small-archivo">{t("home.projects.title")}</h3>
-            <Link href="/desarrollos-proyectos" className="md:hidden">
-              <h3 className="text-small-archivo underline hover:text-black/50 transition-colors duration-300">
-                {t("home.projects.seeMore")}
+          <div className="flex justify-between items-start mb-8">
+            <div className="w-fit">
+              <h3 
+                className="font-baskerville text-black font-normal tracking-[0%] leading-none"
+                style={{
+                  fontSize: 'clamp(16px, 1.9vw, 28.69px)'
+                }}
+              >
+                {t("home.featuredProjects.subtitle")}
               </h3>
-            </Link>
+            </div>
+            <div className="w-fit md:hidden">
+              <Link href="/desarrollos-proyectos">
+                <h3 
+                  className="font-baskerville font-normal uppercase hover:text-black/50 transition-colors duration-300"
+                  style={{
+                    fontSize: 'clamp(16px, 4.1vw, 16px)',
+                    lineHeight: 'clamp(20.23px, 5.1vw, 20.23px)',
+                    letterSpacing: '0%',
+                    fontWeight: '400',
+                    textAlign: 'right',
+                    textDecoration: 'underline',
+                    textDecorationStyle: 'solid',
+                    textDecorationThickness: '1px',
+                    textUnderlineOffset: '2px',
+                    textDecorationSkipInk: 'auto'
+                  }}
+                >
+                  {t("common.buttons.viewAll")}
+                </h3>
+              </Link>
+            </div>
           </div>
 
           <div className="mb-12 flex justify-between items-end">
-            <div>
-              <h2 className="md:hidden text-h1-baskerville">
+            {/* Mobile: Use separate lines for better wrapping */}
+            <div className="md:hidden">
+              <h2 
+                className="font-baskerville font-normal"
+                style={{
+                  fontSize: 'clamp(31.38px, 8vw, 31.38px)',
+                  lineHeight: 'clamp(35.9px, 9.1vw, 35.9px)',
+                  letterSpacing: '0%',
+                  fontWeight: '400'
+                }}
+              >
                 {t("home.businessAreas.titleLine1")}
-                <br />
-                {t("home.businessAreas.titleLine2")}
-                {language === 'es' && (
-                  <>
-                    <br />
-                    {t("home.businessAreas.titleLine3")}
-                  </>
-                )}
               </h2>
-              <h2 className="hidden md:block text-h1-baskerville">
-                {t("home.businessAreas.titleLine1")}
-                <br />
+              <h2 
+                className="font-baskerville font-normal"
+                style={{
+                  fontSize: 'clamp(31.38px, 8vw, 31.38px)',
+                  lineHeight: 'clamp(35.9px, 9.1vw, 35.9px)',
+                  letterSpacing: '0%',
+                  fontWeight: '400'
+                }}
+              >
                 {t("home.businessAreas.titleLine2")}
-                {language === 'es' && (
-                  <>
-                    <br />
-                    {t("home.businessAreas.titleLine3")}
-                  </>
-                )}
+              </h2>
+              <h2 
+                className="font-baskerville font-normal"
+                style={{
+                  fontSize: 'clamp(31.38px, 8vw, 31.38px)',
+                  lineHeight: 'clamp(35.9px, 9.1vw, 35.9px)',
+                  letterSpacing: '0%',
+                  fontWeight: '400'
+                }}
+              >
+                {t("home.businessAreas.titleLine3")}
+              </h2>
+            </div>
+            {/* Desktop: Use full title */}
+            <div className="hidden md:block md:max-w-[40%]">
+              <h2 
+                className="font-baskerville font-normal"
+                style={{
+                  fontSize: 'clamp(31.38px, 3.2vw, 48.81px)',
+                  lineHeight: 'clamp(35.9px, 3.7vw, 55.83px)',
+                  letterSpacing: '0%',
+                  fontWeight: '400'
+                }}
+              >
+                {t("home.businessAreas.title")}
               </h2>
             </div>
             <Link href="/desarrollos-proyectos" className="hidden md:block">
-              <h3 className="text-small-archivo underline hover:text-black/50 transition-colors duration-300">
-                {t("home.projects.seeMore")}
+              <h3 
+                className="font-archivo font-normal uppercase hover:text-black/50 transition-colors duration-300"
+                style={{
+                  fontSize: 'clamp(16px, 1.2vw, 17.74px)',
+                  lineHeight: 'clamp(20.23px, 1.2vw, 18.74px)',
+                  letterSpacing: '0%',
+                  fontWeight: '400',
+                  textDecoration: 'underline',
+                  textDecorationStyle: 'solid',
+                  textDecorationThickness: '1px',
+                  textUnderlineOffset: '2px',
+                  textDecorationSkipInk: 'auto'
+                }}
+              >
+                {t("common.buttons.viewAll")}
               </h3>
             </Link>
           </div>
 
-          <ProjectGallery />
+          <ContentfulProjects 
+            maxProjects={6} 
+            showAll={true}
+            // @ts-expect-error - Type mismatch with ContentfulProjects component
+            homeGalleryProjects={homeGalleryProjects}
+          />
         </div>
       </section>
     </main>

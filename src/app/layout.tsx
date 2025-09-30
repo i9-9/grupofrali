@@ -36,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body>
+      <body className="bg-[#EFEFEF]">
         <LanguageProvider>
           <ConditionalLayout>
             {children}

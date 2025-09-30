@@ -16,7 +16,7 @@
       "back": "VOLVER ARRIBA",
       "next": "SIGUIENTE",
       "previous": "ANTERIOR",
-      "viewAll": "VER TODOS"
+      "viewAll": "VER MÁS"
     }
   },
   "home": {
@@ -24,6 +24,12 @@
       "title": "IMPULSAMOS EL DESARROLLO CON VISIÓN ESTRATÉGICA",
       "titleMobile": "IMPULSAMOS EL DESARROLLO CON VISIÓN ESTRATÉGICA",
       "titleDesktop": "IMPULSAMOS EL DESARROLLO CON VISIÓN ESTRATÉGICA",
+      "titleLine1": "IMPULSAMOS EL DESARROLLO",
+      "titleLine2": "CON VISIÓN ESTRATÉGICA",
+      "titleMobileLine1": "IMPULSAMOS",
+      "titleMobileLine2": "EL DESARROLLO",
+      "titleMobileLine3": "CON VISIÓN",
+      "titleMobileLine4": "ESTRATÉGICA",
       "titleDesktopLine1": "IMPULSAMOS EL DESARROLLO",
       "titleDesktopLine2": "CON VISIÓN ESTRATÉGICA"
     },
@@ -38,12 +44,12 @@
       "projectsDelivered": "PROYECTOS DESARROLLADOS",
       "builtArea": "SUPERFICIE CONSTRUIDA",
       "farmland": "HÉCTAREAS AGRÍCOLAS",
-      "team": "EMPLEADOS Y COLABORADORES",
+      "team": "N° EMPLEADOS & COLABORADORES",
       "upcomingProjects": "PROYECTOS EN PLANIFICACIÓN"
     },
     "featuredProjects": {
       "title": "PROYECTOS QUE MARCAN NUESTRO CAMINO",
-      "subtitle": "PROYECTOS DESTACADOS",
+      "subtitle": "PROYECTOS",
       "projects": [
         "La Reserva Cardales",
         "Sofitel La Reserva Cardales",
@@ -106,9 +112,9 @@
   "about": {
     "title": "QUIENES SOMOS",
     "hero": {
-      "title": "DESARROLLAMOS INVERSIONES ESTRATÉGICAS EN SECTORES CLAVE PARA EL CRECIMIENTO ECONÓMICO Y SOCIAL",
-      "titleMobile": "DESARROLLAMOS INVERSIONES ESTRATÉGICAS EN SECTORES CLAVE PARA EL CRECIMIENTO ECONÓMICO Y SOCIAL",
-      "titleDesktop": "DESARROLLAMOS INVERSIONES ESTRATÉGICAS EN SECTORES CLAVE PARA EL CRECIMIENTO ECONÓMICO Y SOCIAL"
+      "title": "DESARROLLAMOS INVERSIONES ESTRATÉGICAS EN SECTORES CLAVE PARA EL CRECIMIENTO ECONÓMICO Y SOCIAL.",
+      "titleMobile": "DESARROLLAMOS INVERSIONES ESTRATÉGICAS EN SECTORES CLAVE PARA EL CRECIMIENTO ECONÓMICO Y SOCIAL.",
+      "titleDesktop": "DESARROLLAMOS INVERSIONES ESTRATÉGICAS EN SECTORES CLAVE PARA EL CRECIMIENTO ECONÓMICO Y SOCIAL."
     },
     "description": "Con casi 30 años de trayectoria, consolidamos nuestro liderazgo a través de proyectos que combinan innovación, compromiso y una gestión profesional orientada al valor de largo plazo, en Argentina, Estados Unidos y Uruguay. Nuestra fortaleza está en la capacidad de evolucionar, diversificar e invertir en el futuro.",
     "values": {
@@ -144,38 +150,38 @@
         {
           "name": "SEBASTIAN",
           "surname": "LANUSSE",
-          "position": "DIRECTOR GENERAL"
+          "position": "DIRECTOR\nGENERAL"
         },
         {
           "name": "HORACIO",
           "surname": "ANTELO",
-          "position": "DIRECTOR DE OPERACIONES"
+          "position": "DIRECTOR DE\nOPERACIONES"
         },
         {
           "name": "INÉS",
           "surname": "GEMINI",
-          "position": "DIRECTORA FINANCIERA"
+          "position": "DIRECTORA\nFINANCIERA"
         },
         {
           "name": "SEAN",
           "surname": "DUGGAN",
-          "position": "REAL ESTATE MANAGER"
+          "position": "REAL ESTATE\nMANAGER"
         },
         {
           "name": "JOAQUÍN",
           "surname": "GOICOECHEA",
-          "position": "ASSET MANAGER"
+          "position": "ASSET\nMANAGER"
         },
         {
           "name": "JOAQUÍN NAZAR",
           "surname": "ANCHORENA",
-          "position": "AGRO BUSINESS"
+          "position": "AGRO\nBUSINESS"
         }
       ]
     }
   },
   "contact": {
-    "title": "ENVIANOS TU CONSULTA",
+    "title": "ENVIANOS\nTU CONSULTA",
     "form": {
       "firstName": "Nombre",
       "lastName": "Apellido",
@@ -194,7 +200,7 @@
     }
   },
   "hr": {
-    "title": "UN EQUIPO QUE CRECE CON CADA PROYECTO",
+    "title": "UN EQUIPO QUE CRECE EN CADA PROYECTO",
     "description": "El crecimiento sostenido de nuestros desarrollos se construye sobre el compromiso y la calidad humana de nuestro equipo. Fomentamos un ambiente de trabajo basado en el profesionalismo, la responsabilidad y la mejora continua, apoyando tanto el crecimiento personal como profesional de cada colaborador.",
     "joinTeam": {
       "title": "SUMATE A NUESTRO EQUIPO",

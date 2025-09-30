@@ -1,0 +1,46 @@
+{
+  "name": "contentful-migration-scripts",
+  "version": "1.0.0",
+  "description": "Scripts to migrate data from JSON to Contentful",
+  "scripts": {
+    "delete:content-types": "ts-node delete-content-types.ts",
+    "create:content-types": "ts-node create-content-types.ts",
+    "create:simple-content-types": "ts-node create-simple-content-types.ts",
+    "create:complete-content-types": "ts-node create-complete-content-types.ts",
+    "create:home-page": "ts-node create-home-page-content-type.ts",
+    "verify:content-types": "ts-node verify-content-types.ts",
+    "migrate:all": "ts-node migrate-all.ts",
+    "migrate:categories": "ts-node migrate-categories.ts",
+    "migrate:projects": "ts-node migrate-projects.ts",
+    "migrate:team": "ts-node migrate-team.ts",
+    "migrate:statistics": "ts-node migrate-statistics.ts",
+    "migrate:home": "ts-node migrate-home.ts",
+    "update:project-stats": "ts-node update-project-statistics.ts",
+    "update:project-stats-json": "ts-node update-project-statistics-json.ts",
+    "add:json-field": "ts-node add-json-field.ts",
+    "update:projects-stats": "ts-node update-projects-with-stats.ts",
+    "remove:team-from-home": "ts-node remove-team-from-home.ts",
+    "clean:home-config": "ts-node clean-home-config.ts",
+    "check:home-fields": "ts-node check-home-fields.ts",
+    "remove:omitted-fields": "ts-node remove-omitted-fields.ts",
+    "check:project-fields": "ts-node check-project-fields.ts",
+    "clean:project-fields": "ts-node clean-project-fields.ts",
+    "omit:project-fields": "ts-node omit-project-fields.ts",
+    "create:project-statistic": "ts-node create-project-statistic-content-type.ts",
+    "migrate:project-statistics": "ts-node migrate-project-statistics.ts",
+    "activate:project-statistic": "ts-node activate-project-statistic.ts",
+    "list:content-types": "ts-node list-content-types.ts",
+    "delete:duplicate-project-statistic": "ts-node delete-duplicate-project-statistic.ts",
+    "add:statistics-reference": "ts-node add-statistics-reference-to-project.ts",
+    "link:statistics-to-projects": "ts-node link-statistics-to-projects.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "contentful-management": "^11.56.0",
+    "dotenv": "^17.2.2"
+  }
+}

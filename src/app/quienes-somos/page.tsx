@@ -76,15 +76,21 @@ export default function QuienesSomos() {
           <div className="col-6 md:col-12">
             {/* Mobile version */}
             <h1 
-              className="md:hidden text-h1-baskerville text-[#151714]" 
-              style={{ fontSize: '1.5rem', lineHeight: '1.2' }}
+              className="md:hidden font-baskerville text-[#151714] font-normal"
+              style={{ 
+                fontSize: 'clamp(24.02px, 6.1vw, 56px)',
+                lineHeight: 'clamp(25.8px, 6.6vw, 70.89px)'
+              }}
               dangerouslySetInnerHTML={{ __html: t('about.hero.titleMobile') }}
             />
             
             {/* Desktop version */}
             <h1 
-              className="hidden md:block text-h1-baskerville text-[#151714]" 
-              style={{ lineHeight: '1.3' }}
+              className="hidden md:block font-baskerville text-[#151714] font-normal"
+              style={{ 
+                fontSize: 'clamp(24.02px, 6.1vw, 56px)',
+                lineHeight: 'clamp(25.8px, 6.6vw, 70.89px)'
+              }}
               dangerouslySetInnerHTML={{ __html: t('about.hero.titleDesktop') }}
             />
           </div>
@@ -92,7 +98,13 @@ export default function QuienesSomos() {
 
         <div className="grid pb-16">
           <div className="col-6 md:col-6">
-            <p className="text-[#151714] tracking-[0.01em] leading-[1.2] md:leading-[1] text-base md:text-[1.18rem]">
+            <p 
+              className="font-archivo text-[#151714] font-normal tracking-[0%]"
+              style={{
+                fontSize: 'clamp(16px, 1.4vw, 22.44px)',
+                lineHeight: '100%'
+              }}
+            >
               {t('about.description')}
             </p>
           </div>
@@ -100,13 +112,19 @@ export default function QuienesSomos() {
       </div>
 
       {/* Valores y Nuestro ADN Section */}
-      <section className="content-wrapper pb-20 ">
+      <section className="content-wrapper" style={{ paddingBottom: 'clamp(0rem, 0.2vw, 0.2rem)' }}>
         <div className="grid gap-y-32 md:gap-y-0 mb-20">
           {/* Columna Izquierda: VALORES */}
           <div className="col-6 md:col-6 pb-16 md:pb-0" ref={valoresRef}>
             {/* Título VALORES con línea animada */}
             <div className={`pb-2 mb-4 quienes-somos-line quienes-somos-line-delay-1 ${isValoresVisible ? 'animate' : ''}`}>
-              <h2 className="text-small-baskerville md:text-small-baskerville" style={{ fontSize: '1.5rem', lineHeight: '1.2' }}>
+              <h2 
+                className="font-baskerville font-normal tracking-[0%]"
+                style={{
+                  fontSize: 'clamp(24px, 2.8vw, 28.35px)',
+                  lineHeight: 'clamp(28px, 3.6vw, 36px)'
+                }}
+              >
                 {t('about.values.title')}
               </h2>
             </div>
@@ -118,12 +136,24 @@ export default function QuienesSomos() {
                 {valores.map((valor: { numero: string; titulo: string }) => (
                   <div key={valor.numero} className="flex items-start">
                     <div className="w-32 flex-shrink-0">
-                      <span className="text-small-archivo text-black">
+                      <span 
+                        className="font-archivo text-black font-normal tracking-[0%]"
+                        style={{
+                          fontSize: 'clamp(16px, 1.1vw, 17.08px)',
+                          lineHeight: '100%'
+                        }}
+                      >
                         ({valor.numero})
                       </span>
                     </div>
                     <div className="flex-1 pl-12">
-                      <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+                      <p 
+                        className="font-archivo text-black font-normal tracking-[0%]"
+                        style={{
+                          fontSize: 'clamp(14px, 1.4vw, 22.44px)',
+                          lineHeight: '100%'
+                        }}
+                      >
                         {valor.titulo}
                       </p>
                     </div>
@@ -138,10 +168,22 @@ export default function QuienesSomos() {
                   <div className="flex-1">
                     {valores[0] && (
                       <div className="flex items-start space-x-4">
-                        <span className="text-small-archivo text-black flex-shrink-0">
+                        <span 
+                          className="font-archivo text-black font-normal tracking-[0%] flex-shrink-0"
+                          style={{
+                            fontSize: 'clamp(16px, 1.1vw, 17.08px)',
+                            lineHeight: '100%'
+                          }}
+                        >
                           ({valores[0].numero})
                         </span>
-                        <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+                        <p 
+                          className="font-archivo text-black font-normal tracking-[0%]"
+                          style={{
+                            fontSize: 'clamp(14px, 1.4vw, 22.44px)',
+                            lineHeight: '100%'
+                          }}
+                        >
                           {valores[0].titulo}
                         </p>
                       </div>
@@ -151,10 +193,22 @@ export default function QuienesSomos() {
                   <div className="flex-1">
                     {valores[2] && (
                       <div className="flex items-start space-x-4">
-                        <span className="text-small-archivo text-black flex-shrink-0">
+                        <span 
+                          className="font-archivo text-black font-normal tracking-[0%] flex-shrink-0"
+                          style={{
+                            fontSize: 'clamp(16px, 1.1vw, 17.08px)',
+                            lineHeight: '100%'
+                          }}
+                        >
                           ({valores[2].numero})
                         </span>
-                        <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+                        <p 
+                          className="font-archivo text-black font-normal tracking-[0%]"
+                          style={{
+                            fontSize: 'clamp(14px, 1.4vw, 22.44px)',
+                            lineHeight: '100%'
+                          }}
+                        >
                           {valores[2].titulo}
                         </p>
                       </div>
@@ -167,10 +221,22 @@ export default function QuienesSomos() {
                   <div className="flex-1">
                     {valores[1] && (
                       <div className="flex items-start space-x-4">
-                        <span className="text-small-archivo text-black flex-shrink-0">
+                        <span 
+                          className="font-archivo text-black font-normal tracking-[0%] flex-shrink-0"
+                          style={{
+                            fontSize: 'clamp(16px, 1.1vw, 17.08px)',
+                            lineHeight: '100%'
+                          }}
+                        >
                           ({valores[1].numero})
                         </span>
-                        <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+                        <p 
+                          className="font-archivo text-black font-normal tracking-[0%]"
+                          style={{
+                            fontSize: 'clamp(14px, 1.4vw, 22.44px)',
+                            lineHeight: '100%'
+                          }}
+                        >
                           {valores[1].titulo}
                         </p>
                       </div>
@@ -180,10 +246,22 @@ export default function QuienesSomos() {
                   <div className="flex-1">
                     {valores[3] && (
                       <div className="flex items-start space-x-4">
-                        <span className="text-small-archivo text-black flex-shrink-0">
+                        <span 
+                          className="font-archivo text-black font-normal tracking-[0%] flex-shrink-0"
+                          style={{
+                            fontSize: 'clamp(16px, 1.1vw, 17.08px)',
+                            lineHeight: '100%'
+                          }}
+                        >
                           ({valores[3].numero})
                         </span>
-                        <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+                        <p 
+                          className="font-archivo text-black font-normal tracking-[0%]"
+                          style={{
+                            fontSize: 'clamp(14px, 1.4vw, 22.44px)',
+                            lineHeight: '100%'
+                          }}
+                        >
                           {valores[3].titulo}
                         </p>
                       </div>
@@ -198,34 +276,66 @@ export default function QuienesSomos() {
           <div className="col-6 md:col-6" ref={adnRef}>
             {/* Título NUESTRO ADN con línea animada */}
             <div className={`pb-2 mb-4 quienes-somos-line quienes-somos-line-delay-2 ${isAdnVisible ? 'animate' : ''}`}>
-              <h2 className="text-small-baskerville md:text-small-baskerville" style={{ fontSize: '1.5rem', lineHeight: '1.2' }}>
+              <h2 
+                className="font-baskerville font-normal tracking-[0%]"
+                style={{
+                  fontSize: 'clamp(24px, 2.8vw, 28.35px)',
+                  lineHeight: 'clamp(28px, 3.6vw, 36px)'
+                }}
+              >
                 {t('about.dna.title')}
               </h2>
             </div>
             
             {/* MISIÓN con línea animada */}
-            <div className={`flex items-start pb-4 mb-8 quienes-somos-line quienes-somos-line-delay-3 ${isAdnVisible ? 'animate' : ''}`}>
-              <div className="w-32 flex-shrink-0">
-                <h3 className="text-small-archivo text-black tracking-wider">
-                  {t('about.dna.mission.title')}
-                </h3>
-              </div>
-              <div className="flex-1 pl-12">
-                <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
-                  {t('about.dna.mission.description')}
-                </p>
+            <div className={`pb-2 mb-4 quienes-somos-line quienes-somos-line-delay-3 ${isAdnVisible ? 'animate' : ''}`}>
+              <div className="flex items-start pb-4 mb-8">
+                <div className="w-32 flex-shrink-0">
+                  <h3 
+                    className="font-archivo text-black font-normal tracking-[0%]"
+                    style={{
+                      fontSize: 'clamp(16px, 1.2vw, 17.72px)',
+                      lineHeight: '100%'
+                    }}
+                  >
+                    {t('about.dna.mission.title')}
+                  </h3>
+                </div>
+                <div className="flex-1 pl-12">
+                  <p 
+                    className="font-archivo text-black font-normal tracking-[0%]"
+                    style={{
+                      fontSize: 'clamp(11.56px, 1.4vw, 22.44px)',
+                      lineHeight: '100%'
+                    }}
+                  >
+                    {t('about.dna.mission.description')}
+                  </p>
+                </div>
               </div>
             </div>
             
             {/* VISIÓN sin línea */}
             <div className="flex items-start pb-4 mb-8">
               <div className="w-32 flex-shrink-0">
-                <h3 className="text-small-archivo text-black tracking-wider">
+                <h3 
+                  className="font-archivo text-black font-normal tracking-[0%]"
+                  style={{
+                    fontSize: 'clamp(16px, 1.2vw, 17.72px)',
+                    lineHeight: '100%'
+                  }}
+                >
                   {t('about.dna.vision.title')}
                 </h3>
               </div>
               <div className="flex-1 pl-12">
-                <p className="font-archivo text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+                <p 
+                  className="font-archivo text-black font-normal tracking-[0%]"
+                  style={{
+                    fontSize: 'clamp(11.56px, 1.4vw, 22.44px)',
+                    lineHeight: '100%'
+                  }}
+                >
                   {t('about.dna.vision.description')}
                 </p>
               </div>
@@ -239,7 +349,13 @@ export default function QuienesSomos() {
         <div className="grid pb-8" ref={grupoRef}>
           <div className="col-6 md:col-12">
             <div className={`quienes-somos-line quienes-somos-line-delay-4 ${isGrupoVisible ? 'animate' : ''}`}>
-              <h2 className="text-h1-baskerville text-black pb-4" style={{ fontSize: '1.5rem', lineHeight: '1.2' }}>
+              <h2 
+                className="font-baskerville text-black font-normal tracking-[0%] pb-4"
+                style={{
+                  fontSize: 'clamp(24px, 6.1vw, 60.24px)',
+                  lineHeight: 'clamp(28px, 6.5vw, 65px)'
+                }}
+              >
                 {t('about.group.title')}
               </h2>
             </div>
@@ -248,11 +364,23 @@ export default function QuienesSomos() {
 
         <div className="grid">
           <div className="col-6 md:col-6 space-y-6">
-            <p className="text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+            <p 
+              className="font-archivo text-black font-normal tracking-[0%]"
+              style={{
+                fontSize: 'clamp(16px, 1.4vw, 22.44px)',
+                lineHeight: '100%'
+              }}
+            >
               {t('about.group.description1')}
             </p>
 
-            <p className="text-black text-base md:text-[1.18rem] leading-[1.2] md:leading-[1]">
+            <p 
+              className="font-archivo text-black font-normal tracking-[0%]"
+              style={{
+                fontSize: 'clamp(16px, 1.4vw, 22.44px)',
+                lineHeight: '100%'
+              }}
+            >
               {t('about.group.description2')}
             </p>
           </div>
@@ -264,7 +392,13 @@ export default function QuienesSomos() {
                   {/* Espacio vacío para mantener alineación */}
                 </div>
                 <div className="flex-1 pl-12">
-                  <h3 className="font-baskerville text-black" style={{ fontSize: 'clamp(18px, 1.8vw, 24px)', lineHeight: '1.3' }}>
+                  <h3 
+                    className="font-baskerville text-black font-normal tracking-[0%]"
+                    style={{
+                      fontSize: 'clamp(18px, 2.8vw, 28.35px)',
+                      lineHeight: 'clamp(20px, 3.6vw, 36.62px)'
+                    }}
+                  >
                     SEGUIMOS CREANDO<br />
                     OPORTUNIDADES QUE<br />
                     IMPULSAN EL FUTURO
@@ -280,7 +414,13 @@ export default function QuienesSomos() {
       <section className="content-wrapper pb-16">
         <div className="grid pb-8">
           <div className="col-6 md:col-12">
-            <h2 className="font-baskerville text-black" style={{ fontSize: 'clamp(24px, 3.5vw, 48px)', lineHeight: '1.2' }}>
+            <h2 
+              className="font-baskerville text-black font-normal tracking-[0%]"
+              style={{
+                fontSize: 'clamp(24px, 6.1vw, 60.24px)',
+                lineHeight: 'clamp(28px, 6.5vw, 65px)'
+              }}
+            >
               {t('about.management.title')}
             </h2>
           </div>
@@ -303,15 +443,67 @@ export default function QuienesSomos() {
                 {/* Información debajo de la imagen */}
                 <div className="mt-3 space-y-0 flex justify-between items-start">
                   <div className="flex flex-col">
-                    <h3 className="font-baskerville text-black" style={{ fontSize: 'clamp(16px, 1.4vw, 20px)', lineHeight: '1.1' }}>
+                    {/* Mobile: especificaciones exactas del diseño en w393 */}
+                    <h3 
+                      className="md:hidden font-baskerville text-black font-normal tracking-[0%]"
+                      style={{ 
+                        fontSize: 'clamp(18px, 4.6vw, 20px)', 
+                        lineHeight: '100%' 
+                      }}
+                    >
                       {person.nombre}
                     </h3>
-                    <h4 className="font-baskerville text-black" style={{ fontSize: 'clamp(16px, 1.4vw, 20px)', lineHeight: '1.1' }}>
+                    {/* Desktop: especificaciones exactas del diseño en w1512 */}
+                    <h3 
+                      className="hidden md:block font-baskerville text-black font-normal tracking-[0%]"
+                      style={{ 
+                        fontSize: 'clamp(20px, 1.5vw, 23.51px)', 
+                        lineHeight: '100%' 
+                      }}
+                    >
+                      {person.nombre}
+                    </h3>
+                    
+                    {/* Mobile: especificaciones exactas del diseño en w393 */}
+                    <h4 
+                      className="md:hidden font-baskerville text-black font-normal tracking-[0%]"
+                      style={{ 
+                        fontSize: 'clamp(18px, 4.6vw, 20px)', 
+                        lineHeight: '100%' 
+                      }}
+                    >
+                      {person.apellido}
+                    </h4>
+                    {/* Desktop: especificaciones exactas del diseño en w1512 */}
+                    <h4 
+                      className="hidden md:block font-baskerville text-black font-normal tracking-[0%]"
+                      style={{ 
+                        fontSize: 'clamp(20px, 1.5vw, 23.51px)', 
+                        lineHeight: '100%' 
+                      }}
+                    >
                       {person.apellido}
                     </h4>
                   </div>
-                  <div className="text-right">
-                    <p className="font-archivo text-black tracking-wider uppercase text-base leading-[1.1]">
+                  <div className="text-right flex flex-col items-end">
+                    {/* Mobile: especificaciones exactas del diseño en w393 */}
+                    <p 
+                      className="md:hidden font-archivo text-black font-normal tracking-[0%] uppercase whitespace-pre-line text-right"
+                      style={{ 
+                        fontSize: 'clamp(11px, 2.8vw, 12px)',
+                        lineHeight: 'clamp(12px, 3vw, 13px)'
+                      }}
+                    >
+                      {person.cargo}
+                    </p>
+                    {/* Desktop: especificaciones exactas del diseño en w1512 */}
+                    <p 
+                      className="hidden md:block font-archivo text-black font-normal tracking-[0%] uppercase whitespace-pre-line text-right"
+                      style={{ 
+                        fontSize: 'clamp(10px, 0.9vw, 14.61px)', /* Más pequeño en tablets */
+                        lineHeight: 'clamp(11px, 1vw, 16.66px)'
+                      }}
+                    >
                       {person.cargo}
                     </p>
                   </div>

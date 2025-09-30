@@ -24,6 +24,12 @@
       "title": "SHAPING GROWTH WITH STRATEGIC VISION",
       "titleMobile": "SHAPING GROWTH WITH STRATEGIC VISION",
       "titleDesktop": "SHAPING GROWTH WITH STRATEGIC VISION",
+      "titleLine1": "SHAPING GROWTH",
+      "titleLine2": "WITH STRATEGIC VISION",
+      "titleMobileLine1": "SHAPING",
+      "titleMobileLine2": "GROWTH",
+      "titleMobileLine3": "WITH STRATEGIC",
+      "titleMobileLine4": "VISION",
       "titleDesktopLine1": "SHAPING GROWTH",
       "titleDesktopLine2": "WITH STRATEGIC VISION"
     },
@@ -43,7 +49,7 @@
     },
     "featuredProjects": {
       "title": "Projects That Shape Our Journey",
-      "subtitle": "Featured Projects",
+      "subtitle": "PROJECTS",
       "projects": [
         "La Reserva Cardales",
         "Sofitel La Reserva Cardales",
@@ -55,8 +61,9 @@
     },
     "businessAreas": {
       "title": "DIVERSIFICATION FOR SUSTAINABLE GROWTH",
-      "titleLine1": "DIVERSIFICATION FOR",
-      "titleLine2": "SUSTAINABLE GROWTH"
+      "titleLine1": "DIVERSIFICATION",
+      "titleLine2": "FOR SUSTAINABLE",
+      "titleLine3": "GROWTH"
     },
     "projects": {
       "title": "PROJECTS",
@@ -158,27 +165,27 @@
         {
           "name": "SEBASTIAN",
           "surname": "LANUSSE",
-          "position": "CHIEF EXECUTIVE OFFICER"
+          "position": "CHIEF EXECUTIVE\nOFFICER"
         },
         {
           "name": "HORACIO",
           "surname": "ANTELO",
-          "position": "CHIEF OPERATING OFFICER"
+          "position": "CHIEF OPERATING\nOFFICER"
         },
         {
           "name": "INÉS",
           "surname": "GEMINI",
-          "position": "CHIEF FINANCIAL OFFICER"
+          "position": "CHIEF FINANCIAL\nOFFICER"
         },
         {
           "name": "SEAN",
           "surname": "DUGGAN",
-          "position": "REAL ESTATE MANAGER"
+          "position": "REAL ESTATE\nMANAGER"
         },
         {
           "name": "JOAQUÍN",
           "surname": "GOICOECHEA",
-          "position": "ASSET MANAGER / CONTROLLER"
+          "position": "ASSET MANAGER /\nCONTROLLER"
         },
         {
           "name": "JOAQUÍN NAZAR",
@@ -189,7 +196,7 @@
     }
   },
   "contact": {
-    "title": "LET'S KEEP IN TOUCH",
+    "title": "LET'S KEEP\nIN TOUCH",
     "form": {
       "firstName": "First Name",
       "lastName": "Last Name",

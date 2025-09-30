@@ -4,7 +4,8 @@ import { useEffect, useMemo, useState, useRef, Suspense } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
-import projectsData from "@/data/projects.json"
+import { useProjects, useCategories } from "@/hooks/useContentful"
+import type { ContentfulProject } from "@/lib/contentful"
 import AutoSlider from "@/components/AutoSlider"
 import { useLanguage } from "@/contexts/LanguageContext"
 
@@ -53,25 +54,15 @@ function ResponsiveImage({
   )
 }
 
-interface ProjectImage {
-  desarrollos_mobile?: string
-  desarrollos_desktop?: string
-  alt?: string
-}
-
-interface Project {
-  id: string
-  titulo: string
-  categoria: string
-  imagenes?: ProjectImage
-}
-
-// Función para obtener imagen de desarrollo desde JSON
-const getDesarrollosImage = (project: Project, isMobile: boolean = false): string => {
-  const baseKey = isMobile ? 'desarrollos_mobile' : 'desarrollos_desktop'
+// Función para obtener imagen de desarrollo desde Contentful
+const getDesarrollosImage = (project: ContentfulProject, isMobile: boolean = false): string => {
+  const imageField = isMobile ? project.fields.desarrolloMobile : project.fields.desarrolloDesktop
   
-  // Retornar la imagen desde el JSON
-  return project.imagenes?.[baseKey] || ''
+  if (imageField && imageField.fields && imageField.fields.file) {
+    return `https:${imageField.fields.file.url}`
+  }
+  
+  return ''
 }
 
 // Componente que usa useSearchParams - debe estar envuelto en Suspense
@@ -80,11 +71,16 @@ function DesarrollosProyectosContent() {
   const searchParams = useSearchParams()
   const { t, language } = useLanguage()
   
-  const categories = [
+  // Hooks de Contentful
+  const { projects, loading: projectsLoading, error: projectsError } = useProjects()
+  const { categories, loading: categoriesLoading, error: categoriesError } = useCategories()
+  
+  // Crear array de categorías con "VER TODOS" al inicio y orden específico
+  const allCategories = [
     t("projects.categories.all"),
-    t("projects.categories.renewableEnergy"), 
+    t("projects.categories.renewableEnergy"),
     t("projects.categories.realEstate"),
-    t("projects.categories.agroindustry"),
+    t("projects.categories.agroindustry"), 
     t("projects.categories.hospitality")
   ]
 
@@ -92,10 +88,10 @@ function DesarrollosProyectosContent() {
   const [selectedCategory, setSelectedCategory] = useState(() => {
     const categoryFromUrl = searchParams.get('categoria')
     if (categoryFromUrl) {
-      // Buscar la categoría correspondiente en el idioma actual
-      const project = projectsData.proyectos.find(p => p.categoria === categoryFromUrl)
-      if (project) {
-        return language === 'en' ? project.category_en : project.categoria
+      // Buscar la categoría correspondiente en Contentful
+      const category = categories.find(cat => cat.fields.slug === categoryFromUrl)
+      if (category) {
+        return language === 'en' ? category.fields.nameEn : category.fields.name
       }
     }
     return t("projects.categories.all")
@@ -110,15 +106,15 @@ function DesarrollosProyectosContent() {
   useEffect(() => {
     const categoryFromUrl = searchParams.get('categoria')
     if (categoryFromUrl) {
-      const project = projectsData.proyectos.find(p => p.categoria === categoryFromUrl)
-      if (project) {
-        setSelectedCategory(language === 'en' ? project.category_en : project.categoria)
+      const category = categories.find(cat => cat.fields.slug === categoryFromUrl)
+      if (category) {
+        setSelectedCategory(language === 'en' ? category.fields.nameEn : category.fields.name)
       }
     } else {
       // Si no hay categoría en la URL, establecer "VER TODOS" por defecto
       setSelectedCategory(allCategoryValue)
     }
-  }, [language, searchParams, allCategoryValue])
+  }, [language, searchParams, allCategoryValue, categories])
 
   // Efecto para hacer scroll a los proyectos cuando venimos de vuelta de un proyecto individual
   useEffect(() => {
@@ -157,11 +153,22 @@ function DesarrollosProyectosContent() {
   ], [])
 
   const filteredProjects = selectedCategory === t("projects.categories.all")
-    ? projectsData.proyectos 
-    : projectsData.proyectos.filter(project => {
-        const projectCategory = language === 'en' ? project.category_en : project.categoria
-        return projectCategory === selectedCategory
+    ? projects 
+    : projects.filter(project => {
+        const projectCategory = language === 'en' ? project.fields.category?.fields?.nameEn : project.fields.category?.fields?.name
+        
+        // Mapear las traducciones a los nombres de Contentful
+        const categoryMapping: Record<string, string[]> = {
+          [t("projects.categories.realEstate")]: ['REAL ESTATE', 'Real Estate'],
+          [t("projects.categories.agroindustry")]: ['AGROPECUARIA', 'Agroindustry'],
+          [t("projects.categories.hospitality")]: ['HOTELERIA', 'Hospitality'],
+          [t("projects.categories.renewableEnergy")]: ['ENERGIA RENOVABLE', 'Renewable Energy']
+        }
+        
+        const mappedCategories = categoryMapping[selectedCategory] || [selectedCategory]
+        return mappedCategories.includes(projectCategory)
       })
+
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category)
@@ -171,13 +178,18 @@ function DesarrollosProyectosContent() {
     if (category === t("projects.categories.all")) {
       params.delete('categoria')
     } else {
-      // Buscar la categoría correspondiente en español para la URL
-      const spanishCategory = projectsData.proyectos.find(project => {
-        const projectCategory = language === 'en' ? project.category_en : project.categoria
-        return projectCategory === category
-      })?.categoria || category
+      // Mapear las traducciones a los slugs de Contentful
+      const categorySlugMapping: Record<string, string> = {
+        [t("projects.categories.realEstate")]: 'real-estate',
+        [t("projects.categories.agroindustry")]: 'agroindustria',
+        [t("projects.categories.hospitality")]: 'hoteleria',
+        [t("projects.categories.renewableEnergy")]: 'energia-renovable'
+      }
       
-      params.set('categoria', spanishCategory)
+      const slug = categorySlugMapping[category]
+      if (slug) {
+        params.set('categoria', slug)
+      }
     }
     
     const newUrl = params.toString() ? `?${params.toString()}` : '/desarrollos-proyectos'
@@ -188,123 +200,192 @@ function DesarrollosProyectosContent() {
     }, 100)
   }
 
-  return (
-    <main className="bg-[#EFEFEF]">
-      {/* Hero Section con layout híbrido */}
-      <section className="relative flex items-center pt-16 md:pt-24">
-        {/* Contenido de texto usando content-wrapper */}
-        <div className="content-wrapper relative z-10 w-full">
-          <div className="grid">
-            <div className="col-6 md:col-6 pt-24 md:pt-0">
-              <h1 
-                className="text-h1-baskerville text-black lg:pr-6"
-                dangerouslySetInnerHTML={{ __html: t('projects.hero.title') }}
-              />
-              <p className="md:text-[19px] text-black pt-[22px] tracking-[0.01em] max-w-[650px] leading-tight">
-                {t('projects.hero.description')}
-              </p>
+  // Estados de loading y error
+  if (projectsLoading || categoriesLoading) {
+    return (
+      <main className="bg-[#EFEFEF]">
+        <section className="relative flex items-center pt-16 md:pt-24">
+          <div className="content-wrapper relative z-10 w-full">
+            <div className="grid">
+              <div className="col-6 md:col-6 pt-24 md:pt-0">
+                <div className="animate-pulse">
+                  <div className="h-16 bg-gray-300 rounded mb-4"></div>
+                  <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        
-        {/* AutoSlider que se extiende hasta el borde derecho y centrado verticalmente */}
-        <div className="hidden md:block absolute inset-y-0 right-0 w-1/2 items-center z-0 pt-16">
-          <div className="w-full h-[500px]">
-            <AutoSlider 
-              images={photos}
-              altText="Desarrollo"
-              className="w-full h-full"
-            />
-          </div>
-        </div>
-      </section>
+        </section>
+      </main>
+    )
+  }
 
-      {/* Sección de proyectos - con alineación corregida */}
-      <div className="content-wrapper">
-        <div className="grid pt-6 md:pt-8 mt-8 md:mt-12">
-          {/* Mobile layout - título ocupa toda la columna y filtros debajo */}
-          <div className="md:hidden col-6">
-            <h2 className="font-baskerville leading-7 text-[1.5rem]">{t('projects.sectionTitle')}</h2>
-            
-            {/* Filtros mobile en dos filas debajo del título */}
-            <div className="flex flex-col font-baskerville gap-y-3 mt-4 md:mt-6" >
-              {/* Primera fila: 2 botones */}
-              <div className="flex gap-x-3">
-                {categories.slice(0, 2).map((category) => (
-                  <h4 
-                    key={category}
-                    onClick={() => handleCategoryChange(category)}
-                    className={`flex justify-center filter-item items-center rounded-[5px] text-center px-3 py-2 text-[0.75rem] cursor-pointer ${
-                      selectedCategory === category 
-                        ? 'bg-black text-white' 
-                        : 'bg-gray-200 text-gray-600'
-                    }`}
+  if (projectsError || categoriesError) {
+    return (
+      <main className="bg-[#EFEFEF]">
+        <section className="relative flex items-center pt-16 md:pt-24">
+          <div className="content-wrapper relative z-10 w-full">
+            <div className="grid">
+              <div className="col-6 md:col-6 pt-24 md:pt-0">
+                <div className="text-red-600">
+                  Error loading projects: {projectsError || categoriesError}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    )
+  }
+
+  return (
+    <main className="bg-[#EFEFEF]">
+      {/* Hero Section con layout flexbox */}
+      <section className="pt-16 md:pt-24">
+        <div className="max-w-[1600px] mx-auto flex flex-col lg:flex-row items-start">
+          {/* Contenido de texto */}
+          <div className="w-full lg:w-1/2 pl-4 pr-4 md:pl-6 md:pr-6 flex flex-col justify-between h-[637px]">
+            <div className="grid">
+              <div className="col-6 md:col-12 pt-24 md:pt-0">
+                  <h1 
+                    className="font-baskerville font-normal tracking-[0%] text-black lg:pr-6 max-w-[1200px]"
+                    style={{
+                      fontSize: 'clamp(40px, 3.6vw, 54px)',
+                      lineHeight: 'clamp(40px, 4vw, 60px)',
+                      letterSpacing: '0%',
+                      fontWeight: '400'
+                    }}
+                    dangerouslySetInnerHTML={{ __html: t('projects.hero.title') }}
+                  />
+                  <p 
+                    className="font-archivo font-normal tracking-[0%] text-black pt-[32px] col-span-6 md:col-span-5 max-w-[600px]"
+                    style={{
+                      fontSize: 'clamp(16px, 1.2vw, 19.02px)',
+                      lineHeight: '110%',
+                      letterSpacing: '0%',
+                      fontWeight: '400'
+                    }}
                   >
-                    {category}
-                  </h4>
-                ))}
+                    {t('projects.hero.description')}
+                  </p>
+                </div>
+              </div>
+            
+              {/* Sección de proyectos - alineada al borde inferior del slider */}
+              <div className="pt-6 md:pt-8 mt-8 md:mt-12">
+                {/* Mobile layout - título ocupa toda la columna y filtros debajo */}
+                <div className="lg:hidden">
+                <h2 className="projects-title-mobile">
+                  {t('projects.sectionTitle')}
+                </h2>
+                
+                {/* Filtros mobile en dos filas debajo del título */}
+                <div className="flex flex-col font-baskerville gap-y-3 mt-4 md:mt-6" >
+                  {/* Primera fila: 2 botones */}
+                  <div className="flex gap-x-3">
+                    {allCategories.slice(0, 2).map((category) => (
+                      <h4 
+                        key={category}
+                        onClick={() => handleCategoryChange(category)}
+                        className={`flex justify-center filter-item items-center rounded-[5px] text-center px-3 py-2 cursor-pointer projects-filters-mobile ${
+                          selectedCategory === category 
+                            ? 'bg-black text-white' 
+                            : 'bg-gray-200 text-gray-600'
+                        }`}
+                      >
+                        {category}
+                      </h4>
+                    ))}
+                  </div>
+                  
+                  {/* Segunda fila: 3 botones */}
+                  <div className="flex gap-x-3">
+                    {allCategories.slice(2).map((category) => (
+                      <h4 
+                        key={category}
+                        onClick={() => handleCategoryChange(category)}
+                        className={`flex justify-center filter-item items-center rounded-[5px] text-center px-3 py-2 cursor-pointer projects-filters-mobile ${
+                          selectedCategory === category 
+                            ? 'bg-black text-white' 
+                            : 'bg-gray-200 text-gray-600'
+                        }`}
+                      >
+                        {category}
+                      </h4>
+                    ))}
+                  </div>
+                </div>
               </div>
               
-              {/* Segunda fila: 3 botones */}
-              <div className="flex gap-x-3">
-                {categories.slice(2).map((category) => (
-                  <h4 
-                    key={category}
-                    onClick={() => handleCategoryChange(category)}
-                    className={`flex justify-center filter-item items-center rounded-[5px] text-center px-3 py-2 text-[0.75rem] cursor-pointer ${
-                      selectedCategory === category 
-                        ? 'bg-black text-white' 
-                        : 'bg-gray-200 text-gray-600'
-                    }`}
-                  >
-                    {category}
-                  </h4>
-                ))}
+              {/* Desktop layout - usando flexbox para mitad y mitad */}
+              <div className="hidden lg:block">
+                <div className="flex">
+                  <div className="w-1/2">
+                    <h2 className="projects-title-desktop">
+                      {t('projects.sectionTitle')}
+                    </h2>
+                  </div>
+                  <div className="w-1/2">
+                    <div className="flex flex-col projects-filters-desktop gap-y-1">
+                      {allCategories.map((category) => (
+                        <h4 
+                          key={category}
+                          onClick={() => handleCategoryChange(category)}
+                          className={`filter-item cursor-pointer whitespace-nowrap ${selectedCategory === category ? 'active' : 'inactive'}`}
+                        >
+                          {category}
+                        </h4>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           
-          {/* Desktop layout - usando columnas separadas */}
-          <div className="hidden md:block md:col-start-1 md:col-span-3">
-            <h2 className="text-small-baskerville">{t('projects.sectionTitle')}</h2>
-          </div>
-          <div className="hidden md:block md:col-start-4 md:col-span-4">
-            <div className="flex flex-col font-baskerville gap-y-1 leading-7" style={{ fontSize: 'clamp(22px, 1.8vw, 26px)' }}>
-              {categories.map((category) => (
-                <h4 
-                  key={category}
-                  onClick={() => handleCategoryChange(category)}
-                  className={`filter-item cursor-pointer ${selectedCategory === category ? 'active' : 'inactive'}`}
-                >
-                  {category}
-                </h4>
-              ))}
+          {/* AutoSlider - oculto en mobile y tablet */}
+          <div className="hidden lg:block w-full lg:w-1/2">
+            <div className="w-full h-[637px] relative">
+              <AutoSlider 
+                images={photos}
+                altText="Desarrollo"
+                className="w-full h-full"
+              />
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <section ref={projectsRef} className="content-wrapper pb-16">
-        <div className="grid gap-2 md:gap-[10px] mt-16 md:mt-40">
+      <section ref={projectsRef} className="max-w-[1600px] mx-auto pl-4 pr-4 md:pl-6 md:pr-6 pb-16">
+        <div className="grid gap-2 md:gap-[10px] mt-16 md:mt-20">
           {filteredProjects.map((project) => {
             const desktopImage = getDesarrollosImage(project, false)
             const mobileImage = getDesarrollosImage(project, true)
-            
-            if (!desktopImage || !mobileImage) return null
+            const title = language === 'en' ? project.fields.titleEn : project.fields.title
             
             return (
             <Link 
-              key={project.id}
-              href={`/desarrollos-proyectos/${project.id}`} 
+              key={project.sys.id}
+              href={`/desarrollos-proyectos/${project.fields.slug}`} 
               className="col-6 md:col-3 block hover:opacity-80 transition-all duration-300 ease-in-out pt-4 "
             >
-              <ResponsiveImage 
-                desktopImage={desktopImage}
-                mobileImage={mobileImage}
-                alt={project.imagenes?.alt || (language === 'en' ? project.title_en : project.titulo)} 
-              />
-              <h3 className="font-baskerville text-base text-right md:text-left pb-5 md:pb-0 md:text-2xl mt-4 leading-none">
-                {language === 'en' ? project.title_en : project.titulo}
+              {desktopImage && mobileImage ? (
+                <ResponsiveImage 
+                  desktopImage={desktopImage}
+                  mobileImage={mobileImage}
+                  alt={title} 
+                />
+              ) : (
+                <div className="w-full pb-[22px] border-b border-black">
+                  <div className="w-full overflow-hidden aspect-[16/9] md:aspect-[347/355]">
+                    <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                      <span className="text-gray-400 text-sm">No image available</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+              <h3 className="font-baskerville text-right md:text-left pb-5 md:pb-0 mt-4 leading-none" style={{ fontSize: 'clamp(16px, 1.5vw, 24px)', maxWidth: '70%' }}>
+                {title}
               </h3>
             </Link>
             )

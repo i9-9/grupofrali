@@ -20,6 +20,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [translations, setTranslations] = useState<Record<string, unknown>>({})
   const [isLoading, setIsLoading] = useState(true)
   const [isReady, setIsReady] = useState(false)
+  const [isClient, setIsClient] = useState(false)
+
+  // Marcar cuando estamos en el cliente para evitar problemas de hidratación
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   useEffect(() => {
     const loadTranslations = async () => {
@@ -47,12 +53,14 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, [language])
 
   useEffect(() => {
-    // Recuperar idioma del localStorage al cargar
-    const savedLanguage = localStorage.getItem('language') as Language
-    if (savedLanguage && (savedLanguage === 'es' || savedLanguage === 'en')) {
-      setLanguageState(savedLanguage)
+    // Solo recuperar idioma del localStorage cuando estemos en el cliente
+    if (isClient) {
+      const savedLanguage = localStorage.getItem('language') as Language
+      if (savedLanguage && (savedLanguage === 'es' || savedLanguage === 'en')) {
+        setLanguageState(savedLanguage)
+      }
     }
-  }, [])
+  }, [isClient])
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang)

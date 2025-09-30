@@ -20,7 +20,7 @@ export default function AutoSlider({ images, altText = "Slide", className = "" }
     setTimeout(() => {
       setCurrentPhoto((prevIndex) => (prevIndex + 1) % images.length)
       setIsFading(false)
-    }, 500) // Aumentado a 500ms para transición más suave
+    }, 500)
   }, [images.length])
 
 
@@ -56,20 +56,16 @@ export default function AutoSlider({ images, altText = "Slide", className = "" }
 
   return (
     <div 
-      className={`relative ${className}`}
+      className={`relative w-full h-full ${className}`}
     > 
       <Image
         src={images[currentPhoto]}
         alt={`${altText} ${currentPhoto + 1}`}
-        width={350}
-        height={355}
-        className={`w-full h-auto object-cover transition-opacity duration-500 ease-in-out ${
+        fill
+        className={`object-cover transition-opacity duration-500 ease-in-out ${
           isFading ? 'opacity-0' : 'opacity-100'
         }`}
       />
-      
-      
-      
     </div>
   )
 } 

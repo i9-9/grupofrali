@@ -1,4 +1,5 @@
-// components/RandomVideo.tsx
+"use client";
+
 import { useEffect, useState } from 'react';
 
 type Props = {
@@ -8,12 +9,10 @@ type Props = {
 const mobileVideos = [
   '/videos/video_mobile1.mp4',
   '/videos/video_mobile2.mp4',
-  '/videos/video_mobile3.mp4',
 ];
 
 const desktopVideos = [
   '/videos/video_desktop1.mp4',
-  '/videos/video_desktop2.mp4',
   '/videos/video_desktop3.mp4',
 ];
 
@@ -32,13 +31,10 @@ export default function RandomVideo({ type }: Props) {
   // Aplicar zoom específico a videos para ocultar información lumínica detrás del navbar
   const isVideo2Desktop = videoSrc === '/videos/video_desktop2.mp4';
   
-  // Zoom para mobile para mejor contraste con el navbar
+  // Zoom para desktop específico
   const getVideoStyle = () => {
     if (isVideo2Desktop) {
       return { transform: 'scale(1.20)', transformOrigin: 'center center' };
-    }
-    if (type === 'mobile') {
-      return { transform: 'scale(1.35)', transformOrigin: 'center center' };
     }
     return {};
   };
@@ -50,11 +46,24 @@ export default function RandomVideo({ type }: Props) {
       className={`absolute inset-0 w-full h-full object-cover ${
         type === 'mobile' ? 'md:hidden' : 'hidden md:block'
       }`}
-      style={videoStyle}
+      style={{
+        ...videoStyle,
+        imageRendering: 'high-quality',
+        imageRendering: '-webkit-optimize-contrast',
+        backfaceVisibility: 'hidden',
+        transform: 'translateZ(0)',
+        willChange: 'transform',
+        ...(type === 'mobile' && {
+          WebkitTransform: 'translateZ(0)',
+          WebkitBackfaceVisibility: 'hidden',
+          WebkitPerspective: '1000'
+        })
+      }}
       autoPlay
       muted
       loop
       playsInline
+      preload="auto"
       key={videoSrc}
     >
       <source src={videoSrc} type="video/mp4" />
