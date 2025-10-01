@@ -4,7 +4,6 @@ import { useState, useMemo } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useIntersectionObserver } from "@/hooks/useIntersectionObserver"
 import { useLanguage } from "@/contexts/LanguageContext"
 import { useProject, useProjects } from "@/hooks/useContentful"
 import ContentfulRichText from "@/components/ContentfulRichText"
@@ -21,20 +20,6 @@ export default function DesarrolloProyecto() {
   
   const [isTransitioning, setIsTransitioning] = useState(false)
   
-  // Intersection Observer para estadísticas mobile
-  const { ref: mobileStatsRef, isVisible: isMobileStatsVisible } = useIntersectionObserver<HTMLDivElement>({
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px',
-    triggerOnce: true
-  })
-
-  // Intersection Observer para estadísticas desktop
-  const { ref: desktopStatsRef, isVisible: isDesktopStatsVisible } = useIntersectionObserver<HTMLDivElement>({
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px',
-    triggerOnce: true
-  })
-  
   // Obtener el proyecto desde Contentful
   const { project, loading, error } = useProject(projectId)
   const { projects: allProjects } = useProjects()
@@ -42,14 +27,6 @@ export default function DesarrolloProyecto() {
   // Obtener estadísticas locales
   const localProject = projectsData.proyectos.find(p => p.id === projectId)
   const localStats = localProject ? (language === 'en' ? localProject.statistics_en : localProject.estadisticas) : null
-  
-  // Debug: verificar datos del proyecto
-  console.log('Project Debug:', {
-    project,
-    projectId,
-    estadisticasReferencias: project?.fields?.estadisticasReferencias,
-    statistics: project?.fields?.statistics
-  })
   
   // Mapa de logos por proyecto (versiones en blanco)
   const projectLogos: Record<string, string> = {
@@ -192,7 +169,12 @@ export default function DesarrolloProyecto() {
               </div>
             </div>
             
-            <h1 className="font-archivo text-black font-normal leading-[100%] tracking-[0%] mb-[120px] md:mb-0" style={{ fontSize: 'clamp(36.41px, 2.4vw, 35.55px)', lineHeight: '100%' }}>{language === 'en' ? project.fields.titleEn : project.fields.title}</h1>
+            <h1 
+              className="text-black mb-[120px] md:hidden font-archivo font-normal leading-none tracking-[0%]"
+              style={{ fontSize: 'clamp(36.41px, 9.26vw, 36.41px)' }}
+            >
+              {language === 'en' ? project.fields.titleEn : project.fields.title}
+            </h1>
             <p 
               className="text-[#151714] font-archivo font-normal tracking-[0%] mb-[60px] md:mb-4 flex items-center" 
               style={{ 
@@ -212,21 +194,22 @@ export default function DesarrolloProyecto() {
               {language === 'en' ? project.fields.locationEn : project.fields.location}
             </p>
             
-            <div 
-              className="text-[#151714] font-archivo font-normal leading-[100%] tracking-[0%] mb-12" 
-              style={{ 
-                fontSize: 'clamp(13.75px, 1.1vw, 17.5px)', 
-                lineHeight: '110%',
-                letterSpacing: '0%',
-                fontWeight: '400'
-              }}
-            >
-              <ContentfulRichText content={language === 'en' ? project.fields.descriptionEn : project.fields.description} />
+            <div className="text-[#151714] mb-12 md:hidden">
+              <ContentfulRichText 
+                content={language === 'en' ? project.fields.descriptionEn : project.fields.description}
+                paragraphStyle={{ 
+                  fontSize: 'clamp(16.1px, 4.1vw, 16.1px)',
+                  lineHeight: '100%',
+                  letterSpacing: '0%',
+                  fontWeight: '400',
+                  fontFamily: 'Archivo, sans-serif'
+                }}
+              />
             </div>
             
             {/* Estadísticas mobile con animaciones */}
             {localStats && (
-              <div className="py-12" ref={mobileStatsRef}>
+              <div className="py-12">
                 <div className="stats-custom-layout">
                   {Object.entries(localStats).map(([key, value], index) => (
                     <ProjectStatistic 
@@ -234,7 +217,7 @@ export default function DesarrolloProyecto() {
                       statKey={key.replace(/_/g, ' ').toUpperCase()}
                       value={value as string}
                       index={index}
-                      isVisible={isMobileStatsVisible}
+                      isVisible={true}
                       projectId={projectId}
                     />
                   ))}
@@ -264,9 +247,14 @@ export default function DesarrolloProyecto() {
               </div>
             </div>
             
-            {/* Título con altura fija */}
-            <div className="flex items-start h-24  mb-6 md:mb-3">
-              <h1 className="font-archivo text-black font-normal leading-[100%] tracking-[0%]" style={{ fontSize: 'clamp(36.41px, 2.4vw, 35.55px)', lineHeight: '100%' }}>{language === 'en' ? project.fields.titleEn : project.fields.title}</h1>
+            {/* Título */}
+            <div className="flex items-start mb-24">
+              <h1 
+                className="text-black hidden md:block font-archivo font-normal leading-none tracking-[0%]"
+                style={{ fontSize: 'clamp(35.55px, 2.35vw, 35.55px)' }}
+              >
+                {language === 'en' ? project.fields.titleEn : project.fields.title}
+              </h1>
             </div>
             
             {/* Contenido con espacio flexible */}
@@ -290,29 +278,30 @@ export default function DesarrolloProyecto() {
                 {language === 'en' ? project.fields.locationEn : project.fields.location}
               </p>
               
-              <div 
-                className="text-[#151714] font-archivo font-normal leading-[100%] tracking-[0%]" 
-                style={{ 
-                  fontSize: 'clamp(13.75px, 1.1vw, 17.5px)', 
-                  lineHeight: '110%',
-                  letterSpacing: '0%',
-                  fontWeight: '400'
-                }}
-              >
-                <ContentfulRichText content={language === 'en' ? project.fields.descriptionEn : project.fields.description} />
+              <div className="text-[#151714] hidden md:block">
+                <ContentfulRichText 
+                  content={language === 'en' ? project.fields.descriptionEn : project.fields.description}
+                  paragraphStyle={{ 
+                    fontSize: 'clamp(16.1px, 1.07vw, 16.1px)',
+                    lineHeight: '100%',
+                    letterSpacing: '0%',
+                    fontWeight: '400',
+                    fontFamily: 'Archivo, sans-serif'
+                  }}
+                />
               </div>
             </div>
             
             {/* Estadísticas desktop con animaciones */}
             {localStats && (
-              <div className="grid !grid-cols-2 gap-2 md:gap-x-6 md:gap-y-1 mt-16" ref={desktopStatsRef}>
+              <div className="grid !grid-cols-2 gap-2 md:gap-x-6 md:gap-y-1 mt-16">
                 {Object.entries(localStats).map(([key, value], index) => (
                   <ProjectStatistic 
                     key={key}
                     statKey={key.replace(/_/g, ' ').toUpperCase()}
                     value={value as string}
                     index={index}
-                    isVisible={isDesktopStatsVisible}
+                    isVisible={true}
                     projectId={projectId}
                   />
                 ))}

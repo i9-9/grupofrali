@@ -1,4 +1,3 @@
-// Cargar variables de entorno
 require('dotenv').config({ path: '../.env' })
 
 const { createClient } = require('contentful-management')
@@ -86,7 +85,7 @@ async function migrateCategories() {
   }
 }
 
-// Ejecutar si se llama directamente
+// Ejecutar si se llama directamentee
 if (require.main === module) {
   migrateCategories()
 }

@@ -3,6 +3,7 @@ import React from 'react'
 interface ContentfulRichTextProps {
   content: ContentfulRichTextContent
   className?: string
+  paragraphStyle?: React.CSSProperties
 }
 
 interface ContentfulRichTextContent {
@@ -21,14 +22,14 @@ interface ContentfulRichTextMark {
 }
 
 // Función para renderizar contenido rico de Contentful
-function renderRichText(content: ContentfulRichTextContent): React.ReactNode {
+function renderRichText(content: ContentfulRichTextContent, paragraphStyle?: React.CSSProperties): React.ReactNode {
   if (!content || !content.content) return null
 
   return content.content.map((node: ContentfulRichTextNode, index: number) => {
     switch (node.nodeType) {
       case 'paragraph':
         return (
-          <p key={index} className="mb-1">
+          <p key={index} className="mb-1" style={paragraphStyle}>
             {node.content?.map((textNode: ContentfulRichTextNode) => {
               if (textNode.nodeType === 'text') {
                 let text: React.ReactNode = textNode.value
@@ -156,12 +157,12 @@ function renderRichText(content: ContentfulRichTextContent): React.ReactNode {
   })
 }
 
-export default function ContentfulRichText({ content, className = '' }: ContentfulRichTextProps) {
+export default function ContentfulRichText({ content, className = '', paragraphStyle }: ContentfulRichTextProps) {
   if (!content) return null
 
   return (
     <div className={className}>
-      {renderRichText(content)}
+      {renderRichText(content, paragraphStyle)}
     </div>
   )
 }

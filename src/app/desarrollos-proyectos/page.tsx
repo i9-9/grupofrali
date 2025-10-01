@@ -242,7 +242,7 @@ function DesarrollosProyectosContent() {
     <main className="bg-[#EFEFEF]">
       {/* Hero Section con layout flexbox */}
       <section className="pt-16 md:pt-24">
-        <div className="max-w-[1600px] mx-auto flex flex-col lg:flex-row items-start">
+        <div className="mx-auto flex flex-col lg:flex-row items-start">
           {/* Contenido de texto */}
           <div className="w-full lg:w-1/2 pl-4 pr-4 md:pl-6 md:pr-6 flex flex-col justify-between h-[637px]">
             <div className="grid">
@@ -356,7 +356,7 @@ function DesarrollosProyectosContent() {
         </div>
       </section>
 
-      <section ref={projectsRef} className="max-w-[1600px] mx-auto pl-4 pr-4 md:pl-6 md:pr-6 pb-16">
+      <section ref={projectsRef} className="mx-auto pl-4 pr-4 md:pl-6 md:pr-6 pb-16">
         <div className="grid gap-2 md:gap-[10px] mt-16 md:mt-20">
           {filteredProjects.map((project) => {
             const desktopImage = getDesarrollosImage(project, false)
@@ -384,7 +384,7 @@ function DesarrollosProyectosContent() {
                   </div>
                 </div>
               )}
-              <h3 className="font-baskerville text-right md:text-left pb-5 md:pb-0 mt-4 leading-none" style={{ fontSize: 'clamp(16px, 1.5vw, 24px)', maxWidth: '70%' }}>
+              <h3 className="font-baskerville text-right md:text-left pb-5 md:pb-0 mt-4 leading-none md:max-w-[70%]" style={{ fontSize: 'clamp(16px, 1.5vw, 24px)' }}>
                 {title}
               </h3>
             </Link>

@@ -132,7 +132,7 @@ export default function Header() {
         {isHome && (
           <div className="content-wrapper">
             <div className="hidden md:block">
-              <h1 className="font-baskerville text-white responsive-title leading-none whitespace-nowrap">
+              <h1 className="font-baskerville text-white responsive-title leading-none whitespace-nowrap -mt-8">
                 G R U P O &nbsp; F R A L I
               </h1>
             </div>

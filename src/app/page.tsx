@@ -64,7 +64,7 @@ function HomeContent() {
 
       {/* Desarrollo */}
       <section id="desarrollo-section" className="bg-[#EFEFEF]" style={{ paddingTop: 'clamp(4rem, 2.2vw, 8rem)' }}>
-        <div className="w-full max-w-[1600px] mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
+        <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
           <div className="grid grid-cols-6 md:grid-cols-12" style={{ gap: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
             {/* TÍTULO - 6 columnas */}
             <div className="col-span-6 md:col-span-12 md:max-w-[60%]">
@@ -295,7 +295,7 @@ function HomeContent() {
 
       {/* Proyectos Section */}
       <section className="pt-16 bg-[#efefef]">
-        <div className="w-full max-w-[1600px] mx-auto px-4 md:px-6">
+        <div className="w-full mx-auto px-4 md:px-6">
           {/* Header */}
           <div className="flex justify-between items-start mb-8">
             <div className="w-fit">
