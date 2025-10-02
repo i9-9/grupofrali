@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import Link from "next/link"
 import { useLanguage } from "@/contexts/LanguageContext"
 import LanguageSwitcher from "./language-switcher"
+import FraliLogo from "../FraliLogo"
 
 export default function Header() {
   const pathname = usePathname()
@@ -65,23 +66,24 @@ export default function Header() {
   return (
     <>
       <header className="header-overlay">
-        <div className="content-wrapper">
-          {/* Mobile */}
-          <div className={`flex md:hidden items-center h-30 ${isHome ? 'justify-between' : 'justify-between'}`}>
-            <Link href='/' className="flex items-center">
-                <h1 className={`font-baskerville header-logo-mobile whitespace-nowrap mb-2 ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}>
-                GRUPO FRALI
-                </h1>
-            </Link>
+        {isHome ? (
+          <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
+            {/* Mobile */}
+            <div className={`flex md:hidden items-center h-30 justify-between`}>
+              <Link href='/' className="flex items-center">
+                  <FraliLogo 
+                    className={`h-[14px] w-auto ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}
+                    color={isHome || isProjectPage ? '#FFFFFF' : '#000000'}
+                  />
+              </Link>
 
-            <button onClick={toggleMenu} className={`flex items-center justify-center h-9 w-9 pb-2 sm:pb-3 ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}>
-              {isOpen ? <></> : <HamburgerIcon />}
-            </button>
-          </div>
+              <button onClick={toggleMenu} className={`flex items-center justify-center h-9 w-9 ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}>
+                {isOpen ? <></> : <HamburgerIcon />}
+              </button>
+            </div>
 
-          {/* Desktop */}
-          <div className="hidden md:block">
-            {isHome ? (
+            {/* Desktop */}
+            <div className="hidden md:block">
               <div className="flex justify-end items-center h-14">
                 <ul className="flex gap-5 header-menu-items text-white">
                   {menuItems.map((item, index) => (
@@ -96,12 +98,40 @@ export default function Header() {
                   <LanguageSwitcher />
                 </div>
               </div>
-            ) : (
+              
+              {/* Logo grande en Home */}
+              <div className="flex justify-center mt-0 sm:-mt-3 md:-mt-2 lg:mt-0 xl:mt-0">
+                <FraliLogo 
+                  className="h-20 w-auto lg:w-full xl:w-full"
+                  color="#FFFFFF"
+                />
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
+            {/* Mobile */}
+            <div className={`flex md:hidden items-center h-30 justify-between`}>
+              <Link href='/' className="flex items-center">
+                  <FraliLogo 
+                    className={`h-[14px] w-auto ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}
+                    color={isHome || isProjectPage ? '#FFFFFF' : '#000000'}
+                  />
+              </Link>
+
+              <button onClick={toggleMenu} className={`flex items-center justify-center h-9 w-9 ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}>
+                {isOpen ? <></> : <HamburgerIcon />}
+              </button>
+            </div>
+
+            {/* Desktop */}
+            <div className="hidden md:block">
               <div className="flex justify-between items-center h-14">
                 <Link href="/">
-                    <h1 className="font-baskerville header-logo text-black pl-3 whitespace-nowrap">
-                    GRUPO FRALI
-                    </h1>
+                    <FraliLogo 
+                      className="h-3 w-auto pl-3"
+                      color="#000000"
+                    />
                 </Link>
                 <div className="flex items-center gap-5">
                   <ul className="flex gap-5 header-menu-items">
@@ -124,17 +154,6 @@ export default function Header() {
                   </div>
                 </div>
               </div>
-            )}
-          </div>
-        </div>
-
-        {/* Título grande en Home */}
-        {isHome && (
-          <div className="content-wrapper">
-            <div className="hidden md:block">
-              <h1 className="font-baskerville text-white responsive-title leading-none whitespace-nowrap -mt-8">
-                G R U P O &nbsp; F R A L I
-              </h1>
             </div>
           </div>
         )}
@@ -145,11 +164,14 @@ export default function Header() {
           className={`fixed top-0 left-0 right-0 bg-[#EBEBEB] z-50 md:hidden ${animationClass}`}
           style={{ height: '100vh', overflowY: 'auto' }}
         >
-          <div className="content-wrapper">
+          <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
             <Link href='/'>
-              <h1 className="font-baskerville text-2xl sm:text-2xl text-[#151714] tracking-[0.5em] xs:tracking-[0.6em] pt-14 pb-20 whitespace-nowrap">
-                GRUPO FRALI
-              </h1>
+              <div className="pt-14 pb-20">
+                <FraliLogo 
+                  className="h-[14px] w-auto"
+                  color="#151714"
+                />
+              </div>
             </Link>
             
             {/* Contenedor del menú con líneas animadas */}

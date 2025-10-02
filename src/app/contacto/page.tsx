@@ -38,7 +38,7 @@ export default function Contacto() {
 
   return (
     <main className="bg-[#EFEFEF]">
-      <div className="content-wrapper pb-20">
+      <div className="w-full mx-auto pb-20" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
         <div className="grid pt-36 md:pt-24 pb-20">
           {/* Título primero siempre - Columnas 1-6 */}
           <div className="col-6 md:col-span-6 order-1">

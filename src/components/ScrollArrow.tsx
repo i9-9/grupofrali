@@ -12,7 +12,7 @@ export default function ScrollArrow() {
 
   return (
     <div className="absolute bottom-16 left-0 right-0 z-20 pointer-events-none">
-      <div className="content-wrapper relative">
+      <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
         <div 
           className="absolute right-6 text-white cursor-pointer hover:opacity-70 transition-opacity duration-300 pointer-events-auto"
           onClick={handleClick}

@@ -71,7 +71,7 @@ export default function QuienesSomos() {
   return (
     <main className="bg-[#EFEFEF] text-[#151714]">
       {/* Hero Section */}
-      <div className="content-wrapper">
+      <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
         <div className="grid pt-36 md:pt-24 pb-6">
           <div className="col-6 md:col-12">
             {/* Mobile version */}
@@ -112,7 +112,7 @@ export default function QuienesSomos() {
       </div>
 
       {/* Valores y Nuestro ADN Section */}
-      <section className="content-wrapper" style={{ paddingBottom: 'clamp(0rem, 0.2vw, 0.2rem)' }}>
+      <section className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)', paddingBottom: 'clamp(0rem, 0.2vw, 0.2rem)' }}>
         <div className="grid gap-y-32 md:gap-y-0 mb-20">
           {/* Columna Izquierda: VALORES */}
           <div className="col-6 md:col-6 pb-16 md:pb-0" ref={valoresRef}>
@@ -345,7 +345,7 @@ export default function QuienesSomos() {
       </section>
 
       {/* El Grupo Section */}
-      <section className="content-wrapper pb-20 md:pb-52">
+      <section className="w-full mx-auto pb-20 md:pb-52" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
         <div className="grid pb-8" ref={grupoRef}>
           <div className="col-6 md:col-12">
             <div className={`quienes-somos-line quienes-somos-line-delay-4 ${isGrupoVisible ? 'animate' : ''}`}>
@@ -411,7 +411,7 @@ export default function QuienesSomos() {
       </section>
 
       {/* Management Section */}
-      <section className="content-wrapper pb-16">
+      <section className="w-full mx-auto pb-16" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
         <div className="grid pb-8">
           <div className="col-6 md:col-12">
             <h2 

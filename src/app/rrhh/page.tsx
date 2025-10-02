@@ -8,7 +8,7 @@ export default function RRHH() {
   return (
     <main className="bg-[#EFEFEF]">
       {/* Hero */}
-      <div className="content-wrapper">
+      <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
         <div className="grid pt-36 md:pt-24 pb-48">
           <div className="col-6 md:col-8">
             {/* Mobile: especificaciones exactas del diseño en w393 */}
@@ -38,7 +38,7 @@ export default function RRHH() {
       </div>
 
       {/* Join Our Team */}
-      <section className="content-wrapper pb-52">
+      <section className="w-full mx-auto pb-52" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
         <div className="grid pb-8">
           <div className="col-6 md:col-12">
             {/* Mobile: especificaciones exactas del diseño en w393 */}

@@ -17,7 +17,7 @@ export default function Footer() {
     }
     return(
         <footer className="bg-[#151714]">
-            <div className="content-wrapper">
+            <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
                 <div className="grid pt-7">
                     <div className="col-6 md:col-6 flex flex-col">
                         <a href="mailto:info@grupofrali.com" className="text-white text-xs mb-2 hover:text-white/70 transition-colors">
@@ -42,7 +42,7 @@ export default function Footer() {
                         </h4>
                     </div>
                 </div>
-                                 <div className="flex flex-col md:flex-row justify-between text-white py-10 gap-y-1">
+                <div className="flex flex-col md:flex-row justify-between text-white py-10 gap-y-1">
                     <button onClick={scrollToTop} className="hidden md:block text-white hover:text-white/70 transition-colors cursor-pointer text-left" style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}>
                         {t("common.buttons.back")}
                     </button>
