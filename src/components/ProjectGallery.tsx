@@ -71,7 +71,7 @@ export default function ProjectGallery() {
                 <div className="absolute inset-0 bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300" />
               </div>
               <div className="border-t border-black pt-6 pb-4">
-                <div className="flex items-start w-full">
+                <div className="flex items-center w-full">
                   {/* Número a la izquierda */}
                   <h3 className="font-light mr-4">(0{index + 1})</h3>
 

@@ -39,22 +39,13 @@ export default function RRHH() {
 
       {/* Join Our Team */}
       <section className="w-full mx-auto pb-52" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
-        <div className="grid pb-8">
+        <div className="grid pb-2 md:pb-8">
           <div className="col-6 md:col-12">
             {/* Mobile: especificaciones exactas del diseño en w393 */}
-            <h2 
-              className="md:hidden font-baskerville text-black font-normal tracking-[0%]"
-              style={{ 
-                fontSize: 'clamp(25.04px, 6.4vw, 25.04px)', 
-                lineHeight: 'clamp(42.94px, 10.9vw, 42.94px)' 
-              }}
-            >
-              {t("hr.joinTeam.title")}
-            </h2>
-            {/* Desktop: especificaciones exactas del diseño en w1512 */}
             <h2 className="md:hidden font-baskerville text-black font-normal tracking-[0%] rrhh-h2-mobile">
               {t("hr.joinTeam.title")}
             </h2>
+            {/* Desktop: especificaciones exactas del diseño en w1512 */}
             <h2 className="hidden md:block font-baskerville text-black font-normal tracking-[0%] rrhh-h2-desktop">
               {t("hr.joinTeam.title")}
             </h2>

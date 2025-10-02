@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react'
+import React, { useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useTranslations } from '@/hooks/useTranslations'
@@ -20,10 +20,29 @@ export default function ContentfulProjects({
   homeGalleryProjects
 }: ContentfulProjectsProps) {
   const { language } = useTranslations()
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
   
   // Si no se pasan proyectos como props, mostrar loading
   const loading = !homeGalleryProjects
   const error = null
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: -320, // 280px card + 24px gap + 16px extra
+        behavior: 'smooth'
+      })
+    }
+  }
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: 320, // 280px card + 24px gap + 16px extra
+        behavior: 'smooth'
+      })
+    }
+  }
 
   if (loading) {
     return (
@@ -59,12 +78,43 @@ export default function ContentfulProjects({
 
   return (
     <div className="relative w-full">
-      <div className="w-full overflow-x-auto scrollbar-hidden">
+      <div ref={scrollContainerRef} className="w-full overflow-x-auto scrollbar-hidden">
         <div className="flex space-x-6 pb-4 md:pb-8">
           {displayProjects.map((project, index) => (
             <ProjectCard key={project.sys.id} project={project} language={language} index={index} />
           ))}
         </div>
+      </div>
+      
+      {/* Navigation arrows */}
+      <div className="flex justify-between items-center mt-4 mb-10">
+        <button
+          onClick={scrollLeft}
+          className="flex items-center justify-center w-6 h-6 hover:opacity-70 transition-opacity duration-200"
+          aria-label="Scroll left"
+        >
+          <Image
+            src="/images/icons/LEFT_ARROW.svg"
+            alt="Previous"
+            width={24}
+            height={24}
+            className="w-6 h-6"
+          />
+        </button>
+        
+        <button
+          onClick={scrollRight}
+          className="flex items-center justify-center w-6 h-6 hover:opacity-70 transition-opacity duration-200"
+          aria-label="Scroll right"
+        >
+          <Image
+            src="/images/icons/RIGHT_ARROW.svg"
+            alt="Next"
+            width={24}
+            height={24}
+            className="w-6 h-6"
+          />
+        </button>
       </div>
     </div>
   )
@@ -116,13 +166,21 @@ function ProjectCard({ project, language, index }: ProjectCardProps) {
         <div className="absolute inset-0 bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300" />
       </div>
       <div className="border-t border-black pt-6 pb-4">
-        <div className="flex items-start w-full">
+        <div className="flex items-center w-full">
           {/* Número a la izquierda */}
           <h3 className="font-light mr-4">(0{index + 1})</h3>
 
           {/* Contenedor que empuja el título al borde derecho */}
           <div className="flex-1 flex justify-end">
-            <h3 className="font-baskerville text-sm md:text-[22px] text-black leading-tight text-left inline-block whitespace-pre-line">
+            <h3 
+              className="font-baskerville text-black leading-tight text-right inline-block whitespace-pre-line"
+              style={{
+                fontSize: 'clamp(16px, 1.46vw, 22.11px)', /* Mobile: 16px (w393 base), Desktop: 22.11px (w1512 base) */
+                lineHeight: '100%',
+                letterSpacing: '0%',
+                fontWeight: '400'
+              }}
+            >
               {renderTitle(title)}
             </h3>
           </div>

@@ -44,7 +44,7 @@ export default function Contacto() {
           <div className="col-6 md:col-span-6 order-1">
             {/* Mobile: especificaciones exactas del diseño en w393 */}
             <h1 
-              className="md:hidden font-baskerville text-black font-normal tracking-[0%] pb-24"
+              className="md:hidden font-baskerville text-black font-normal tracking-[0%] pb-8"
               style={{ 
                 fontSize: 'clamp(40px, 10.2vw, 40px)', 
                 lineHeight: 'clamp(40px, 10.2vw, 40px)',
@@ -221,7 +221,7 @@ export default function Contacto() {
                 </a>
               </div>
               
-              <div className="-mt-1">
+              <div className="-mt-1 py-2 md:py-0">
                 <a 
                   href="tel:+543489466110" 
                   className="font-archivo text-black hover:opacity-70 transition-opacity uppercase"
@@ -237,7 +237,7 @@ export default function Contacto() {
               </div>
             </div>
 
-            <div className="space-y-0 md:mt-40 ">
+            <div className="space-y-1 md:mt-40 ">
               <p 
                 className="font-archivo text-black uppercase"
                 style={{

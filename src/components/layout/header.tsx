@@ -11,7 +11,7 @@ import FraliLogo from "../FraliLogo"
 
 export default function Header() {
   const pathname = usePathname()
-  const { t } = useLanguage()
+  const { t, language, setLanguage } = useLanguage()
   const isHome = pathname === "/"
   const isProjectPage = pathname.startsWith("/desarrollos-proyectos/") && pathname !== "/desarrollos-proyectos"
   const [isOpen, setIsOpen] = useState(false)
@@ -200,7 +200,22 @@ export default function Header() {
             
             <div className="flex justify-between items-center">
               <div className="py-14">
-                <LanguageSwitcher />
+                <button
+                  onClick={() => {
+                    const newLanguage = language === 'es' ? 'en' : 'es'
+                    setLanguage(newLanguage)
+                  }}
+                  className="font-archivo text-[#151714] hover:opacity-70 transition-opacity duration-200 flex items-center"
+                  style={{
+                    fontSize: 'clamp(16px, 4.1vw, 16px)', /* Mobile: 16px (w393 base) */
+                    lineHeight: '100%',
+                    letterSpacing: '0%',
+                    fontWeight: '500'
+                  }}
+                  aria-label={`Cambiar idioma a ${language === 'es' ? 'inglés' : 'Spanish'}`}
+                >
+                  {language === 'es' ? 'EN' : 'ES'}
+                </button>
               </div>
               <div onClick={toggleMenu}>
                 <DownArrowIcon className="rotate-180" />
