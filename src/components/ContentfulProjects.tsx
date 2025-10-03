@@ -32,8 +32,14 @@ export default function ContentfulProjects({
     if (!projects || projects.length === 0) return []
     
     const displayProjects = showAll ? projects : projects.slice(0, maxProjects)
-    // Duplicar proyectos para scroll infinito: [originales] + [duplicados] + [originales]
-    return [...displayProjects, ...displayProjects, ...displayProjects]
+    // Crear más copias para scroll verdaderamente infinito
+    return [
+      ...displayProjects, // Copia 1
+      ...displayProjects, // Copia 2 (posición inicial)
+      ...displayProjects, // Copia 3
+      ...displayProjects, // Copia 4
+      ...displayProjects  // Copia 5
+    ]
   }
 
   const infiniteProjects = homeGalleryProjects ? createInfiniteProjects(homeGalleryProjects) : []
@@ -49,18 +55,6 @@ export default function ContentfulProjects({
         left: cardWidth,
         behavior: 'smooth'
       })
-
-      // Verificar si llegamos al final y necesitamos resetear
-      setTimeout(() => {
-        if (container.scrollLeft >= container.scrollWidth - container.clientWidth - cardWidth) {
-          setIsTransitioning(true)
-          container.scrollTo({
-            left: originalLength * cardWidth,
-            behavior: 'auto'
-          })
-          setTimeout(() => setIsTransitioning(false), 50)
-        }
-      }, 300)
     }
   }
 
@@ -74,32 +68,72 @@ export default function ContentfulProjects({
         left: -cardWidth,
         behavior: 'smooth'
       })
-
-      // Verificar si llegamos al inicio y necesitamos resetear
-      setTimeout(() => {
-        if (container.scrollLeft <= cardWidth) {
-          setIsTransitioning(true)
-          container.scrollTo({
-            left: originalLength * cardWidth,
-            behavior: 'auto'
-          })
-          setTimeout(() => setIsTransitioning(false), 50)
-        }
-      }, 300)
     }
   }
 
-  // Inicializar posición en el centro (segundo set de proyectos)
+  // Inicializar posición en el primer proyecto
   useEffect(() => {
     if (scrollContainerRef.current && infiniteProjects.length > 0) {
       const container = scrollContainerRef.current
       const cardWidth = 320
+      // Empezar con el primer proyecto (primera copia)
       container.scrollTo({
-        left: originalLength * cardWidth,
+        left: 0,
         behavior: 'auto'
       })
     }
   }, [infiniteProjects.length, originalLength])
+
+  // Listener para scroll suave infinito
+  useEffect(() => {
+    const container = scrollContainerRef.current
+    if (!container) return
+
+    const handleScroll = () => {
+      if (isTransitioning) return
+      
+      const cardWidth = 320
+      const scrollLeft = container.scrollLeft
+      const maxScroll = container.scrollWidth - container.clientWidth
+      
+      // Reset cuando llegamos al final (copia 5) - volver a la copia 2
+      if (scrollLeft >= maxScroll - cardWidth) {
+        setIsTransitioning(true)
+        container.scrollTo({
+          left: originalLength * cardWidth,
+          behavior: 'auto'
+        })
+        setTimeout(() => setIsTransitioning(false), 50)
+      }
+      // Reset cuando llegamos al inicio (copia 1) - volver a la copia 2
+      else if (scrollLeft <= cardWidth) {
+        setIsTransitioning(true)
+        container.scrollTo({
+          left: originalLength * cardWidth,
+          behavior: 'auto'
+        })
+        setTimeout(() => setIsTransitioning(false), 50)
+      }
+    }
+
+    // Usar requestAnimationFrame para mejor performance
+    let ticking = false
+    const optimizedScrollHandler = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll()
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    container.addEventListener('scroll', optimizedScrollHandler, { passive: true })
+    
+    return () => {
+      container.removeEventListener('scroll', optimizedScrollHandler)
+    }
+  }, [isTransitioning, originalLength])
 
   if (loading) {
     return (

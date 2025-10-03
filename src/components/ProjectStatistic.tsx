@@ -132,7 +132,7 @@ export default function ProjectStatistic({
     return `project-stats-line-delay-${index + 1}`
   }
 
-  const className = `pt-3 pb-1 flex justify-between items-start min-h-[60px] md:min-h-[20px] project-stats-line ${getLineDelayClass(index)} ${isVisible ? 'animate' : ''} ${parsed.isTextOnly ? 'text-only' : ''}`
+  const className = `pt-3 pb-2 flex justify-between items-start min-h-[60px] md:min-h-[20px] project-stats-line ${getLineDelayClass(index)} ${isVisible ? 'animate' : ''} ${parsed.isTextOnly ? 'text-only' : ''}`
   
   return (
     <div className={className}>

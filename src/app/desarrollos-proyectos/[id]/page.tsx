@@ -165,7 +165,7 @@ export default function DesarrolloProyecto() {
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                   </svg>
                 </Link>
-                <span className="text-black font-baskerville" style={{ fontSize: 'clamp(16.2px, 1.25vw, 18.9px)', lineHeight: '100%' }}>{language === 'en' ? project.fields.category?.fields?.nameEn : project.fields.category?.fields?.name}</span>
+                <span className="text-black font-baskerville" style={{ fontSize: 'clamp(16.2px, 1.25vw, 18.9px)', lineHeight: '100%', transform: 'translateY(-0.5px)' }}>{language === 'en' ? project.fields.category?.fields?.nameEn : project.fields.category?.fields?.name}</span>
               </div>
             </div>
             
@@ -209,7 +209,7 @@ export default function DesarrolloProyecto() {
             
             {/* Estadísticas mobile con animaciones */}
             {localStats && (
-              <div className="py-12">
+              <div className="pt-12 pb-2">
                 <div className="stats-custom-layout">
                   {Object.entries(localStats).map(([key, value], index) => (
                     <ProjectStatistic 
@@ -224,6 +224,31 @@ export default function DesarrolloProyecto() {
                 </div>
               </div>
             )}
+            
+            {/* Flechas de navegación mobile */}
+            <div className="flex justify-between items-center py-8">
+              {/* Flecha anterior */}
+              <button
+                onClick={() => navigateToProject(previousProject)}
+                className="w-12 h-12 flex items-center justify-center hover:opacity-70 transition-opacity"
+                aria-label={`Ir a proyecto anterior: ${previousProject ? (language === 'en' ? previousProject.fields.titleEn : previousProject.fields.title) : 'Proyecto anterior'}`}
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
+                  <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+              </button>
+              
+              {/* Flecha siguiente */}
+              <button
+                onClick={() => navigateToProject(nextProject)}
+                className="w-12 h-12 flex items-center justify-center hover:opacity-70 transition-opacity"
+                aria-label={`Ir a proyecto siguiente: ${nextProject ? (language === 'en' ? nextProject.fields.titleEn : nextProject.fields.title) : 'Proyecto siguiente'}`}
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -243,7 +268,7 @@ export default function DesarrolloProyecto() {
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                   </svg>
                 </Link>
-                <span className="text-[#151714] font-baskerville font-medium" style={{ fontSize: 'clamp(16.2px, 1.25vw, 18.9px)', lineHeight: '100%' }}>{language === 'en' ? project.fields.category?.fields?.nameEn : project.fields.category?.fields?.name}</span>
+                <span className="text-[#151714] font-baskerville font-medium" style={{ fontSize: 'clamp(16.2px, 1.25vw, 18.9px)', lineHeight: '100%', transform: 'translateY(-2px)' }}>{language === 'en' ? project.fields.category?.fields?.nameEn : project.fields.category?.fields?.name}</span>
               </div>
             </div>
             

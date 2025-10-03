@@ -139,13 +139,13 @@ export default function ProjectImageSlider({
     <div className="w-full h-[504px] relative overflow-hidden bg-black">
       {/* Contenedor de slides con transform */}
       <div 
-        className="flex h-full transition-transform duration-300 ease-out select-none cursor-grab active:cursor-grabbing"
+        className="flex h-full transition-transform duration-300 ease-out select-none cursor-grab active:cursor-grabbing gap-0 project-image-slider-container"
         style={{
           width: `${images.length * 100}%`,
           transform: `translateX(-${currentSlide * (100 / images.length)}%)`,
-          gap: 0,
-          margin: 0,
-          padding: 0,
+          gap: '0px !important',
+          margin: '0px !important',
+          padding: '0px !important',
           touchAction: 'pan-y' // Permite scroll vertical pero controla horizontal
         }}
         onTouchStart={handleTouchStart}
@@ -160,14 +160,15 @@ export default function ProjectImageSlider({
         {images.map((imageSrc, index) => (
           <div 
             key={index} 
-            className="relative flex-shrink-0 pointer-events-none"
+            className="relative flex-shrink-0 pointer-events-none m-0 p-0"
             style={{
               width: `${100 / images.length}%`,
               height: '100%',
-              margin: 0,
-              padding: 0,
+              margin: '0px !important',
+              padding: '0px !important',
               border: 'none',
-              outline: 'none'
+              outline: 'none',
+              boxSizing: 'border-box'
             }}
           >
             <Image 
@@ -176,16 +177,17 @@ export default function ProjectImageSlider({
               fill
               sizes="100vw"
               quality={100}
-              className={`object-cover transition-opacity duration-300 pointer-events-none ${
+              className={`object-cover transition-opacity duration-300 pointer-events-none m-0 p-0 ${
                 isTransitioning ? 'opacity-0' : 'opacity-100'
               }`}
               style={{
                 objectFit: 'cover',
                 display: 'block',
-                margin: 0,
-                padding: 0,
+                margin: '0px !important',
+                padding: '0px !important',
                 border: 'none',
-                userSelect: 'none'
+                userSelect: 'none',
+                boxSizing: 'border-box'
               }}
               priority={index === 0}
               draggable={false}
