@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useTranslations } from '@/hooks/useTranslations'
@@ -21,28 +21,85 @@ export default function ContentfulProjects({
 }: ContentfulProjectsProps) {
   const { language } = useTranslations()
   const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const [isTransitioning, setIsTransitioning] = useState(false)
   
   // Si no se pasan proyectos como props, mostrar loading
   const loading = !homeGalleryProjects
   const error = null
 
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: -320, // 280px card + 24px gap + 16px extra
+  // Crear array infinito duplicando los proyectos
+  const createInfiniteProjects = (projects: ContentfulProject[]) => {
+    if (!projects || projects.length === 0) return []
+    
+    const displayProjects = showAll ? projects : projects.slice(0, maxProjects)
+    // Duplicar proyectos para scroll infinito: [originales] + [duplicados] + [originales]
+    return [...displayProjects, ...displayProjects, ...displayProjects]
+  }
+
+  const infiniteProjects = homeGalleryProjects ? createInfiniteProjects(homeGalleryProjects) : []
+  const originalLength = homeGalleryProjects ? (showAll ? homeGalleryProjects.length : Math.min(maxProjects, homeGalleryProjects.length)) : 0
+
+  // Scroll infinito hacia la derecha
+  const scrollRight = () => {
+    if (scrollContainerRef.current && !isTransitioning) {
+      const container = scrollContainerRef.current
+      const cardWidth = 320 // 280px card + 24px gap + 16px extra
+      
+      container.scrollBy({
+        left: cardWidth,
         behavior: 'smooth'
       })
+
+      // Verificar si llegamos al final y necesitamos resetear
+      setTimeout(() => {
+        if (container.scrollLeft >= container.scrollWidth - container.clientWidth - cardWidth) {
+          setIsTransitioning(true)
+          container.scrollTo({
+            left: originalLength * cardWidth,
+            behavior: 'auto'
+          })
+          setTimeout(() => setIsTransitioning(false), 50)
+        }
+      }, 300)
     }
   }
 
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: 320, // 280px card + 24px gap + 16px extra
+  // Scroll infinito hacia la izquierda
+  const scrollLeft = () => {
+    if (scrollContainerRef.current && !isTransitioning) {
+      const container = scrollContainerRef.current
+      const cardWidth = 320 // 280px card + 24px gap + 16px extra
+      
+      container.scrollBy({
+        left: -cardWidth,
         behavior: 'smooth'
       })
+
+      // Verificar si llegamos al inicio y necesitamos resetear
+      setTimeout(() => {
+        if (container.scrollLeft <= cardWidth) {
+          setIsTransitioning(true)
+          container.scrollTo({
+            left: originalLength * cardWidth,
+            behavior: 'auto'
+          })
+          setTimeout(() => setIsTransitioning(false), 50)
+        }
+      }, 300)
     }
   }
+
+  // Inicializar posición en el centro (segundo set de proyectos)
+  useEffect(() => {
+    if (scrollContainerRef.current && infiniteProjects.length > 0) {
+      const container = scrollContainerRef.current
+      const cardWidth = 320
+      container.scrollTo({
+        left: originalLength * cardWidth,
+        behavior: 'auto'
+      })
+    }
+  }, [infiniteProjects.length, originalLength])
 
   if (loading) {
     return (
@@ -74,15 +131,22 @@ export default function ContentfulProjects({
     )
   }
 
-  const displayProjects = showAll ? homeGalleryProjects : homeGalleryProjects.slice(0, maxProjects)
-
   return (
     <div className="relative w-full">
       <div ref={scrollContainerRef} className="w-full overflow-x-auto scrollbar-hidden">
         <div className="flex space-x-6 pb-4 md:pb-8">
-          {displayProjects.map((project, index) => (
-            <ProjectCard key={project.sys.id} project={project} language={language} index={index} />
-          ))}
+          {infiniteProjects.map((project, index) => {
+            // Calcular el índice real para la numeración (0, 1, 2, etc.)
+            const realIndex = index % originalLength
+            return (
+              <ProjectCard 
+                key={`${project.sys.id}-${index}`} 
+                project={project} 
+                language={language} 
+                index={realIndex} 
+              />
+            )
+          })}
         </div>
       </div>
       
@@ -90,7 +154,12 @@ export default function ContentfulProjects({
       <div className="flex justify-between items-center mt-4 mb-10">
         <button
           onClick={scrollLeft}
-          className="flex items-center justify-center w-6 h-6 hover:opacity-70 transition-opacity duration-200"
+          disabled={isTransitioning}
+          className={`flex items-center justify-center w-6 h-6 transition-opacity duration-200 ${
+            isTransitioning 
+              ? 'opacity-50 cursor-not-allowed' 
+              : 'hover:opacity-70 cursor-pointer'
+          }`}
           aria-label="Scroll left"
         >
           <Image
@@ -104,7 +173,12 @@ export default function ContentfulProjects({
         
         <button
           onClick={scrollRight}
-          className="flex items-center justify-center w-6 h-6 hover:opacity-70 transition-opacity duration-200"
+          disabled={isTransitioning}
+          className={`flex items-center justify-center w-6 h-6 transition-opacity duration-200 ${
+            isTransitioning 
+              ? 'opacity-50 cursor-not-allowed' 
+              : 'hover:opacity-70 cursor-pointer'
+          }`}
           aria-label="Scroll right"
         >
           <Image

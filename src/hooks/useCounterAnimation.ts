@@ -16,6 +16,7 @@ export const useCounterAnimation = ({
   projectId
 }: UseCounterAnimationProps) => {
   const [displayValue, setDisplayValue] = useState('0');
+  const [isAnimationComplete, setIsAnimationComplete] = useState(false);
   const hasAnimatedRef = useRef(false);
   const animationFrameRef = useRef<number | undefined>(undefined);
   const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
@@ -36,6 +37,7 @@ export const useCounterAnimation = ({
   useEffect(() => {
     hasAnimatedRef.current = false;
     setDisplayValue('0');
+    setIsAnimationComplete(false);
     
     // Limpiar cualquier animación en curso
     if (timeoutRef.current) {
@@ -107,6 +109,7 @@ export const useCounterAnimation = ({
     
     if (targetNum === 0) {
       setDisplayValue(currentTargetValue);
+      setIsAnimationComplete(true);
       hasAnimatedRef.current = true;
       return;
     }
@@ -133,6 +136,7 @@ export const useCounterAnimation = ({
           animationFrameRef.current = requestAnimationFrame(animate);
         } else {
           setDisplayValue(currentTargetValue);
+          setIsAnimationComplete(true);
         }
       };
 
@@ -149,5 +153,5 @@ export const useCounterAnimation = ({
     };
   }, [isVisible, projectId]); // Solo depende de isVisible y projectId
 
-  return { displayValue };
+  return { displayValue, isAnimationComplete };
 };

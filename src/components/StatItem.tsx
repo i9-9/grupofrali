@@ -39,7 +39,7 @@ export function StatItem({ number, unit, label, delay, lineDelay, isVisible: par
   const counterDelay = getDelayFromClass(delay);
   
   // Usar el hook de animación de conteo
-  const { displayValue } = useCounterAnimation({
+  const { displayValue, isAnimationComplete } = useCounterAnimation({
     targetValue: number,
     isVisible,
     // Duración total fija (incluye delay) para que todos terminen juntos
@@ -66,16 +66,22 @@ export function StatItem({ number, unit, label, delay, lineDelay, isVisible: par
         >
           {displayValue}
           {unit && (
-            <>
+            <span 
+              className={`text-stat-unit transition-all duration-1000 ease-in-out ${
+                isAnimationComplete 
+                  ? 'opacity-100 transform translate-x-0' 
+                  : 'opacity-0 transform -translate-x-1'
+              }`}
+            >
               {unit === 'MMUSD' ? (
                 <>
                   <span className="text-stat-number">MM</span>
                   <span className="text-stat-unit" style={{ fontSize: 'clamp(0.5rem, 1vw, 0.75rem)', verticalAlign: 'sub' }}>USD</span>
                 </>
               ) : (
-                <span className="text-stat-unit">{unit}</span>
+                unit
               )}
-            </>
+            </span>
           )}
         </div>
 

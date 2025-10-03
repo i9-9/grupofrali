@@ -72,7 +72,8 @@ export default function Header() {
             <div className={`flex md:hidden items-center h-30 justify-between`}>
               <Link href='/' className="flex items-center">
                   <FraliLogo 
-                    className={`h-[14px] w-auto ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}
+                    className={`w-auto ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}
+                    style={{ height: '20px' }}
                     color={isHome || isProjectPage ? '#FFFFFF' : '#000000'}
                   />
               </Link>
@@ -114,7 +115,8 @@ export default function Header() {
             <div className={`flex md:hidden items-center h-30 justify-between`}>
               <Link href='/' className="flex items-center">
                   <FraliLogo 
-                    className={`h-[14px] w-auto ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}
+                    className={`w-auto ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}
+                    style={{ height: '20px' }}
                     color={isHome || isProjectPage ? '#FFFFFF' : '#000000'}
                   />
               </Link>
@@ -168,8 +170,9 @@ export default function Header() {
             <Link href='/'>
               <div className="pt-14 pb-20">
                 <FraliLogo 
-                  className="h-[14px] w-auto"
+                  className="w-auto"
                   color="#151714"
+                  style={{ height: '20px' }}
                 />
               </div>
             </Link>
