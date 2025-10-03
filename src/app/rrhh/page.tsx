@@ -42,11 +42,27 @@ export default function RRHH() {
         <div className="grid pb-2 md:pb-8">
           <div className="col-6 md:col-12">
             {/* Mobile: especificaciones exactas del diseño en w393 */}
-            <h2 className="md:hidden font-baskerville text-black font-normal tracking-[0%] rrhh-h2-mobile">
+            <h2 
+              className="md:hidden font-baskerville text-black font-normal tracking-[0%]"
+              style={{
+                fontSize: 'clamp(20px, 6.4vw, 25.04px)', /* Mobile: escala desde 20px hasta 25.04px (w393 base) */
+                lineHeight: 'clamp(34px, 10.9vw, 42.94px)', /* Mobile: escala desde 34px hasta 42.94px (w393 base) */
+                letterSpacing: '0%',
+                fontWeight: '400'
+              }}
+            >
               {t("hr.joinTeam.title")}
             </h2>
             {/* Desktop: especificaciones exactas del diseño en w1512 */}
-            <h2 className="hidden md:block font-baskerville text-black font-normal tracking-[0%] rrhh-h2-desktop">
+            <h2 
+              className="hidden md:block font-baskerville text-black font-normal tracking-[0%]"
+              style={{
+                fontSize: 'clamp(25.04px, 1.88vw, 28.35px)', /* Desktop: escala desde 25.04px hasta 28.35px (w1512 base) */
+                lineHeight: 'clamp(42.94px, 3.22vw, 48.62px)', /* Desktop: escala desde 42.94px hasta 48.62px (w1512 base) */
+                letterSpacing: '0%',
+                fontWeight: '400'
+              }}
+            >
               {t("hr.joinTeam.title")}
             </h2>
           </div>
