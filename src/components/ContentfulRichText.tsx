@@ -29,7 +29,7 @@ function renderRichText(content: ContentfulRichTextContent, paragraphStyle?: Rea
     switch (node.nodeType) {
       case 'paragraph':
         return (
-          <p key={index} className="mb-1" style={paragraphStyle}>
+          <p key={index} className="mb-1" style={{...paragraphStyle, lineHeight: '130%'}}>
             {node.content?.map((textNode: ContentfulRichTextNode) => {
               if (textNode.nodeType === 'text') {
                 let text: React.ReactNode = textNode.value

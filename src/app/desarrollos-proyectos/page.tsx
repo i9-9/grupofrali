@@ -261,7 +261,7 @@ function DesarrollosProyectosContent() {
                     className="font-archivo font-normal tracking-[0%] text-black pt-[32px] col-span-6 md:col-span-5 max-w-[600px]"
                     style={{
                       fontSize: 'clamp(16px, 1.2vw, 19.02px)',
-                      lineHeight: '110%',
+                      lineHeight: '140%',
                       letterSpacing: '0%',
                       fontWeight: '400'
                     }}

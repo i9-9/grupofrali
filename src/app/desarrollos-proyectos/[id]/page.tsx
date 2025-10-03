@@ -283,7 +283,7 @@ export default function DesarrolloProyecto() {
                   content={language === 'en' ? project.fields.descriptionEn : project.fields.description}
                   paragraphStyle={{ 
                     fontSize: 'clamp(16.1px, 1.07vw, 16.1px)',
-                    lineHeight: '100%',
+                    lineHeight: '140%',
                     letterSpacing: '0%',
                     fontWeight: '400',
                     fontFamily: 'Archivo, sans-serif'
