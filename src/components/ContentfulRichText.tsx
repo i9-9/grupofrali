@@ -30,7 +30,7 @@ function renderRichText(content: ContentfulRichTextContent, paragraphStyle?: Rea
       case 'paragraph':
         return (
           <p key={index} className="mb-1" style={{...paragraphStyle, lineHeight: '130%'}}>
-            {node.content?.map((textNode: ContentfulRichTextNode) => {
+            {node.content?.map((textNode: ContentfulRichTextNode, textIndex: number) => {
               if (textNode.nodeType === 'text') {
                 let text: React.ReactNode = textNode.value
                 
@@ -51,7 +51,7 @@ function renderRichText(content: ContentfulRichTextContent, paragraphStyle?: Rea
                   })
                 }
                 
-                return text
+                return <span key={textIndex}>{text}</span>
               }
               return null
             })}
@@ -61,9 +61,9 @@ function renderRichText(content: ContentfulRichTextContent, paragraphStyle?: Rea
       case 'heading-1':
         return (
           <h1 key={index} className="text-4xl font-bold mb-6">
-            {node.content?.map((textNode: ContentfulRichTextNode) => {
+            {node.content?.map((textNode: ContentfulRichTextNode, textIndex: number) => {
               if (textNode.nodeType === 'text') {
-                return textNode.value
+                return <span key={textIndex}>{textNode.value}</span>
               }
               return null
             })}
@@ -73,9 +73,9 @@ function renderRichText(content: ContentfulRichTextContent, paragraphStyle?: Rea
       case 'heading-2':
         return (
           <h2 key={index} className="text-3xl font-bold mb-4">
-            {node.content?.map((textNode: ContentfulRichTextNode) => {
+            {node.content?.map((textNode: ContentfulRichTextNode, textIndex: number) => {
               if (textNode.nodeType === 'text') {
-                return textNode.value
+                return <span key={textIndex}>{textNode.value}</span>
               }
               return null
             })}
@@ -85,9 +85,9 @@ function renderRichText(content: ContentfulRichTextContent, paragraphStyle?: Rea
       case 'heading-3':
         return (
           <h3 key={index} className="text-2xl font-bold mb-3">
-            {node.content?.map((textNode: ContentfulRichTextNode) => {
+            {node.content?.map((textNode: ContentfulRichTextNode, textIndex: number) => {
               if (textNode.nodeType === 'text') {
-                return textNode.value
+                return <span key={textIndex}>{textNode.value}</span>
               }
               return null
             })}
@@ -101,9 +101,9 @@ function renderRichText(content: ContentfulRichTextContent, paragraphStyle?: Rea
               if (listItem.nodeType === 'list-item') {
                 return (
                   <li key={itemIndex} className="mb-2">
-                    {listItem.content?.map((textNode: ContentfulRichTextNode) => {
+                    {listItem.content?.map((textNode: ContentfulRichTextNode, textIndex: number) => {
                       if (textNode.nodeType === 'text') {
-                        return textNode.value
+                        return <span key={textIndex}>{textNode.value}</span>
                       }
                       return null
                     })}
@@ -122,9 +122,9 @@ function renderRichText(content: ContentfulRichTextContent, paragraphStyle?: Rea
               if (listItem.nodeType === 'list-item') {
                 return (
                   <li key={itemIndex} className="mb-2">
-                    {listItem.content?.map((textNode: ContentfulRichTextNode) => {
+                    {listItem.content?.map((textNode: ContentfulRichTextNode, textIndex: number) => {
                       if (textNode.nodeType === 'text') {
-                        return textNode.value
+                        return <span key={textIndex}>{textNode.value}</span>
                       }
                       return null
                     })}
@@ -139,9 +139,9 @@ function renderRichText(content: ContentfulRichTextContent, paragraphStyle?: Rea
       case 'blockquote':
         return (
           <blockquote key={index} className="border-l-4 border-gray-300 pl-4 italic mb-4">
-            {node.content?.map((textNode: ContentfulRichTextNode) => {
+            {node.content?.map((textNode: ContentfulRichTextNode, textIndex: number) => {
               if (textNode.nodeType === 'text') {
-                return textNode.value
+                return <span key={textIndex}>{textNode.value}</span>
               }
               return null
             })}

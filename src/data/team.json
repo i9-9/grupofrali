@@ -8,16 +8,16 @@
         "positionEn": "CHIEF EXECUTIVE OFFICER"
       },
       {
-        "name": "HORACIO",
-        "surname": "ANTELO",
-        "position": "DIRECTOR DE OPERACIONES",
-        "positionEn": "CHIEF OPERATING OFFICER"
-      },
-      {
         "name": "INÉS",
         "surname": "GEMINI",
         "position": "DIRECTORA FINANCIERA",
         "positionEn": "CHIEF FINANCIAL OFFICER"
+      },
+      {
+        "name": "HORACIO",
+        "surname": "ANTELO",
+        "position": "DIRECTOR DE OPERACIONES",
+        "positionEn": "CHIEF OPERATING OFFICER"
       },
       {
         "name": "SEAN",
@@ -32,7 +32,7 @@
         "positionEn": "ASSET MANAGER / CONTROLLER"
       },
       {
-        "name": "JOAQUÍN NAZAR",
+        "name": "JOSÉ NAZAR",
         "surname": "ANCHORENA",
         "position": "AGRO BUSINESS",
         "positionEn": "AGRIBUSINESS"

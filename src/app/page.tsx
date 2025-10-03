@@ -299,14 +299,16 @@ function HomeContent() {
           {/* Header */}
           <div className="flex justify-between items-start mb-8">
             <div className="w-fit">
-              <h3 
-                className="font-baskerville text-black font-normal tracking-[0%] leading-none"
-                style={{
-                  fontSize: 'clamp(16px, 1.9vw, 28.69px)'
-                }}
-              >
-                {t("home.featuredProjects.subtitle")}
-              </h3>
+              <Link href="/desarrollos-proyectos">
+                <h3 
+                  className="font-baskerville text-black font-normal tracking-[0%] leading-none hover:text-black/50 transition-colors duration-300 cursor-pointer"
+                  style={{
+                    fontSize: 'clamp(16px, 1.9vw, 28.69px)'
+                  }}
+                >
+                  {t("home.featuredProjects.subtitle")}
+                </h3>
+              </Link>
             </div>
             <div className="w-fit md:hidden">
               <Link href="/desarrollos-proyectos">

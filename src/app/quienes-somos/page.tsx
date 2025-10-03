@@ -42,7 +42,7 @@ export default function QuienesSomos() {
   const management = Array.isArray(managementPositions) ? managementPositions.map((person: { name: string; surname: string; position: string }, index: number) => {
     // Generar la ruta de imagen basada en el nombre y apellido
     let imageName = '';
-    if (person.name === 'JOAQUÍN NAZAR' && person.surname === 'ANCHORENA') {
+    if (person.name === 'JOSÉ NAZAR' && person.surname === 'ANCHORENA') {
       imageName = 'nazar-anchorena';
     } else if (person.name === 'JOAQUÍN' && person.surname === 'GOICOECHEA') {
       imageName = 'goicochea';

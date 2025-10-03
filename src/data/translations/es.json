@@ -16,7 +16,7 @@
       "back": "VOLVER ARRIBA",
       "next": "SIGUIENTE",
       "previous": "ANTERIOR",
-      "viewAll": "VER MÁS"
+      "viewAll": "VER TODOS"
     }
   },
   "home": {
@@ -153,14 +153,14 @@
           "position": "DIRECTOR\nGENERAL"
         },
         {
-          "name": "HORACIO",
-          "surname": "ANTELO",
-          "position": "DIRECTOR DE\nOPERACIONES"
-        },
-        {
           "name": "INÉS",
           "surname": "GEMINI",
           "position": "DIRECTORA\nFINANCIERA"
+        },
+        {
+          "name": "HORACIO",
+          "surname": "ANTELO",
+          "position": "DIRECTOR DE\nOPERACIONES"
         },
         {
           "name": "SEAN",
@@ -173,7 +173,7 @@
           "position": "ASSET\nMANAGER"
         },
         {
-          "name": "JOAQUÍN NAZAR",
+          "name": "JOSÉ NAZAR",
           "surname": "ANCHORENA",
           "position": "AGRO\nBUSINESS"
         }

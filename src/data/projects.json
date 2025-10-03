@@ -26,7 +26,7 @@
       },
       "estadisticas": {
         "capacidad_instalada": "36.75 MW",
-        "factor_capacidad_historico": "52.08%",
+        "factor_capacidad_historico": "48,54%",
         "produccion_anual_promedio": "168.8 GWH",
         "estado": "EN OPERACIÓN",
         "hogares_abastecidos": "70.000",
@@ -34,7 +34,7 @@
       },
       "statistics_en": {
         "installed_capacity": "36.75 MW",
-        "historical_capacity_factor": "52.08%",
+        "historical_capacity_factor": "48.54%",
         "average_annual_production": "168.8 GWh",
         "status": "OPERATIONAL",
         "households_supplied": "70,000",
@@ -197,15 +197,15 @@
       },
       "estadisticas": {
         "superficie_construida": "3950 m²",
-        "tipologia": "DEPARTAMENTOS DE RENTING",
+        "tipologia": "UNIDADES DE 2 Y 3 AMB. CON TERRAZA",
         "unidades_residenciales": "61",
-        "estado": "EN OPERACIÓN"
+        "estado": "100% VENDIDO"
       },
       "statistics_en": {
         "built_area": "3,950 m²",
-        "typology": "RENTAL APARTMENTS",
+        "typology": "2 AND 3 BEDROOM UNITS WITH TERRACE",
         "residential_units": "61",
-        "status": "OPERATIONAL"
+        "status": "100% SOLD"
       }
     },
     {
@@ -307,15 +307,15 @@
         "alt": "Vista aérea de desarrollo inmobiliario costero con casas modernas junto al mar"
       },
       "estadisticas": {
-        "cantidad_de_lotes": "30",
-        "inversion_total": "000000",
-        "superficie": "168 m²",
+        "superficie": "120 HECTÁREAS",
+        "cantidad_de_chacras": "24",
+        "metros_de_costa": "900 METROS LINEALES",
         "estado": "EN PLANIFICACIÓN"
       },
       "statistics_en": {
-        "number_of_lots": "30",
-        "total_investment": "000000",
-        "area": "168 m²",
+        "area": "120 HECTARES",
+        "number_of_chacras": "24",
+        "coastline_meters": "900 LINEAR METERS",
         "status": "IN PLANNING"
       }
     },
@@ -344,18 +344,18 @@
         "alt": "Renderización de torres residenciales modernas en Miami"
       },
       "estadisticas": {
-        "superficie": "60.000 m²",
+        "superficie": "60.000 SqFt",
         "tipologia": "MIX USE: COMERCIAL, RESIDENCIAL Y OFICINAS",
-        "zonificacion": "T6-360",
+        "zonificacion": "T6-36o",
         "estado": "EN PLANIFICACIÓN",
-        "superficie_construir": "750.000 m²"
+        "superficie_construible": "8.073.000 SqFt"
       },
       "statistics_en": {
-        "area": "60,000 m²",
+        "area": "60,000 SqFt",
         "typology": "MIXED USE: COMMERCIAL, RESIDENTIAL AND OFFICES",
-        "zoning": "T6-36O",
+        "zoning": "T6-36o",
         "status": "IN PLANNING",
-        "buildable_area": "750,000 m²"
+        "buildable_area": "8,073,000 SqFt"
       }
     },
     {
