@@ -237,11 +237,21 @@ interface ProjectCardProps {
 function ProjectCard({ project, language, index }: ProjectCardProps) {
   const title = language === 'en' ? project.fields.titleEn : project.fields.title
   
+  // Debug: verificar qué contiene el título
+  console.log('Project title:', title, 'Raw length:', title?.length, 'Contains \\n:', title?.includes('\\n'), 'Contains |:', title?.includes('|'))
+  
   // Obtener imagen principal para la galería del home
   const mainImage = project.fields.imagenHome
 
   const renderTitle = (titulo: string) => {
-    const lines = titulo.split('\n');
+    // Debug: verificar el contenido del título
+    console.log('renderTitle input:', JSON.stringify(titulo))
+    
+    // Detectar diferentes tipos de separadores: \n, \\n, |, y espacios múltiples
+    const lines = titulo.split(/\n|\\n|\|/);
+    
+    console.log('Split lines:', lines)
+    
     if (lines.length === 1) {
       return titulo;
     }
@@ -249,7 +259,7 @@ function ProjectCard({ project, language, index }: ProjectCardProps) {
       <>
         {lines.map((line, lineIndex) => (
           <span key={lineIndex}>
-            {line}
+            {line.trim()}
             {lineIndex < lines.length - 1 ? <br /> : null}
           </span>
         ))}
@@ -281,7 +291,7 @@ function ProjectCard({ project, language, index }: ProjectCardProps) {
           {/* Contenedor que empuja el título al borde derecho */}
           <div className="flex-1 flex justify-end">
             <h3 
-              className="font-baskerville text-black leading-tight text-right inline-block whitespace-pre-line"
+              className="font-baskerville text-black leading-tight text-left inline-block whitespace-pre-line"
               style={{
                 fontSize: 'clamp(16px, 1.46vw, 22.11px)', /* Mobile: 16px (w393 base), Desktop: 22.11px (w1512 base) */
                 lineHeight: '100%',

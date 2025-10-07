@@ -1164,6 +1164,9 @@ body {
   gap: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
+  border: none !important;
+  outline: none !important;
+  box-sizing: border-box !important;
 }
 
 .project-image-slider-container > * {
@@ -1171,6 +1174,8 @@ body {
   padding: 0 !important;
   border: none !important;
   outline: none !important;
+  box-sizing: border-box !important;
+  flex-shrink: 0 !important;
 }
 
 .project-image-slider-container img {
@@ -1179,5 +1184,21 @@ body {
   border: none !important;
   outline: none !important;
   display: block !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Asegurar que las imágenes ocupen todo el ancho sin espacios laterales */
+.project-image-slider-container > div {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
 }
 

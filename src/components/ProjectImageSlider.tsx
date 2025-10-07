@@ -139,13 +139,13 @@ export default function ProjectImageSlider({
     <div className="w-full h-[504px] relative overflow-hidden bg-black">
       {/* Contenedor de slides con transform */}
       <div 
-        className="flex h-full transition-transform duration-300 ease-out select-none cursor-grab active:cursor-grabbing gap-0 project-image-slider-container"
+        className="flex h-full transition-transform duration-300 ease-out select-none cursor-grab active:cursor-grabbing project-image-slider-container"
         style={{
           width: `${images.length * 100}%`,
           transform: `translateX(-${currentSlide * (100 / images.length)}%)`,
-          gap: '0px !important',
-          margin: '0px !important',
-          padding: '0px !important',
+          gap: '0px',
+          margin: '0px',
+          padding: '0px',
           touchAction: 'pan-y' // Permite scroll vertical pero controla horizontal
         }}
         onTouchStart={handleTouchStart}
@@ -160,15 +160,16 @@ export default function ProjectImageSlider({
         {images.map((imageSrc, index) => (
           <div 
             key={index} 
-            className="relative flex-shrink-0 pointer-events-none m-0 p-0"
+            className="relative flex-shrink-0 pointer-events-none project-image-slider-container"
             style={{
               width: `${100 / images.length}%`,
               height: '100%',
-              margin: '0px !important',
-              padding: '0px !important',
+              margin: '0px',
+              padding: '0px',
               border: 'none',
               outline: 'none',
-              boxSizing: 'border-box'
+              boxSizing: 'border-box',
+              overflow: 'hidden'
             }}
           >
             <Image 
@@ -177,17 +178,19 @@ export default function ProjectImageSlider({
               fill
               sizes="100vw"
               quality={100}
-              className={`object-cover transition-opacity duration-300 pointer-events-none m-0 p-0 ${
+              className={`object-cover transition-opacity duration-300 pointer-events-none ${
                 isTransitioning ? 'opacity-0' : 'opacity-100'
               }`}
               style={{
                 objectFit: 'cover',
                 display: 'block',
-                margin: '0px !important',
-                padding: '0px !important',
+                margin: '0px',
+                padding: '0px',
                 border: 'none',
                 userSelect: 'none',
-                boxSizing: 'border-box'
+                boxSizing: 'border-box',
+                width: '100%',
+                height: '100%'
               }}
               priority={index === 0}
               draggable={false}

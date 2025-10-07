@@ -224,32 +224,32 @@ export default function DesarrolloProyecto() {
                 </div>
               </div>
             )}
-            
-            {/* Flechas de navegación mobile */}
-            <div className="flex justify-between items-center py-8">
-              {/* Flecha anterior */}
-              <button
-                onClick={() => navigateToProject(previousProject)}
-                className="w-12 h-12 flex items-center justify-center hover:opacity-70 transition-opacity"
-                aria-label={`Ir a proyecto anterior: ${previousProject ? (language === 'en' ? previousProject.fields.titleEn : previousProject.fields.title) : 'Proyecto anterior'}`}
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
-                  <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-              </button>
-              
-              {/* Flecha siguiente */}
-              <button
-                onClick={() => navigateToProject(nextProject)}
-                className="w-12 h-12 flex items-center justify-center hover:opacity-70 transition-opacity"
-                aria-label={`Ir a proyecto siguiente: ${nextProject ? (language === 'en' ? nextProject.fields.titleEn : nextProject.fields.title) : 'Proyecto siguiente'}`}
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </button>
-            </div>
           </div>
+        </div>
+        
+        {/* Flechas de navegación mobile - fuera del content-wrapper */}
+        <div className="flex justify-between items-center py-8 px-4">
+          {/* Flecha anterior */}
+          <button
+            onClick={() => navigateToProject(previousProject)}
+            className="w-12 h-12 flex items-center justify-center hover:opacity-70 transition-opacity"
+            aria-label={`Ir a proyecto anterior: ${previousProject ? (language === 'en' ? previousProject.fields.titleEn : previousProject.fields.title) : 'Proyecto anterior'}`}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          
+          {/* Flecha siguiente */}
+          <button
+            onClick={() => navigateToProject(nextProject)}
+            className="w-12 h-12 flex items-center justify-center hover:opacity-70 transition-opacity"
+            aria-label={`Ir a proyecto siguiente: ${nextProject ? (language === 'en' ? nextProject.fields.titleEn : nextProject.fields.title) : 'Proyecto siguiente'}`}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
         </div>
       </div>
 

@@ -244,7 +244,7 @@ function DesarrollosProyectosContent() {
       <section className="pt-16 md:pt-24">
         <div className="mx-auto flex flex-col lg:flex-row items-start">
           {/* Contenido de texto */}
-          <div className="w-full lg:w-1/2 pl-4 pr-4 md:pl-6 md:pr-6 flex flex-col justify-between h-[637px]">
+          <div className="w-full lg:w-1/2 pl-4 pr-4 md:pl-6 md:pr-6 flex flex-col justify-between h-[637px] md:h-auto xl:h-[637px]">
             <div className="grid">
               <div className="col-6 md:col-12 pt-24 md:pt-0">
                   <h1 
@@ -258,7 +258,7 @@ function DesarrollosProyectosContent() {
                     dangerouslySetInnerHTML={{ __html: t('projects.hero.title') }}
                   />
                   <p 
-                    className="font-archivo font-normal tracking-[0%] text-black pt-[32px] col-span-6 md:col-span-5 max-w-[600px]"
+                    className="font-archivo font-normal tracking-[0%] text-black pt-[32px] md:pt-[20px] xl:pt-[32px] col-span-6 md:col-span-5 max-w-[600px]"
                     style={{
                       fontSize: 'clamp(16px, 1.2vw, 19.02px)',
                       lineHeight: '140%',
@@ -272,7 +272,7 @@ function DesarrollosProyectosContent() {
               </div>
             
               {/* Sección de proyectos - alineada al borde inferior del slider */}
-              <div className="pt-6 md:pt-8 mt-8 md:mt-12">
+              <div className="pt-6 md:pt-2 xl:pt-8 mt-8 md:mt-3 xl:mt-12">
                 {/* Mobile layout - título ocupa toda la columna y filtros debajo */}
                 <div className="lg:hidden">
                 <h2 className="projects-title-mobile">
