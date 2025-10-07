@@ -222,9 +222,9 @@ function HomeContent() {
                   <img
                     src="/images/logos/septiembre.png"
                     alt="Septiembre"
-                    width={120}
-                    height={80}
-                    className="h-24 w-auto object-contain"
+                    width={96}
+                    height={64}
+                    className="h-20 w-auto object-contain"
                   />
                 </picture>
               </div>
