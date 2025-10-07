@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useTranslations } from '@/hooks/useTranslations'
 import type { ContentfulProject } from '@/lib/contentful'
+import { renderTitle } from "@/lib/titleUtils"
 
 interface ContentfulProjectsProps {
   className?: string
@@ -242,30 +243,6 @@ function ProjectCard({ project, language, index }: ProjectCardProps) {
   
   // Obtener imagen principal para la galería del home
   const mainImage = project.fields.imagenHome
-
-  const renderTitle = (titulo: string) => {
-    // Debug: verificar el contenido del título
-    console.log('renderTitle input:', JSON.stringify(titulo))
-    
-    // Detectar diferentes tipos de separadores: \n, \\n, |, y espacios múltiples
-    const lines = titulo.split(/\n|\\n|\|/);
-    
-    console.log('Split lines:', lines)
-    
-    if (lines.length === 1) {
-      return titulo;
-    }
-    return (
-      <>
-        {lines.map((line, lineIndex) => (
-          <span key={lineIndex}>
-            {line.trim()}
-            {lineIndex < lines.length - 1 ? <br /> : null}
-          </span>
-        ))}
-      </>
-    );
-  };
 
   return (
     <Link

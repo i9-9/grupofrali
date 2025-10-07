@@ -8,6 +8,7 @@ import { useProjects, useCategories } from "@/hooks/useContentful"
 import type { ContentfulProject } from "@/lib/contentful"
 import AutoSlider from "@/components/AutoSlider"
 import { useLanguage } from "@/contexts/LanguageContext"
+import { renderTitle } from "@/lib/titleUtils"
 
 function ResponsiveImage({ 
   desktopImage, 
@@ -385,7 +386,7 @@ function DesarrollosProyectosContent() {
                 </div>
               )}
               <h3 className="font-baskerville text-right md:text-left pb-5 md:pb-0 mt-4 leading-none md:max-w-[70%]" style={{ fontSize: 'clamp(16px, 1.5vw, 24px)' }}>
-                {title}
+                {renderTitle(title)}
               </h3>
             </Link>
             )

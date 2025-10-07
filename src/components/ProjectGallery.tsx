@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/contexts/LanguageContext";
 import projectsData from "@/data/projects.json";
+import { renderTitle } from "@/lib/titleUtils";
 
 export default function ProjectGallery() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -22,23 +23,6 @@ export default function ProjectGallery() {
     const home = language === 'en' ? project.home_title_en : project.home_title;
     if (home && home.length > 0) return home;
     return language === 'en' ? project.title_en : project.titulo;
-  };
-
-  const renderTitle = (titulo: string) => {
-    const lines = titulo.split('\n');
-    if (lines.length === 1) {
-      return titulo;
-    }
-    return (
-      <>
-        {lines.map((line, index) => (
-          <span key={index}>
-            {line}
-            {index < lines.length - 1 ? <br /> : null}
-          </span>
-        ))}
-      </>
-    );
   };
   
   // Obtener los proyectos en el orden específico desde projects.json
