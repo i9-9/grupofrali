@@ -66,20 +66,16 @@
         "alt": "Vista aérea del barrio Septiembre con club house, piscinas y canchas"
       },
       "estadisticas": {
-        "club_house": "1",
-        "canchas_de_futbol_&_hockey": "XXX",
         "lotes_residenciales": "428",
-        "estado": "100% COMERCIALIZADO Y HABITADO",
         "hectareas_de_superficie_total": "60",
-        "canchas_tenis": "XXX"
+        "estado": "100% COMERCIALIZADO Y HABITADO",
+        "espacios_comunes": "GIMNASIO, TENIS, FÚTBOL"
       },
       "statistics_en": {
-        "club_house": "1",
-        "soccer_and_hockey_fields": "XXX",
         "residential_lots": "428",
-        "status": "100% SOLD AND INHABITED",
         "total_area_hectares": "60",
-        "tennis_courts": "XXX"
+        "status": "100% SOLD AND INHABITED",
+        "common_areas": "GYM, TENNIS, SOCCER"
       }
     },
     {

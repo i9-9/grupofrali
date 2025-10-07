@@ -71,13 +71,13 @@ export default function ProjectGallery() {
                 <div className="absolute inset-0 bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300" />
               </div>
               <div className="border-t border-black pt-6 pb-4">
-                <div className="flex items-center w-full">
-                  {/* Número a la izquierda */}
-                  <h3 className="font-light mr-4">(0{index + 1})</h3>
+                <div className="flex items-start w-full">
+                  {/* Número a la izquierda - alineado con la primera línea */}
+                  <h3 className="font-light mr-4 leading-[1.1]">(0{index + 1})</h3>
 
                   {/* Contenedor que empuja el título al borde derecho */}
                   <div className="flex-1 flex justify-end">
-                    <h3 className="font-baskerville text-sm md:text-[22px] text-black leading-tight text-left inline-block whitespace-pre-line">
+                    <h3 className="font-baskerville text-sm md:text-[22px] text-black text-left inline-block whitespace-pre-line" style={{ lineHeight: '1.1' }}>
                       {renderTitle(getDisplayTitle(project))}
                     </h3>
                   </div>

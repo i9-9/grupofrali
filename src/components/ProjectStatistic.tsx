@@ -154,7 +154,15 @@ export default function ProjectStatistic({
       <div className="text-right self-center max-w-[45%]">
         {parsed.isTextOnly ? (
           <div className="font-archivo text-black uppercase tracking-wider leading-none break-words md:text-[0.8rem]" style={{ fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? 'clamp(14px, 2.5vw, 16px)' : undefined }}>
-            {parsed.text}
+            {parsed.text === "100% COMERCIALIZADO Y HABITADO" ? (
+              <>
+                100%<br />
+                COMERCIALIZADO Y<br />
+                HABITADO
+              </>
+            ) : (
+              parsed.text
+            )}
           </div>
         ) : parsed.text && (parsed.text.toUpperCase() === 'HOYOS' || parsed.text.toUpperCase() === 'ESTRELLAS') ? (
           // Caso especial para HOYOS y ESTRELLAS - número arriba, texto abajo
