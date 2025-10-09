@@ -148,7 +148,7 @@ export default function DesarrolloProyecto() {
         {/* CARRUSEL MOBILE */}
         <ProjectImageSlider 
           images={mobileImages}
-          projectTitle={language === 'en' ? project.fields.titleEn : project.fields.title}
+          projectTitle={(language === 'en' ? project.fields.titleEn : project.fields.title).replace(/\\n/g, ' ')}
           logoSrc={logoSrc}
           isTransitioning={isTransitioning}
         />
@@ -173,7 +173,7 @@ export default function DesarrolloProyecto() {
               className="text-black mb-[120px] md:hidden font-archivo font-normal leading-none tracking-[0%]"
               style={{ fontSize: 'clamp(36.41px, 9.26vw, 36.41px)' }}
             >
-              {language === 'en' ? project.fields.titleEn : project.fields.title}
+              {(language === 'en' ? project.fields.titleEn : project.fields.title).replace(/\\n/g, ' ')}
             </h1>
             <p 
               className="text-[#151714] font-archivo font-normal tracking-[0%] mb-[60px] md:mb-4 flex items-center" 
@@ -234,7 +234,7 @@ export default function DesarrolloProyecto() {
           <button
             onClick={() => navigateToProject(previousProject)}
             className="w-12 h-12 flex items-center justify-center hover:opacity-70 transition-opacity"
-            aria-label={`Ir a proyecto anterior: ${previousProject ? (language === 'en' ? previousProject.fields.titleEn : previousProject.fields.title) : 'Proyecto anterior'}`}
+            aria-label={`Ir a proyecto anterior: ${previousProject ? (language === 'en' ? previousProject.fields.titleEn : previousProject.fields.title).replace(/\\n/g, ' ') : 'Proyecto anterior'}`}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
               <path d="M19 12H5M12 19l-7-7 7-7"/>
@@ -245,7 +245,7 @@ export default function DesarrolloProyecto() {
           <button
             onClick={() => navigateToProject(nextProject)}
             className="w-12 h-12 flex items-center justify-center hover:opacity-70 transition-opacity"
-            aria-label={`Ir a proyecto siguiente: ${nextProject ? (language === 'en' ? nextProject.fields.titleEn : nextProject.fields.title) : 'Proyecto siguiente'}`}
+            aria-label={`Ir a proyecto siguiente: ${nextProject ? (language === 'en' ? nextProject.fields.titleEn : nextProject.fields.title).replace(/\\n/g, ' ') : 'Proyecto siguiente'}`}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
               <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -279,7 +279,7 @@ export default function DesarrolloProyecto() {
                 className="text-black hidden md:block font-archivo font-normal leading-none tracking-[0%]"
                 style={{ fontSize: 'clamp(35.55px, 2.35vw, 35.55px)' }}
               >
-                {language === 'en' ? project.fields.titleEn : project.fields.title}
+                {(language === 'en' ? project.fields.titleEn : project.fields.title).replace(/\\n/g, ' ')}
               </h1>
             </div>
             
@@ -340,7 +340,7 @@ export default function DesarrolloProyecto() {
         {/* Galería de imágenes desktop - carrusel vertical */}
         <ProjectDesktopGallery 
           images={desktopImages}
-          projectTitle={language === 'en' ? project.fields.titleEn : project.fields.title}
+          projectTitle={(language === 'en' ? project.fields.titleEn : project.fields.title).replace(/\\n/g, ' ')}
           logoSrc={logoSrc}
           isTransitioning={isTransitioning}
         />
@@ -351,7 +351,7 @@ export default function DesarrolloProyecto() {
           <button
             onClick={() => navigateToProject(previousProject)}
             className="pointer-events-auto w-16 h-16 flex items-center justify-center hover:opacity-70 transition-opacity"
-            aria-label={`Ir a proyecto anterior: ${previousProject ? (language === 'en' ? previousProject.fields.titleEn : previousProject.fields.title) : 'Proyecto anterior'}`}
+            aria-label={`Ir a proyecto anterior: ${previousProject ? (language === 'en' ? previousProject.fields.titleEn : previousProject.fields.title).replace(/\\n/g, ' ') : 'Proyecto anterior'}`}
           >
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
               <path d="M19 12H5M12 19l-7-7 7-7"/>
@@ -362,7 +362,7 @@ export default function DesarrolloProyecto() {
           <button
             onClick={() => navigateToProject(nextProject)}
             className="pointer-events-auto w-16 h-16 flex items-center justify-center hover:opacity-70 transition-opacity"
-            aria-label={`Ir a proyecto siguiente: ${nextProject ? (language === 'en' ? nextProject.fields.titleEn : nextProject.fields.title) : 'Proyecto siguiente'}`}
+            aria-label={`Ir a proyecto siguiente: ${nextProject ? (language === 'en' ? nextProject.fields.titleEn : nextProject.fields.title).replace(/\\n/g, ' ') : 'Proyecto siguiente'}`}
           >
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white">
               <path d="M5 12h14M12 5l7 7-7 7"/>
