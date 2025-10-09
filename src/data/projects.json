@@ -26,7 +26,7 @@
       },
       "estadisticas": {
         "capacidad_instalada": "36.75 MW",
-        "factor_capacidad_historico": "48,54%",
+        "factor_carga_historico": "48,54%",
         "produccion_anual_promedio": "168.8 GWH",
         "estado": "EN OPERACIÓN",
         "hogares_abastecidos": "70.000",
@@ -34,7 +34,7 @@
       },
       "statistics_en": {
         "installed_capacity": "36.75 MW",
-        "historical_capacity_factor": "48.54%",
+        "historical_load_factor": "48.54%",
         "average_annual_production": "168.8 GWh",
         "status": "OPERATIONAL",
         "households_supplied": "70,000",

@@ -4,6 +4,7 @@ interface ContentfulRichTextProps {
   content: ContentfulRichTextContent
   className?: string
   paragraphStyle?: React.CSSProperties
+  convertLineBreaksToSpaces?: boolean
 }
 
 interface ContentfulRichTextContent {
@@ -22,7 +23,7 @@ interface ContentfulRichTextMark {
 }
 
 // Función para renderizar contenido rico de Contentful
-function renderRichText(content: ContentfulRichTextContent, paragraphStyle?: React.CSSProperties): React.ReactNode {
+function renderRichText(content: ContentfulRichTextContent, paragraphStyle?: React.CSSProperties, convertLineBreaksToSpaces?: boolean): React.ReactNode {
   if (!content || !content.content) return null
 
   return content.content.map((node: ContentfulRichTextNode, index: number) => {
@@ -32,7 +33,12 @@ function renderRichText(content: ContentfulRichTextContent, paragraphStyle?: Rea
           <p key={index} className="mb-1" style={{...paragraphStyle, lineHeight: '130%'}}>
             {node.content?.map((textNode: ContentfulRichTextNode, textIndex: number) => {
               if (textNode.nodeType === 'text') {
-                let text: React.ReactNode = textNode.value
+                // Reemplazar saltos de línea con espacios solo si se especifica
+                const textValue = convertLineBreaksToSpaces 
+                  ? (textNode.value || '').replace(/\n/g, ' ')
+                  : (textNode.value || '')
+                
+                let text: React.ReactNode = textValue
                 
                 // Aplicar marcas de formato
                 if (textNode.marks) {
@@ -157,12 +163,12 @@ function renderRichText(content: ContentfulRichTextContent, paragraphStyle?: Rea
   })
 }
 
-export default function ContentfulRichText({ content, className = '', paragraphStyle }: ContentfulRichTextProps) {
+export default function ContentfulRichText({ content, className = '', paragraphStyle, convertLineBreaksToSpaces = false }: ContentfulRichTextProps) {
   if (!content) return null
 
   return (
     <div className={className}>
-      {renderRichText(content, paragraphStyle)}
+      {renderRichText(content, paragraphStyle, convertLineBreaksToSpaces)}
     </div>
   )
 }

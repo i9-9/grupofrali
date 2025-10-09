@@ -95,7 +95,7 @@ Key Figures:
 • Average Annual Production: 168.8 GWh
 • Households Supplied: 70,000
 • Annual CO₂ Emissions Reduced: 82,724 tons
-• Historical Capacity Factor: 52.08%
+• Historical Load Factor: 52.08%
 • Location: La Pampa, Argentina
 • Status: Operational
 Text:

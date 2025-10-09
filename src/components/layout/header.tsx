@@ -131,7 +131,7 @@ export default function Header() {
               <div className="flex justify-between items-center h-14">
                 <Link href="/">
                     <FraliLogo 
-                      className="h-3 w-auto pl-3"
+                      className="h-3 w-auto"
                       color="#000000"
                     />
                 </Link>

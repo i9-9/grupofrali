@@ -204,6 +204,7 @@ export default function DesarrolloProyecto() {
                   fontWeight: '400',
                   fontFamily: 'Archivo, sans-serif'
                 }}
+                convertLineBreaksToSpaces={true}
               />
             </div>
             
@@ -313,6 +314,7 @@ export default function DesarrolloProyecto() {
                     fontWeight: '400',
                     fontFamily: 'Archivo, sans-serif'
                   }}
+                  convertLineBreaksToSpaces={true}
                 />
               </div>
             </div>
