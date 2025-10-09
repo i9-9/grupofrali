@@ -295,7 +295,7 @@ function HomeContent() {
 
       {/* Proyectos Section */}
       <section className="pt-16 bg-[#efefef]">
-        <div className="w-full mx-auto px-4 md:px-6">
+        <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
           {/* Header */}
           <div className="flex justify-between items-start mb-8">
             <div className="w-fit">

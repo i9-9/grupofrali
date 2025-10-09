@@ -304,15 +304,8 @@ body {
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-@media (min-width: 768px) {
-  .content-wrapper {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
+  padding-left: clamp(1rem, 0.4vw, 1.5rem);
+  padding-right: clamp(1rem, 0.4vw, 1.5rem);
 }
 
 /* Grid System */

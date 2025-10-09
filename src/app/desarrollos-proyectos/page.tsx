@@ -245,7 +245,7 @@ function DesarrollosProyectosContent() {
       <section className="pt-16 md:pt-24">
         <div className="mx-auto flex flex-col lg:flex-row items-start">
           {/* Contenido de texto */}
-          <div className="w-full lg:w-1/2 pl-4 pr-4 md:pl-6 md:pr-6 flex flex-col justify-between h-[637px] md:h-auto xl:h-[637px]">
+          <div className="w-full lg:w-1/2 flex flex-col justify-between h-[637px] md:h-auto xl:h-[637px]" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
             <div className="grid">
               <div className="col-6 md:col-12 pt-24 md:pt-0">
                   <h1 
@@ -357,7 +357,7 @@ function DesarrollosProyectosContent() {
         </div>
       </section>
 
-      <section ref={projectsRef} className="mx-auto pl-4 pr-4 md:pl-6 md:pr-6 pb-16">
+      <section ref={projectsRef} className="mx-auto pb-16" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
         <div className="grid gap-2 md:gap-[10px] mt-16 md:mt-20">
           {filteredProjects.map((project) => {
             const desktopImage = getDesarrollosImage(project, false)

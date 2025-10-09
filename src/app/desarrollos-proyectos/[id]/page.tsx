@@ -157,7 +157,7 @@ export default function DesarrolloProyecto() {
         <div className={`bg-[#EFEFEF] border-t border-gray-200 transition-opacity duration-300 ${
           isTransitioning ? 'opacity-0' : 'opacity-100'
         }`}>
-          <div className="content-wrapper p-4">
+          <div className="content-wrapper">
             <div className="grid">
               <div className="col-6 flex items-center gap-2 mb-2">
                 <Link href={getBackUrl} className="text-[#151714] flex items-center" style={{ transform: 'translateY(-1px)' }}>
@@ -260,7 +260,7 @@ export default function DesarrolloProyecto() {
         <div className={`absolute left-0 top-0 w-1/2 h-full bg-[#EFEFEF] z-10 pt-16 md:pt-20 lg:pt-18 flex flex-col transition-opacity duration-300 ${
           isTransitioning ? 'opacity-0' : 'opacity-100'
         }`}>
-          <div className="content-wrapper p-4 md:p-6 lg:p-8 lg:pt-0">
+          <div className="content-wrapper">
             {/* Header fijo */}
             <div className="grid">
               <div className="col-6 md:col-6 flex items-center gap-2 mb-4">
