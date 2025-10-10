@@ -69,16 +69,17 @@ export default function Header() {
         {isHome ? (
           <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
             {/* Mobile */}
-            <div className={`flex md:hidden items-center h-30 justify-between`}>
-              <Link href='/' className="flex items-center">
+            <div className={`flex md:hidden items-center h-30`}>
+              <Link href='/' className="flex items-center frali-logo-mobile flex-shrink-0 overflow-hidden">
                   <FraliLogo 
-                    className={`w-auto ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}
-                    style={{ height: '20px' }}
+                    className={`h-full w-auto ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}
                     color={isHome || isProjectPage ? '#FFFFFF' : '#000000'}
                   />
               </Link>
+              
+              <div className="flex-grow" style={{ minWidth: '24px' }}></div>
 
-              <button onClick={toggleMenu} className={`flex items-center justify-center h-9 w-9 ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}>
+              <button onClick={toggleMenu} className={`flex items-center justify-center h-9 w-9 flex-shrink-0 ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}>
                 {isOpen ? <></> : <HamburgerIcon />}
               </button>
             </div>
@@ -112,16 +113,17 @@ export default function Header() {
         ) : (
           <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
             {/* Mobile */}
-            <div className={`flex md:hidden items-center h-30 justify-between`}>
-              <Link href='/' className="flex items-center">
+            <div className={`flex md:hidden items-center h-30`}>
+              <Link href='/' className="flex items-center frali-logo-mobile flex-shrink-0 overflow-hidden">
                   <FraliLogo 
-                    className={`w-auto ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}
-                    style={{ height: '20px' }}
+                    className={`h-full w-auto ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}
                     color={isHome || isProjectPage ? '#FFFFFF' : '#000000'}
                   />
               </Link>
+              
+              <div className="flex-grow" style={{ minWidth: '24px' }}></div>
 
-              <button onClick={toggleMenu} className={`flex items-center justify-center h-9 w-9 ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}>
+              <button onClick={toggleMenu} className={`flex items-center justify-center h-9 w-9 flex-shrink-0 ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}>
                 {isOpen ? <></> : <HamburgerIcon />}
               </button>
             </div>
@@ -168,11 +170,10 @@ export default function Header() {
         >
           <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
             <Link href='/'>
-              <div className="pt-14 pb-20">
+              <div className="pt-14 pb-20 frali-logo-mobile">
                 <FraliLogo 
-                  className="w-auto"
+                  className="h-full w-auto"
                   color="#151714"
-                  style={{ height: '20px' }}
                 />
               </div>
             </Link>

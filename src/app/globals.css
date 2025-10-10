@@ -17,6 +17,13 @@
   font-family: 'archivo', 'Archivo', sans-serif;
 }
 
+/* Logo mobile responsive */
+.frali-logo-mobile {
+  height: clamp(14px, 3.5vw, 18px);
+  width: auto;
+  max-width: 70%; /* Limitar el logo al 70% del ancho disponible */
+}
+
 /* Deshabilitamos el smooth scroll nativo para usar uno personalizado */
 html {
   scroll-behavior: auto;
