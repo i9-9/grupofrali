@@ -70,7 +70,7 @@ export default function Header() {
           <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
             {/* Mobile */}
             <div className={`flex md:hidden items-center h-30`}>
-              <Link href='/' className="flex items-center frali-logo-mobile flex-shrink-0 overflow-hidden">
+              <Link href='/' className="flex items-center frali-logo-mobile flex-shrink-0 overflow-hidden" style={{ transform: 'translateY(1px)' }}>
                   <FraliLogo 
                     className={`h-full w-auto ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}
                     color={isHome || isProjectPage ? '#FFFFFF' : '#000000'}
@@ -114,7 +114,7 @@ export default function Header() {
           <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
             {/* Mobile */}
             <div className={`flex md:hidden items-center h-30`}>
-              <Link href='/' className="flex items-center frali-logo-mobile flex-shrink-0 overflow-hidden">
+              <Link href='/' className="flex items-center frali-logo-mobile flex-shrink-0 overflow-hidden" style={{ transform: 'translateY(2px)' }}>
                   <FraliLogo 
                     className={`h-full w-auto ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}
                     color={isHome || isProjectPage ? '#FFFFFF' : '#000000'}
