@@ -21,7 +21,6 @@
 .frali-logo-mobile {
   height: clamp(14px, 3.5vw, 18px);
   width: auto;
-  max-width: 70%; /* Limitar el logo al 70% del ancho disponible */
 }
 
 /* Deshabilitamos el smooth scroll nativo para usar uno personalizado */
@@ -249,7 +248,7 @@ body {
 }
 
 .header-logo-mobile {
-  font-size: clamp(24px, 4vw, 28px);
+  font-size: clamp(12px, 4vw, 28px);
   letter-spacing: clamp(0.5em, 0.8vw, 0.68em);
   line-height: 1.1;
 }
