@@ -159,7 +159,7 @@ export default function DesarrolloProyecto() {
         }`}>
           <div className="content-wrapper">
             <div className="grid">
-              <div className="col-6 flex items-center gap-2 mb-2">
+              <div className="col-6 flex items-center gap-2 my-4">
                 <Link href={getBackUrl} className="text-[#151714] flex items-center" style={{ transform: 'translateY(-1px)' }}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
