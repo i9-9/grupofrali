@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useLanguage } from "@/contexts/LanguageContext"
 import { useProject, useProjects } from "@/hooks/useContentful"
+import type { ContentfulMedia } from "@/lib/contentful"
 import ContentfulRichText from "@/components/ContentfulRichText"
 import ProjectImageSlider from "@/components/ProjectImageSlider"
 import ProjectDesktopGallery from "@/components/ProjectDesktopGallery"
@@ -67,24 +68,34 @@ export default function DesarrolloProyecto() {
     : allProjects[0] // Primer proyecto
   
 
-  interface GalleryImage {
-    fields: {
-      file: {
-        url: string
-      }
-    }
-  }
 
   const mobileImages: string[] = (() => {
-    if (!project?.fields?.galeriaMobile) return []
-    const mobile = project.fields.galeriaMobile as GalleryImage | GalleryImage[]
-    return Array.isArray(mobile) ? mobile.map((img: GalleryImage) => `https:${img.fields.file.url}`) : [`https:${mobile.fields.file.url}`]
+    if (!project?.fields?.galeriaMobile) {
+      return []
+    }
+    
+    const mobile = project.fields.galeriaMobile as ContentfulMedia[]
+    
+    // Mapear todas las imágenes del array
+    const images = mobile.map((img: ContentfulMedia) => `https:${img.fields.file.url}`)
+    
+    // Remove duplicates while preserving order
+    const uniqueImages = images.filter((url, index, self) => self.indexOf(url) === index)
+    
+    return uniqueImages
   })()
       
   const desktopImages: string[] = (() => {
     if (!project?.fields?.galeriaDesktop) return []
-    const desktop = project.fields.galeriaDesktop as GalleryImage | GalleryImage[]
-    return Array.isArray(desktop) ? desktop.map((img: GalleryImage) => `https:${img.fields.file.url}`) : [`https:${desktop.fields.file.url}`]
+    
+    // galeriaDesktop siempre es un array según la interfaz ContentfulProject
+    const desktop = project.fields.galeriaDesktop as ContentfulMedia[]
+    
+    // Mapear todas las imágenes del array
+    const images = desktop.map((img: ContentfulMedia) => `https:${img.fields.file.url}`)
+    
+    // Remove duplicates while preserving order
+    return images.filter((url, index, self) => self.indexOf(url) === index)
   })()
 
   // Estados de loading y error

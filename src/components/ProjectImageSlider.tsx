@@ -21,6 +21,7 @@ export default function ProjectImageSlider({
   const [currentX, setCurrentX] = useState(0)
   const [isTracking, setIsTracking] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
+  const [lastWheelTime, setLastWheelTime] = useState(0)
 
   // Threshold mínimo para el swipe
   const SWIPE_THRESHOLD = 50
@@ -127,22 +128,87 @@ export default function ProjectImageSlider({
     setCurrentX(0)
   }
 
+  // Handler para trackpad/mouse wheel con throttle
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault()
+    
+    const now = Date.now()
+    const timeSinceLastWheel = now - lastWheelTime
+    
+    // Throttle: solo procesar si han pasado al menos 150ms desde el último wheel
+    if (timeSinceLastWheel < 150) return
+    
+    setLastWheelTime(now)
+    
+    // Detectar dirección del scroll horizontal
+    const deltaX = e.deltaX
+    const deltaY = e.deltaY
+    
+    // Threshold mínimo para considerar el movimiento
+    const threshold = 10
+    
+    // Si hay scroll horizontal significativo, usar esa dirección
+    if (Math.abs(deltaX) > threshold && Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (deltaX > 0 && currentSlide < images.length - 1) {
+        // Scroll hacia la derecha - siguiente imagen
+        nextSlide()
+      } else if (deltaX < 0 && currentSlide > 0) {
+        // Scroll hacia la izquierda - imagen anterior
+        prevSlide()
+      }
+    } else if (Math.abs(deltaY) > threshold) {
+      // Si no hay scroll horizontal significativo, usar scroll vertical
+      if (deltaY > 0 && currentSlide < images.length - 1) {
+        // Scroll hacia abajo - siguiente imagen
+        nextSlide()
+      } else if (deltaY < 0 && currentSlide > 0) {
+        // Scroll hacia arriba - imagen anterior
+        prevSlide()
+      }
+    }
+  }
+
+  // Handler para teclas de flecha
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowLeft' && currentSlide > 0) {
+      e.preventDefault()
+      prevSlide()
+    } else if (e.key === 'ArrowRight' && currentSlide < images.length - 1) {
+      e.preventDefault()
+      nextSlide()
+    }
+  }
+
   if (images.length === 0) {
     return (
-      <div className="w-full h-[504px] relative overflow-hidden bg-black flex items-center justify-center">
+      <div 
+        className="w-full relative overflow-hidden bg-black flex items-center justify-center"
+        style={{ 
+          aspectRatio: '393/504', // Aspect ratio específico para mobile basado en w393 del diseño
+          height: 'clamp(400px, 128.2vw, 504px)' // Escalado responsive desde 504px en w393
+        }}
+      >
         <p className="text-gray-500">No hay imágenes disponibles</p>
       </div>
     )
   }
 
   return (
-    <div className="w-full h-[504px] relative overflow-hidden bg-black">
+    <div 
+      className="w-full relative overflow-hidden bg-black"
+      style={{ 
+        aspectRatio: '393/504', // Aspect ratio específico para mobile basado en w393 del diseño
+        height: 'clamp(400px, 128.2vw, 504px)' // Escalado responsive desde 504px en w393
+      }}
+      tabIndex={0} // Hacer focusable para eventos de teclado
+      onKeyDown={handleKeyDown}
+    >
       {/* Contenedor de slides con transform */}
       <div 
         className="flex h-full transition-transform duration-300 ease-out select-none cursor-grab active:cursor-grabbing project-image-slider-container"
         style={{
-          width: `${images.length * 100}%`,
-          transform: `translateX(-${currentSlide * (100 / images.length)}%)`,
+          width: `${images.length * 100}%`, // El contenedor debe ser tan ancho como todas las slides juntas
+          transform: `translateX(-${currentSlide * 100}%)`, // Cada slide se mueve 100% del viewport
           gap: '0px',
           margin: '0px',
           padding: '0px',
@@ -155,6 +221,7 @@ export default function ProjectImageSlider({
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}
+        onWheel={handleWheel}
         onDragStart={(e) => e.preventDefault()} // Previene drag de imágenes
       >
         {images.map((imageSrc, index) => (
@@ -162,7 +229,7 @@ export default function ProjectImageSlider({
             key={index} 
             className="relative flex-shrink-0 pointer-events-none project-image-slider-container"
             style={{
-              width: `${100 / images.length}%`,
+              width: '100%', // Cada slide debe ocupar el 100% del contenedor
               height: '100%',
               margin: '0px',
               padding: '0px',
@@ -176,7 +243,7 @@ export default function ProjectImageSlider({
               src={imageSrc} 
               alt={`${projectTitle} - Imagen ${index + 1}`}
               fill
-              sizes="100vw"
+              sizes="(max-width: 393px) 100vw, (max-width: 768px) 393px, 393px"
               quality={100}
               className={`object-cover transition-opacity duration-300 pointer-events-none ${
                 isTransitioning ? 'opacity-0' : 'opacity-100'
