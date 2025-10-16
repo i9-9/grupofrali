@@ -195,10 +195,6 @@ function DesarrollosProyectosContent() {
     
     const newUrl = params.toString() ? `?${params.toString()}` : '/desarrollos-proyectos'
     router.replace(newUrl, { scroll: false })
-
-    setTimeout(() => {
-      scrollToProjects()
-    }, 100)
   }
 
   // Estados de loading y error

@@ -181,7 +181,7 @@ export default function DesarrolloProyecto() {
             </div>
             
             <h1 
-              className="text-black mb-[120px] md:hidden font-archivo font-normal leading-none tracking-[0%]"
+              className="text-black mb-[60px] md:hidden font-archivo font-normal leading-none tracking-[0%]"
               style={{ fontSize: 'clamp(36.41px, 9.26vw, 36.41px)' }}
             >
               {(language === 'en' ? project.fields.titleEn : project.fields.title).replace(/\\n/g, ' ')}
