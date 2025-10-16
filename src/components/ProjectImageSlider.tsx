@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 
 interface ProjectImageSliderProps {
@@ -22,21 +22,22 @@ export default function ProjectImageSlider({
   const [isTracking, setIsTracking] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
   const [lastWheelTime, setLastWheelTime] = useState(0)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   // Threshold mínimo para el swipe
   const SWIPE_THRESHOLD = 50
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     if (currentSlide < images.length - 1) {
       setCurrentSlide(currentSlide + 1)
     }
-  }
+  }, [currentSlide, images.length])
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     if (currentSlide > 0) {
       setCurrentSlide(currentSlide - 1)
     }
-  }
+  }, [currentSlide])
 
   // Handlers de touch mejorados
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -129,7 +130,7 @@ export default function ProjectImageSlider({
   }
 
   // Handler para trackpad/mouse wheel con throttle
-  const handleWheel = (e: React.WheelEvent) => {
+  const handleWheel = useCallback((e: WheelEvent) => {
     e.preventDefault()
     
     const now = Date.now()
@@ -166,7 +167,19 @@ export default function ProjectImageSlider({
         prevSlide()
       }
     }
-  }
+  }, [currentSlide, lastWheelTime, images.length, nextSlide, prevSlide])
+
+  // Add wheel event listener with passive: false
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
+    container.addEventListener('wheel', handleWheel, { passive: false })
+    
+    return () => {
+      container.removeEventListener('wheel', handleWheel)
+    }
+  }, [currentSlide, lastWheelTime, handleWheel])
 
   // Handler para teclas de flecha
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -184,8 +197,7 @@ export default function ProjectImageSlider({
       <div 
         className="w-full relative overflow-hidden bg-black flex items-center justify-center"
         style={{ 
-          aspectRatio: '393/504', // Aspect ratio específico para mobile basado en w393 del diseño
-          height: 'clamp(400px, 128.2vw, 504px)' // Escalado responsive desde 504px en w393
+          height: 'clamp(400px, 128.2vw, 504px)'
         }}
       >
         <p className="text-gray-500">No hay imágenes disponibles</p>
@@ -195,24 +207,21 @@ export default function ProjectImageSlider({
 
   return (
     <div 
+      ref={containerRef}
       className="w-full relative overflow-hidden bg-black"
       style={{ 
-        aspectRatio: '393/504', // Aspect ratio específico para mobile basado en w393 del diseño
-        height: 'clamp(400px, 128.2vw, 504px)' // Escalado responsive desde 504px en w393
+        height: 'clamp(400px, 128.2vw, 504px)'
       }}
-      tabIndex={0} // Hacer focusable para eventos de teclado
+      tabIndex={0}
       onKeyDown={handleKeyDown}
     >
       {/* Contenedor de slides con transform */}
       <div 
-        className="flex h-full transition-transform duration-300 ease-out select-none cursor-grab active:cursor-grabbing project-image-slider-container"
+        className="flex h-full transition-transform duration-300 ease-out select-none cursor-grab active:cursor-grabbing"
         style={{
-          width: `${images.length * 100}%`, // El contenedor debe ser tan ancho como todas las slides juntas
-          transform: `translateX(-${currentSlide * 100}%)`, // Cada slide se mueve 100% del viewport
-          gap: '0px',
-          margin: '0px',
-          padding: '0px',
-          touchAction: 'pan-y' // Permite scroll vertical pero controla horizontal
+          width: `${images.length * 100}%`,
+          transform: `translateX(-${currentSlide * (100 / images.length)}%)`,
+          touchAction: 'pan-y'
         }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -221,43 +230,29 @@ export default function ProjectImageSlider({
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}
-        onWheel={handleWheel}
-        onDragStart={(e) => e.preventDefault()} // Previene drag de imágenes
+        onDragStart={(e) => e.preventDefault()}
       >
         {images.map((imageSrc, index) => (
           <div 
             key={index} 
-            className="relative flex-shrink-0 pointer-events-none project-image-slider-container"
+            className="relative flex-shrink-0 bg-black flex items-center justify-center"
             style={{
-              width: '100%', // Cada slide debe ocupar el 100% del contenedor
-              height: '100%',
-              margin: '0px',
-              padding: '0px',
-              border: 'none',
-              outline: 'none',
-              boxSizing: 'border-box',
-              overflow: 'hidden'
+              width: `${100 / images.length}%`,
+              height: '100%'
             }}
           >
             <Image 
               src={imageSrc} 
               alt={`${projectTitle} - Imagen ${index + 1}`}
               fill
-              sizes="(max-width: 393px) 100vw, (max-width: 768px) 393px, 393px"
+              sizes="(max-width: 768px) 100vw, 393px"
               quality={100}
-              className={`object-cover transition-opacity duration-300 pointer-events-none ${
+              className={`transition-opacity duration-300 ${
                 isTransitioning ? 'opacity-0' : 'opacity-100'
               }`}
               style={{
-                objectFit: 'cover',
-                display: 'block',
-                margin: '0px',
-                padding: '0px',
-                border: 'none',
-                userSelect: 'none',
-                boxSizing: 'border-box',
-                width: '100%',
-                height: '100%'
+                objectFit: 'cover', // Cambia a 'cover' si prefieres que la imagen llene todo el espacio
+                userSelect: 'none'
               }}
               priority={index === 0}
               draggable={false}

@@ -1186,7 +1186,6 @@ body {
   box-sizing: border-box !important;
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover !important;
 }
 
 /* Asegurar que las imágenes ocupen todo el ancho sin espacios laterales */

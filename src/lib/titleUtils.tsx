@@ -10,13 +10,8 @@ import React from 'react'
 export const renderTitle = (titulo: string): React.ReactNode => {
   if (!titulo) return ''
   
-  // Debug: verificar el contenido del título
-  console.log('renderTitle input:', JSON.stringify(titulo))
-  
   // Detectar diferentes tipos de separadores: \n, \\n, |, y espacios múltiples
   const lines = titulo.split(/\n|\\n|\|/)
-  
-  console.log('Split lines:', lines)
   
   if (lines.length === 1) {
     return titulo

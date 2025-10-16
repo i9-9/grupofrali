@@ -4,6 +4,7 @@ import ConditionalLayout from "@/components/layout/ConditionalLayout";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   title: "Grupo Frali",
   description: "Con casi 30 años de trayectoria, en Grupo Frali desarrollamos inversiones estratégicas en real estate, agroindustria, hotelería y energías renovables. Apostamos a proyectos que combinan crecimiento económico, compromiso con el entorno y generación de valor en Argentina, EE. UU. y Uruguay.",
   icons: {

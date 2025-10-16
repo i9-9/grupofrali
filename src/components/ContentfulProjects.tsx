@@ -76,7 +76,6 @@ export default function ContentfulProjects({
   useEffect(() => {
     if (scrollContainerRef.current && infiniteProjects.length > 0) {
       const container = scrollContainerRef.current
-      const cardWidth = 320
       // Empezar con el primer proyecto (primera copia)
       container.scrollTo({
         left: 0,
@@ -237,9 +236,6 @@ interface ProjectCardProps {
 
 function ProjectCard({ project, language, index }: ProjectCardProps) {
   const title = language === 'en' ? project.fields.titleEn : project.fields.title
-  
-  // Debug: verificar qué contiene el título
-  console.log('Project title:', title, 'Raw length:', title?.length, 'Contains \\n:', title?.includes('\\n'), 'Contains |:', title?.includes('|'))
   
   // Obtener imagen principal para la galería del home
   const mainImage = project.fields.imagenHome
