@@ -98,7 +98,6 @@ function DesarrollosProyectosContent() {
     return t("projects.categories.all")
   })
   
-  const projectsRef = useRef<HTMLElement>(null)
 
   // Valor estable para la categoría "VER TODOS"
   const allCategoryValue = useMemo(() => t("projects.categories.all"), [t])
@@ -117,34 +116,18 @@ function DesarrollosProyectosContent() {
     }
   }, [language, searchParams, allCategoryValue, categories])
 
-  // Efecto para hacer scroll a los proyectos cuando venimos de vuelta de un proyecto individual
+  // Efecto para limpiar el parámetro scrollTo cuando venimos de vuelta de un proyecto individual
   useEffect(() => {
     const shouldScrollToProjects = searchParams.get('scrollTo') === 'projects'
-    if (shouldScrollToProjects && projectsRef.current) {
+    if (shouldScrollToProjects) {
       // Remover el parámetro scrollTo de la URL
       const params = new URLSearchParams(searchParams.toString())
       params.delete('scrollTo')
       const newUrl = params.toString() ? `?${params.toString()}` : '/desarrollos-proyectos'
       router.replace(newUrl, { scroll: false })
-      
-      // Hacer scroll a la sección de proyectos
-      setTimeout(() => {
-        projectsRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        })
-      }, 100)
     }
   }, [searchParams, router])
 
-  const scrollToProjects = () => {
-    if (projectsRef.current) {
-      projectsRef.current.scrollIntoView({
-        behavior: 'smooth', 
-        block:'start'
-      })
-    }
-  }
 
   const photos = useMemo(() => [
     "/images/desarrollos/1.jpg",
@@ -353,7 +336,7 @@ function DesarrollosProyectosContent() {
         </div>
       </section>
 
-      <section ref={projectsRef} className="mx-auto pb-16" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
+      <section className="mx-auto pb-16" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
         <div className="grid gap-2 md:gap-[10px] mt-16 md:mt-20">
           {filteredProjects.map((project) => {
             const desktopImage = getDesarrollosImage(project, false)
