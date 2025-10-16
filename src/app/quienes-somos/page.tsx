@@ -305,7 +305,7 @@ export default function QuienesSomos() {
                   <p 
                     className="font-archivo text-black font-normal tracking-[0%]"
                     style={{
-                      fontSize: 'clamp(11.56px, 1.4vw, 22.44px)',
+                      fontSize: 'clamp(14px, 1.4vw, 22.44px)',
                       lineHeight: '100%'
                     }}
                   >
@@ -332,7 +332,7 @@ export default function QuienesSomos() {
                 <p 
                   className="font-archivo text-black font-normal tracking-[0%]"
                   style={{
-                    fontSize: 'clamp(11.56px, 1.4vw, 22.44px)',
+                    fontSize: 'clamp(14px, 1.4vw, 22.44px)',
                     lineHeight: '100%'
                   }}
                 >
