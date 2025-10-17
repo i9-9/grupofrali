@@ -165,18 +165,19 @@ export default function Header() {
 
       {(isOpen || isAnimating) && (
         <div
-          className={`fixed top-0 left-0 right-0 bg-[#EBEBEB] z-50 md:hidden ${animationClass}`}
-          style={{ height: '100vh', overflowY: 'auto' }}
+          className={`fixed top-0 left-0 right-0 bg-[#EBEBEB] md:hidden ${animationClass}`}
+          style={{ height: '100vh', overflowY: 'auto', zIndex: 9999 }}
         >
-          <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
-            <Link href='/'>
-              <div className="pt-14 pb-20 frali-logo-mobile">
+          <div className="w-full mx-auto px-4">
+            {/* Logo del mobile menu */}
+            <div className="pt-16 pb-8">
+              <Link href="/" className="inline-block" style={{ marginBottom: '107px' }}>
                 <FraliLogo 
-                  className="h-full w-auto"
+                  className="frali-logo-mobile"
                   color="#151714"
                 />
-              </div>
-            </Link>
+              </Link>
+            </div>
             
             {/* Contenedor del menú con líneas animadas */}
             <div className={`mobile-menu-border-top mobile-menu-border-bottom mobile-menu-line-delay-0 mobile-menu-line-delay-5 ${showLines ? 'animate' : ''}`}>

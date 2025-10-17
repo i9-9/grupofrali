@@ -35,7 +35,7 @@ export default function DesarrolloProyecto() {
     'terrazas-de-septiembre': '/images/project-logos/septiembre.svg',
     'casas-de-septiembre': '/images/project-logos/septiembre.svg',
     'la-reserva-cardales': '/images/project-logos/lareservacardales.svg',
-    'sofitel-la-reserva-cardales': '/images/project-logos/sofitel.svg',
+    'sofitel-la-reserva-cardales': '/images/project-logos/sofitel-white.png',
     'santa-regina': '/images/project-logos/santa-regina.svg'
   }
   const logoSrc = project ? projectLogos[project.fields.slug] : undefined
