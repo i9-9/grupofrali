@@ -216,12 +216,16 @@ export default function ProjectImageSlider({
       onKeyDown={handleKeyDown}
     >
       {/* Contenedor de slides con transform */}
-      <div 
+      <div
         className="flex h-full transition-transform duration-300 ease-out select-none cursor-grab active:cursor-grabbing"
         style={{
           width: `${images.length * 100}%`,
-          transform: `translateX(-${currentSlide * (100 / images.length)}%)`,
-          touchAction: 'pan-y'
+          transform: `translate3d(-${currentSlide * (100 / images.length)}%, 0, 0)`,
+          WebkitTransform: `translate3d(-${currentSlide * (100 / images.length)}%, 0, 0)`,
+          touchAction: 'pan-y',
+          willChange: isTracking ? 'transform' : 'auto',
+          backfaceVisibility: 'hidden',
+          WebkitBackfaceVisibility: 'hidden'
         }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -241,18 +245,22 @@ export default function ProjectImageSlider({
               height: '100%'
             }}
           >
-            <Image 
-              src={imageSrc} 
+            <Image
+              src={imageSrc}
               alt={`${projectTitle} - Imagen ${index + 1}`}
               fill
               sizes="(max-width: 768px) 100vw, 393px"
               quality={100}
-              className={`transition-opacity duration-300 ${
+              className={`transition-opacity duration-200 ease-in-out ${
                 isTransitioning ? 'opacity-0' : 'opacity-100'
               }`}
               style={{
-                objectFit: 'cover', // Cambia a 'cover' si prefieres que la imagen llene todo el espacio
-                userSelect: 'none'
+                objectFit: 'cover',
+                userSelect: 'none',
+                transform: 'translate3d(0, 0, 0)', // GPU acceleration
+                WebkitTransform: 'translate3d(0, 0, 0)',
+                backfaceVisibility: 'hidden',
+                WebkitBackfaceVisibility: 'hidden'
               }}
               priority={index === 0}
               draggable={false}

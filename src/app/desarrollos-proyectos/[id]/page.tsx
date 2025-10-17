@@ -22,8 +22,17 @@ export default function DesarrolloProyecto() {
   const [isTransitioning, setIsTransitioning] = useState(false)
 
   // Scroll to top when project changes (especially important for iOS)
+  // Using useLayoutEffect to run synchronously before paint
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' })
+    // Scroll immediately without any animation
+    window.scrollTo(0, 0)
+    // Also ensure document scroll
+    if (document.documentElement) {
+      document.documentElement.scrollTop = 0
+    }
+    if (document.body) {
+      document.body.scrollTop = 0
+    }
   }, [projectId])
   
   // Obtener el proyecto desde Contentful
@@ -132,20 +141,32 @@ export default function DesarrolloProyecto() {
     )
   }
 
-  
+
   // Función para navegar entre proyectos con transición de opacidad
   const navigateToProject = (targetProject: { fields: { slug: string } }) => {
     if (!targetProject) return
-    
+
+    // Scroll to top BEFORE starting transition to prevent flickering
+    window.scrollTo(0, 0)
+    if (document.documentElement) {
+      document.documentElement.scrollTop = 0
+    }
+    if (document.body) {
+      document.body.scrollTop = 0
+    }
+
     setIsTransitioning(true)
-    
-    setTimeout(() => {
-      router.push(`/desarrollos-proyectos/${targetProject.fields.slug}`)
-    }, 150) // Mitad de la transición para cambiar el contenido
-    
+
+    // Use requestAnimationFrame for smoother transition
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        router.push(`/desarrollos-proyectos/${targetProject.fields.slug}`)
+      }, 100) // Reduced delay for faster navigation
+    })
+
     setTimeout(() => {
       setIsTransitioning(false)
-    }, 300) // Duración total de la transición
+    }, 250) // Reduced total duration
   }
 
   
@@ -170,7 +191,7 @@ export default function DesarrolloProyecto() {
         />
         
         {/* Panel de información mobile */}
-        <div className={`bg-[#EFEFEF] border-t border-gray-200 transition-opacity duration-300 ${
+        <div className={`bg-[#EFEFEF] border-t border-gray-200 transition-opacity duration-200 ease-in-out ${
           isTransitioning ? 'opacity-0' : 'opacity-100'
         }`}>
           <div className="content-wrapper">
@@ -273,7 +294,7 @@ export default function DesarrolloProyecto() {
       {/* Desktop Layout */}
       <div className="hidden md:block h-full relative">
         {/* Panel de información desktop */}
-        <div className={`absolute left-0 top-0 w-1/2 h-full bg-[#EFEFEF] z-10 pt-16 md:pt-20 lg:pt-18 flex flex-col transition-opacity duration-300 ${
+        <div className={`absolute left-0 top-0 w-1/2 h-full bg-[#EFEFEF] z-10 pt-16 md:pt-20 lg:pt-18 flex flex-col transition-opacity duration-200 ease-in-out ${
           isTransitioning ? 'opacity-0' : 'opacity-100'
         }`}>
           <div className="content-wrapper">

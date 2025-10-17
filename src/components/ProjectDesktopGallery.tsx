@@ -66,15 +66,21 @@ export default function ProjectDesktopGallery({
         >
           {images.map((imageSrc, index) => (
             <div key={index} className="flex-shrink-0 w-full h-full snap-start">
-              <Image 
-                src={imageSrc} 
+              <Image
+                src={imageSrc}
                 alt={`${projectTitle} - Imagen ${index + 1}`}
                 width={800}
                 height={600}
                 quality={100}
-                className={`w-full h-full object-cover transition-opacity duration-300 ${
+                className={`w-full h-full object-cover transition-opacity duration-200 ease-in-out ${
                   isTransitioning ? 'opacity-0' : 'opacity-100'
                 }`}
+                style={{
+                  transform: 'translate3d(0, 0, 0)',
+                  WebkitTransform: 'translate3d(0, 0, 0)',
+                  backfaceVisibility: 'hidden',
+                  WebkitBackfaceVisibility: 'hidden'
+                }}
               />
             </div>
           ))}
