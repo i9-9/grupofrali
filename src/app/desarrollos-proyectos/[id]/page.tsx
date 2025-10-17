@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -67,10 +67,6 @@ export default function DesarrolloProyecto() {
     ? allProjects[currentProjectIndex + 1] 
     : allProjects[0] // Primer proyecto
   
-  // Scroll to top cuando cambia el proyecto
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [projectId])
 
 
   const mobileImages: string[] = (() => {
@@ -157,7 +153,7 @@ export default function DesarrolloProyecto() {
   }
 
   return (
-    <main className="min-h-screen md:h-screen md:overflow-hidden bg-[#EFEFEF] relative">
+    <main key={projectId} className="min-h-screen md:h-screen md:overflow-hidden bg-[#EFEFEF] relative">
       {/* Mobile Layout */}
       <div className="md:hidden flex flex-col">
         {/* CARRUSEL MOBILE */}
