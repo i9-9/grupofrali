@@ -11,17 +11,24 @@ import type { ContentfulStatistic, ContentfulProject } from "@/lib/contentful";
 interface HomePageProps {
   statistics: ContentfulStatistic[];
   homeGalleryProjects: ContentfulProject[];
+  videosDesktop?: Array<{ src: string; poster?: string }>;
+  videosMobile?: Array<{ src: string; poster?: string }>;
 }
 
-export default function HomePage({ statistics, homeGalleryProjects }: HomePageProps) {
+export default function HomePage({
+  statistics,
+  homeGalleryProjects,
+  videosDesktop,
+  videosMobile
+}: HomePageProps) {
   const { t } = useTranslations();
 
   return (
     <main>
       {/* Video Hero */}
       <section className="relative h-screen overflow-hidden">
-        <RandomVideo type="mobile" />
-        <RandomVideo type="desktop" />
+        <RandomVideo type="mobile" videos={videosMobile} />
+        <RandomVideo type="desktop" videos={videosDesktop} />
         {/* Content over video */}
         <div className="relative z-10 h-full flex items-center justify-center">
           <div className="text-center text-white"></div>

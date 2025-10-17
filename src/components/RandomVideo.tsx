@@ -4,29 +4,36 @@ import { useEffect, useState, useRef } from 'react';
 
 type Props = {
   type: 'mobile' | 'desktop';
+  videos?: Array<{ src: string; poster?: string }>;
 };
 
-const mobileVideos = [
-  '/videos/video_mobile1.mp4',
-  '/videos/video_mobile2.mp4',
+// Fallback videos locales (solo se usan si no se pasan videos desde Contentful)
+const mobileVideosFallback = [
+  { src: '/videos/video_mobile1.mp4', poster: '/videos/video_mobile1_poster.jpg' },
+  { src: '/videos/video_mobile2.mp4', poster: '/videos/video_mobile2_poster.jpg' },
 ];
 
-const desktopVideos = [
-  '/videos/video_desktop1.mp4',
-  '/videos/video_desktop3.mp4',
+const desktopVideosFallback = [
+  { src: '/videos/video_desktop1.mp4', poster: '/videos/video_desktop1_poster.jpg' },
+  { src: '/videos/video_desktop3.mp4', poster: '/videos/video_desktop3_poster.jpg' },
 ];
 
-export default function RandomVideo({ type }: Props) {
-  const [videoSrc, setVideoSrc] = useState<string | null>(null);
+export default function RandomVideo({ type, videos }: Props) {
+  const [videoData, setVideoData] = useState<{ src: string; poster?: string } | null>(null);
   const [isMounted, setIsMounted] = useState(false);
   const [shouldLoad, setShouldLoad] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     setIsMounted(true);
-    const list = type === 'mobile' ? mobileVideos : desktopVideos;
-    const randomIndex = Math.floor(Math.random() * list.length);
-    setVideoSrc(list[randomIndex]);
+
+    // Usar videos de Contentful si están disponibles, sino usar fallback locales
+    const videoList = videos && videos.length > 0
+      ? videos
+      : (type === 'mobile' ? mobileVideosFallback : desktopVideosFallback);
+
+    const randomIndex = Math.floor(Math.random() * videoList.length);
+    setVideoData(videoList[randomIndex]);
 
     // Delay video loading slightly to prioritize other critical resources
     const timer = setTimeout(() => {
@@ -34,7 +41,7 @@ export default function RandomVideo({ type }: Props) {
     }, 100);
 
     return () => clearTimeout(timer);
-  }, [type]);
+  }, [type, videos]);
 
   useEffect(() => {
     // Start loading video once shouldLoad is true
@@ -44,14 +51,14 @@ export default function RandomVideo({ type }: Props) {
   }, [shouldLoad]);
 
   // Don't render anything until we're on the client
-  if (!isMounted || !videoSrc) return null;
+  if (!isMounted || !videoData) return null;
 
   // Check if we should render this video based on screen size
   // Only render mobile video on mobile, desktop video on desktop
   const shouldRenderMobile = type === 'mobile';
 
   // Aplicar zoom específico a videos para ocultar información lumínica detrás del navbar
-  const isVideo2Desktop = videoSrc === '/videos/video_desktop2.mp4';
+  const isVideo2Desktop = videoData.src === '/videos/video_desktop2.mp4';
 
   // Zoom para desktop específico
   const getVideoStyle = () => {
@@ -81,6 +88,7 @@ export default function RandomVideo({ type }: Props) {
         perspective: '1000px',
         WebkitPerspective: '1000px'
       }}
+      poster={videoData.poster}
       autoPlay
       muted
       loop
@@ -88,10 +96,10 @@ export default function RandomVideo({ type }: Props) {
       preload="none"
       disablePictureInPicture
       disableRemotePlayback
-      key={videoSrc}
+      key={videoData.src}
       aria-label={`Video de fondo ${type === 'mobile' ? 'móvil' : 'de escritorio'} de Grupo Frali`}
     >
-      {shouldLoad && <source src={videoSrc} type="video/mp4" />}
+      {shouldLoad && <source src={videoData.src} type="video/mp4" />}
       <track kind="captions" />
     </video>
   );

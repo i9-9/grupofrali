@@ -148,6 +148,20 @@ export interface ContentfulProjectStatistic {
   }
 }
 
+// Nuevo: Entry de Video con Poster incluido
+export interface ContentfulVideoWithPoster {
+  sys: {
+    id: string
+    type: string
+  }
+  fields: {
+    title: string
+    video: ContentfulMedia
+    poster?: ContentfulMedia
+    displayOrder?: number
+  }
+}
+
 export interface ContentfulHomePage {
   sys: {
     id: string
@@ -160,8 +174,14 @@ export interface ContentfulHomePage {
     heroTitleEn: string
     description: ContentfulRichText
     descriptionEn: ContentfulRichText
+    // OPCIÓN 1: Arrays separados (actual - mantener por compatibilidad)
     videosDesktop?: ContentfulMedia[]
     videosMobile?: ContentfulMedia[]
+    postersDesktop?: ContentfulMedia[]
+    postersMobile?: ContentfulMedia[]
+    // OPCIÓN 2: Nuevos campos con videos+posters en un solo entry (RECOMENDADO)
+    heroVideosDesktop?: ContentfulVideoWithPoster[]
+    heroVideosMobile?: ContentfulVideoWithPoster[]
     logosMarquee?: ContentfulMedia[]
     proyectosDestacados?: ContentfulProject[]
     maxProyectosDestacados?: number
