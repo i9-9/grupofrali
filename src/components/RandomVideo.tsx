@@ -89,8 +89,10 @@ export default function RandomVideo({ type }: Props) {
       disablePictureInPicture
       disableRemotePlayback
       key={videoSrc}
+      aria-label={`Video de fondo ${type === 'mobile' ? 'móvil' : 'de escritorio'} de Grupo Frali`}
     >
       {shouldLoad && <source src={videoSrc} type="video/mp4" />}
+      <track kind="captions" />
     </video>
   );
 }

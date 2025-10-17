@@ -366,23 +366,31 @@ export default function DesarrolloProyecto() {
           {/* Flecha anterior */}
           <button
             onClick={() => navigateToProject(previousProject)}
-            className="pointer-events-auto w-16 h-16 flex items-center justify-center hover:opacity-70 transition-opacity"
+            className="pointer-events-auto flex items-center justify-center w-12 h-12 hover:opacity-70 transition-opacity"
             aria-label={`Ir a proyecto anterior: ${previousProject ? (language === 'en' ? previousProject.fields.titleEn : previousProject.fields.title).replace(/\\n/g, ' ') : 'Proyecto anterior'}`}
           >
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
-              <path d="M19 12H5M12 19l-7-7 7-7"/>
-            </svg>
+            <Image
+              src="/images/icons/LEFT_ARROW.svg"
+              alt=""
+              width={24}
+              height={24}
+              className="w-6 h-6"
+            />
           </button>
           
           {/* Flecha siguiente */}
           <button
             onClick={() => navigateToProject(nextProject)}
-            className="pointer-events-auto w-16 h-16 flex items-center justify-center hover:opacity-70 transition-opacity"
+            className="pointer-events-auto flex items-center justify-center w-12 h-12 hover:opacity-70 transition-opacity"
             aria-label={`Ir a proyecto siguiente: ${nextProject ? (language === 'en' ? nextProject.fields.titleEn : nextProject.fields.title).replace(/\\n/g, ' ') : 'Proyecto siguiente'}`}
           >
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
+            <Image
+              src="/images/icons/RIGHT_ARROW.svg"
+              alt=""
+              width={24}
+              height={24}
+              className="w-6 h-6"
+            />
           </button>
         </div>
       </div>

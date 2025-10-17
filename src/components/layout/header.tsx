@@ -114,7 +114,12 @@ export default function Header() {
           <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
             {/* Mobile */}
             <div className={`flex md:hidden items-center h-30`}>
-              <Link href='/' className="flex items-center frali-logo-mobile flex-shrink-0 overflow-hidden" style={{ transform: 'translateY(2px)' }}>
+              <Link 
+                href='/' 
+                className="flex items-center frali-logo-mobile flex-shrink-0 overflow-hidden" 
+                style={{ transform: 'translateY(2px)' }}
+                aria-label="Ir a la página de inicio"
+              >
                   <FraliLogo 
                     className={`h-full w-auto ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}
                     color={isHome || isProjectPage ? '#FFFFFF' : '#000000'}
@@ -123,7 +128,12 @@ export default function Header() {
               
               <div className="flex-grow" style={{ minWidth: '24px' }}></div>
 
-              <button onClick={toggleMenu} className={`flex items-center justify-center h-9 w-9 flex-shrink-0 ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}>
+              <button 
+                onClick={toggleMenu} 
+                className={`flex items-center justify-center h-12 w-12 flex-shrink-0 ${isHome || isProjectPage ? 'text-white' : 'text-black'}`}
+                aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+                aria-expanded={isOpen}
+              >
                 {isOpen ? <></> : <HamburgerIcon />}
               </button>
             </div>
@@ -131,7 +141,7 @@ export default function Header() {
             {/* Desktop */}
             <div className="hidden md:block">
               <div className="flex justify-between items-center h-14">
-                <Link href="/">
+                <Link href="/" aria-label="Ir a la página de inicio">
                     <FraliLogo 
                       className="h-3 w-auto"
                       color="#000000"
@@ -222,9 +232,13 @@ export default function Header() {
                   {language === 'es' ? 'EN' : 'ES'}
                 </button>
               </div>
-              <div onClick={toggleMenu}>
+              <button 
+                onClick={toggleMenu}
+                aria-label="Cerrar menú"
+                className="cursor-pointer hover:opacity-70 transition-opacity flex items-center justify-center h-12 w-12"
+              >
                 <DownArrowIcon className="rotate-180" />
-              </div>
+              </button>
             </div>
           </div>
         </div>

@@ -43,7 +43,12 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className="flex flex-col md:flex-row justify-between text-white py-10 gap-y-1">
-                    <button onClick={scrollToTop} className="hidden md:block text-white hover:text-white/70 transition-colors cursor-pointer text-left" style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}>
+                    <button 
+                        onClick={scrollToTop} 
+                        className="hidden md:block text-white hover:text-white/70 transition-colors cursor-pointer text-left" 
+                        style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}
+                        aria-label="Volver al inicio de la página"
+                    >
                         {t("common.buttons.back")}
                     </button>
                     <Link href="/" className="text-white tracking-[0.17em] hover:text-white/70 transition-colors" style={{ fontSize: 'clamp(10px, 1vw, 14px)' }}>

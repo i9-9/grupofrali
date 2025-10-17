@@ -189,16 +189,16 @@ export default function ContentfulProjects({
         <button
           onClick={scrollLeft}
           disabled={isTransitioning}
-          className={`flex items-center justify-center w-6 h-6 transition-opacity duration-200 ${
+          className={`flex items-center justify-center w-12 h-12 transition-opacity duration-200 ${
             isTransitioning 
               ? 'opacity-50 cursor-not-allowed' 
               : 'hover:opacity-70 cursor-pointer'
           }`}
-          aria-label="Scroll left"
+          aria-label="Ver proyectos anteriores"
         >
           <Image
             src="/images/icons/LEFT_ARROW.svg"
-            alt="Previous"
+            alt=""
             width={24}
             height={24}
             className="w-6 h-6"
@@ -208,16 +208,16 @@ export default function ContentfulProjects({
         <button
           onClick={scrollRight}
           disabled={isTransitioning}
-          className={`flex items-center justify-center w-6 h-6 transition-opacity duration-200 ${
+          className={`flex items-center justify-center w-12 h-12 transition-opacity duration-200 ${
             isTransitioning 
               ? 'opacity-50 cursor-not-allowed' 
               : 'hover:opacity-70 cursor-pointer'
           }`}
-          aria-label="Scroll right"
+          aria-label="Ver proyectos siguientes"
         >
           <Image
             src="/images/icons/RIGHT_ARROW.svg"
-            alt="Next"
+            alt=""
             width={24}
             height={24}
             className="w-6 h-6"

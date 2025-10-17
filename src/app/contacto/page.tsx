@@ -78,15 +78,18 @@ export default function Contacto() {
                     <input
                       type="text"
                       name="nombre"
+                      id="nombre"
                       value={formData.nombre}
                       onChange={handleInputChange}
                       className="w-full bg-transparent pb-2 text-black font-archivo text-base tracking-wider focus:outline-none border-0"
+                      aria-label={t('contact.form.firstName')}
+                      required
                     />
                   </div>
-                  <label className="block mt-2 font-archivo text-black uppercase contact-label-mobile md:hidden">
+                  <label htmlFor="nombre" className="block mt-2 font-archivo text-black uppercase contact-label-mobile md:hidden">
                     {t('contact.form.firstName')}
                   </label>
-                  <label className="hidden md:block mt-2 font-archivo text-black uppercase contact-label-desktop">
+                  <label htmlFor="nombre" className="hidden md:block mt-2 font-archivo text-black uppercase contact-label-desktop">
                     {t('contact.form.firstName')}
                   </label>
                 </div>
@@ -95,15 +98,18 @@ export default function Contacto() {
                     <input
                       type="text"
                       name="apellido"
+                      id="apellido"
                       value={formData.apellido}
                       onChange={handleInputChange}
                       className="w-full bg-transparent pb-2 text-black font-archivo text-base tracking-wider focus:outline-none border-0"
+                      aria-label={t('contact.form.lastName')}
+                      required
                     />
                   </div>
-                  <label className="block mt-2 font-archivo text-black uppercase contact-label-mobile md:hidden">
+                  <label htmlFor="apellido" className="block mt-2 font-archivo text-black uppercase contact-label-mobile md:hidden">
                     {t('contact.form.lastName')}
                   </label>
-                  <label className="hidden md:block mt-2 font-archivo text-black uppercase contact-label-desktop">
+                  <label htmlFor="apellido" className="hidden md:block mt-2 font-archivo text-black uppercase contact-label-desktop">
                     {t('contact.form.lastName')}
                   </label>
                 </div>
@@ -115,15 +121,18 @@ export default function Contacto() {
                   <input
                     type="email"
                     name="email"
+                    id="email"
                     value={formData.email}
                     onChange={handleInputChange}
                     className="w-full bg-transparent pb-2 text-black font-archivo text-base tracking-wider focus:outline-none border-0"
+                    aria-label={t('contact.form.email')}
+                    required
                   />
                 </div>
-                <label className="block mt-2 font-archivo text-black uppercase contact-label-mobile md:hidden">
+                <label htmlFor="email" className="block mt-2 font-archivo text-black uppercase contact-label-mobile md:hidden">
                   {t('contact.form.email')}
                 </label>
-                <label className="hidden md:block mt-2 font-archivo text-black uppercase contact-label-desktop">
+                <label htmlFor="email" className="hidden md:block mt-2 font-archivo text-black uppercase contact-label-desktop">
                   {t('contact.form.email')}
                 </label>
               </div>
@@ -134,12 +143,16 @@ export default function Contacto() {
                   <input
                     type="text"
                     name="asunto"
+                    id="asunto"
                     value={formData.asunto}
                     onChange={handleInputChange}
                     className="w-full bg-transparent pb-2 text-black font-archivo text-base tracking-wider focus:outline-none border-0"
+                    aria-label={t('contact.form.subject')}
+                    required
                   />
                 </div>
                 <label 
+                  htmlFor="asunto"
                   className="block mt-2 font-archivo text-black uppercase"
                   style={{ 
                     fontSize: 'clamp(16px, 1.02vw, 15.36px)', 
@@ -157,13 +170,17 @@ export default function Contacto() {
                 <div className={`form-field form-field-delay-4 ${isFormVisible ? 'animate' : ''}`}>
                   <textarea
                     name="mensaje"
+                    id="mensaje"
                     value={formData.mensaje}
                     onChange={handleInputChange}
                     rows={4}
                     className="w-full bg-transparent pb-2 text-black font-archivo text-base tracking-wider resize-none focus:outline-none border-0"
+                    aria-label={t('contact.form.message')}
+                    required
                   />
                 </div>
                 <label 
+                  htmlFor="mensaje"
                   className="block mt-2 font-archivo text-black uppercase"
                   style={{ 
                     fontSize: 'clamp(16px, 1.02vw, 15.36px)', 
@@ -179,7 +196,9 @@ export default function Contacto() {
                 <div className="flex justify-end mt-6">
                   <button
                     onClick={handleSubmit}
-                    className="font-archivo text-black/30 tracking-wider hover:opacity-70 transition-opacity text-base cursor-pointer"
+                    type="submit"
+                    className="font-archivo text-black/30 tracking-wider hover:opacity-70 transition-opacity text-base cursor-pointer min-h-12 px-4"
+                    aria-label="Enviar formulario de contacto"
                   >
                     {t('contact.form.send')}
                   </button>
