@@ -69,9 +69,11 @@ export default function ProjectDesktopGallery({
               <Image
                 src={imageSrc}
                 alt={`${projectTitle} - Imagen ${index + 1}`}
-                width={800}
-                height={600}
-                quality={100}
+                width={960}
+                height={1080}
+                quality={85}
+                priority={index === 0}
+                loading={index === 0 ? undefined : 'lazy'}
                 className={`w-full h-full object-cover transition-opacity duration-200 ease-in-out ${
                   isTransitioning ? 'opacity-0' : 'opacity-100'
                 }`}

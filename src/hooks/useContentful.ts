@@ -217,3 +217,28 @@ export function useProject(slug: string) {
   return { project, loading, error }
 }
 
+// Hook optimizado para navegación entre proyectos
+export function useProjectNavigation() {
+  const [projectSlugs, setProjectSlugs] = useState<Array<{ slug: string; title: string; titleEn: string }>>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchProjectSlugs() {
+      try {
+        setLoading(true)
+        const { getProjectSlugsForNavigation } = await import('@/lib/contentful')
+        const data = await getProjectSlugsForNavigation()
+        setProjectSlugs(data)
+      } catch (err) {
+        console.error('Error loading project navigation data:', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProjectSlugs()
+  }, [])
+
+  return { projectSlugs, loading }
+}
+

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 interface ContentfulRichTextProps {
   content: ContentfulRichTextContent
@@ -163,7 +163,7 @@ function renderRichText(content: ContentfulRichTextContent, paragraphStyle?: Rea
   })
 }
 
-export default function ContentfulRichText({ content, className = '', paragraphStyle, convertLineBreaksToSpaces = false }: ContentfulRichTextProps) {
+const ContentfulRichText = memo(function ContentfulRichText({ content, className = '', paragraphStyle, convertLineBreaksToSpaces = false }: ContentfulRichTextProps) {
   if (!content) return null
 
   return (
@@ -171,5 +171,7 @@ export default function ContentfulRichText({ content, className = '', paragraphS
       {renderRichText(content, paragraphStyle, convertLineBreaksToSpaces)}
     </div>
   )
-}
+})
+
+export default ContentfulRichText
 

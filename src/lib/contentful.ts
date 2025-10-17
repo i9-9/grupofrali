@@ -189,7 +189,7 @@ export interface ContentfulHomePage {
     maxMiembrosEquipo?: number
     estadisticas?: ContentfulStatistic[]
     maxEstadisticas?: number
-    isActive: boolean
+    isActive?: boolean
     lastUpdated?: string
   }
 }
@@ -201,7 +201,6 @@ export async function getHomePageData(): Promise<ContentfulHomePage | null> {
     const response = await client.getEntries({
       content_type: 'homePage',
       include: 3,
-      'fields.isActive': true,
       limit: 1
     })
     
@@ -302,7 +301,7 @@ export async function getProjectBySlug(slug: string): Promise<ContentfulProject 
     const client = getContentfulClient()
     const response = await client.getEntries({
       content_type: 'project',
-      include: 3, // Incluir referencias a estadísticas
+      include: 2, // Reducido de 3 a 2 para mejor performance
       'fields.slug': slug,
       'fields.isActive': true,
       limit: 1
@@ -343,6 +342,32 @@ export async function getProjectStatistics(projectId: string): Promise<Contentfu
     return response.items as unknown as ContentfulProjectStatistic[]
   } catch (error) {
     console.error('Error fetching project statistics:', error)
+    return []
+  }
+}
+
+// Función optimizada para obtener solo los datos necesarios para navegación
+export async function getProjectSlugsForNavigation(): Promise<Array<{ slug: string; title: string; titleEn: string }>> {
+  try {
+    const client = getContentfulClient()
+    const response = await client.getEntries({
+      content_type: 'project',
+      'fields.isActive': true,
+      order: ['fields.displayOrder'],
+      select: ['fields.slug', 'fields.title', 'fields.titleEn'],
+      limit: 1000
+    })
+    
+    return response.items.map(item => {
+      const fields = item.fields as { slug: string; title: string; titleEn: string }
+      return {
+        slug: fields.slug,
+        title: fields.title,
+        titleEn: fields.titleEn
+      }
+    })
+  } catch (error) {
+    console.error('Error fetching project slugs:', error)
     return []
   }
 }

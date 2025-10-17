@@ -250,7 +250,9 @@ export default function ProjectImageSlider({
               alt={`${projectTitle} - Imagen ${index + 1}`}
               fill
               sizes="(max-width: 768px) 100vw, 393px"
-              quality={100}
+              quality={85}
+              priority={index === 0}
+              loading={index === 0 ? undefined : 'lazy'}
               className={`transition-opacity duration-200 ease-in-out ${
                 isTransitioning ? 'opacity-0' : 'opacity-100'
               }`}
@@ -262,7 +264,6 @@ export default function ProjectImageSlider({
                 backfaceVisibility: 'hidden',
                 WebkitBackfaceVisibility: 'hidden'
               }}
-              priority={index === 0}
               draggable={false}
             />
           </div>

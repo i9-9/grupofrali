@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -18,22 +18,8 @@ export default function DesarrolloProyecto() {
   const router = useRouter()
   const { language } = useLanguage()
   const projectId = params.id as string
-
+  
   const [isTransitioning, setIsTransitioning] = useState(false)
-
-  // Scroll to top when project changes (especially important for iOS)
-  // Using useLayoutEffect to run synchronously before paint
-  useEffect(() => {
-    // Scroll immediately without any animation
-    window.scrollTo(0, 0)
-    // Also ensure document scroll
-    if (document.documentElement) {
-      document.documentElement.scrollTop = 0
-    }
-    if (document.body) {
-      document.body.scrollTop = 0
-    }
-  }, [projectId])
   
   // Obtener el proyecto desde Contentful
   const { project, loading, error } = useProject(projectId)
@@ -49,7 +35,7 @@ export default function DesarrolloProyecto() {
     'terrazas-de-septiembre': '/images/project-logos/septiembre.svg',
     'casas-de-septiembre': '/images/project-logos/septiembre.svg',
     'la-reserva-cardales': '/images/project-logos/lareservacardales.svg',
-    'sofitel-la-reserva-cardales': '/images/project-logos/sofitel-white.png',
+    'sofitel-la-reserva-cardales': '/images/project-logos/sofitel.svg',
     'santa-regina': '/images/project-logos/santa-regina.svg'
   }
   const logoSrc = project ? projectLogos[project.fields.slug] : undefined
@@ -73,27 +59,13 @@ export default function DesarrolloProyecto() {
   }, [project, language])
   
   // Encontrar el índice del proyecto actual y calcular anterior/siguiente con navegación circular
-  const { previousProject, nextProject } = useMemo(() => {
-    if (!allProjects.length) {
-      return { previousProject: null, nextProject: null }
-    }
-    
-    const currentProjectIndex = allProjects.findIndex(p => p.fields.slug === projectId)
-    
-    if (currentProjectIndex === -1) {
-      return { previousProject: null, nextProject: null }
-    }
-    
-    const previous = currentProjectIndex > 0 
-      ? allProjects[currentProjectIndex - 1] 
-      : allProjects[allProjects.length - 1] // Último proyecto
-    
-    const next = currentProjectIndex < allProjects.length - 1 
-      ? allProjects[currentProjectIndex + 1] 
-      : allProjects[0] // Primer proyecto
-    
-    return { previousProject: previous, nextProject: next }
-  }, [allProjects, projectId])
+  const currentProjectIndex = allProjects.findIndex(p => p.fields.slug === projectId)
+  const previousProject = currentProjectIndex > 0 
+    ? allProjects[currentProjectIndex - 1] 
+    : allProjects[allProjects.length - 1] // Último proyecto
+  const nextProject = currentProjectIndex < allProjects.length - 1 
+    ? allProjects[currentProjectIndex + 1] 
+    : allProjects[0] // Primer proyecto
   
 
 
@@ -155,32 +127,20 @@ export default function DesarrolloProyecto() {
     )
   }
 
-
+  
   // Función para navegar entre proyectos con transición de opacidad
-  const navigateToProject = (targetProject: { fields: { slug: string } } | null) => {
+  const navigateToProject = (targetProject: { fields: { slug: string } }) => {
     if (!targetProject) return
-
-    // Scroll to top BEFORE starting transition to prevent flickering
-    window.scrollTo(0, 0)
-    if (document.documentElement) {
-      document.documentElement.scrollTop = 0
-    }
-    if (document.body) {
-      document.body.scrollTop = 0
-    }
-
+    
     setIsTransitioning(true)
-
-    // Use requestAnimationFrame for smoother transition
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        router.push(`/desarrollos-proyectos/${targetProject.fields.slug}`)
-      }, 100) // Reduced delay for faster navigation
-    })
-
+    
+    setTimeout(() => {
+      router.push(`/desarrollos-proyectos/${targetProject.fields.slug}`)
+    }, 150) // Mitad de la transición para cambiar el contenido
+    
     setTimeout(() => {
       setIsTransitioning(false)
-    }, 250) // Reduced total duration
+    }, 300) // Duración total de la transición
   }
 
   
@@ -205,7 +165,7 @@ export default function DesarrolloProyecto() {
         />
         
         {/* Panel de información mobile */}
-        <div className={`bg-[#EFEFEF] border-t border-gray-200 transition-opacity duration-200 ease-in-out ${
+        <div className={`bg-[#EFEFEF] border-t border-gray-200 transition-opacity duration-300 ${
           isTransitioning ? 'opacity-0' : 'opacity-100'
         }`}>
           <div className="content-wrapper">
@@ -280,14 +240,11 @@ export default function DesarrolloProyecto() {
         </div>
         
         {/* Flechas de navegación mobile - fuera del content-wrapper */}
-        <div className="flex justify-between items-center py-8">
+        <div className="flex justify-between items-center py-8 px-4">
           {/* Flecha anterior */}
           <button
             onClick={() => navigateToProject(previousProject)}
-            disabled={!previousProject}
-            className={`w-12 h-12 flex items-center justify-center transition-opacity ${
-              previousProject ? 'hover:opacity-70 cursor-pointer' : 'opacity-30 cursor-not-allowed'
-            }`}
+            className="w-12 h-12 flex items-center justify-center hover:opacity-70 transition-opacity"
             aria-label={`Ir a proyecto anterior: ${previousProject ? (language === 'en' ? previousProject.fields.titleEn : previousProject.fields.title).replace(/\\n/g, ' ') : 'Proyecto anterior'}`}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
@@ -298,10 +255,7 @@ export default function DesarrolloProyecto() {
           {/* Flecha siguiente */}
           <button
             onClick={() => navigateToProject(nextProject)}
-            disabled={!nextProject}
-            className={`w-12 h-12 flex items-center justify-center transition-opacity ${
-              nextProject ? 'hover:opacity-70 cursor-pointer' : 'opacity-30 cursor-not-allowed'
-            }`}
+            className="w-12 h-12 flex items-center justify-center hover:opacity-70 transition-opacity"
             aria-label={`Ir a proyecto siguiente: ${nextProject ? (language === 'en' ? nextProject.fields.titleEn : nextProject.fields.title).replace(/\\n/g, ' ') : 'Proyecto siguiente'}`}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
@@ -314,7 +268,7 @@ export default function DesarrolloProyecto() {
       {/* Desktop Layout */}
       <div className="hidden md:block h-full relative">
         {/* Panel de información desktop */}
-        <div className={`absolute left-0 top-0 w-1/2 h-full bg-[#EFEFEF] z-10 pt-16 md:pt-20 lg:pt-18 flex flex-col transition-opacity duration-200 ease-in-out ${
+        <div className={`absolute left-0 top-0 w-1/2 h-full bg-[#EFEFEF] z-10 pt-16 md:pt-20 lg:pt-18 flex flex-col transition-opacity duration-300 ${
           isTransitioning ? 'opacity-0' : 'opacity-100'
         }`}>
           <div className="content-wrapper">
@@ -403,41 +357,27 @@ export default function DesarrolloProyecto() {
         />
         
         {/* Flechas de navegación desktop */}
-        <div className="flex absolute bottom-2 left-0 right-0 justify-between pointer-events-none z-20">
+        <div className="flex absolute bottom-2 left-0 right-0 justify-between pointer-events-none z-20 px-4">
           {/* Flecha anterior */}
           <button
             onClick={() => navigateToProject(previousProject)}
-            disabled={!previousProject}
-            className={`pointer-events-auto flex items-center justify-center w-12 h-12 transition-opacity ${
-              previousProject ? 'hover:opacity-70 cursor-pointer' : 'opacity-30 cursor-not-allowed'
-            }`}
+            className="pointer-events-auto w-16 h-16 flex items-center justify-center hover:opacity-70 transition-opacity"
             aria-label={`Ir a proyecto anterior: ${previousProject ? (language === 'en' ? previousProject.fields.titleEn : previousProject.fields.title).replace(/\\n/g, ' ') : 'Proyecto anterior'}`}
           >
-            <Image
-              src="/images/icons/LEFT_ARROW.svg"
-              alt=""
-              width={24}
-              height={24}
-              className="w-6 h-6"
-            />
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
           </button>
           
           {/* Flecha siguiente */}
           <button
             onClick={() => navigateToProject(nextProject)}
-            disabled={!nextProject}
-            className={`pointer-events-auto flex items-center justify-center w-12 h-12 transition-opacity ${
-              nextProject ? 'hover:opacity-70 cursor-pointer' : 'opacity-30 cursor-not-allowed'
-            }`}
+            className="pointer-events-auto w-16 h-16 flex items-center justify-center hover:opacity-70 transition-opacity"
             aria-label={`Ir a proyecto siguiente: ${nextProject ? (language === 'en' ? nextProject.fields.titleEn : nextProject.fields.title).replace(/\\n/g, ' ') : 'Proyecto siguiente'}`}
           >
-            <Image
-              src="/images/icons/RIGHT_ARROW.svg"
-              alt=""
-              width={24}
-              height={24}
-              className="w-6 h-6"
-            />
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
           </button>
         </div>
       </div>
