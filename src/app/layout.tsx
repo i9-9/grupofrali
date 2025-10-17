@@ -46,6 +46,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
+      <head>
+        {/* Mobile-specific resource hints for faster loading */}
+        <link rel="preconnect" href="https://images.ctfassets.net" />
+        <link rel="dns-prefetch" href="https://images.ctfassets.net" />
+        <link rel="preconnect" href="https://cdn.contentful.com" />
+        <link rel="dns-prefetch" href="https://cdn.contentful.com" />
+      </head>
       <body className="bg-[#EFEFEF]">
         <LanguageProvider>
           <ConditionalLayout>

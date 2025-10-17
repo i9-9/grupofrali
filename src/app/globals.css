@@ -4,6 +4,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ========================================
+   MOBILE PERFORMANCE OPTIMIZATIONS
+   ======================================== */
+
+/* Optimize font loading for mobile */
+@media (max-width: 768px) {
+  @font-face {
+    font-family: 'baskerville';
+    font-display: swap; /* Faster font loading on mobile */
+  }
+
+  @font-face {
+    font-family: 'archivo';
+    font-display: swap;
+  }
+}
+
+/* Reduce paint and layout overhead on mobile */
+@media (max-width: 768px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation; /* Faster touch response */
+  }
+
+  /* Optimize scroll performance on mobile */
+  body {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none; /* Prevent overscroll bounce lag */
+  }
+}
+
 /* Fuentes de Adobe Fonts */
 /* Baskerville - usando Adobe Fonts - solo peso 400 */
 .font-baskerville {

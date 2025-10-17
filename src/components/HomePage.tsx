@@ -4,7 +4,6 @@ import RandomVideo from "@/components/RandomVideo";
 import ContentfulProjects from "@/components/ContentfulProjects";
 import ContentfulStats from "@/components/ContentfulStats";
 import Link from "next/link";
-import Image from "next/image";
 import ScrollArrow from "@/components/ScrollArrow";
 import { useTranslations } from "@/hooks/useTranslations";
 import type { ContentfulStatistic, ContentfulProject } from "@/lib/contentful";
