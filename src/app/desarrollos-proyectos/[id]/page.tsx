@@ -67,6 +67,10 @@ export default function DesarrolloProyecto() {
     ? allProjects[currentProjectIndex + 1] 
     : allProjects[0] // Primer proyecto
   
+  // Scroll to top cuando cambia el proyecto
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [projectId])
 
 
   const mobileImages: string[] = (() => {
