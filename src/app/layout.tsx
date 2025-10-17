@@ -1,7 +1,15 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import ConditionalLayout from "@/components/layout/ConditionalLayout";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: '#EFEFEF',
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
@@ -11,7 +19,8 @@ export const metadata: Metadata = {
     icon: '/favicon.png',
     shortcut: '/favicon.png',
     apple: '/favicon.png',
-  }, 
+  },
+  manifest: '/site.webmanifest',
   openGraph: {
     title: "Grupo Frali",
     description: "Con casi 30 años de trayectoria, en Grupo Frali desarrollamos inversiones estratégicas en real estate, agroindustria, hotelería y energías renovables.",

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -18,8 +18,13 @@ export default function DesarrolloProyecto() {
   const router = useRouter()
   const { language } = useLanguage()
   const projectId = params.id as string
-  
+
   const [isTransitioning, setIsTransitioning] = useState(false)
+
+  // Scroll to top when project changes (especially important for iOS)
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [projectId])
   
   // Obtener el proyecto desde Contentful
   const { project, loading, error } = useProject(projectId)
@@ -240,7 +245,7 @@ export default function DesarrolloProyecto() {
         </div>
         
         {/* Flechas de navegación mobile - fuera del content-wrapper */}
-        <div className="flex justify-between items-center py-8 px-4">
+        <div className="flex justify-between items-center py-8">
           {/* Flecha anterior */}
           <button
             onClick={() => navigateToProject(previousProject)}
@@ -357,7 +362,7 @@ export default function DesarrolloProyecto() {
         />
         
         {/* Flechas de navegación desktop */}
-        <div className="flex absolute bottom-2 left-0 right-0 justify-between pointer-events-none z-20 px-4">
+        <div className="flex absolute bottom-2 left-0 right-0 justify-between pointer-events-none z-20">
           {/* Flecha anterior */}
           <button
             onClick={() => navigateToProject(previousProject)}

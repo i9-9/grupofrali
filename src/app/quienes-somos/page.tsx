@@ -427,7 +427,7 @@ export default function QuienesSomos() {
         </div>
 
         <div className="grid">
-          {management.map((person: { numero: string; nombre: string; apellido: string; cargo: string; imagen: string }) => (
+          {management.map((person: { numero: string; nombre: string; apellido: string; cargo: string; imagen: string }, idx: number) => (
             <React.Fragment key={person.numero}>
               {/* Imagen - 5 columnas mobile, 3 columnas desktop */}
               <div className="col-5 md:col-3 mb-8 md:mb-12">
@@ -436,7 +436,9 @@ export default function QuienesSomos() {
                   alt={`${person.nombre} ${person.apellido}`}
                   width={600}
                   height={800}
-                  quality={100}
+                  quality={85}
+                  loading={idx < 2 ? "eager" : "lazy"}
+                  priority={idx < 2}
                   className="w-full h-auto object-contain grayscale"
                 />
                 

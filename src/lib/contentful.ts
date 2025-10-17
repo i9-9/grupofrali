@@ -2,13 +2,14 @@ import { createClient } from 'contentful'
 
 // Función para crear el cliente de Contentful
 function getContentfulClient() {
-  console.log('Creating Contentful client with:', {
-    space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
-    accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN ? 'Present' : 'Missing',
-    environment: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT || 'master',
-  })
-  console.log('Deploy trigger - checking env vars...')
-  
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Creating Contentful client with:', {
+      space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
+      accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN ? 'Present' : 'Missing',
+      environment: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT || 'master',
+    })
+  }
+
   return createClient({
     space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID!,
     accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN!,
@@ -262,15 +263,13 @@ export async function getTeamMembers(): Promise<ContentfulTeamMember[]> {
 
 export async function getStatistics(): Promise<ContentfulStatistic[]> {
   try {
-    console.log('Fetching statistics...')
     const client = getContentfulClient()
     const response = await client.getEntries({
       content_type: 'statistic',
       'fields.isActive': true,
       order: ['fields.displayOrder']
     })
-    
-    console.log('Statistics response:', response.items.length, 'items')
+
     return response.items as unknown as ContentfulStatistic[]
   } catch (error) {
     console.error('Error fetching statistics:', error)

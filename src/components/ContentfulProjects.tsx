@@ -167,8 +167,8 @@ export default function ContentfulProjects({
 
   return (
     <div className="relative w-full">
-      <div ref={scrollContainerRef} className="w-full overflow-x-auto scrollbar-hidden">
-        <div className="flex space-x-6 pb-4 md:pb-8">
+      <div ref={scrollContainerRef} className="w-full overflow-x-auto scrollbar-hidden" style={{ margin: 0, padding: 0 }}>
+        <div className="flex space-x-6 pb-4 md:pb-8" style={{ margin: 0 }}>
           {infiniteProjects.map((project, index) => {
             // Calcular el índice real para la numeración (0, 1, 2, etc.)
             const realIndex = index % originalLength
@@ -252,6 +252,10 @@ function ProjectCard({ project, language, index }: ProjectCardProps) {
           alt={mainImage?.fields?.title || title}
           width={343}
           height={350}
+          quality={85}
+          loading={index < 3 ? "eager" : "lazy"}
+          priority={index < 3}
+          sizes="(max-width: 768px) 280px, 343px"
           className="object-cover w-full h-full"
         />
         <div className="absolute inset-0 bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300" />
