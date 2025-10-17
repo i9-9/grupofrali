@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState, memo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useTranslations } from '@/hooks/useTranslations'
@@ -234,9 +234,9 @@ interface ProjectCardProps {
   index: number
 }
 
-function ProjectCard({ project, language, index }: ProjectCardProps) {
+const ProjectCard = memo(function ProjectCard({ project, language, index }: ProjectCardProps) {
   const title = language === 'en' ? project.fields.titleEn : project.fields.title
-  
+
   // Obtener imagen principal para la galería del home
   const mainImage = project.fields.imagenHome
 
@@ -261,7 +261,7 @@ function ProjectCard({ project, language, index }: ProjectCardProps) {
         <div className="absolute inset-0 bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300" />
       </div>
       <div className="border-t border-black pt-6 pb-4">
-        <div className="flex items-start w-full">
+        <div className="flex items-baseline w-full">
           {/* Número a la izquierda - alineado con la primera línea */}
           <h3 className="font-light mr-4 leading-[1.1]">(0{index + 1})</h3>
 
@@ -283,4 +283,4 @@ function ProjectCard({ project, language, index }: ProjectCardProps) {
       </div>
     </Link>
   )
-}
+})

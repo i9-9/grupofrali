@@ -232,12 +232,12 @@ export async function getHomeGalleryProjects(): Promise<ContentfulProject[]> {
     const client = getContentfulClient()
     const response = await client.getEntries({
       content_type: 'project',
-      include: 3, // Incluir referencias a estadísticas
+      include: 2, // Reduced from 3 to 2 for better performance
       'fields.isActive': true,
       'fields.isFeatured': true,
       order: ['fields.homeGalleryOrder', 'fields.displayOrder']
     })
-    
+
     return response.items as unknown as ContentfulProject[]
   } catch (error) {
     console.error('Error fetching home gallery projects:', error)

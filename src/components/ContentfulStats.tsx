@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react'
+import React, { memo } from 'react'
 import { useTranslations } from '@/hooks/useTranslations'
 import { StatItem } from '@/components/StatItem'
 import type { ContentfulStatistic } from '@/lib/contentful'
@@ -12,11 +12,11 @@ interface ContentfulStatsProps {
   statistics?: ContentfulStatistic[]
 }
 
-export default function ContentfulStats({ 
-  className = '', 
-  maxStats = 6, 
-  startIndex = 0, 
-  statistics 
+const ContentfulStats = memo(function ContentfulStats({
+  className = '',
+  maxStats = 6,
+  startIndex = 0,
+  statistics
 }: ContentfulStatsProps) {
   const { language } = useTranslations()
   
@@ -71,4 +71,6 @@ export default function ContentfulStats({
       })}
     </div>
   )
-}
+})
+
+export default ContentfulStats
