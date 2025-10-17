@@ -73,13 +73,27 @@ export default function DesarrolloProyecto() {
   }, [project, language])
   
   // Encontrar el índice del proyecto actual y calcular anterior/siguiente con navegación circular
-  const currentProjectIndex = allProjects.findIndex(p => p.fields.slug === projectId)
-  const previousProject = currentProjectIndex > 0 
-    ? allProjects[currentProjectIndex - 1] 
-    : allProjects[allProjects.length - 1] // Último proyecto
-  const nextProject = currentProjectIndex < allProjects.length - 1 
-    ? allProjects[currentProjectIndex + 1] 
-    : allProjects[0] // Primer proyecto
+  const { previousProject, nextProject } = useMemo(() => {
+    if (!allProjects.length) {
+      return { previousProject: null, nextProject: null }
+    }
+    
+    const currentProjectIndex = allProjects.findIndex(p => p.fields.slug === projectId)
+    
+    if (currentProjectIndex === -1) {
+      return { previousProject: null, nextProject: null }
+    }
+    
+    const previous = currentProjectIndex > 0 
+      ? allProjects[currentProjectIndex - 1] 
+      : allProjects[allProjects.length - 1] // Último proyecto
+    
+    const next = currentProjectIndex < allProjects.length - 1 
+      ? allProjects[currentProjectIndex + 1] 
+      : allProjects[0] // Primer proyecto
+    
+    return { previousProject: previous, nextProject: next }
+  }, [allProjects, projectId])
   
 
 
@@ -143,7 +157,7 @@ export default function DesarrolloProyecto() {
 
 
   // Función para navegar entre proyectos con transición de opacidad
-  const navigateToProject = (targetProject: { fields: { slug: string } }) => {
+  const navigateToProject = (targetProject: { fields: { slug: string } } | null) => {
     if (!targetProject) return
 
     // Scroll to top BEFORE starting transition to prevent flickering
@@ -270,7 +284,10 @@ export default function DesarrolloProyecto() {
           {/* Flecha anterior */}
           <button
             onClick={() => navigateToProject(previousProject)}
-            className="w-12 h-12 flex items-center justify-center hover:opacity-70 transition-opacity"
+            disabled={!previousProject}
+            className={`w-12 h-12 flex items-center justify-center transition-opacity ${
+              previousProject ? 'hover:opacity-70 cursor-pointer' : 'opacity-30 cursor-not-allowed'
+            }`}
             aria-label={`Ir a proyecto anterior: ${previousProject ? (language === 'en' ? previousProject.fields.titleEn : previousProject.fields.title).replace(/\\n/g, ' ') : 'Proyecto anterior'}`}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
@@ -281,7 +298,10 @@ export default function DesarrolloProyecto() {
           {/* Flecha siguiente */}
           <button
             onClick={() => navigateToProject(nextProject)}
-            className="w-12 h-12 flex items-center justify-center hover:opacity-70 transition-opacity"
+            disabled={!nextProject}
+            className={`w-12 h-12 flex items-center justify-center transition-opacity ${
+              nextProject ? 'hover:opacity-70 cursor-pointer' : 'opacity-30 cursor-not-allowed'
+            }`}
             aria-label={`Ir a proyecto siguiente: ${nextProject ? (language === 'en' ? nextProject.fields.titleEn : nextProject.fields.title).replace(/\\n/g, ' ') : 'Proyecto siguiente'}`}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
@@ -387,7 +407,10 @@ export default function DesarrolloProyecto() {
           {/* Flecha anterior */}
           <button
             onClick={() => navigateToProject(previousProject)}
-            className="pointer-events-auto flex items-center justify-center w-12 h-12 hover:opacity-70 transition-opacity"
+            disabled={!previousProject}
+            className={`pointer-events-auto flex items-center justify-center w-12 h-12 transition-opacity ${
+              previousProject ? 'hover:opacity-70 cursor-pointer' : 'opacity-30 cursor-not-allowed'
+            }`}
             aria-label={`Ir a proyecto anterior: ${previousProject ? (language === 'en' ? previousProject.fields.titleEn : previousProject.fields.title).replace(/\\n/g, ' ') : 'Proyecto anterior'}`}
           >
             <Image
@@ -402,7 +425,10 @@ export default function DesarrolloProyecto() {
           {/* Flecha siguiente */}
           <button
             onClick={() => navigateToProject(nextProject)}
-            className="pointer-events-auto flex items-center justify-center w-12 h-12 hover:opacity-70 transition-opacity"
+            disabled={!nextProject}
+            className={`pointer-events-auto flex items-center justify-center w-12 h-12 transition-opacity ${
+              nextProject ? 'hover:opacity-70 cursor-pointer' : 'opacity-30 cursor-not-allowed'
+            }`}
             aria-label={`Ir a proyecto siguiente: ${nextProject ? (language === 'en' ? nextProject.fields.titleEn : nextProject.fields.title).replace(/\\n/g, ' ') : 'Proyecto siguiente'}`}
           >
             <Image
