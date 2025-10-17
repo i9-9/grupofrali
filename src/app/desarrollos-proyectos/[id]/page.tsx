@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -34,7 +34,7 @@ export default function DesarrolloProyecto() {
     'septiembre': '/images/project-logos/septiembre.svg',
     'terrazas-de-septiembre': '/images/project-logos/septiembre.svg',
     'casas-de-septiembre': '/images/project-logos/septiembre.svg',
-    'la-reserva-cardales': '/images/project-logos/lareservacardales.svg',
+    'la-reserva-cardales': '/images/logos/cardales-white.png',
     'sofitel-la-reserva-cardales': '/images/logos/sofitel-blanco.png',
     'santa-regina': '/images/project-logos/santa-regina.svg'
   }
@@ -170,13 +170,13 @@ export default function DesarrolloProyecto() {
         }`}>
           <div className="content-wrapper">
             <div className="grid">
-              <div className="col-6 flex items-center gap-2 my-4">
-                <Link href={getBackUrl} className="text-[#151714] flex items-center" style={{ transform: 'translateY(-1px)' }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <div className="col-6 my-4">
+                <Link href={getBackUrl} className="flex items-center gap-2 w-fit hover:opacity-70 transition-opacity">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ transform: 'translateY(-1px)' }}>
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                   </svg>
+                  <span className="text-black font-baskerville" style={{ fontSize: 'clamp(16.2px, 1.25vw, 18.9px)', lineHeight: '100%', transform: 'translateY(-0.5px)' }}>{language === 'en' ? project.fields.category?.fields?.nameEn : project.fields.category?.fields?.name}</span>
                 </Link>
-                <span className="text-black font-baskerville" style={{ fontSize: 'clamp(16.2px, 1.25vw, 18.9px)', lineHeight: '100%', transform: 'translateY(-0.5px)' }}>{language === 'en' ? project.fields.category?.fields?.nameEn : project.fields.category?.fields?.name}</span>
               </div>
             </div>
             
@@ -274,13 +274,13 @@ export default function DesarrolloProyecto() {
           <div className="content-wrapper">
             {/* Header fijo */}
             <div className="grid">
-              <div className="col-6 md:col-6 flex items-center gap-2 mb-4">
-                <Link href={getBackUrl} className="text-black hover:text-black/80 transition-colors flex items-center" style={{ transform: 'translateY(-1px)' }}>
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <div className="col-6 md:col-6 mb-4">
+                <Link href={getBackUrl} className="flex items-center gap-2 w-fit hover:opacity-70 transition-opacity">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ transform: 'translateY(-1px)' }}>
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                   </svg>
+                  <span className="text-[#151714] font-baskerville font-medium" style={{ fontSize: 'clamp(16.2px, 1.25vw, 18.9px)', lineHeight: '100%', transform: 'translateY(-2px)' }}>{language === 'en' ? project.fields.category?.fields?.nameEn : project.fields.category?.fields?.name}</span>
                 </Link>
-                <span className="text-[#151714] font-baskerville font-medium" style={{ fontSize: 'clamp(16.2px, 1.25vw, 18.9px)', lineHeight: '100%', transform: 'translateY(-2px)' }}>{language === 'en' ? project.fields.category?.fields?.nameEn : project.fields.category?.fields?.name}</span>
               </div>
             </div>
             

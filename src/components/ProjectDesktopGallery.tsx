@@ -90,7 +90,9 @@ export default function ProjectDesktopGallery({
         
         {/* Logo overlay - desktop */}
         {logoSrc && (
-          <div className="absolute bottom-6 left-6 z-10 pointer-events-none">
+          <div className={`absolute left-6 z-10 pointer-events-none ${
+            logoSrc.includes('cardales-white') ? 'bottom-3' : 'bottom-6'
+          }`}>
             <Image
               src={logoSrc}
               alt={`${projectTitle} logo`}

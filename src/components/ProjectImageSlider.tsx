@@ -272,7 +272,9 @@ export default function ProjectImageSlider({
       
       {/* Logo overlay - mobile */}
       {logoSrc && (
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-12 z-10 pointer-events-none">
+        <div className={`absolute left-1/2 -translate-x-1/2 z-10 pointer-events-none ${
+          logoSrc.includes('cardales-white') ? 'bottom-8' : 'bottom-12'
+        }`}>
           <Image
             src={logoSrc}
             alt={`${projectTitle} logo`}
