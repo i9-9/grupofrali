@@ -139,18 +139,19 @@ function DesarrollosProyectosContent() {
   const filteredProjects = selectedCategory === t("projects.categories.all")
     ? projects 
     : projects.filter(project => {
-        const projectCategory = language === 'en' ? project.fields.category?.fields?.nameEn : project.fields.category?.fields?.name
+        // Obtener el slug de la categoría seleccionada basado en el mapeo de traducciones
+        const categorySlugMapping: Record<string, string> = {
+          [t("projects.categories.realEstate")]: 'real-estate',
+          [t("projects.categories.agroindustry")]: 'agroindustria',
+          [t("projects.categories.hospitality")]: 'hoteleria',
+          [t("projects.categories.renewableEnergy")]: 'energia-renovable'
+        } 
         
-        // Mapear las traducciones a los nombres de Contentful
-        const categoryMapping: Record<string, string[]> = {
-          [t("projects.categories.realEstate")]: ['REAL ESTATE', 'Real Estate'],
-          [t("projects.categories.agroindustry")]: ['AGROPECUARIA', 'Agroindustry'],
-          [t("projects.categories.hospitality")]: ['HOTELERIA', 'Hospitality'],
-          [t("projects.categories.renewableEnergy")]: ['ENERGIA RENOVABLE', 'Renewable Energy']
-        }
+        const selectedSlug = categorySlugMapping[selectedCategory]
+        const projectSlug = project.fields.category?.fields?.slug
         
-        const mappedCategories = categoryMapping[selectedCategory] || [selectedCategory]
-        return mappedCategories.includes(projectCategory)
+        // Comparar por slug que es consistente en ambos idiomas
+        return selectedSlug === projectSlug
       })
 
 
