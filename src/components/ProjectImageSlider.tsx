@@ -239,10 +239,11 @@ export default function ProjectImageSlider({
         {images.map((imageSrc, index) => (
           <div 
             key={index} 
-            className="relative flex-shrink-0 bg-black flex items-center justify-center"
+            className="relative flex-shrink-0 bg-black flex items-center justify-center overflow-hidden"
             style={{
-              width: `${100 / images.length}%`,
-              height: '100%'
+              width: `calc(${100 / images.length}% + 2px)`, // Más ancho para evitar gaps
+              height: '100%',
+              marginLeft: index > 0 ? '-2px' : '0' // Overlap entre slides para evitar línea blanca
             }}
           >
             <Image
@@ -259,7 +260,7 @@ export default function ProjectImageSlider({
               style={{
                 objectFit: 'cover',
                 userSelect: 'none',
-                transform: 'translate3d(0, 0, 0)', // GPU acceleration
+                transform: 'translate3d(0, 0, 0)',
                 WebkitTransform: 'translate3d(0, 0, 0)',
                 backfaceVisibility: 'hidden',
                 WebkitBackfaceVisibility: 'hidden'

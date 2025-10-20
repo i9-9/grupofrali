@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -18,9 +18,14 @@ export default function DesarrolloProyecto() {
   const router = useRouter()
   const { language } = useLanguage()
   const projectId = params.id as string
-  
+
   const [isTransitioning, setIsTransitioning] = useState(false)
-  
+
+  // Scroll to top when project changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [projectId])
+
   // Obtener el proyecto desde Contentful
   const { project, loading, error } = useProject(projectId)
   const { projects: allProjects } = useProjects()
@@ -43,57 +48,57 @@ export default function DesarrolloProyecto() {
   // Crear URL de vuelta que preserva el filtro y hace scroll a proyectos
   const getBackUrl = useMemo(() => {
     if (!project) return '/desarrollos-proyectos'
-    
+
     const params = new URLSearchParams()
-    
+
     // Agregar categoría si no es "VER TODOS"
     const categoryName = language === 'en' ? project.fields.category?.fields?.nameEn : project.fields.category?.fields?.name
     if (categoryName && categoryName !== "VER TODOS") {
       params.set('categoria', project.fields.category?.fields?.slug || '')
     }
-    
+
     // Agregar parámetro para hacer scroll a proyectos
     params.set('scrollTo', 'projects')
-    
+
     return `/desarrollos-proyectos?${params.toString()}`
   }, [project, language])
-  
+
   // Encontrar el índice del proyecto actual y calcular anterior/siguiente con navegación circular
   const currentProjectIndex = allProjects.findIndex(p => p.fields.slug === projectId)
-  const previousProject = currentProjectIndex > 0 
-    ? allProjects[currentProjectIndex - 1] 
+  const previousProject = currentProjectIndex > 0
+    ? allProjects[currentProjectIndex - 1]
     : allProjects[allProjects.length - 1] // Último proyecto
-  const nextProject = currentProjectIndex < allProjects.length - 1 
-    ? allProjects[currentProjectIndex + 1] 
+  const nextProject = currentProjectIndex < allProjects.length - 1
+    ? allProjects[currentProjectIndex + 1]
     : allProjects[0] // Primer proyecto
-  
+
 
 
   const mobileImages: string[] = (() => {
     if (!project?.fields?.galeriaMobile) {
       return []
     }
-    
+
     const mobile = project.fields.galeriaMobile as ContentfulMedia[]
-    
+
     // Mapear todas las imágenes del array
     const images = mobile.map((img: ContentfulMedia) => `https:${img.fields.file.url}`)
-    
+
     // Remove duplicates while preserving order
     const uniqueImages = images.filter((url, index, self) => self.indexOf(url) === index)
-    
+
     return uniqueImages
   })()
-      
+
   const desktopImages: string[] = (() => {
     if (!project?.fields?.galeriaDesktop) return []
-    
+
     // galeriaDesktop siempre es un array según la interfaz ContentfulProject
     const desktop = project.fields.galeriaDesktop as ContentfulMedia[]
-    
+
     // Mapear todas las imágenes del array
     const images = desktop.map((img: ContentfulMedia) => `https:${img.fields.file.url}`)
-    
+
     // Remove duplicates while preserving order
     return images.filter((url, index, self) => self.indexOf(url) === index)
   })()
@@ -127,23 +132,23 @@ export default function DesarrolloProyecto() {
     )
   }
 
-  
+
   // Función para navegar entre proyectos con transición de opacidad
   const navigateToProject = (targetProject: { fields: { slug: string } }) => {
     if (!targetProject) return
-    
+
     setIsTransitioning(true)
-    
+
     setTimeout(() => {
       router.push(`/desarrollos-proyectos/${targetProject.fields.slug}`)
     }, 150) // Mitad de la transición para cambiar el contenido
-    
+
     setTimeout(() => {
       setIsTransitioning(false)
     }, 300) // Duración total de la transición
   }
 
-  
+
   if (!project) {
     return (
       <div className="content-wrapper h-screen flex items-center justify-center">
@@ -251,7 +256,7 @@ export default function DesarrolloProyecto() {
               <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
           </button>
-          
+
           {/* Flecha siguiente */}
           <button
             onClick={() => navigateToProject(nextProject)}
@@ -368,7 +373,7 @@ export default function DesarrolloProyecto() {
               <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
           </button>
-          
+
           {/* Flecha siguiente */}
           <button
             onClick={() => navigateToProject(nextProject)}
