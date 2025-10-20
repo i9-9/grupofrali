@@ -59,6 +59,11 @@ export default function SmoothScroll() {
     window.scrollTo = function(x: number | ScrollToOptions, y?: number) {
       if (typeof x === 'object' && x !== null) {
         const options = x as ScrollToOptions
+        // Si es scroll al tope (0) o tiene behavior 'instant', no aplicar smooth scroll
+        if (options.top === 0 || options.behavior === 'instant' || options.behavior === 'auto') {
+          originalScrollTo(options)
+          return
+        }
         if (options.behavior === 'smooth' || !options.behavior) {
           smoothScrollTo(options.top || 0)
           return
@@ -67,6 +72,11 @@ export default function SmoothScroll() {
         originalScrollTo(options)
         return
       } else if (typeof x === 'number' && typeof y === 'number') {
+        // Si es scroll al tope (0, 0), no aplicar smooth scroll
+        if (y === 0) {
+          originalScrollTo(x, y)
+          return
+        }
         smoothScrollTo(y)
         return
       }

@@ -23,7 +23,20 @@ export default function DesarrolloProyecto() {
 
   // Scroll to top when project changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' })
+    // Forzar scroll inmediato al tope para iOS Safari
+    // Usar scrollTo directo con 0,0 y también document.documentElement.scrollTop
+    window.scrollTo(0, 0)
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+    
+    // Forzar un segundo scroll después de un pequeño delay para iOS
+    const timeoutId = setTimeout(() => {
+      window.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+    }, 10)
+    
+    return () => clearTimeout(timeoutId)
   }, [projectId])
 
   // Obtener el proyecto desde Contentful
