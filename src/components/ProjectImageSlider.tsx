@@ -251,7 +251,7 @@ export default function ProjectImageSlider({
               alt={`${projectTitle} - Imagen ${index + 1}`}
               fill
               sizes="(max-width: 768px) 100vw, 393px"
-              quality={85}
+              quality={100}
               priority={index === 0}
               loading={index === 0 ? undefined : 'lazy'}
               className={`transition-opacity duration-200 ease-in-out ${
