@@ -142,9 +142,9 @@ function DesarrollosProyectosContent() {
         // Obtener el slug de la categoría seleccionada basado en el mapeo de traducciones
         const categorySlugMapping: Record<string, string> = {
           [t("projects.categories.realEstate")]: 'real-estate',
-          [t("projects.categories.agroindustry")]: 'agroindustria',
-          [t("projects.categories.hospitality")]: 'hoteleria',
-          [t("projects.categories.renewableEnergy")]: 'energia-renovable'
+          [t("projects.categories.agroindustry")]: 'agribusiness',
+          [t("projects.categories.hospitality")]: 'hospitality',
+          [t("projects.categories.renewableEnergy")]: 'renewable-energy'
         } 
         
         const selectedSlug = categorySlugMapping[selectedCategory]
@@ -166,9 +166,9 @@ function DesarrollosProyectosContent() {
       // Mapear las traducciones a los slugs de Contentful
       const categorySlugMapping: Record<string, string> = {
         [t("projects.categories.realEstate")]: 'real-estate',
-        [t("projects.categories.agroindustry")]: 'agroindustria',
-        [t("projects.categories.hospitality")]: 'hoteleria',
-        [t("projects.categories.renewableEnergy")]: 'energia-renovable'
+        [t("projects.categories.agroindustry")]: 'agribusiness',
+        [t("projects.categories.hospitality")]: 'hospitality',
+        [t("projects.categories.renewableEnergy")]: 'renewable-energy'
       }
       
       const slug = categorySlugMapping[category]
