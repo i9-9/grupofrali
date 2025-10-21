@@ -176,7 +176,7 @@ export default function Header() {
       {(isOpen || isAnimating) && (
         <div
           className={`fixed top-0 left-0 right-0 bg-[#EBEBEB] md:hidden ${animationClass}`}
-          style={{ height: '100vh', overflowY: 'auto', zIndex: 9999 }}
+          style={{ height: '100dvh', overflowY: 'auto', zIndex: 9999 }}
         >
           <div className="w-full mx-auto px-4">
             {/* Logo del mobile menu */}

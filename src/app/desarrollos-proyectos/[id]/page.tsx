@@ -119,7 +119,7 @@ export default function DesarrolloProyecto() {
   // Estados de loading y error
   if (loading) {
     return (
-      <main className="bg-[#EFEFEF] min-h-screen flex items-center justify-center">
+      <main className="bg-[#EFEFEF] min-h-dvh flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
           <p className="text-gray-600">Loading project...</p>
@@ -130,7 +130,7 @@ export default function DesarrolloProyecto() {
 
   if (error || !project) {
     return (
-      <main className="bg-[#EFEFEF] min-h-screen flex items-center justify-center">
+      <main className="bg-[#EFEFEF] min-h-dvh flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Project not found</h1>
           <p className="text-gray-600 mb-6">{error || 'The requested project could not be found.'}</p>
@@ -164,14 +164,14 @@ export default function DesarrolloProyecto() {
 
   if (!project) {
     return (
-      <div className="content-wrapper h-screen flex items-center justify-center">
+      <div className="content-wrapper h-dvh flex items-center justify-center">
         <h1>Proyecto no encontrado</h1>
       </div>
     )
   }
 
   return (
-    <main key={projectId} className="min-h-screen md:h-screen md:overflow-hidden bg-[#EFEFEF] relative">
+    <main key={projectId} className="min-h-dvh md:h-dvh md:overflow-hidden bg-[#EFEFEF] relative">
       {/* Mobile Layout */}
       <div className="md:hidden flex flex-col">
         {/* CARRUSEL MOBILE */}

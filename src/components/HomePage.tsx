@@ -26,7 +26,7 @@ export default function HomePage({
   return (
     <main>
       {/* Video Hero */}
-      <section className="relative h-screen overflow-hidden">
+      <section className="relative h-dvh overflow-hidden">
         <RandomVideo type="mobile" videos={videosMobile} />
         <RandomVideo type="desktop" videos={videosDesktop} />
         {/* Content over video */}

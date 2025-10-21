@@ -16,7 +16,7 @@ export default function ConditionalLayout({ children }: ConditionalLayoutProps) 
   const isProyectoDetailPage = pathname?.match(/^\/desarrollos-proyectos\/[^\/]+$/)
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ minHeight: '100dvh', display: 'flex', flexDirection: 'column' }}>
       <SmoothScroll />
       <Header />
       <main style={{ flex: 1 }}>
