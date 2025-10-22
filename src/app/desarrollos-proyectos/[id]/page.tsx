@@ -11,6 +11,8 @@ import ContentfulRichText from "@/components/ContentfulRichText"
 import ProjectImageSlider from "@/components/ProjectImageSlider"
 import ProjectDesktopGallery from "@/components/ProjectDesktopGallery"
 import ProjectStatistic from "@/components/ProjectStatistic"
+import LeftArrowIcon from "@/components/icons/LeftArrowIcon"
+import RightArrowIcon from "@/components/icons/RightArrowIcon"
 import projectsData from "@/data/projects.json"
 
 export default function DesarrolloProyecto() {
@@ -49,12 +51,12 @@ export default function DesarrolloProyecto() {
   
   // Mapa de logos por proyecto (versiones en blanco)
   const projectLogos: Record<string, string> = {
-    'septiembre': '/images/project-logos/septiembre.svg',
-    'terrazas-de-septiembre': '/images/project-logos/septiembre.svg',
-    'casas-de-septiembre': '/images/project-logos/septiembre.svg',
-    'la-reserva-cardales': '/images/logos/cardales-white.png',
-    'sofitel-la-reserva-cardales': '/images/logos/sofitel-blanco.png',
-    'santa-regina': '/images/project-logos/santa-regina.svg'
+    'septiembre': '/images/logos-new-white/septiembre.png',
+    'terrazas-de-septiembre': '/images/logos-new-white/septiembre.png',
+    'casas-de-septiembre': '/images/logos-new-white/septiembre.png',
+    'la-reserva-cardales': '/images/logos-new-white/lareserva.png',
+    'sofitel-la-reserva-cardales': '/images/logos-new-white/sofitel.png',
+    'santa-regina': '/images/logos-new-white/santa-regina.png'
   }
   const logoSrc = project ? projectLogos[project.fields.slug] : undefined
   
@@ -190,9 +192,7 @@ export default function DesarrolloProyecto() {
             <div className="grid">
               <div className="col-6 my-4">
                 <Link href={getBackUrl} className="flex items-center gap-2 w-fit hover:opacity-70 transition-opacity">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ transform: 'translateY(-1px)' }}>
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                  </svg>
+                  <LeftArrowIcon width={20} height={20} className="translate-y-[-1px]" />
                   <span className="text-black font-baskerville" style={{ fontSize: 'clamp(16.2px, 1.25vw, 18.9px)', lineHeight: '100%', transform: 'translateY(-0.5px)' }}>{language === 'en' ? project.fields.category?.fields?.nameEn : project.fields.category?.fields?.name}</span>
                 </Link>
               </div>
@@ -265,9 +265,7 @@ export default function DesarrolloProyecto() {
             className="w-12 h-12 flex items-center justify-center hover:opacity-70 transition-opacity"
             aria-label={`Ir a proyecto anterior: ${previousProject ? (language === 'en' ? previousProject.fields.titleEn : previousProject.fields.title).replace(/\\n/g, ' ') : 'Proyecto anterior'}`}
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
-              <path d="M19 12H5M12 19l-7-7 7-7"/>
-            </svg>
+            <LeftArrowIcon className="text-black" />
           </button>
 
           {/* Flecha siguiente */}
@@ -276,9 +274,7 @@ export default function DesarrolloProyecto() {
             className="w-12 h-12 flex items-center justify-center hover:opacity-70 transition-opacity"
             aria-label={`Ir a proyecto siguiente: ${nextProject ? (language === 'en' ? nextProject.fields.titleEn : nextProject.fields.title).replace(/\\n/g, ' ') : 'Proyecto siguiente'}`}
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
+            <RightArrowIcon className="text-black" />
           </button>
         </div>
       </div>
@@ -294,9 +290,7 @@ export default function DesarrolloProyecto() {
             <div className="grid">
               <div className="col-6 md:col-6 mb-4">
                 <Link href={getBackUrl} className="flex items-center gap-2 w-fit hover:opacity-70 transition-opacity">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ transform: 'translateY(-1px)' }}>
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                  </svg>
+                  <LeftArrowIcon width={32} height={32} className="translate-y-[-1px]" />
                   <span className="text-[#151714] font-baskerville font-medium" style={{ fontSize: 'clamp(16.2px, 1.25vw, 18.9px)', lineHeight: '100%', transform: 'translateY(-2px)' }}>{language === 'en' ? project.fields.category?.fields?.nameEn : project.fields.category?.fields?.name}</span>
                 </Link>
               </div>
@@ -382,9 +376,7 @@ export default function DesarrolloProyecto() {
             className="pointer-events-auto w-16 h-16 flex items-center justify-center hover:opacity-70 transition-opacity"
             aria-label={`Ir a proyecto anterior: ${previousProject ? (language === 'en' ? previousProject.fields.titleEn : previousProject.fields.title).replace(/\\n/g, ' ') : 'Proyecto anterior'}`}
           >
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-black">
-              <path d="M19 12H5M12 19l-7-7 7-7"/>
-            </svg>
+            <LeftArrowIcon width={32} height={32} className="text-black" />
           </button>
 
           {/* Flecha siguiente */}
@@ -393,9 +385,7 @@ export default function DesarrolloProyecto() {
             className="pointer-events-auto w-16 h-16 flex items-center justify-center hover:opacity-70 transition-opacity"
             aria-label={`Ir a proyecto siguiente: ${nextProject ? (language === 'en' ? nextProject.fields.titleEn : nextProject.fields.title).replace(/\\n/g, ' ') : 'Proyecto siguiente'}`}
           >
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
+            <RightArrowIcon width={32} height={32} className="text-white" />
           </button>
         </div>
       </div>
