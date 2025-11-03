@@ -1,12 +1,16 @@
 'use client'
 
+import { lazy, Suspense } from "react";
 import RandomVideo from "@/components/RandomVideo";
-import ContentfulProjects from "@/components/ContentfulProjects";
 import ContentfulStats from "@/components/ContentfulStats";
 import Link from "next/link";
 import ScrollArrow from "@/components/ScrollArrow";
 import { useTranslations } from "@/hooks/useTranslations";
+import TranslationLoader from "@/components/TranslationLoader";
 import type { ContentfulStatistic, ContentfulProject } from "@/lib/contentful";
+
+// Lazy load components that are below the fold
+const ContentfulProjects = lazy(() => import("@/components/ContentfulProjects"));
 
 interface HomePageProps {
   statistics: ContentfulStatistic[];
@@ -39,42 +43,43 @@ export default function HomePage({
 
       {/* Desarrollo */}
       <section id="desarrollo-section" className="bg-[#EFEFEF]" style={{ paddingTop: 'clamp(4rem, 2.2vw, 8rem)' }}>
-        <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
-          <div className="grid grid-cols-6 md:grid-cols-12" style={{ gap: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
-            {/* TÍTULO - 6 columnas */}
-            <div className="col-span-6 md:col-span-12 md:max-w-[60%]">
-              {/* Mobile version - 4 líneas */}
-              <h2
-                className="md:hidden font-baskerville text-black font-normal"
-                style={{
-                  fontSize: 'clamp(40px, 10.2vw, 40px)',
-                  lineHeight: 'clamp(40px, 10.2vw, 40px)',
-                  letterSpacing: '0%',
-                  fontWeight: '400',
-                  marginBottom: 'clamp(1rem, 0.5vw, 2rem)'
-                }}
-              >
-                <div>{t("home.hero.titleMobileLine1")}</div>
-                <div>{t("home.hero.titleMobileLine2")}</div>
-                <div>{t("home.hero.titleMobileLine3")}</div>
-                <div>{t("home.hero.titleMobileLine4")}</div>
-              </h2>
+        <TranslationLoader>
+          <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
+            <div className="grid grid-cols-6 md:grid-cols-12" style={{ gap: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
+              {/* TÍTULO - 6 columnas */}
+              <div className="col-span-6 md:col-span-12 md:max-w-[60%]">
+                {/* Mobile version - 4 líneas */}
+                <h2
+                  className="md:hidden font-baskerville text-black font-normal"
+                  style={{
+                    fontSize: 'clamp(40px, 10.2vw, 40px)',
+                    lineHeight: 'clamp(40px, 10.2vw, 40px)',
+                    letterSpacing: '0%',
+                    fontWeight: '400',
+                    marginBottom: 'clamp(1rem, 0.5vw, 2rem)'
+                  }}
+                >
+                  <div>{t("home.hero.titleMobileLine1")}</div>
+                  <div>{t("home.hero.titleMobileLine2")}</div>
+                  <div>{t("home.hero.titleMobileLine3")}</div>
+                  <div>{t("home.hero.titleMobileLine4")}</div>
+                </h2>
 
-              {/* Desktop/Tablet version - 2 líneas */}
-              <h2
-                className="hidden md:block font-baskerville text-black font-normal"
-                style={{
-                  fontSize: 'clamp(40px, 3.7vw, 56px)',
-                  lineHeight: 'clamp(40px, 4.5vw, 68.14px)',
-                  letterSpacing: '0%',
-                  fontWeight: '400',
-                  marginBottom: 'clamp(1rem, 0.5vw, 2rem)'
-                }}
-              >
-                <div style={{ whiteSpace: 'nowrap' }}>{t("home.hero.titleLine1")}</div>
-                <div style={{ whiteSpace: 'nowrap' }}>{t("home.hero.titleLine2")}</div>
-              </h2>
-            </div>
+                {/* Desktop/Tablet version - 2 líneas */}
+                <h2
+                  className="hidden md:block font-baskerville text-black font-normal"
+                  style={{
+                    fontSize: 'clamp(40px, 3.7vw, 56px)',
+                    lineHeight: 'clamp(40px, 4.5vw, 68.14px)',
+                    letterSpacing: '0%',
+                    fontWeight: '400',
+                    marginBottom: 'clamp(1rem, 0.5vw, 2rem)'
+                  }}
+                >
+                  <div style={{ whiteSpace: 'nowrap' }}>{t("home.hero.titleLine1")}</div>
+                  <div style={{ whiteSpace: 'nowrap' }}>{t("home.hero.titleLine2")}</div>
+                </h2>
+              </div>
 
             {/* CONCEPTOS - arriba de stats izquierdas (columnas 1-5) */}
             <div className="col-span-6 md:col-start-1 md:col-end-6 flex flex-col order-2 md:order-1 md:pt-24 md:pb-32">
@@ -134,6 +139,7 @@ export default function HomePage({
             </div>
           </div>
         </div>
+        </TranslationLoader>
       </section>
 
       {/* Marquee Logos */}
@@ -154,6 +160,8 @@ export default function HomePage({
                     width={120}
                     height={80}
                     className="h-28 w-auto object-contain"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </picture>
               </div>
@@ -169,6 +177,8 @@ export default function HomePage({
                     width={120}
                     height={144}
                     className="h-48 w-auto object-contain"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </picture>
               </div>
@@ -181,6 +191,8 @@ export default function HomePage({
                     width={120}
                     height={96}
                     className="h-32 w-auto object-contain"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </picture>
               </div>
@@ -196,6 +208,8 @@ export default function HomePage({
                     width={120}
                     height={80}
                     className="h-24 w-auto object-contain"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </picture>
               </div>
@@ -214,6 +228,8 @@ export default function HomePage({
                     width={120}
                     height={80}
                     className="h-28 w-auto object-contain"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </picture>
               </div>
@@ -229,6 +245,8 @@ export default function HomePage({
                     width={120}
                     height={144}
                     className="h-48 w-auto object-contain"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </picture>
               </div>
@@ -241,6 +259,8 @@ export default function HomePage({
                     width={120}
                     height={96}
                     className="h-32 w-auto object-contain"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </picture>
               </div>
@@ -256,6 +276,8 @@ export default function HomePage({
                     width={120}
                     height={80}
                     className="h-24 w-auto object-contain"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </picture>
               </div>
@@ -266,9 +288,10 @@ export default function HomePage({
 
       {/* Proyectos Section */}
       <section className="pt-16 bg-[#efefef]">
-        <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
-          {/* Header */}
-          <div className="flex justify-between items-start mb-8">
+        <TranslationLoader>
+          <div className="w-full mx-auto" style={{ paddingLeft: 'clamp(1rem, 0.4vw, 1.5rem)', paddingRight: 'clamp(1rem, 0.4vw, 1.5rem)' }}>
+            {/* Header */}
+            <div className="flex justify-between items-start mb-8">
             <div className="w-fit">
               <Link href="/desarrollos-proyectos">
                 <h3
@@ -375,12 +398,26 @@ export default function HomePage({
             </Link>
           </div>
 
-          <ContentfulProjects
-            maxProjects={6}
-            showAll={true}
-            homeGalleryProjects={homeGalleryProjects}
-          />
-        </div>
+            <Suspense fallback={
+              <div className="flex space-x-6 pb-4 md:pb-8">
+                {[...Array(6)].map((_, i) => (
+                  <div key={i} className="w-[280px] md:w-[343px] flex-shrink-0 animate-pulse">
+                    <div className="aspect-[343/350] bg-gray-300 rounded mb-4"></div>
+                    <div className="border-t border-black pt-6 pb-4">
+                      <div className="h-6 bg-gray-300 rounded w-3/4"></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            }>
+              <ContentfulProjects
+                maxProjects={6}
+                showAll={true}
+                homeGalleryProjects={homeGalleryProjects}
+              />
+            </Suspense>
+          </div>
+        </TranslationLoader>
       </section>
     </main>
   );

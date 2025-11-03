@@ -47,11 +47,57 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        {/* Mobile-specific resource hints for faster loading */}
+        {/* Critical resource hints for faster loading */}
         <link rel="preconnect" href="https://images.ctfassets.net" />
         <link rel="dns-prefetch" href="https://images.ctfassets.net" />
         <link rel="preconnect" href="https://cdn.contentful.com" />
         <link rel="dns-prefetch" href="https://cdn.contentful.com" />
+        
+        {/* Adobe Fonts optimization - Non-blocking load */}
+        <link rel="preconnect" href="https://use.typekit.net" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://use.typekit.net" />
+        <link rel="preconnect" href="https://p.typekit.net" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://p.typekit.net" />
+
+        {/* Load Adobe Fonts with preload to prevent render blocking
+            Preload as style then apply with high priority but non-blocking */}
+        <link
+          rel="preload"
+          href="https://use.typekit.net/mwm8rjz.css"
+          as="style"
+        />
+        <link
+          rel="stylesheet"
+          href="https://use.typekit.net/mwm8rjz.css"
+        />
+
+        {/* Preload hero video poster images - these are the LCP elements */}
+        {/* Mobile posters - one of these will be the LCP on mobile */}
+        <link
+          rel="preload"
+          href="/videos/video_mobile1_poster.jpg"
+          as="image"
+          media="(max-width: 768px)"
+        />
+        <link
+          rel="preload"
+          href="/videos/video_mobile2_poster.jpg"
+          as="image"
+          media="(max-width: 768px)"
+        />
+        {/* Desktop posters - one of these will be the LCP on desktop */}
+        <link
+          rel="preload"
+          href="/videos/video_desktop1_poster.jpg"
+          as="image"
+          media="(min-width: 769px)"
+        />
+        <link
+          rel="preload"
+          href="/videos/video_desktop3_poster.jpg"
+          as="image"
+          media="(min-width: 769px)"
+        />
       </head>
       <body className="bg-[#EFEFEF]">
         <LanguageProvider>

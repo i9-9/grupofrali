@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
 type Props = {
   type: 'mobile' | 'desktop';
@@ -23,6 +24,14 @@ export default function RandomVideo({ type, videos }: Props) {
   const [isMounted, setIsMounted] = useState(false);
   const [shouldLoad, setShouldLoad] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  
+  // Use Intersection Observer to only load video when in viewport
+  // Hero videos are always visible, so we'll always load them but with delay
+  const { ref: containerRef } = useIntersectionObserver({
+    threshold: 0.1,
+    rootMargin: '50px', // Start loading slightly before entering viewport
+    triggerOnce: true,
+  });
 
   useEffect(() => {
     setIsMounted(true);
@@ -34,14 +43,30 @@ export default function RandomVideo({ type, videos }: Props) {
 
     const randomIndex = Math.floor(Math.random() * videoList.length);
     setVideoData(videoList[randomIndex]);
-
-    // Delay video loading slightly to prioritize other critical resources
-    const timer = setTimeout(() => {
-      setShouldLoad(true);
-    }, 100);
-
-    return () => clearTimeout(timer);
   }, [type, videos]);
+
+  useEffect(() => {
+    // Delay video loading until after critical resources (poster image/LCP) have loaded
+    // This significantly improves LCP by not competing for bandwidth
+    if (isMounted && videoData) {
+      // Use requestIdleCallback to load video when browser is idle
+      // Falls back to 2 second delay if requestIdleCallback not supported
+      if ('requestIdleCallback' in window) {
+        const idleCallback = requestIdleCallback(
+          () => {
+            setShouldLoad(true);
+          },
+          { timeout: 2000 } // Max 2 seconds even if not idle
+        );
+        return () => cancelIdleCallback(idleCallback);
+      } else {
+        const timer = setTimeout(() => {
+          setShouldLoad(true);
+        }, 2000);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [isMounted, videoData]);
 
   useEffect(() => {
     // Start loading video once shouldLoad is true
@@ -71,6 +96,7 @@ export default function RandomVideo({ type, videos }: Props) {
   const videoStyle = getVideoStyle();
 
   return (
+    <div ref={containerRef} className="absolute inset-0 w-full h-full">
     <video
       ref={videoRef}
       className={`absolute inset-0 w-full h-full object-cover ${
@@ -78,7 +104,7 @@ export default function RandomVideo({ type, videos }: Props) {
       }`}
       style={{
         ...videoStyle,
-        imageRendering: '-webkit-optimize-contrast',
+        // Optimizaciones de renderizado para máxima calidad visual
         backfaceVisibility: 'hidden',
         WebkitBackfaceVisibility: 'hidden',
         transform: 'translate3d(0, 0, 0)',
@@ -86,8 +112,10 @@ export default function RandomVideo({ type, videos }: Props) {
         willChange: 'auto',
         WebkitFontSmoothing: 'antialiased',
         perspective: '1000px',
-        WebkitPerspective: '1000px'
-      }}
+        WebkitPerspective: '1000px',
+        // Asegurar renderizado de alta calidad
+        imageRendering: 'crisp-edges',
+      } as React.CSSProperties}
       poster={videoData.poster}
       autoPlay
       muted
@@ -102,5 +130,6 @@ export default function RandomVideo({ type, videos }: Props) {
       {shouldLoad && <source src={videoData.src} type="video/mp4" />}
       <track kind="captions" />
     </video>
+    </div>
   );
 }

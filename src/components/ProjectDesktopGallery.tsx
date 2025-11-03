@@ -71,7 +71,7 @@ export default function ProjectDesktopGallery({
                 alt={`${projectTitle} - Imagen ${index + 1}`}
                 width={960}
                 height={1080}
-                quality={85}
+                quality={100}
                 priority={index === 0}
                 loading={index === 0 ? undefined : 'lazy'}
                 className={`w-full h-full object-cover transition-opacity duration-200 ease-in-out ${

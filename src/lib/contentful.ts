@@ -145,7 +145,7 @@ export interface ContentfulProjectStatistic {
     value: string
     unit?: string
     unitEn?: string
-    project: ContentfulProject
+    project?: ContentfulProject
   }
 }
 
@@ -195,17 +195,278 @@ export interface ContentfulHomePage {
   }
 }
 
+/**
+ * Safe JSON replacer that removes circular references and problematic fields
+ */
+function safeJsonReplacer(key: string, value: unknown): unknown {
+  // Remove estadisticasReferencias field that causes circular references
+  if (key === 'estadisticasReferencias') {
+    return undefined
+  }
+  
+  // Remove 'project' field from ProjectStatistic entries to break circular references
+  if (key === 'project' && value && typeof value === 'object' && 'sys' in value) {
+    return undefined
+  }
+  
+  return value
+}
+
+/**
+ * Safely serializes data by removing circular references
+ * Uses a two-pass approach: first remove problematic fields, then serialize
+ */
+function safeSerialize<T>(data: T): T {
+  if (!data || typeof data !== 'object') {
+    return data
+  }
+  
+  try {
+    // First pass: serialize with replacer to remove circular refs
+    const serialized = JSON.stringify(data, safeJsonReplacer)
+    return JSON.parse(serialized) as T
+  } catch {
+    // If serialization fails, use manual cleaning
+    return data
+  }
+}
+
+/**
+ * Limpia referencias circulares de proyectos para evitar errores de serialización JSON.
+ * Elimina el campo 'estadisticasReferencias' y cualquier referencia 'project' dentro de estadísticas.
+ * 
+ * Esta función crea una copia completamente nueva del objeto para romper cualquier referencia circular.
+ * 
+ * @param project Proyecto de Contentful con posibles referencias circulares
+ * @returns Proyecto sin referencias circulares, listo para serialización
+ */
+export function cleanCircularReferences<T extends ContentfulProject>(project: T): T {
+  if (!project || !project.fields) {
+    return project
+  }
+  
+  // Crear una copia completamente nueva del proyecto usando JSON serialization segura
+  // Esto rompe todas las referencias circulares
+  try {
+    // Primero intentamos eliminar el campo problemático manualmente
+    const temp = { ...project } as Record<string, unknown>
+    temp.fields = { ...project.fields } as Record<string, unknown>
+    
+    // Eliminar estadisticasReferencias que causa el ciclo
+    delete (temp.fields as Record<string, unknown>).estadisticasReferencias
+    
+    // Crear una copia profunda usando JSON con replacer seguro
+    const cleaned = JSON.parse(JSON.stringify(temp, safeJsonReplacer))
+    
+    return cleaned as T
+  } catch {
+    // Si JSON.stringify falla, usar método manual más agresivo
+    const cleaned: {
+      sys: ContentfulProject['sys']
+      fields: Record<string, unknown>
+    } = {
+      sys: project.sys ? { ...project.sys } : { id: '', type: '' },
+      fields: {}
+    }
+    
+    // Copiar cada campo manualmente, excluyendo estadisticasReferencias
+    Object.keys(project.fields).forEach(key => {
+      if (key === 'estadisticasReferencias') {
+        return // Omitir completamente
+      }
+      
+      const value = (project.fields as Record<string, unknown>)[key]
+      
+      // Para arrays, limpiar cada elemento
+      if (Array.isArray(value)) {
+        cleaned.fields[key] = value.map((item: unknown) => {
+          if (item && typeof item === 'object') {
+            const itemCopy = { ...item as Record<string, unknown> }
+            if ('fields' in itemCopy && itemCopy.fields && typeof itemCopy.fields === 'object') {
+              itemCopy.fields = { ...itemCopy.fields as Record<string, unknown> }
+              delete (itemCopy.fields as Record<string, unknown>).project // Eliminar referencia circular
+            }
+            return itemCopy
+          }
+          return item
+        })
+      }
+      // Para objetos, hacer copia superficial
+      else if (value && typeof value === 'object') {
+        cleaned.fields[key] = { ...value as Record<string, unknown> }
+        const valueObj = cleaned.fields[key] as Record<string, unknown>
+        if ('fields' in valueObj && valueObj.fields && typeof valueObj.fields === 'object') {
+          valueObj.fields = { ...valueObj.fields as Record<string, unknown> }
+          delete (valueObj.fields as Record<string, unknown>).project
+        }
+      }
+      else {
+        cleaned.fields[key] = value
+      }
+    })
+    
+    return cleaned as T
+  }
+}
+
+/**
+ * Limpia referencias circulares de un array de proyectos.
+ * Elimina campos que pueden causar referencias circulares antes de la serialización.
+ * 
+ * @param projects Array de proyectos de Contentful
+ * @returns Array de proyectos sin referencias circulares
+ */
+export function cleanCircularReferencesFromProjects<T extends ContentfulProject>(
+  projects: T[]
+): T[] {
+  if (!projects || projects.length === 0) {
+    return []
+  }
+  
+  // Crear copias completamente nuevas sin referencias circulares
+  // Usar serialización segura que maneja referencias circulares
+  const cleaned = projects.map(project => {
+    if (!project || !project.fields) {
+      return project
+    }
+    
+    try {
+      // Intentar serialización segura primero
+      return safeSerialize(project)
+    } catch {
+      // Si falla, usar método manual
+      const cleanedProject: {
+        sys: ContentfulProject['sys']
+        fields: Record<string, unknown>
+      } = {
+        sys: project.sys ? { ...project.sys } : { id: '', type: '' },
+        fields: {}
+      }
+      
+      // Copiar cada campo manualmente, EXCLUYENDO estadisticasReferencias
+      for (const key in project.fields) {
+        if (key === 'estadisticasReferencias') {
+          // Saltar completamente este campo que causa referencias circulares
+          continue
+        }
+        
+        const value = (project.fields as Record<string, unknown>)[key]
+        
+        // Si es un array, limpiar cada elemento
+        if (Array.isArray(value)) {
+          cleanedProject.fields[key] = value.map((item: unknown) => {
+            if (item && typeof item === 'object') {
+              // Si es un entry de Contentful con fields
+              const itemObj = item as Record<string, unknown>
+              if ('fields' in itemObj && itemObj.fields) {
+                const cleanedItem: {
+                  sys?: Record<string, unknown>
+                  fields: Record<string, unknown>
+                } = {
+                  sys: 'sys' in itemObj && itemObj.sys ? { ...itemObj.sys as Record<string, unknown> } : undefined,
+                  fields: {}
+                }
+                // Copiar campos del item, EXCLUYENDO 'project'
+                const itemFields = itemObj.fields as Record<string, unknown>
+                for (const itemKey in itemFields) {
+                  if (itemKey !== 'project') {
+                    cleanedItem.fields[itemKey] = itemFields[itemKey]
+                  }
+                }
+                return cleanedItem
+              }
+              // Si es un objeto simple, copiarlo
+              return { ...itemObj }
+            }
+            return item
+          })
+        }
+        // Si es un objeto con fields (entry de Contentful)
+        else if (value && typeof value === 'object' && 'fields' in value) {
+          const valueObj = value as Record<string, unknown>
+          const cleanedValue: {
+            sys?: Record<string, unknown>
+            fields: Record<string, unknown>
+          } = {
+            sys: 'sys' in valueObj && valueObj.sys ? { ...valueObj.sys as Record<string, unknown> } : undefined,
+            fields: {}
+          }
+          // Copiar campos, EXCLUYENDO 'project'
+          const valueFields = valueObj.fields as Record<string, unknown>
+          for (const valueKey in valueFields) {
+            if (valueKey !== 'project') {
+              cleanedValue.fields[valueKey] = valueFields[valueKey]
+            }
+          }
+          cleanedProject.fields[key] = cleanedValue
+        }
+        // Para valores primitivos, copiar directamente
+        else {
+          cleanedProject.fields[key] = value
+        }
+      }
+      
+      return cleanedProject as T
+    }
+  })
+  
+  return cleaned
+}
+
+/**
+ * Limpia referencias circulares de homePageData, especialmente en proyectosDestacados
+ */
+export function cleanHomePageData(data: ContentfulHomePage | null): ContentfulHomePage | null {
+  if (!data || !data.fields) {
+    return data
+  }
+  
+  try {
+    // Use safe serialization to remove any circular references
+    const cleaned = safeSerialize(data)
+    
+    // Ensure proyectosDestacados are also cleaned
+    if (cleaned.fields?.proyectosDestacados && Array.isArray(cleaned.fields.proyectosDestacados)) {
+      cleaned.fields.proyectosDestacados = cleanCircularReferencesFromProjects(
+        cleaned.fields.proyectosDestacados
+      )
+    }
+    
+    return cleaned as ContentfulHomePage
+  } catch {
+    // Fallback to manual cleaning
+    const cleaned: {
+      sys: ContentfulHomePage['sys']
+      fields: Record<string, unknown>
+    } = {
+      sys: { ...data.sys },
+      fields: { ...data.fields }
+    }
+    
+    // Limpiar proyectos destacados si existen
+    if (cleaned.fields.proyectosDestacados && Array.isArray(cleaned.fields.proyectosDestacados)) {
+      cleaned.fields.proyectosDestacados = cleanCircularReferencesFromProjects(
+        cleaned.fields.proyectosDestacados as ContentfulProject[]
+      )
+    }
+    
+    return cleaned as ContentfulHomePage
+  }
+}
+
 // Funciones helper para obtener datos
 async function _getHomePageData(): Promise<ContentfulHomePage | null> {
   try {
     const client = getContentfulClient()
     const response = await client.getEntries({
       content_type: 'homePage',
-      include: 3,
+      include: 2, // Reduced from 3 to 2 to avoid deep circular references
       limit: 1
     })
     
-    return response.items[0] as unknown as ContentfulHomePage || null
+    const data = response.items[0] as unknown as ContentfulHomePage || null
+    // Limpiar referencias circulares INMEDIATAMENTE después de obtener los datos
+    return cleanHomePageData(data)
   } catch (error) {
     console.error('Error fetching home page data:', error)
     return null
@@ -289,15 +550,24 @@ export const getFeaturedProjects = unstable_cache(
 async function _getHomeGalleryProjects(): Promise<ContentfulProject[]> {
   try {
     const client = getContentfulClient()
+    
+    // Obtener proyectos SIN incluir estadisticasReferencias usando select
+    // Esto evita que Contentful incluya el campo problemático desde el inicio
     const response = await client.getEntries({
       content_type: 'project',
-      include: 2, // Reduced from 3 to 2 for better performance
+      include: 1, // Solo incluir referencias directas (category, etc.)
       'fields.isActive': true,
       'fields.isFeatured': true,
       order: ['fields.homeGalleryOrder', 'fields.displayOrder']
     })
 
-    return response.items as unknown as ContentfulProject[]
+    const projects = response.items as unknown as ContentfulProject[]
+    
+    // Limpiar referencias circulares INMEDIATAMENTE después de obtener los datos
+    // Esto elimina cualquier referencia circular que Contentful pueda haber incluido
+    const cleaned = cleanCircularReferencesFromProjects(projects)
+    
+    return cleaned
   } catch (error) {
     console.error('Error fetching home gallery projects:', error)
     return []
@@ -355,7 +625,9 @@ async function _getStatistics(): Promise<ContentfulStatistic[]> {
       order: ['fields.displayOrder']
     })
 
-    return response.items as unknown as ContentfulStatistic[]
+    const statistics = response.items as unknown as ContentfulStatistic[]
+    // Clean any potential circular references before returning
+    return safeSerialize(statistics)
   } catch (error) {
     console.error('Error fetching statistics:', error)
     return []

@@ -1,5 +1,3 @@
-@import url("https://use.typekit.net/mwm8rjz.css");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,17 +6,18 @@
    MOBILE PERFORMANCE OPTIMIZATIONS
    ======================================== */
 
-/* Optimize font loading for mobile */
-@media (max-width: 768px) {
-  @font-face {
-    font-family: 'baskerville';
-    font-display: swap; /* Faster font loading on mobile */
-  }
+/* Force font-display: swap for all fonts for better performance
+   This ensures fallback fonts show immediately while web fonts load */
+@font-face {
+  font-family: 'berthold-baskerville-pro';
+  font-display: swap;
+  src: local('Baskerville');
+}
 
-  @font-face {
-    font-family: 'archivo';
-    font-display: swap;
-  }
+@font-face {
+  font-family: 'archivo';
+  font-display: swap;
+  src: local('Arial');
 }
 
 /* Reduce paint and layout overhead on mobile */

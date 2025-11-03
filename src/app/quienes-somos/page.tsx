@@ -436,7 +436,7 @@ export default function QuienesSomos() {
                   alt={`${person.nombre} ${person.apellido}`}
                   width={600}
                   height={800}
-                  quality={85}
+                  quality={100}
                   loading={idx < 2 ? "eager" : "lazy"}
                   priority={idx < 2}
                   className="w-full h-auto object-contain grayscale"

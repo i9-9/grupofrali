@@ -2,18 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath, revalidateTag } from 'next/cache'
 
 // Tipos para el webhook de Contentful
-interface ContentfulWebhookPayload {
-  sys: {
-    id: string
-    type: string
-    contentType?: {
-      sys: {
-        id: string
-      }
-    }
-  }
-}
-
 interface ContentfulWebhookBody {
   sys?: {
     id?: string

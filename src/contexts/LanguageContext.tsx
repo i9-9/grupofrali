@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback, useMemo } from 'react'
 
 type Language = 'es' | 'en'
 
@@ -62,35 +62,44 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   }, [isClient])
 
-  const setLanguage = (lang: Language) => {
+  const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang)
     localStorage.setItem('language', lang)
-    
+
     // Actualizar el atributo lang del HTML
     if (typeof document !== 'undefined') {
       document.documentElement.lang = lang
     }
-  }
+  }, [])
 
-  const t = (key: string): string => {
+  const t = useCallback((key: string): string => {
+    // Si las traducciones no están listas, retornar string vacío para evitar mostrar keys
+    if (!isReady || isLoading) {
+      return ''
+    }
+
     const keys = key.split('.')
     let value: unknown = translations
-    
+
     for (const k of keys) {
       if (value && typeof value === 'object' && k in value) {
         value = (value as Record<string, unknown>)[k]
       } else {
-        return key // Retornar la clave si no se encuentra la traducción
+        // En desarrollo, retornar la key para debug; en producción, string vacío
+        if (process.env.NODE_ENV === 'development') {
+          return key
+        }
+        return ''
       }
     }
-    
-    return typeof value === 'string' ? value : key
-  }
 
-  const getValue = (key: string): unknown => {
+    return typeof value === 'string' ? value : (process.env.NODE_ENV === 'development' ? key : '')
+  }, [translations, isReady, isLoading])
+
+  const getValue = useCallback((key: string): unknown => {
     const keys = key.split('.')
     let value: unknown = translations
-    
+
     for (const k of keys) {
       if (value && typeof value === 'object' && k in value) {
         value = (value as Record<string, unknown>)[k]
@@ -98,12 +107,17 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
         return undefined
       }
     }
-    
+
     return value
-  }
+  }, [translations])
+
+  const contextValue = useMemo(
+    () => ({ language, setLanguage, t, getValue, isLoading, isReady }),
+    [language, setLanguage, t, getValue, isLoading, isReady]
+  )
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t, getValue, isLoading, isReady }}>
+    <LanguageContext.Provider value={contextValue}>
       {children}
     </LanguageContext.Provider>
   )
