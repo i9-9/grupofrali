@@ -1,4 +1,5 @@
 import { createClient } from 'contentful'
+import { unstable_cache } from 'next/cache'
 
 // Función para crear el cliente de Contentful
 function getContentfulClient() {
@@ -195,7 +196,7 @@ export interface ContentfulHomePage {
 }
 
 // Funciones helper para obtener datos
-export async function getHomePageData(): Promise<ContentfulHomePage | null> {
+async function _getHomePageData(): Promise<ContentfulHomePage | null> {
   try {
     const client = getContentfulClient()
     const response = await client.getEntries({
@@ -211,7 +212,16 @@ export async function getHomePageData(): Promise<ContentfulHomePage | null> {
   }
 }
 
-export async function getProjects(): Promise<ContentfulProject[]> {
+export const getHomePageData = unstable_cache(
+  _getHomePageData,
+  ['home-page-data'],
+  {
+    tags: ['home-page'],
+    revalidate: 300, // Fallback a revalidación cada 5 minutos
+  }
+)
+
+async function _getProjects(): Promise<ContentfulProject[]> {
   try {
     const client = getContentfulClient()
     const response = await client.getEntries({
@@ -228,7 +238,16 @@ export async function getProjects(): Promise<ContentfulProject[]> {
   }
 }
 
-export async function getFeaturedProjects(): Promise<ContentfulProject[]> {
+export const getProjects = unstable_cache(
+  _getProjects,
+  ['projects-list'],
+  {
+    tags: ['projects'],
+    revalidate: 300,
+  }
+)
+
+async function _getFeaturedProjects(): Promise<ContentfulProject[]> {
   try {
     const client = getContentfulClient()
     const response = await client.getEntries({
@@ -246,7 +265,16 @@ export async function getFeaturedProjects(): Promise<ContentfulProject[]> {
   }
 }
 
-export async function getHomeGalleryProjects(): Promise<ContentfulProject[]> {
+export const getFeaturedProjects = unstable_cache(
+  _getFeaturedProjects,
+  ['featured-projects'],
+  {
+    tags: ['projects', 'home-page'],
+    revalidate: 300,
+  }
+)
+
+async function _getHomeGalleryProjects(): Promise<ContentfulProject[]> {
   try {
     const client = getContentfulClient()
     const response = await client.getEntries({
@@ -264,7 +292,16 @@ export async function getHomeGalleryProjects(): Promise<ContentfulProject[]> {
   }
 }
 
-export async function getTeamMembers(): Promise<ContentfulTeamMember[]> {
+export const getHomeGalleryProjects = unstable_cache(
+  _getHomeGalleryProjects,
+  ['home-gallery-projects'],
+  {
+    tags: ['projects', 'home-page'],
+    revalidate: 300,
+  }
+)
+
+async function _getTeamMembers(): Promise<ContentfulTeamMember[]> {
   try {
     const client = getContentfulClient()
     const response = await client.getEntries({
@@ -280,7 +317,16 @@ export async function getTeamMembers(): Promise<ContentfulTeamMember[]> {
   }
 }
 
-export async function getStatistics(): Promise<ContentfulStatistic[]> {
+export const getTeamMembers = unstable_cache(
+  _getTeamMembers,
+  ['team-members'],
+  {
+    tags: ['team', 'home-page'],
+    revalidate: 300,
+  }
+)
+
+async function _getStatistics(): Promise<ContentfulStatistic[]> {
   try {
     const client = getContentfulClient()
     const response = await client.getEntries({
@@ -296,7 +342,16 @@ export async function getStatistics(): Promise<ContentfulStatistic[]> {
   }
 }
 
-export async function getProjectBySlug(slug: string): Promise<ContentfulProject | null> {
+export const getStatistics = unstable_cache(
+  _getStatistics,
+  ['statistics'],
+  {
+    tags: ['statistics', 'home-page'],
+    revalidate: 300,
+  }
+)
+
+async function _getProjectBySlug(slug: string): Promise<ContentfulProject | null> {
   try {
     const client = getContentfulClient()
     const response = await client.getEntries({
@@ -314,7 +369,18 @@ export async function getProjectBySlug(slug: string): Promise<ContentfulProject 
   }
 }
 
-export async function getCategories(): Promise<ContentfulCategory[]> {
+export async function getProjectBySlug(slug: string): Promise<ContentfulProject | null> {
+  return unstable_cache(
+    async () => _getProjectBySlug(slug),
+    [`project-by-slug-${slug}`],
+    {
+      tags: ['projects'],
+      revalidate: 300,
+    }
+  )()
+}
+
+async function _getCategories(): Promise<ContentfulCategory[]> {
   try {
     const client = getContentfulClient()
     const response = await client.getEntries({
@@ -330,7 +396,16 @@ export async function getCategories(): Promise<ContentfulCategory[]> {
   }
 }
 
-export async function getProjectStatistics(projectId: string): Promise<ContentfulProjectStatistic[]> {
+export const getCategories = unstable_cache(
+  _getCategories,
+  ['categories'],
+  {
+    tags: ['categories'],
+    revalidate: 300,
+  }
+)
+
+async function _getProjectStatistics(projectId: string): Promise<ContentfulProjectStatistic[]> {
   try {
     const client = getContentfulClient()
     const response = await client.getEntries({
@@ -346,8 +421,19 @@ export async function getProjectStatistics(projectId: string): Promise<Contentfu
   }
 }
 
+export async function getProjectStatistics(projectId: string): Promise<ContentfulProjectStatistic[]> {
+  return unstable_cache(
+    async () => _getProjectStatistics(projectId),
+    [`project-statistics-${projectId}`],
+    {
+      tags: ['statistics', 'projects'],
+      revalidate: 300,
+    }
+  )()
+}
+
 // Función optimizada para obtener solo los datos necesarios para navegación
-export async function getProjectSlugsForNavigation(): Promise<Array<{ slug: string; title: string; titleEn: string }>> {
+async function _getProjectSlugsForNavigation(): Promise<Array<{ slug: string; title: string; titleEn: string }>> {
   try {
     const client = getContentfulClient()
     const response = await client.getEntries({
@@ -371,3 +457,12 @@ export async function getProjectSlugsForNavigation(): Promise<Array<{ slug: stri
     return []
   }
 }
+
+export const getProjectSlugsForNavigation = unstable_cache(
+  _getProjectSlugsForNavigation,
+  ['project-slugs-navigation'],
+  {
+    tags: ['projects'],
+    revalidate: 300,
+  }
+)
