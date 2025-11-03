@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
 import { 
-  getHomePageData, 
-  getProjects, 
-  getFeaturedProjects, 
-  getHomeGalleryProjects,
-  getTeamMembers, 
-  getStatistics,
-  getProjectBySlug,
-  getCategories,
+  getHomePageDataUncached, 
+  getProjectsUncached, 
+  getFeaturedProjectsUncached, 
+  getHomeGalleryProjectsUncached,
+  getTeamMembersUncached, 
+  getStatisticsUncached,
+  getProjectBySlugUncached,
+  getCategoriesUncached,
+  getProjectSlugsForNavigationUncached,
   type ContentfulHomePage,
   type ContentfulProject,
   type ContentfulTeamMember,
@@ -25,7 +26,7 @@ export function useHomePage() {
     async function fetchHomeData() {
       try {
         setLoading(true)
-        const data = await getHomePageData()
+        const data = await getHomePageDataUncached()
         setHomeData(data)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Error loading home data')
@@ -50,7 +51,7 @@ export function useProjects() {
     async function fetchProjects() {
       try {
         setLoading(true)
-        const data = await getProjects()
+        const data = await getProjectsUncached()
         setProjects(data)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Error loading projects')
@@ -75,7 +76,7 @@ export function useFeaturedProjects() {
     async function fetchFeaturedProjects() {
       try {
         setLoading(true)
-        const data = await getFeaturedProjects()
+        const data = await getFeaturedProjectsUncached()
         setFeaturedProjects(data)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Error loading featured projects')
@@ -100,7 +101,7 @@ export function useHomeGalleryProjects() {
     async function fetchHomeGalleryProjects() {
       try {
         setLoading(true)
-        const data = await getHomeGalleryProjects()
+        const data = await getHomeGalleryProjectsUncached()
         setHomeGalleryProjects(data)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Error loading home gallery projects')
@@ -125,7 +126,7 @@ export function useTeamMembers() {
     async function fetchTeamMembers() {
       try {
         setLoading(true)
-        const data = await getTeamMembers()
+        const data = await getTeamMembersUncached()
         setTeamMembers(data)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Error loading team members')
@@ -150,7 +151,7 @@ export function useStatistics() {
     async function fetchStatistics() {
       try {
         setLoading(true)
-        const data = await getStatistics()
+        const data = await getStatisticsUncached()
         setStatistics(data)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Error loading statistics')
@@ -175,7 +176,7 @@ export function useCategories() {
     async function fetchCategories() {
       try {
         setLoading(true)
-        const data = await getCategories()
+        const data = await getCategoriesUncached()
         setCategories(data)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Error loading categories')
@@ -202,7 +203,7 @@ export function useProject(slug: string) {
       
       try {
         setLoading(true)
-        const data = await getProjectBySlug(slug)
+        const data = await getProjectBySlugUncached(slug)
         setProject(data)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Error loading project')
@@ -226,8 +227,7 @@ export function useProjectNavigation() {
     async function fetchProjectSlugs() {
       try {
         setLoading(true)
-        const { getProjectSlugsForNavigation } = await import('@/lib/contentful')
-        const data = await getProjectSlugsForNavigation()
+        const data = await getProjectSlugsForNavigationUncached()
         setProjectSlugs(data)
       } catch (err) {
         console.error('Error loading project navigation data:', err)

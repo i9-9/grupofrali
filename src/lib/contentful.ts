@@ -212,6 +212,10 @@ async function _getHomePageData(): Promise<ContentfulHomePage | null> {
   }
 }
 
+// Exportar función interna para uso en client-side
+export const getHomePageDataUncached = _getHomePageData
+
+// Función con cache para uso en Server Components
 export const getHomePageData = unstable_cache(
   _getHomePageData,
   ['home-page-data'],
@@ -238,6 +242,10 @@ async function _getProjects(): Promise<ContentfulProject[]> {
   }
 }
 
+// Exportar función interna para uso en client-side
+export const getProjectsUncached = _getProjects
+
+// Función con cache para uso en Server Components
 export const getProjects = unstable_cache(
   _getProjects,
   ['projects-list'],
@@ -265,6 +273,10 @@ async function _getFeaturedProjects(): Promise<ContentfulProject[]> {
   }
 }
 
+// Exportar función interna para uso en client-side
+export const getFeaturedProjectsUncached = _getFeaturedProjects
+
+// Función con cache para uso en Server Components
 export const getFeaturedProjects = unstable_cache(
   _getFeaturedProjects,
   ['featured-projects'],
@@ -292,6 +304,10 @@ async function _getHomeGalleryProjects(): Promise<ContentfulProject[]> {
   }
 }
 
+// Exportar función interna para uso en client-side
+export const getHomeGalleryProjectsUncached = _getHomeGalleryProjects
+
+// Función con cache para uso en Server Components
 export const getHomeGalleryProjects = unstable_cache(
   _getHomeGalleryProjects,
   ['home-gallery-projects'],
@@ -317,6 +333,10 @@ async function _getTeamMembers(): Promise<ContentfulTeamMember[]> {
   }
 }
 
+// Exportar función interna para uso en client-side
+export const getTeamMembersUncached = _getTeamMembers
+
+// Función con cache para uso en Server Components
 export const getTeamMembers = unstable_cache(
   _getTeamMembers,
   ['team-members'],
@@ -342,6 +362,10 @@ async function _getStatistics(): Promise<ContentfulStatistic[]> {
   }
 }
 
+// Exportar función interna para uso en client-side
+export const getStatisticsUncached = _getStatistics
+
+// Función con cache para uso en Server Components
 export const getStatistics = unstable_cache(
   _getStatistics,
   ['statistics'],
@@ -369,6 +393,10 @@ async function _getProjectBySlug(slug: string): Promise<ContentfulProject | null
   }
 }
 
+// Exportar función interna para uso en client-side
+export const getProjectBySlugUncached = _getProjectBySlug
+
+// Función con cache para uso en Server Components
 export async function getProjectBySlug(slug: string): Promise<ContentfulProject | null> {
   return unstable_cache(
     async () => _getProjectBySlug(slug),
@@ -396,6 +424,10 @@ async function _getCategories(): Promise<ContentfulCategory[]> {
   }
 }
 
+// Exportar función interna para uso en client-side
+export const getCategoriesUncached = _getCategories
+
+// Función con cache para uso en Server Components
 export const getCategories = unstable_cache(
   _getCategories,
   ['categories'],
@@ -458,6 +490,10 @@ async function _getProjectSlugsForNavigation(): Promise<Array<{ slug: string; ti
   }
 }
 
+// Exportar función interna para uso en client-side
+export const getProjectSlugsForNavigationUncached = _getProjectSlugsForNavigation
+
+// Función con cache para uso en Server Components
 export const getProjectSlugsForNavigation = unstable_cache(
   _getProjectSlugsForNavigation,
   ['project-slugs-navigation'],
