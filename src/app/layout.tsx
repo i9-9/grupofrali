@@ -11,8 +11,11 @@ export const viewport: Viewport = {
   themeColor: '#EFEFEF',
 }
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://grupofrali.com';
+const ogImageUrl = `${siteUrl}/images/seo/OGImage.png`;
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  metadataBase: new URL(siteUrl),
   title: "Grupo Frali",
   description: "Con casi 30 años de trayectoria, en Grupo Frali desarrollamos inversiones estratégicas en real estate, agroindustria, hotelería y energías renovables. Apostamos a proyectos que combinan crecimiento económico, compromiso con el entorno y generación de valor en Argentina, EE. UU. y Uruguay.",
   icons: {
@@ -25,12 +28,15 @@ export const metadata: Metadata = {
     title: "Grupo Frali",
     description: "Con casi 30 años de trayectoria, en Grupo Frali desarrollamos inversiones estratégicas en real estate, agroindustria, hotelería y energías renovables.",
     type: 'website',
+    url: siteUrl,
+    siteName: 'Grupo Frali',
     images: [
       {
-        url: '/images/seo/OGImage.png',
+        url: ogImageUrl,
         width: 1200,
         height: 630,
         alt: 'Grupo Frali',
+        type: 'image/png',
       }
     ],
   },
@@ -38,7 +44,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Grupo Frali',
     description: 'Con casi 30 años de trayectoria, en Grupo Frali desarrollamos inversiones estratégicas en real estate, agroindustria, hotelería y energías renovables.',
-    images: ['/images/seo/OGImage.png'],
+    images: [ogImageUrl],
   },
 };
 
