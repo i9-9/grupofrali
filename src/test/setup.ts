@@ -12,3 +12,4 @@ expect.extend({
   // Los matchers de jest-dom ya están disponibles a través de '@testing-library/jest-dom'
 })
 
+

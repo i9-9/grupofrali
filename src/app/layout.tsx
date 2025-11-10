@@ -24,9 +24,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Grupo Frali",
     description: "Con casi 30 años de trayectoria, en Grupo Frali desarrollamos inversiones estratégicas en real estate, agroindustria, hotelería y energías renovables.",
+    type: 'website',
     images: [
       {
         url: '/images/seo/OGImage.png',
+        width: 1200,
+        height: 630,
         alt: 'Grupo Frali',
       }
     ],
