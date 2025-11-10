@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { useTranslations } from "@/hooks/useTranslations";
 
@@ -62,19 +63,33 @@ export default function Contacto() {
     setErrorMessage('');
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      // EmailJS requiere estas variables de entorno:
+      // NEXT_PUBLIC_EMAILJS_SERVICE_ID
+      // NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+      // NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+      
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Error al enviar el mensaje');
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error('Configuración de email incompleta. Por favor contacta al administrador.');
       }
+
+      // Enviar email usando EmailJS
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: `${formData.nombre} ${formData.apellido}`,
+          from_email: formData.email,
+          subject: formData.asunto, // También se puede usar como 'title' en el template
+          title: formData.asunto, // Variable estándar de EmailJS
+          message: formData.mensaje,
+          to_email: 'info@grupofrali.com',
+        },
+        publicKey
+      );
 
       // Éxito
       setStatus('success');
@@ -92,6 +107,7 @@ export default function Contacto() {
         setStatus('idle');
       }, 5000);
     } catch (error) {
+      console.error('Error enviando email:', error);
       setStatus('error');
       setErrorMessage(error instanceof Error ? error.message : 'Error al enviar el mensaje. Por favor intenta nuevamente.');
     }

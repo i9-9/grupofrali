@@ -13,13 +13,13 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "contentful": "^11.7.15",
     "contentful-management": "^11.54.4",
     "motion": "^12.23.11",
     "next": "15.4.3",
     "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "resend": "^6.4.2"
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
