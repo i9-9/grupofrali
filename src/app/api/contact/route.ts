@@ -1,10 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: NextRequest) {
   try {
+    // Validar que la API key esté configurada
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      console.error('RESEND_API_KEY no está configurada');
+      return NextResponse.json(
+        { error: 'Configuración del servidor incompleta. Por favor contacta al administrador.' },
+        { status: 500 }
+      );
+    }
+
+    const resend = new Resend(apiKey);
     const body = await request.json();
     const { nombre, apellido, email, asunto, mensaje } = body;
 
@@ -87,9 +96,20 @@ ${mensaje}
     });
 
     if (error) {
-      console.error('Error enviando email:', error);
+      console.error('Error enviando email desde Resend:', JSON.stringify(error, null, 2));
+      
+      // Mensajes de error más específicos
+      let errorMessage = 'Error al enviar el mensaje. Por favor intenta nuevamente.';
+      if (error.message) {
+        if (error.message.includes('API key')) {
+          errorMessage = 'Error de configuración del servidor. Por favor contacta al administrador.';
+        } else if (error.message.includes('domain')) {
+          errorMessage = 'Error de configuración del dominio. Por favor contacta al administrador.';
+        }
+      }
+      
       return NextResponse.json(
-        { error: 'Error al enviar el mensaje. Por favor intenta nuevamente.' },
+        { error: errorMessage },
         { status: 500 }
       );
     }
@@ -100,8 +120,14 @@ ${mensaje}
     );
   } catch (error) {
     console.error('Error en API de contacto:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+    console.error('Detalles del error:', errorMessage);
+    
     return NextResponse.json(
-      { error: 'Error al procesar la solicitud' },
+      { 
+        error: 'Error al procesar la solicitud',
+        details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
+      },
       { status: 500 }
     );
   }
