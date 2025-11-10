@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { useTranslations } from "@/hooks/useTranslations";
 
+type FormStatus = 'idle' | 'loading' | 'success' | 'error';
+
 export default function Contacto() {
   const { t } = useTranslations();
 
@@ -14,6 +16,9 @@ export default function Contacto() {
     asunto: '',
     mensaje: ''
   });
+
+  const [status, setStatus] = useState<FormStatus>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   // Intersection Observer para el formulario
   const { ref: formRef, isVisible: isFormVisible } = useIntersectionObserver<HTMLDivElement>({
@@ -28,12 +33,68 @@ export default function Contacto() {
       ...prev,
       [name]: value
     }));
+    // Limpiar mensaje de error cuando el usuario empieza a escribir
+    if (status === 'error') {
+      setStatus('idle');
+      setErrorMessage('');
+    }
   };
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    // Aquí iría la lógica para enviar el formulario
-    console.log('Formulario enviado:', formData);
+    
+    // Validación básica
+    if (!formData.nombre || !formData.apellido || !formData.email || !formData.asunto || !formData.mensaje) {
+      setStatus('error');
+      setErrorMessage('Por favor completa todos los campos');
+      return;
+    }
+
+    // Validación de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setStatus('error');
+      setErrorMessage('Por favor ingresa un email válido');
+      return;
+    }
+
+    setStatus('loading');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Error al enviar el mensaje');
+      }
+
+      // Éxito
+      setStatus('success');
+      // Limpiar formulario
+      setFormData({
+        nombre: '',
+        apellido: '',
+        email: '',
+        asunto: '',
+        mensaje: ''
+      });
+
+      // Resetear estado después de 5 segundos
+      setTimeout(() => {
+        setStatus('idle');
+      }, 5000);
+    } catch (error) {
+      setStatus('error');
+      setErrorMessage(error instanceof Error ? error.message : 'Error al enviar el mensaje. Por favor intenta nuevamente.');
+    }
   };
 
   return (
@@ -70,7 +131,7 @@ export default function Contacto() {
 
           {/* Formulario - Columnas 1-6 en mobile, 7-12 en desktop */}
           <div className="col-6 md:col-span-6 md:col-start-7 order-2" ref={formRef}>
-            <div className="space-y-8 mt-0 md:mt-36">
+            <form onSubmit={handleSubmit} className="space-y-8 mt-0 md:mt-36">
               {/* Nombre y Apellido - separados en mobile, juntos en desktop */}
               <div className="flex flex-col md:flex-row md:space-x-6 space-y-8 md:space-y-0">
                 <div className="flex-1">
@@ -192,19 +253,40 @@ export default function Contacto() {
                   {t('contact.form.message')}
                 </label>
                 
+                {/* Mensajes de estado */}
+                {status === 'success' && (
+                  <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded">
+                    <p className="font-archivo text-green-800 text-sm">
+                      Mensaje enviado correctamente. Nos pondremos en contacto contigo pronto.
+                    </p>
+                  </div>
+                )}
+
+                {status === 'error' && errorMessage && (
+                  <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded">
+                    <p className="font-archivo text-red-800 text-sm">
+                      {errorMessage}
+                    </p>
+                  </div>
+                )}
+
                 {/* Botón Enviar en el flujo normal */}
                 <div className="flex justify-end mt-6">
                   <button
-                    onClick={handleSubmit}
                     type="submit"
-                    className="font-archivo text-black/30 tracking-wider hover:opacity-70 transition-opacity text-base cursor-pointer min-h-12 px-4"
+                    disabled={status === 'loading'}
+                    className={`font-archivo tracking-wider transition-opacity text-base cursor-pointer min-h-12 px-4 ${
+                      status === 'loading' 
+                        ? 'text-black/20 cursor-not-allowed' 
+                        : 'text-black/30 hover:opacity-70'
+                    }`}
                     aria-label="Enviar formulario de contacto"
                   >
-                    {t('contact.form.send')}
+                    {status === 'loading' ? 'ENVIANDO...' : t('contact.form.send')}
                   </button>
                 </div>
               </div>
-            </div>
+            </form>
           </div>
 
           {/* Información de contacto - Columnas 1-6 en desktop, después del formulario en mobile */}
